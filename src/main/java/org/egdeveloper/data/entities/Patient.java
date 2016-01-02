@@ -138,7 +138,27 @@ public class Patient implements Serializable{
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;
 
+    @OneToMany
     private Set<BioChemTest> bioChemTests = new HashSet<BioChemTest>();
+
+    @OneToMany
+    private Set<CommonBloodTest> commonBloodTests = new HashSet<CommonBloodTest>();
+
+    @OneToMany
+    private Set<CommonUreaTest> commonUreaTests = new HashSet<CommonUreaTest>();
+
+    @OneToMany
+    private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<DailyExcreationTest>();
+
+    @OneToMany
+    private Set<TitrationTest> titrationTests = new HashSet<TitrationTest>();
+
+    @OneToMany
+    private Set<UreaColorTest> ureaColorTests = new HashSet<UreaColorTest>();
+
+    @OneToMany
+    private Set<UreaStoneTest> ureaStoneTests = new HashSet<UreaStoneTest>();
+
     @ManyToMany
     private Set<Doctor> doctor = new HashSet<Doctor>();
 

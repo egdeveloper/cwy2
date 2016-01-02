@@ -8,5 +8,11 @@
         <mapping class="org.egdeveloper.data.entities.Doctor"/>
         <mapping class="org.egdeveloper.data.entities.Patient"/>
         <mapping class="org.egdeveloper.data.entities.BioChemTest"/>
+        <mapping class="org.egdeveloper.data.entities.CommonBloodTest"/>
+        <mapping class="org.egdeveloper.data.entities.CommonUreaTest"/>
+        <mapping class="org.egdeveloper.data.entities.DailyExcreationTest"/>
+        <mapping class="org.egdeveloper.data.entities.TitrationTest"/>
+        <mapping class="org.egdeveloper.data.entities.UreaColorTest"/>
+        <mapping class="org.egdeveloper.data.entities.UreaStoneTest"/>
     </session-factory>
 </hibernate-configuration>
