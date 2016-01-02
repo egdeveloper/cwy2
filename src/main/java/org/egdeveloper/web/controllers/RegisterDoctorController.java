@@ -26,7 +26,7 @@ public class RegisterDoctorController {
         }
         else {
             doctorService.addDoctor(doctor);
-            return "/home/index";
+            return "redirect:/";
         }
     }
 }

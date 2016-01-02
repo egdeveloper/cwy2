@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-/**
- * Created by egdeveloper on 16.11.15.
- */
+
 
 @Repository
 public class PatientDAO {

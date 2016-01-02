@@ -6,379 +6,143 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "PATIENT")
+@Table(name = "Patient")
 public class Patient implements Serializable{
 
     //Fields
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id;
 
     @Size(max = 255)
     @NotEmpty
-    @Column(name = "FULL_NAME", nullable = false)
-    private String FullName;
+    @Column(name = "fullName", nullable = false)
+    private String fullName;
 
     @NotEmpty
     @Enumerated(EnumType.STRING)
-    @Column(name = "GENDER", nullable = false)
-    private Gender Gender;
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
 
     @NotNull
-    @Column(name = "BIRTHDATE", nullable = false)
-    private LocalDate Birthdate;
+    @Column(name = "birthdate", nullable = false)
+    private LocalDate birthdate;
 
     @NotNull
-    @Column(name = "CARD_NUMBER", nullable = false)
-    private String CardNumber;
+    @Column(name = "cardNumber", nullable = false)
+    private String cardNumber;
 
     @NotNull
-    @Column(name = "PASSPORT", nullable = false)
-    private String Passport;
+    @Column(name = "passport", nullable = false)
+    private String passport;
 
     @NotNull
-    @Column(name = "PHONE_NUMBER", nullable = false)
-    private String PhoneNumber;
+    @Column(name = "phoneNumber", nullable = false)
+    private String phoneNumber;
 
     @NotNull
-    @Column(name = "COUNTRY", nullable = false)
-    private String Country;
+    @Column(name = "country", nullable = false)
+    private String country;
 
     @NotNull
-    @Column(name = "POST_INDEX", nullable = false)
-    private String PostIndex;
+    @Column(name = "postIndex", nullable = false)
+    private String postIndex;
 
     @NotNull
-    @Column(name = "REGION", nullable = false)
-    private String Region;
+    @Column(name = "region", nullable = false)
+    private String region;
 
     @NotNull
-    @Column(name = "CITY", nullable = false)
-    private String City;
+    @Column(name = "city", nullable = false)
+    private String city;
 
     @NotNull
-    @Column(name = "ADDRESS", nullable = false)
-    private String Address;
+    @Column(name = "address", nullable = false)
+    private String address;
 
-    @Column(name = "EMAIL", nullable = false)
-    private String Email;
-
-    //private byte[] Photo;
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @NotEmpty
     @Enumerated(EnumType.STRING)
-    @Column(name = "RH", nullable = false)
-    private Rh Rh;
+    @Column(name = "rh", nullable = false)
+    private Rh rh;
 
     @NotEmpty
     @Enumerated(EnumType.STRING)
-    @Column(name = "BLOOD_GROUP", nullable = false)
-    private BloodGroup BloodGroup;
+    @Column(name = "bloodGroup", nullable = false)
+    private BloodGroup bloodGroup;
 
     @NotEmpty
     @Enumerated(EnumType.STRING)
-    @Column(name = "DISABILITY", nullable = false)
-    private Disability Disability;
+    @Column(name = "disability", nullable = false)
+    private Disability disability;
 
     @NotNull
     @Column(name = "TIN", nullable = false)
     private String TIN;
 
     @NotNull
-    @Column(name = "OMI_CARD", nullable = false)
+    @Column(name = "OMICard", nullable = false)
     private String OMICard;
 
     @NotNull
-    @Column(name = "JOB_PLACE", nullable = false)
-    private String JobPlace;
+    @Column(name = "jobPlace", nullable = false)
+    private String jobPlace;
 
     @NotNull
-    @Column(name = "OCCUPATION", nullable = false)
-    private String Occupation;
+    @Column(name = "occupation", nullable = false)
+    private String occupation;
 
     @NotNull
-    @Column(name = "POST", nullable = false)
-    private String Post;
+    @Column(name = "post", nullable = false)
+    private String post;
 
     @NotNull
-    @Column(name = "JON_CONDITIONS", nullable = false)
-    private String JobConditions;
+    @Column(name = "jobConditions", nullable = false)
+    private String jobConditions;
 
     @NotNull
-    @Column(name = "COMPLAINTS", nullable = false)
-    private String Complaints;
+    @Column(name = "complaints", nullable = false)
+    private String complaints;
 
     @NotNull
-    @Column(name = "PREMEDICATION", nullable = false)
-    private String Premedication;
+    @Column(name = "premedication", nullable = false)
+    private String premedication;
 
     @NotNull
-    @Column(name = "ASSOCIATED_DISEASE", nullable = false)
-    private String AssociatedDisease;
+    @Column(name = "associatedDisease", nullable = false)
+    private String associatedDisease;
 
     @NotNull
-    @Column(name = "PREMEDICAL_SUPPLIES", nullable = false)
-    private String PreMedicalSupplies;
+    @Column(name = "preMedicalSupplies", nullable = false)
+    private String preMedicalSupplies;
 
     @NotNull
-    @Column(name = "BAD_HABITS", nullable = false)
-    private String BadHabits;
+    @Column(name = "badHabits", nullable = false)
+    private String badHabits;
 
     @NotNull
-    @Column(name = "PRE_UREA_STONE_DESCRIPTION", nullable = false)
-    private String PreUreaStoneDescription;
+    @Column(name = "preUreaStoneDescription", nullable = false)
+    private String preUreaStoneDescription;
 
     @NotNull
-    @Column(name = "DISEASE_DURATION", nullable = false)
-    private String DiseaseDuration;
+    @Column(name = "diseaseDuration", nullable = false)
+    private String diseaseDuration;
+
+    private Set<BioChemTest> bioChemTests = new HashSet<BioChemTest>();
+    @ManyToMany
+    private Set<Doctor> doctor = new HashSet<Doctor>();
 
     //Getters and setters
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getFullName() {
-        return FullName;
-    }
-
-    public void setFullName(String fullName) {
-        FullName = fullName;
-    }
-
-    public Gender getGender() {
-        return Gender;
-    }
-
-    public void setGender(Gender gender) {
-        Gender = gender;
-    }
-
-    public LocalDate getBirthdate() {
-        return Birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        Birthdate = birthdate;
-    }
-
-    public String getCardNumber() {
-        return CardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        CardNumber = cardNumber;
-    }
-
-    public String getPassport() {
-        return Passport;
-    }
-
-    public void setPassport(String passport) {
-        Passport = passport;
-    }
-
-    public String getPhoneNumber() {
-        return PhoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
-    }
-
-    public String getCountry() {
-        return Country;
-    }
-
-    public void setCountry(String country) {
-        Country = country;
-    }
-
-    public String getPostIndex() {
-        return PostIndex;
-    }
-
-    public void setPostIndex(String postIndex) {
-        PostIndex = postIndex;
-    }
-
-    public String getRegion() {
-        return Region;
-    }
-
-    public void setRegion(String region) {
-        Region = region;
-    }
-
-    public String getCity() {
-        return City;
-    }
-
-    public void setCity(String city) {
-        City = city;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
-        Address = address;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    /*
-    public byte[] getPhoto() {
-        return Photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        Photo = photo;
-    }
-    */
-
-    public Rh getRh() {
-        return Rh;
-    }
-
-    public void setRh(Rh rh) {
-        Rh = rh;
-    }
-
-    public BloodGroup getBloodGroup() {
-        return BloodGroup;
-    }
-
-    public void setBloodGroup(BloodGroup bloodGroup) {
-        BloodGroup = bloodGroup;
-    }
-
-    public Disability getDisability() {
-        return Disability;
-    }
-
-    public void setDisability(Disability disability) {
-        Disability = disability;
-    }
-
-    public String getTIN() {
-        return TIN;
-    }
-
-    public void setTIN(String TIN) {
-        this.TIN = TIN;
-    }
-
-    public String getOMICard() {
-        return OMICard;
-    }
-
-    public void setOMICard(String OMICard) {
-        this.OMICard = OMICard;
-    }
-
-    public String getJobPlace() {
-        return JobPlace;
-    }
-
-    public void setJobPlace(String jobPlace) {
-        JobPlace = jobPlace;
-    }
-
-    public String getOccupation() {
-        return Occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        Occupation = occupation;
-    }
-
-    public String getPost() {
-        return Post;
-    }
-
-    public void setPost(String post) {
-        Post = post;
-    }
-
-    public String getJobConditions() {
-        return JobConditions;
-    }
-
-    public void setJobConditions(String jobConditions) {
-        JobConditions = jobConditions;
-    }
-
-    public String getComplaints() {
-        return Complaints;
-    }
-
-    public void setComplaints(String complaints) {
-        Complaints = complaints;
-    }
-
-    public String getPremedication() {
-        return Premedication;
-    }
-
-    public void setPremedication(String premedication) {
-        Premedication = premedication;
-    }
-
-    public String getAssociatedDisease() {
-        return AssociatedDisease;
-    }
-
-    public void setAssociatedDisease(String associatedDisease) {
-        AssociatedDisease = associatedDisease;
-    }
-
-    public String getPreMedicalSupplies() {
-        return PreMedicalSupplies;
-    }
-
-    public void setPreMedicalSupplies(String preMedicalSupplies) {
-        PreMedicalSupplies = preMedicalSupplies;
-    }
-
-    public String getBadHabits() {
-        return BadHabits;
-    }
-
-    public void setBadHabits(String badHabits) {
-        BadHabits = badHabits;
-    }
-
-    public String getPreUreaStoneDescription() {
-        return PreUreaStoneDescription;
-    }
-
-    public void setPreUreaStoneDescription(String preUreaStoneDescription) {
-        PreUreaStoneDescription = preUreaStoneDescription;
-    }
-
-    public String getDiseaseDuration() {
-        return DiseaseDuration;
-    }
-
-    public void setDiseaseDuration(String diseaseDuration) {
-        DiseaseDuration = diseaseDuration;
-    }
 
 }

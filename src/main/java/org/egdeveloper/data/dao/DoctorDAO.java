@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by egdeveloper on 18.11.15.
- */
+
 
 @Repository("doctorDAO")
 public class DoctorDAO {

@@ -4,14 +4,45 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by egdeveloper on 18.11.15.
- */
 
 @Entity
-@Table(name = "DOCTOR")
+@Table(name = "Doctor")
 public class Doctor implements Serializable{
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @NotEmpty(message = "Введите свое ФИО")
+    @Column(name = "fullName", nullable = false)
+    private String fullName;
+
+    @NotEmpty(message = "Введите логин")
+    @Column(name = "login", nullable = false)
+    private String login;
+
+    @NotEmpty(message = "Введите пароль")
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "jobPlace", nullable = false)
+    private String jobPlace;
+
+    @Column(name = "jobPost", nullable = false)
+    private String jobPost;
+
+    @Column(name = "phoneNumber", nullable = false)
+    private String phoneNumber;
+
+    @OneToMany
+    private Set<Patient> patients = new HashSet<Patient>();
 
     public Doctor(){}
 
@@ -78,33 +109,4 @@ public class Doctor implements Serializable{
     public void setPhoneNumber(String phone_number) {
         this.phoneNumber = phone_number;
     }
-
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @NotEmpty(message = "Введите свое ФИО")
-    @Column(name = "FULL_NAME", nullable = false)
-    private String fullName;
-
-    @NotEmpty(message = "Введите логин")
-    @Column(name = "LOGIN", nullable = false)
-    private String login;
-
-    @NotEmpty(message = "Введите пароль")
-    @Column(name = "PASSWORD", nullable = false)
-    private String password;
-
-    @Column(name = "EMAIL", nullable = false)
-    private String email;
-
-    @Column(name = "JOB_PLACE", nullable = false)
-    private String jobPlace;
-
-    @Column(name = "JOB_POST", nullable = false)
-    private String jobPost;
-
-    @Column(name = "PHONE_NUMBER", nullable = false)
-    private String phoneNumber;
 }
