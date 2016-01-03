@@ -11,11 +11,12 @@
 
 <html>
 <head>
-    <title></title>
-  <link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home_stylesheet.css"/>">
-  <script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
+  <title></title>
+  <link rel="stylesheet" href="<c:url value="/resources/css/home_stylesheet.css"/>">
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-responsive.css"/>"/>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
 </head>
 <body>
@@ -28,26 +29,25 @@
 </div>
 <c:url var="login_action" value="/login"/>
 
-<div class="col-md-12">
-  <form:form method="post" action="${login_action}" modelAttribute="loginAuth">
-    <table>
-      <tr class="form-group">
-        <td><span style="color:red"><form:errors path="login" cssClass="errors"/></span></td>
-        <td><label for="login">Логин</label></td>
-        <td><form:input path="login" id="login"/></td>
-      </tr>
-      <tr class="form-group">
-        <td><span style="color:red"><form:errors path="password" cssClass="errors"/></span></td>
-        <td><label for="password">Пароль</label></td>
-        <td><form:password path="password" id="password"/></td>
-      </tr>
-      <tr class="form-group">
-        <td colspan="3" align="right">
-          <input class="btn btn-lg btn-primary btn-block" type="submit" value="Войти"/>
-        </td>
-      </tr>
-    </table>
-  </form:form>
+<div class="container" style="margin-top:30px">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3><strong>Войти</strong></h3></div>
+      <div class="panel-body">
+        <form:form role="form" method="post" action="${login_action}" modelAttribute="loginAuth">
+          <div class="form-group">
+            <label for="login">Логин <span style="color:red"><form:errors path="login" cssClass="errors"/></span></label>
+            <form:input path="login" id="login"/>
+          </div>
+          <div class="form-group">
+            <label for="password">Пароль <span style="color:red"><form:errors path="password" cssClass="errors"/></span></label>
+            <form:password path="password" id="password"/>
+          </div>
+          <button class="btn btn-sm btn-default" type="submit">Войти</button>
+        </form:form>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
