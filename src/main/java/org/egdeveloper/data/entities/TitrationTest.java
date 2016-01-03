@@ -18,4 +18,20 @@ public class TitrationTest implements Serializable{
 
     @Column(name = "oxalate")
     private double oxalate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getOxalate() {
+        return oxalate;
+    }
+
+    public void setOxalate(double oxalate) {
+        this.oxalate = oxalate;
+    }
 }
