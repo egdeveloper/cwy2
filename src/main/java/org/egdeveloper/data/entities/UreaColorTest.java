@@ -2,6 +2,7 @@ package org.egdeveloper.data.entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -14,31 +15,44 @@ public class UreaColorTest implements Serializable{
     private int id;
 
     @Column(name = "DUV")
+    @NotNull
     private double DUV;
 
     @Column(name = "ClSalt")
+    @NotNull
     private double ClSalt;
 
     @Column(name = "NO2Salt")
+    @NotNull
     private double NO2Salt;
 
     @Column(name = "NO3Salt")
+    @NotNull
     private double NO3Salt;
 
     @Column(name = "SO3Salt")
+    @NotNull
     private double SO3Salt;
 
     @Column(name = "PO3Salt")
+    @NotNull
     private double PO3Salt;
 
     @Column(name = "citrate")
+    @NotNull
     private double citrate;
 
     @Column(name = "isoCitrate")
+    @NotNull
     private double isoCitrate;
 
     @Column(name = "ureaAcid")
+    @NotNull
     private double ureaAcid;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public double getIsoCitrate() {
         return isoCitrate;
@@ -118,5 +132,13 @@ public class UreaColorTest implements Serializable{
 
     public void setUreaAcid(double ureaAcid) {
         this.ureaAcid = ureaAcid;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

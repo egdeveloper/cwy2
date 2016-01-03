@@ -1,6 +1,8 @@
 package org.egdeveloper.data.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -14,99 +16,133 @@ public class BioChemTest implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     @Column(name = "commonProtein")
+    @NotNull
     private double commonProtein;
 
     @Column(name = "urea")
+    @NotNull
     private double urea;
 
     @Column(name = "creatinine")
+    @NotNull
     private double creatinine;
 
     @Column(name = "commonBiliRuby")
+    @NotNull
     private double commonBiliRuby;
 
     @Column(name = "linkedBiliRuby")
+    @NotNull
     private double linkedBiliRuby;
 
     @Column(name = "cholesterol")
+    @NotNull
     private double cholesterol;
 
     @Column(name = "TAG")
+    @NotNull
     private double TAG;
 
     @Column(name = "HDL")
+    @NotNull
     private double HDL;
 
     @Column(name = "LDL")
+    @NotNull
     private double LDL;
 
     @Column(name = "cholesterolRatio")
+    @NotNull
     private double cholesterolRatio;
 
     @Column(name = "ALT")
+    @NotNull
     private double ALT;
 
     @Column(name = "AST")
+    @NotNull
     private double AST;
 
     @Column(name = "ALKP")
+    @NotNull
     private double ALKP;
 
     @Column(name = "CK")
+    @NotNull
     private double CK;
 
     @Column(name = "CKMB")
+    @NotNull
     private double CKMB;
 
     @Column(name = "LDH")
+    @NotNull
     private double LDH;
 
     @Column(name = "GGT")
+    @NotNull
     private double GGT;
 
     @Column(name = "amylase")
+    @NotNull
     private double amylase;
 
     @Column(name = "pancrAmylase")
+    @NotNull
     private double pancrAmylase;
 
     @Column(name = "glucose")
+    @NotNull
     private double glucose;
 
     @Column(name = "ureaAcid")
+    @NotNull
     private double ureaAcid;
 
     @Column(name = "CRP")
+    @NotNull
     private double CRP;
 
     @Column(name = "RF")
+    @NotNull
     private double RF;
 
     @Column(name = "potassium")
+    @NotNull
     private double potassium;
 
     @Column(name = "sodium")
+    @NotNull
     private double sodium;
 
     @Column(name = "chlorine")
+    @NotNull
     private double chlorine;
 
     @Column(name = "commonCalcium")
+    @NotNull
     private double commonCalcium;
 
     @Column(name = "ionCalcium")
+    @NotNull
     private double ionCalcium;
 
     @Column(name = "phosphor")
+    @NotNull
     private double phosphor;
 
     @Column(name = "ferrum")
+    @NotNull
     private double ferrum;
 
     @Column(name = "ferritin")
+    @NotNull
     private double ferritin;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -362,5 +398,13 @@ public class BioChemTest implements Serializable{
 
     public void setFerritin(double ferritin) {
         this.ferritin = ferritin;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

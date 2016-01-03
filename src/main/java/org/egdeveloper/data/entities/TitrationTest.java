@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -17,7 +18,12 @@ public class TitrationTest implements Serializable{
     private int id;
 
     @Column(name = "oxalate")
+    @NotNull
     private double oxalate;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -33,5 +39,13 @@ public class TitrationTest implements Serializable{
 
     public void setOxalate(double oxalate) {
         this.oxalate = oxalate;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

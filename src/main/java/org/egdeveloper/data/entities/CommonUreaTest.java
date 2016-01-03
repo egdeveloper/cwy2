@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -14,52 +15,72 @@ public class CommonUreaTest implements Serializable{
     private int id;
 
     @Column(name = "amount")
+    @NotNull
     private double amount;
 
     @Column(name = "PH")
+    @NotNull
     private double PH;
 
     @Column(name = "WBCells")
+    @NotNull
     private double WBCells;
 
     @Column(name = "RBCells")
+    @NotNull
     private double RBCells;
 
     @Column(name = "color")
+    @NotNull
     private String color;
 
     @Column(name = "transparency")
+    @NotNull
     private String transparency;
 
     @Column(name = "protein")
+    @NotNull
     private String protein;
 
     @Column(name = "glucose")
+    @NotNull
     private String glucose;
 
     @Column(name = "ketoneBodies")
+    @NotNull
     private String ketoneBodies;
 
     @Column(name = "bloodReaction")
+    @NotNull
     private String bloodReaction;
 
     @Column(name = "biliRuby")
+    @NotNull
     private String biliRuby;
 
     @Column(name = "mucus")
+    @NotNull
     private String mucus;
 
     @Column(name = "bacteria")
+    @NotNull
     private String bacteria;
 
     @Column(name = "salt")
+    @NotNull
     private String salt;
 
     @Column(name = "ureaBilins")
+    @NotNull
     private String ureaBilins;
 
     @Column(name = "cylinder")
+    @NotNull
     private String cylinder;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public String getUreaBilins() {
         return ureaBilins;
@@ -195,5 +216,13 @@ public class CommonUreaTest implements Serializable{
 
     public void setCylinder(String cylinder) {
         this.cylinder = cylinder;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

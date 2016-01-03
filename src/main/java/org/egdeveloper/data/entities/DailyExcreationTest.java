@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -14,31 +15,44 @@ public class DailyExcreationTest implements Serializable{
     private int id;
 
     @Column(name = "creatinine")
+    @NotNull
     private double creatinine;
 
     @Column(name = "urea")
+    @NotNull
     private double urea;
 
     @Column(name = "ureaAcid")
+    @NotNull
     private double ureaAcid;
 
     @Column(name = "calcium")
+    @NotNull
     private double calcium;
 
     @Column(name = "potassium")
+    @NotNull
     private double potassium;
 
     @Column(name = "magnesium")
+    @NotNull
     private double magnesium;
 
     @Column(name = "sodium")
+    @NotNull
     private double sodium;
 
     @Column(name = "phosphorOxide")
+    @NotNull
     private double phosphorOxide;
 
     @Column(name = "chlorine")
+    @NotNull
     private double chlorine;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -118,6 +132,14 @@ public class DailyExcreationTest implements Serializable{
 
     public void setChlorine(double chlorine) {
         this.chlorine = chlorine;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
 }

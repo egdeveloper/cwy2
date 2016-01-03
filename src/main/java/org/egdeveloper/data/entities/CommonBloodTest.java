@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,43 +19,60 @@ public class CommonBloodTest implements Serializable{
     private int id;
 
     @Column(name = "hemoglobin")
+    @NotNull
     private double hemoglobin;
 
     @Column(name = "RBCells")
+    @NotNull
     private double RBCells;
 
     @Column(name = "colorIndex")
+    @NotNull
     private double colorIndex;
 
     @Column(name = "IMRBCells")
+    @NotNull
     private double IMRBCells;
 
     @Column(name = "platelets")
+    @NotNull
     private double platelets;
 
     @Column(name = "ESR")
+    @NotNull
     private double ESR;
 
     @Column(name = "WBCells")
+    @NotNull
     private double WBCells;
 
     @Column(name = "bandCells")
+    @NotNull
     private double bandCells;
 
     @Column(name = "segmentCells")
+    @NotNull
     private double segmentCells;
 
     @Column(name = "eosinCells")
+    @NotNull
     private double eosinCells;
 
     @Column(name = "basophil")
+    @NotNull
     private double basophil;
 
     @Column(name = "NKCells")
+    @NotNull
     private double NKCells;
 
     @Column(name = "monoCells")
+    @NotNull
     private double monoCells;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -166,5 +184,13 @@ public class CommonBloodTest implements Serializable{
 
     public void setMonoCells(double monoCells) {
         this.monoCells = monoCells;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

@@ -1,5 +1,6 @@
 package org.egdeveloper.data.entities;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -12,22 +13,32 @@ public class UreaStoneTest implements Serializable{
     private int id;
 
     @Column(name = "size")
+    @NotNull
     private double size;
 
     @Column(name = "density")
+    @NotNull
     private double density;
 
     @Column(name = "location")
+    @NotNull
     private String location;
 
     @Column(name = "form")
+    @NotNull
     private String form;
 
     @Column(name = "hardness")
+    @NotNull
     private double hardness;
 
     @Column(name = "addInfo")
+    @NotNull
     private String addInfo;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -83,5 +94,13 @@ public class UreaStoneTest implements Serializable{
 
     public void setAddInfo(String addInfo) {
         this.addInfo = addInfo;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

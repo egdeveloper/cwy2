@@ -18,7 +18,7 @@ public class Patient implements Serializable{
     //Fields
 
     @Id
-    @Column(name = "id")
+    @Column(name = "patient_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -138,29 +138,30 @@ public class Patient implements Serializable{
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<BioChemTest> bioChemTests = new HashSet<BioChemTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<CommonBloodTest> commonBloodTests = new HashSet<CommonBloodTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<CommonUreaTest> commonUreaTests = new HashSet<CommonUreaTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<DailyExcreationTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<TitrationTest> titrationTests = new HashSet<TitrationTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<UreaColorTest> ureaColorTests = new HashSet<UreaColorTest>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<UreaStoneTest> ureaStoneTests = new HashSet<UreaStoneTest>();
 
-    @ManyToMany
-    private Set<Doctor> doctor = new HashSet<Doctor>();
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    private Doctor doctor;
 
     //Getters and setters
 
@@ -452,11 +453,11 @@ public class Patient implements Serializable{
         this.ureaStoneTests = ureaStoneTests;
     }
 
-    public Set<Doctor> getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Set<Doctor> doctor) {
+    public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 

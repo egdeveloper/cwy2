@@ -13,7 +13,7 @@ import java.util.Set;
 public class Doctor implements Serializable{
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "doctor_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
@@ -41,7 +41,7 @@ public class Doctor implements Serializable{
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Patient> patients = new HashSet<Patient>();
 
     public Doctor(){}
