@@ -29,13 +29,15 @@
 <c:url var="login_action" value="/login"/>
 
 <div class="col-md-12">
-  <form:form method="get" action="${login_action}" modelAttribute="doctorAccount">
+  <form:form method="post" action="${login_action}" modelAttribute="loginAuth">
     <table>
       <tr class="form-group">
+        <td><span style="color:red"><form:errors path="login" cssClass="errors"/></span></td>
         <td><label for="login">Логин</label></td>
         <td><form:input path="login" id="login"/></td>
       </tr>
       <tr class="form-group">
+        <td><span style="color:red"><form:errors path="password" cssClass="errors"/></span></td>
         <td><label for="password">Пароль</label></td>
         <td><form:password path="password" id="password"/></td>
       </tr>

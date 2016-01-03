@@ -35,6 +35,9 @@ public class DoctorDAO {
         query.setParameter("login", login);
         query.setParameter("password", password);
         List doctorList = query.list();
-        return doctorList != null ? null : (Doctor)doctorList.get(0);
+        if(doctorList == null || doctorList.size() <= 0)
+            return null;
+        else
+            return (Doctor)doctorList.get(0);
     }
 }

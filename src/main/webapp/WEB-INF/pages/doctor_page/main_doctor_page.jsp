@@ -11,6 +11,8 @@
     <title></title>
 </head>
 <body>
-
+<h2>ФИО: ${doctorAccount.fullName}</h2>
+<h2>Должность: ${doctorAccount.jobPost}</h2>
+<h2>Место работы: ${doctorAccount.jobPlace}</h2>
 </body>
 </html>
