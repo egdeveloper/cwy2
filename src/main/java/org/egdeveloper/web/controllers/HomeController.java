@@ -4,6 +4,7 @@ import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import org.egdeveloper.security.LoginBean;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -27,12 +29,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@ModelAttribute("loginAuth") @Valid LoginBean loginAuth, BindingResult bindingResult, ModelMap modelMap){
+    public String logIn(@ModelAttribute("loginAuth") @Valid LoginBean loginAuth, BindingResult bindingResult, Model model, RedirectAttributes attributes){
         if(!bindingResult.hasErrors()) {
             Doctor doctor = doctorService.getDoctorByLoginAndPassword(loginAuth.getLogin(), loginAuth.getPassword());
             if(doctor != null) {
-                modelMap.addAttribute("doctorAccount", doctor);
-                return "doctor_page/main_doctor_page";
+                attributes.addFlashAttribute("doctorAccount", doctor);
+                return "redirect:/logged";
             }
             else
                 return "redirect:/";
