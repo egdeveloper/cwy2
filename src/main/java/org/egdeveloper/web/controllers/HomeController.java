@@ -37,11 +37,8 @@ public class HomeController {
                 attributes.addFlashAttribute("doctorAccount", doctor);
                 return "redirect:/logged";
             }
-            else
-                return "redirect:/";
         }
-        else
-            return "redirect:/";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
