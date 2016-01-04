@@ -1,4 +1,4 @@
-package org.egdeveloper.security;
+package org.egdeveloper.web.form;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by egdeveloper on 03.01.16.
  */
-public class LoginBean {
+public class Login {
 
     @NotNull
     @NotEmpty(message = "Введите логин!")
@@ -17,9 +17,9 @@ public class LoginBean {
     @NotEmpty(message = "Введите пароль!")
     private String password;
 
-    public LoginBean(){}
+    public Login(){}
 
-    public LoginBean(String login, String password){
+    public Login(String login, String password){
         this.login = login;
         this.password = password;
     }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
-import org.egdeveloper.security.LoginBean;
+import org.egdeveloper.web.form.Login;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -24,12 +24,12 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap modelMap){
-        modelMap.addAttribute("loginAuth", new LoginBean());
+        modelMap.addAttribute("loginAuth", new Login());
         return "home/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@ModelAttribute("loginAuth") @Valid LoginBean loginAuth, BindingResult bindingResult, Model model, RedirectAttributes attributes){
+    public String logIn(@ModelAttribute("loginAuth") @Valid Login loginAuth, BindingResult bindingResult, Model model, RedirectAttributes attributes){
         if(!bindingResult.hasErrors()) {
             Doctor doctor = doctorService.getDoctorByLoginAndPassword(loginAuth.getLogin(), loginAuth.getPassword());
             if(doctor != null) {
