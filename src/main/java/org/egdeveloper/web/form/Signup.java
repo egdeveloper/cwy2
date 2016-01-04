@@ -3,19 +3,27 @@ package org.egdeveloper.web.form;
 import org.egdeveloper.data.entities.Doctor;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Signup {
 
-    @NotEmpty(message = "Введите свое ФИО")
+    @NotEmpty(message = "Введите свое ФИО!")
     private String fullName;
 
-    @NotEmpty(message = "Введите логин")
+    @NotEmpty(message = "Введите логин!")
     private String login;
 
-    @NotEmpty(message = "Введите пароль")
+    @NotEmpty(message = "Введите пароль!")
+    @Size(min = 6, max = 255, message = "Пароль должен состоять не менее из 6 символов")
     private String password;
 
+    @NotEmpty(message = "Вы не подтвердили пароль!")
     private String confirmPassword;
 
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$",
+            message = "Введите email в правильном формате!"
+    )
     private String email;
 
     private String jobPlace;

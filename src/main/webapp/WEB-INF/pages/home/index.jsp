@@ -22,7 +22,7 @@
 <body>
 <div id="hmenu">
   <ul>
-    <li><a href="<c:url value="/register_new_doctor"/>">Регистрация</a></li>
+    <li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
     <li><a href="<c:url value="/about"/>">О сайте</a></li>
     <li><a href="<c:url value="/help"/>">Помощь</a></li>
   </ul>

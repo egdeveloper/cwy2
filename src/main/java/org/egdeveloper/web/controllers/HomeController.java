@@ -54,8 +54,8 @@ public class HomeController {
         return "home/help";
     }
 
-    @RequestMapping(value = "/register_new_doctor", method = RequestMethod.GET)
+    @RequestMapping(value = "/registerNewDoctor", method = RequestMethod.GET)
     public ModelAndView registerNewDoctor(){
-        return new ModelAndView("/registration/register", "signupData", new Signup());
+        return new ModelAndView("registration/register", "signupData", new Signup());
     }
 }

@@ -20,6 +20,6 @@ public class PersonalUserAccountController {
     @RequestMapping(value = "/logged", method = RequestMethod.GET)
     public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap){
         modelMap.addAttribute("doctorAccount", doctor);
-        return "/doctor_page/main_doctor_page";
+        return "doctorPage/MainDoctorPage";
     }
 }

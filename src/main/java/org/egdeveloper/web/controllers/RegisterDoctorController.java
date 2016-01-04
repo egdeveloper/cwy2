@@ -1,8 +1,6 @@
 package org.egdeveloper.web.controllers;
 
-import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.service.DoctorService;
-import org.egdeveloper.validators.SignupValidator;
 import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +29,7 @@ public class RegisterDoctorController {
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
         validator.validate(signup, bindingResult);
         if(bindingResult.hasErrors()){
-            return "/registration/register";
+            return "registration/register";
         }
         else {
             doctorService.addDoctor(signup.getDoctorAccount());

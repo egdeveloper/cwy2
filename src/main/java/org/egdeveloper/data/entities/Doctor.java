@@ -3,6 +3,8 @@ package org.egdeveloper.data.entities;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,18 +19,22 @@ public class Doctor implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty(message = "Введите свое ФИО")
+    @NotEmpty(message = "Введите свое ФИО!")
     @Column(name = "fullName", nullable = false)
     private String fullName;
 
-    @NotEmpty(message = "Введите логин")
+    @NotEmpty(message = "Введите логин!")
     @Column(name = "login", nullable = false)
     private String login;
 
-    @NotEmpty(message = "Введите пароль")
+    @NotEmpty(message = "Введите пароль!")
+    @Size(min = 6, max = 255, message = "Пароль должен состоять не менее из 6 символов")
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$",
+            message = "Введите email в правильном формате!"
+    )
     @Column(name = "email", nullable = false)
     private String email;
 
