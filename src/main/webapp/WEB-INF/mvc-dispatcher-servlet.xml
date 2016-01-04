@@ -15,12 +15,19 @@
        <context:component-scan base-package="org.egdeveloper.data"/>
        <context:component-scan base-package="org.egdeveloper.service"/>
        <context:component-scan base-package="org.egdeveloper.web.controllers"/>
+       <context:component-scan base-package="org.egdeveloper.validators"/>
 
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
               <property name="prefix" value="/WEB-INF/pages/"/>
               <property name="suffix" value=".jsp"/>
        </bean>
 
+       <bean id="messageSource"
+             class="org.springframework.context.support.ResourceBundleMessageSource">
+              <property name="basename" value="validation" />
+              <property name="defaultEncoding" value="UTF-8" />
+       </bean>
+       <bean id="signupValidator" class="org.egdeveloper.validators.SignupValidator" />
        <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
               <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
               <property name="url" value="jdbc:mysql://localhost:3306/laksmi_med_db?useUnicode=yes&amp;characterEncoding=UTF-8"/>

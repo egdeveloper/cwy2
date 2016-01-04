@@ -2,6 +2,7 @@ package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.service.DoctorService;
+import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class HomeController {
                 return "redirect:/";
         }
         else
-            return "/home/index";
+            return "redirect:/";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
@@ -55,6 +56,6 @@ public class HomeController {
 
     @RequestMapping(value = "/register_new_doctor", method = RequestMethod.GET)
     public ModelAndView registerNewDoctor(){
-        return new ModelAndView("/registration/register", "doctorAccount", new Doctor());
+        return new ModelAndView("/registration/register", "signupData", new Signup());
     }
 }
