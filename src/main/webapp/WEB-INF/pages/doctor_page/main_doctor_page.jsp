@@ -24,7 +24,7 @@
     <li class="active"><a href="<c:url value="/" />">На главную</a></li>
     <li><a href="#">Открыть страницу</a></li>
     <li class="nav-header">Пациенты</li>
-    <li><a href="#">Добавить пациента</a></li>
+    <li><a href="<c:url value="/patientInfoEditor"/>">Добавить пациента</a></li>
     <li class="divider"></li>
     <li><a href="#">
       Справка

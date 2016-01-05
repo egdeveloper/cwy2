@@ -138,6 +138,7 @@ public class Patient implements Serializable{
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;
 
+
     @OneToMany(fetch = FetchType.LAZY)
     private Set<BioChemTest> bioChemTests = new HashSet<BioChemTest>();
 
@@ -159,7 +160,7 @@ public class Patient implements Serializable{
     @OneToMany(fetch = FetchType.LAZY)
     private Set<UreaStoneTest> ureaStoneTests = new HashSet<UreaStoneTest>();
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Doctor doctor;
 
@@ -460,6 +461,4 @@ public class Patient implements Serializable{
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
-
-
 }
