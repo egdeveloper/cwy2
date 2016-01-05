@@ -1,22 +1,21 @@
 package org.egdeveloper.service;
 
-import org.egdeveloper.data.dao.DoctorDAO;
+import org.egdeveloper.data.dao.IDoctorDAO;
 import org.egdeveloper.data.entities.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by egdeveloper on 18.11.15.
- */
 @Service("doctorService")
 @Transactional
-public class DoctorService {
+public class DoctorService implements IDoctorService{
 
     @Autowired
-    DoctorDAO doctorDAO;
+    @Qualifier("doctorDAO")
+    private IDoctorDAO doctorDAO;
 
     @Transactional
     public void addDoctor(Doctor doctor){

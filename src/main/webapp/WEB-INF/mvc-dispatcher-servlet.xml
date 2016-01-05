@@ -60,7 +60,9 @@
 
        <tx:annotation-driven transaction-manager="transactionManager"/>
        <bean id="doctorDAO" class="org.egdeveloper.data.dao.DoctorDAO"/>
+       <bean id="patientDAO" class="org.egdeveloper.data.dao.PatientDAO"/>
        <bean id="doctorService" class="org.egdeveloper.service.DoctorService"/>
+       <bean id="patientService" class="org.egdeveloper.service.PatientService"/>
        <mvc:annotation-driven />
        <mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>

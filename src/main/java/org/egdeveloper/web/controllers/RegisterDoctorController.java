@@ -1,6 +1,6 @@
 package org.egdeveloper.web.controllers;
 
-import org.egdeveloper.service.DoctorService;
+import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,8 @@ import javax.validation.Valid;
 public class RegisterDoctorController {
 
     @Autowired
-    private DoctorService doctorService;
+    @Qualifier("doctorService")
+    private IDoctorService doctorService;
 
     @Autowired
     @Qualifier("signupValidator")

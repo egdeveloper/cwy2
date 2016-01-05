@@ -1,9 +1,10 @@
 package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
-import org.egdeveloper.service.DoctorService;
+import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,7 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomeController {
 
     @Autowired
-    private DoctorService doctorService;
+    @Qualifier("doctorService")
+    private IDoctorService doctorService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap modelMap){

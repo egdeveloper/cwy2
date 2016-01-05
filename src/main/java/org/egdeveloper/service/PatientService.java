@@ -1,24 +1,22 @@
 package org.egdeveloper.service;
 
-import org.egdeveloper.data.dao.PatientDAO;
+import org.egdeveloper.data.dao.IPatientDAO;
 import org.egdeveloper.data.entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by egdeveloper on 16.11.15.
- */
 
-@Service
-@Scope("singleton")
-public class PatientService {
+@Service("patientService")
+@Transactional
+public class PatientService implements IPatientService{
 
     @Autowired
-    private PatientDAO patientDAO;
+    @Qualifier("patientDAO")
+    private IPatientDAO patientDAO;
 
     @Transactional
     public void addPatient(Patient patient){

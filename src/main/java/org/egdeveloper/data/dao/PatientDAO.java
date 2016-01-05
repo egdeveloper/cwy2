@@ -8,8 +8,8 @@ import java.util.List;
 
 
 
-@Repository
-public class PatientDAO {
+@Repository("patientDAO")
+public class PatientDAO implements IPatientDAO{
 
     @Autowired
     private SessionFactory sessionFactory;
