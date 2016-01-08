@@ -16,17 +16,22 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-responsive.css"/>"/>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js"/>"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
+  <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 </head>
 <body>
-<div id="hmenu">
-  <ul>
-    <li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
-    <li><a href="<c:url value="/about"/>">О сайте</a></li>
-    <li><a href="<c:url value="/help"/>">Помощь</a></li>
-  </ul>
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand"><a>LaksmiMed</a></div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="<c:url value="/"/>">Главная</a></li>
+      <li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
+      <li><a href="<c:url value="/about"/>">О сайте</a></li>
+      <li><a href="<c:url value="/help"/>">Помощь</a></li>
+    </ul>
+  </div>
+</nav>
 <c:url var="login_action" value="/login"/>
 
 <div class="container" style="margin-top:30px">

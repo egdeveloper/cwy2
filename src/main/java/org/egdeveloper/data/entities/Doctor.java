@@ -47,8 +47,8 @@ public class Doctor implements Serializable{
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Patient> patients = new HashSet<Patient>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Patient> patients = new HashSet<>();
 
     public Doctor(){}
 
@@ -114,5 +114,13 @@ public class Doctor implements Serializable{
 
     public void setPhoneNumber(String phone_number) {
         this.phoneNumber = phone_number;
+    }
+
+    public Set<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Set<Patient> patients) {
+        this.patients = patients;
     }
 }

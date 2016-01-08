@@ -140,29 +140,26 @@ public class Patient implements Serializable{
 
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<BioChemTest> bioChemTests = new HashSet<BioChemTest>();
+    private Set<BioChemTest> bioChemTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<CommonBloodTest> commonBloodTests = new HashSet<CommonBloodTest>();
+    private Set<CommonBloodTest> commonBloodTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<CommonUreaTest> commonUreaTests = new HashSet<CommonUreaTest>();
+    private Set<CommonUreaTest> commonUreaTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<DailyExcreationTest>();
+    private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<TitrationTest> titrationTests = new HashSet<TitrationTest>();
+    private Set<TitrationTest> titrationTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<UreaColorTest> ureaColorTests = new HashSet<UreaColorTest>();
+    private Set<UreaColorTest> ureaColorTests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<UreaStoneTest> ureaStoneTests = new HashSet<UreaStoneTest>();
+    private Set<UreaStoneTest> ureaStoneTests = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Doctor doctor;
 
     //Getters and setters
 
@@ -452,13 +449,5 @@ public class Patient implements Serializable{
 
     public void setUreaStoneTests(Set<UreaStoneTest> ureaStoneTests) {
         this.ureaStoneTests = ureaStoneTests;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
     }
 }

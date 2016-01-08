@@ -32,8 +32,7 @@ public class PersonalUserAccountController {
 
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
     public String getPatientInfoEditor(RedirectAttributes attributes){
-        attributes.addFlashAttribute("doctorInfo", doctorInfo);
-        attributes.addFlashAttribute("patientInfo", new Patient());
+        attributes.addFlashAttribute("doctor", doctorInfo);
         return "redirect:/editPatientInfo";
     }
 }

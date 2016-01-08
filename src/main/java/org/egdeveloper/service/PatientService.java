@@ -1,6 +1,7 @@
 package org.egdeveloper.service;
 
 import org.egdeveloper.data.dao.IPatientDAO;
+import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,8 +20,8 @@ public class PatientService implements IPatientService{
     private IPatientDAO patientDAO;
 
     @Transactional
-    public void addPatient(Patient patient){
-        patientDAO.addPatient(patient);
+    public void addPatient(Doctor doctor, Patient patient){
+        patientDAO.addPatient(doctor, patient);
     }
 
     @Transactional
