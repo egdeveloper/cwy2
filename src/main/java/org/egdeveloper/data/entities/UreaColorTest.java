@@ -1,9 +1,16 @@
 package org.egdeveloper.data.entities;
 
 
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table
@@ -13,6 +20,18 @@ public class UreaColorTest implements Serializable{
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @NotEmpty
+    //@Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Column(name = "testDate")
+    private LocalDate testDate;
+
+    @NotNull
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "DUV")
     @NotNull
@@ -54,20 +73,28 @@ public class UreaColorTest implements Serializable{
     @PrimaryKeyJoinColumn
     private Patient patient;
 
-    public double getIsoCitrate() {
-        return isoCitrate;
-    }
-
-    public void setIsoCitrate(double isoCitrate) {
-        this.isoCitrate = isoCitrate;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDate getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(LocalDate testDate) {
+        this.testDate = testDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getDUV() {
@@ -124,6 +151,14 @@ public class UreaColorTest implements Serializable{
 
     public void setCitrate(double citrate) {
         this.citrate = citrate;
+    }
+
+    public double getIsoCitrate() {
+        return isoCitrate;
+    }
+
+    public void setIsoCitrate(double isoCitrate) {
+        this.isoCitrate = isoCitrate;
     }
 
     public double getUreaAcid() {

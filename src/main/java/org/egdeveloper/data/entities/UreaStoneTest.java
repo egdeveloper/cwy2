@@ -1,7 +1,14 @@
 package org.egdeveloper.data.entities;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table
@@ -11,6 +18,18 @@ public class UreaStoneTest implements Serializable{
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @NotEmpty
+    //@Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Column(name = "testDate")
+    private LocalDate testDate;
+
+    @NotNull
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "size")
     @NotNull
@@ -46,6 +65,22 @@ public class UreaStoneTest implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDate getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(LocalDate testDate) {
+        this.testDate = testDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getSize() {

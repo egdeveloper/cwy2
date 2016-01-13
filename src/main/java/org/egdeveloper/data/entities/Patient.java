@@ -5,11 +5,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
-
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.joda.time.LocalDate;
 
 @Entity
 @Table(name = "Patient")
@@ -23,20 +25,24 @@ public class Patient implements Serializable{
     private int id;
 
     @Size(max = 255)
-    @NotEmpty
+    @NotEmpty(message = "Введите ФИО пациента")
     @Column(name = "fullName", nullable = false)
     private String fullName;
 
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @NotNull
+    //@NotEmpty(message = "Введите дату рождения")
+    //@Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
     @NotNull
+    @NotEmpty(message = "Введите номер карты")
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
 
@@ -71,17 +77,17 @@ public class Patient implements Serializable{
     @Column(name = "email", nullable = false)
     private String email;
 
-    @NotEmpty
+    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "rh", nullable = false)
     private Rh rh;
 
-    @NotEmpty
+    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "bloodGroup", nullable = false)
     private BloodGroup bloodGroup;
 
-    @NotEmpty
+    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "disability", nullable = false)
     private Disability disability;
@@ -104,7 +110,7 @@ public class Patient implements Serializable{
 
     @NotNull
     @Column(name = "post", nullable = false)
-    private String post;
+    private String jobPost;
 
     @NotNull
     @Column(name = "jobConditions", nullable = false)
@@ -311,6 +317,14 @@ public class Patient implements Serializable{
         return jobPlace;
     }
 
+    public String getJobPost() {
+        return jobPost;
+    }
+
+    public void setJobPost(String jobPost) {
+        this.jobPost = jobPost;
+    }
+
     public void setJobPlace(String jobPlace) {
         this.jobPlace = jobPlace;
     }
@@ -323,13 +337,7 @@ public class Patient implements Serializable{
         this.occupation = occupation;
     }
 
-    public String getPost() {
-        return post;
-    }
 
-    public void setPost(String post) {
-        this.post = post;
-    }
 
     public String getJobConditions() {
         return jobConditions;

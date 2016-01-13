@@ -12,47 +12,48 @@
 <html>
 <head>
   <title></title>
-  <link rel="stylesheet" href="<c:url value="/resources/css/home_stylesheet.css"/>">
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-responsive.css"/>"/>
-  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <div class="navbar-brand"><a>LaksmiMed</a></div>
+<div class="container">
+  <nav class="navbar navbar-default navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-brand"><a>LaksmiMed</a></div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="<c:url value="/"/>">Главная</a></li>
+        <li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
+        <li><a href="<c:url value="/about"/>">О сайте</a></li>
+        <li><a href="<c:url value="/help"/>">Помощь</a></li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a href="<c:url value="/"/>">Главная</a></li>
-      <li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
-      <li><a href="<c:url value="/about"/>">О сайте</a></li>
-      <li><a href="<c:url value="/help"/>">Помощь</a></li>
-    </ul>
-  </div>
-</nav>
-<c:url var="login_action" value="/login"/>
+  </nav>
+  <c:url var="login_action" value="/login"/>
 
-<div class="container" style="margin-top:30px">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3><strong>Войти</strong></h3></div>
-      <div class="panel-body">
-        <form:form role="form" method="post" action="${login_action}" modelAttribute="loginAuth">
-          <div class="form-group">
-            <label for="login">Логин <span style="color:red"><form:errors path="login" cssClass="errors"/></span></label>
-            <form:input path="login" id="login"/>
-          </div>
-          <div class="form-group">
-            <label for="password">Пароль <span style="color:red"><form:errors path="password" cssClass="errors"/></span></label>
-            <form:password path="password" id="password"/>
-          </div>
-          <button class="btn btn-sm btn-default" type="submit">Войти</button>
-        </form:form>
+  <div class="container" style="margin-top:30px">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3><strong>Войти</strong></h3></div>
+        <div class="panel-body">
+          <form:form role="form" method="post" action="${login_action}" modelAttribute="loginAuth">
+            <div class="form-group">
+              <label for="login">Логин <span style="color:red"><form:errors path="login" cssClass="errors"/></span></label>
+              <form:input path="login" id="login"/>
+            </div>
+            <div class="form-group">
+              <label for="password">Пароль <span style="color:red"><form:errors path="password" cssClass="errors"/></span></label>
+              <form:password path="password" id="password"/>
+            </div>
+            <button class="btn btn-sm btn-default" type="submit">Войти</button>
+          </form:form>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>
