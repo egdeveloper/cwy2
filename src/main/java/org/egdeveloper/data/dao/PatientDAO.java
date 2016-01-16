@@ -1,6 +1,7 @@
 package org.egdeveloper.data.dao;
 
 import org.egdeveloper.data.entities.Doctor;
+import org.egdeveloper.data.entities.IMedicalTest;
 import org.egdeveloper.data.entities.Patient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,7 @@ public class PatientDAO implements IPatientDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
     public void addPatient(Doctor doctor, Patient patient){
         Session session = sessionFactory.getCurrentSession();
         session.save(patient);
@@ -27,10 +29,17 @@ public class PatientDAO implements IPatientDAO{
         session.saveOrUpdate(doctor);
     }
 
+    @Override
     public List<Patient> getPatients(){
-        return sessionFactory.getCurrentSession().createQuery("from PATIENT").list();
+        return sessionFactory.getCurrentSession().createQuery("from Patient").list();
     }
 
+    @Override
+    public void editPatientInfo(Patient patient) {
+        sessionFactory.getCurrentSession().saveOrUpdate(patient);
+    }
+
+    @Override
     public void removePatient(Integer id){
         Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, id);
         if(patient != null){
@@ -38,4 +47,8 @@ public class PatientDAO implements IPatientDAO{
         }
     }
 
+    @Override
+    public void addMedicalTest(Patient patient, IMedicalTest test) {
+
+    }
 }

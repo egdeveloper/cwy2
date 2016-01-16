@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 @Entity
 @Table
-public class UreaColorTest implements Serializable{
+public class UreaColorTest implements Serializable, IMedicalTest{
 
     @Id
     @Column(name = "id")

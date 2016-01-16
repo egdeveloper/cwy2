@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IPatientService {
     void addPatient(Doctor doctor, Patient patient);
+    void editPatientInfo(Patient patient);
     List<Patient> getPatients();
     void removePatient(Integer id);
 }

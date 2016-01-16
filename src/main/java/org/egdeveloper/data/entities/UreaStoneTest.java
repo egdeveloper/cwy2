@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 @Entity
 @Table
-public class UreaStoneTest implements Serializable{
+public class UreaStoneTest implements Serializable, IMedicalTest{
 
     @Id
     @Column(name = "id")

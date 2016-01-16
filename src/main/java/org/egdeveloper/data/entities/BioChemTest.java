@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 @Entity
 @Table
-public class BioChemTest implements Serializable{
+public class BioChemTest implements Serializable, IMedicalTest{
 
 
     @Id
