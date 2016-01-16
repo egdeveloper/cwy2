@@ -1,6 +1,7 @@
 package org.egdeveloper.data.dao;
 
 import org.egdeveloper.data.entities.Doctor;
+import org.egdeveloper.data.entities.IMedicalTest;
 import org.egdeveloper.data.entities.Patient;
 import java.util.List;
 
@@ -31,4 +32,19 @@ public interface IPatientDAO {
      * @param id id of existing patient record
      */
     void removePatient(Integer id);
+
+
+    /**
+     * Edit patient info
+     * @param patient patient record
+     */
+    void editPatientInfo(Patient patient);
+
+
+    /**
+     * Add medicatl test to existing patient record
+     * @param patient patient record
+     * @param test test instance
+     */
+    void addMedicalTest(Patient patient, IMedicalTest test);
 }

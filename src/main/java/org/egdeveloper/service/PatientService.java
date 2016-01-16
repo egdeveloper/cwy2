@@ -25,6 +25,11 @@ public class PatientService implements IPatientService{
     }
 
     @Transactional
+    public void editPatientInfo(Patient patient){
+        patientDAO.editPatientInfo(patient);
+    }
+
+    @Transactional
     public List<Patient> getPatients(){
         return patientDAO.getPatients();
     }

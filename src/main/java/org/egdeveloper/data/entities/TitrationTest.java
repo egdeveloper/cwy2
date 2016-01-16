@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 @Entity
 @Table
-public class TitrationTest implements Serializable{
+public class TitrationTest implements Serializable, IMedicalTest{
 
     @Id
     @Column(name = "id")

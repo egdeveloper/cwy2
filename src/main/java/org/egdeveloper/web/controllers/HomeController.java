@@ -25,14 +25,14 @@ public class HomeController {
     @Qualifier("doctorService")
     private IDoctorService doctorService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap){
         modelMap.addAttribute("loginAuth", new Login());
         return "home/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@ModelAttribute("loginAuth") @Valid Login loginAuth, BindingResult bindingResult, Model model, RedirectAttributes attributes){
+    public String logIn(@ModelAttribute("loginAuth") @Valid Login loginAuth, BindingResult bindingResult, ModelMap modelMap, RedirectAttributes attributes){
         if(!bindingResult.hasErrors()) {
             Doctor doctor = doctorService.getDoctorByLoginAndPassword(loginAuth.getLogin(), loginAuth.getPassword());
             if(doctor != null) {
@@ -40,6 +40,7 @@ public class HomeController {
                 return "redirect:/logged";
             }
         }
+        modelMap.addAttribute("loginError", "Вы не правильно ввели логин или пароль!");
         return "redirect:/";
     }
 
