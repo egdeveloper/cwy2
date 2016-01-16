@@ -14,38 +14,29 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="<c:url value="/main"/>">Главная</a></li>
-                <li><a href="<c:url value="/patientInfoEditor"/>">Добавить пациента</a></li>
                 <li><a href="<c:url value="/about"/>">О сайте</a></li>
                 <li><a href="<c:url value="/help"/>">Помощь</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value="/personalPage"/>">Личная страница</a></li>
+            <ul class="nav navbar-right">
                 <li><a href="<c:url value="/logout"/>">Выйти</a></li>
             </ul>
         </div>
     </nav>
-    <table class="table table-striped table-bordered" cellpadding="0" width="100%">
-        <thead>
-            <tr>
-                <td>№</td>
-                <td>ФИО</td>
-                <td>Пол</td>
-                <td>Дата рождения</td>
-                <td>Номер карты</td>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="patient" items="${doctor.patients}" varStatus="counter">
-                <tr>
-                    <td>${counter.count}</td>
-                    <td>${patient.fullName}</td>
-                    <td>${patient.gender.gender2String()}</td>
-                    <td>${patient.birthdate}</td>
-                    <td>${patient.cardNumber}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+    <div class="row">
+        <h2>${doctor.fullName}</h2>
+    </div>
+    <div class="row">
+        <h2>${doctor.jobPost}</h2>
+    </div>
+    <div class="row">
+        <h2>${doctor.jobPlace}</h2>
+    </div>
+    <div class="row">
+        <h2>${doctor.phoneNumber}</h2>
+    </div>
+    <div class="row">
+        <h2>${doctor.email}</h2>
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>

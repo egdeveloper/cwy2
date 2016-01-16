@@ -6,7 +6,6 @@ import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +36,7 @@ public class HomeController {
             Doctor doctor = doctorService.getDoctorByLoginAndPassword(loginAuth.getLogin(), loginAuth.getPassword());
             if(doctor != null) {
                 attributes.addFlashAttribute("doctorAccount", doctor);
-                return "redirect:/logged";
+                return "redirect:/main";
             }
         }
         modelMap.addAttribute("loginError", "Вы не правильно ввели логин или пароль!");

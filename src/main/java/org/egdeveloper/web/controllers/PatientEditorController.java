@@ -40,7 +40,7 @@ public class PatientEditorController {
         }
         patientService.addPatient(doctor, patient);
         sessionStatus.setComplete();
-        return "redirect:/logged";
+        return "redirect:/main";
     }
 
     //get methods

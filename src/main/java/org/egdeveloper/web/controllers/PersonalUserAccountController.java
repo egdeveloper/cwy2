@@ -11,28 +11,44 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
+@SessionAttributes("doctor")
 public class PersonalUserAccountController {
 
     @Autowired
     @Qualifier("patientService")
     private IPatientService patientService;
 
-    private Doctor doctorInfo;
-
-    @RequestMapping(value = "/logged", method = RequestMethod.GET)
-    public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap){
-        modelMap.addAttribute("doctorAccount", doctor);
-        doctorInfo = doctor;
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
+        session.setAttribute("doctor", doctor);
         return "/doctor_page/main_doctor_page";
     }
 
+    @RequestMapping(value = "/personalPage", method = RequestMethod.GET)
+    public String personalPage(ModelMap modelMap, HttpSession session){
+        Doctor doctor = (Doctor)session.getAttribute("doctor");
+        modelMap.addAttribute("doctorInfo", doctor);
+        return "doctor_page/personal_page";
+    }
+
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
-    public String getPatientInfoEditor(RedirectAttributes attributes){
-        attributes.addFlashAttribute("doctor", doctorInfo);
+    public String getPatientInfoEditor(RedirectAttributes attributes, HttpSession session){
+        Doctor doctor = (Doctor)session.getAttribute("doctor");
+        attributes.addFlashAttribute("doctor", doctor);
         return "redirect:/editPatientInfo";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(SessionStatus sessionStatus){
+        sessionStatus.setComplete();
+        return "redirect:/";
     }
 }
