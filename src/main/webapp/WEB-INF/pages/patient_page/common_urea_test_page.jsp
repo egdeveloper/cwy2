@@ -12,7 +12,7 @@
 <c:url var="addCommonUreaTest" value="/addCommonUreaTest"/>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
+    <legend>Общий анализ мочи</legend>
     <form:form cssClass="form-horizontal" method="post" action="${addCommonUreaTest}" modelAttribute="commonUreaTest">
       <div class="row">
         <div class="form-group">

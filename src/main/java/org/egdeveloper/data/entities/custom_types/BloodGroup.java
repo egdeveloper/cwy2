@@ -9,4 +9,7 @@ public enum BloodGroup {
     private BloodGroup(String blood_group){
         this.blood_group = blood_group;
     }
+    public String bloodGroup2String(){
+        return blood_group;
+    }
 }

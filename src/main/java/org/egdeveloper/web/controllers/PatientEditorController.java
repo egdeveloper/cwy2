@@ -15,9 +15,11 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 @Controller
-@SessionAttributes("doctorInfo")
+@SessionAttributes(value = {"doctorInfo", "patientInfo"})
 public class PatientEditorController {
 
     @Autowired
@@ -30,6 +32,7 @@ public class PatientEditorController {
         modelMap.addAttribute("patientInfo", new Patient());
         return "/patient_page/patient_edit_page";
     }
+
     @RequestMapping(value = "/editPatientInfo", method = RequestMethod.POST)
     public String editPatientInfo(@ModelAttribute("patientInfo") @Valid Patient patient,
                                   BindingResult bindingResult, ModelMap modelMap, HttpSession session, SessionStatus sessionStatus)
@@ -41,6 +44,15 @@ public class PatientEditorController {
         patientService.addPatient(doctor, patient);
         sessionStatus.setComplete();
         return "redirect:/main";
+    }
+
+    @RequestMapping(value = "/personalPatientPage", method = RequestMethod.GET)
+    public String getPersonalPatientPage(@ModelAttribute("patient") Patient patient, ModelMap modelMap){
+        //if(session.getAttribute("patientInfo") != null)
+        //    session.removeAttribute("patientInfo");
+        //session.setAttribute("patientInfo", patient);
+        modelMap.addAttribute("patientInfo", patient);
+        return "/patient_page/personal_patient_page";
     }
 
     //get methods
@@ -67,28 +79,28 @@ public class PatientEditorController {
         return "patient_page/common_urea_test_page";
     }
 
-    @RequestMapping(value = "addDailyExcreationTest", method = RequestMethod.GET)
+    @RequestMapping(value = "/addDailyExcreationTest", method = RequestMethod.GET)
     public String addDailyExcreationTest(ModelMap modelMap)
     {
         modelMap.addAttribute("dailyExcreationTest", new DailyExcreationTest());
         return "/patient_page/daily_excreation_test_page";
     }
 
-    @RequestMapping(value = "addTitrationTest", method = RequestMethod.GET)
+    @RequestMapping(value = "/addTitrationTest", method = RequestMethod.GET)
     public String addTitrationTest(ModelMap modelMap)
     {
         modelMap.addAttribute("titrationTest", new TitrationTest());
         return "patient_page/titration_test_page";
     }
 
-    @RequestMapping(value = "addUreaColorTest", method = RequestMethod.GET)
+    @RequestMapping(value = "/addUreaColorTest", method = RequestMethod.GET)
     public String addUreaColorTest(ModelMap modelMap)
     {
         modelMap.addAttribute("ureaColorTest", new UreaColorTest());
         return "patient_page/urea_color_test_page";
     }
 
-    @RequestMapping(value = "addUreaStoneTest", method = RequestMethod.GET)
+    @RequestMapping(value = "/addUreaStoneTest", method = RequestMethod.GET)
     public String addUreaStoneTest(ModelMap modelMap)
     {
         modelMap.addAttribute("ureaStoneTest", new UreaStoneTest());
@@ -100,31 +112,61 @@ public class PatientEditorController {
     @RequestMapping(value = "/addBiochemTest", method = RequestMethod.POST)
     public String addBiochemTest(@ModelAttribute("biochemTest") @Valid BioChemTest test,
                                  BindingResult bindingResult,
-                                 ModelMap modelMap)
+                                 ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<BioChemTest> bioChemTests = patient.getBioChemTests();
+                bioChemTests.add(test);
+                patient.setBioChemTests(bioChemTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addBiochemTest";
     }
 
     @RequestMapping(value = "/addCommonBloodTest", method = RequestMethod.POST)
     public String addCommonBloodTest(@ModelAttribute("commonBloodTest") @Valid CommonBloodTest test,
                                      BindingResult bindingResult,
-                                     ModelMap modelMap)
+                                     ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<CommonBloodTest> commonBloodTests = patient.getCommonBloodTests();
+                commonBloodTests.add(test);
+                patient.setCommonBloodTests(commonBloodTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addCommonBloodTest";
     }
 
     @RequestMapping(value = "/addCommonUreaTest", method = RequestMethod.POST)
     public String addCommonUreaTest(@ModelAttribute("commonUreaTest") @Valid CommonUreaTest test,
                                     BindingResult bindingResult,
-                                    ModelMap modelMap)
+                                    ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<CommonUreaTest> commonUreaTests = patient.getCommonUreaTests();
+                commonUreaTests.add(test);
+                patient.setCommonUreaTests(commonUreaTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addCommonUreaTest";
     }
 
     @RequestMapping(value = "addDailyExcreationTest", method = RequestMethod.POST)
     public String addDailyExcreationTest(@ModelAttribute("dailyExcreationTest") @Valid DailyExcreationTest test,
                                          BindingResult bindingResult,
-                                         ModelMap modelMap)
+                                         ModelMap modelMap, HttpSession session)
     {
         return "redirect:/";
     }
@@ -132,7 +174,7 @@ public class PatientEditorController {
     @RequestMapping(value = "addTitrationTest", method = RequestMethod.POST)
     public String addTitrationTest(@ModelAttribute("titrationTest") @Valid TitrationTest test,
                                    BindingResult bindingResult,
-                                   ModelMap modelMap)
+                                   ModelMap modelMap, HttpSession session)
     {
         return "redirect:/";
     }
@@ -140,7 +182,7 @@ public class PatientEditorController {
     @RequestMapping(value = "addUreaColorTest", method = RequestMethod.POST)
     public String addUreaColorTest(@ModelAttribute("ureaColorTest") @Valid UreaColorTest test,
                                    BindingResult bindingResult,
-                                   ModelMap modelMap)
+                                   ModelMap modelMap, HttpSession session)
     {
         return "redirect:/";
     }
@@ -148,7 +190,7 @@ public class PatientEditorController {
     @RequestMapping(value = "addUreaStoneTest", method = RequestMethod.POST)
     public String addUreaStoneTest(@ModelAttribute("ureaStoneTest") @Valid UreaStoneTest test,
                                    BindingResult bindingResult,
-                                   ModelMap modelMap)
+                                   ModelMap modelMap, HttpSession session)
     {
         return "redirect:/";
     }

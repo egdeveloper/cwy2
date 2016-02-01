@@ -12,7 +12,7 @@
 <c:url var="addUreaStoneTest" value="/addUreaStoneTest"/>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
+    <legend>Мочевой камень</legend>
     <form:form cssClass="form-horizontal" method="post" action="${addUreaStoneTest}" modelAttribute="ureaStoneTest">
       <div class="row">
         <div class="form-group">

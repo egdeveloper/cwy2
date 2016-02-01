@@ -9,4 +9,7 @@ public enum Rh {
     private Rh(String rh){
         this.rh = rh;
     }
+    public String Rh2String(){
+        return rh;
+    }
 }

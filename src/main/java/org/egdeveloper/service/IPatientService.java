@@ -9,5 +9,6 @@ public interface IPatientService {
     void addPatient(Doctor doctor, Patient patient);
     void editPatientInfo(Patient patient);
     List<Patient> getPatients();
+    Patient getPatientById(Integer id);
     void removePatient(Integer id);
 }

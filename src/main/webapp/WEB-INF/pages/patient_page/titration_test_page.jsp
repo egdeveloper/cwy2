@@ -12,7 +12,7 @@
 <c:url var="addTitrationTest" value="/addTitrationTest"/>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
+    <legend>Титриметрия</legend>
     <form:form cssClass="form-horizontal" method="post" action="${addTitrationTest}" modelAttribute="titrationTest">
       <div class="row">
         <div class="form-group">

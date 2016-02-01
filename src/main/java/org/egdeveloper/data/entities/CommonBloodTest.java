@@ -26,7 +26,7 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    @NotEmpty
+    //@NotEmpty
     //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")

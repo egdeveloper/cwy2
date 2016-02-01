@@ -92,7 +92,7 @@
       <form:input cssClass="form-control" path="TIN" id="TINInput"/>
     </div>
     <div class="form-group">
-      <label class="control-label">Медицинская карта</label>
+      <label class="control-label">Страховой полис</label>
       <form:input cssClass="form-control" path="OMICard" id="OMICardInput"/>
     </div>
     <div class="form-group">

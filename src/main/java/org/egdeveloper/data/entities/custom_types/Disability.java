@@ -9,4 +9,7 @@ public enum Disability {
     private Disability(String disability){
         this.disability = disability;
     }
+    public String disability2String(){
+        return disability;
+    }
 }

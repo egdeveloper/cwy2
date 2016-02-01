@@ -12,7 +12,7 @@
 <c:url var="addUreaColorTest" value="/addUreaColorTest"/>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
+    <legend>Хроматография</legend>
     <form:form cssClass="form-horizontal" method="post" action="${addUreaColorTest}" modelAttribute="ureaColorTest">
       <div class="row">
         <div class="form-group">

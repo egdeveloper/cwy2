@@ -13,6 +13,30 @@
 <head>
   <title></title>
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+  <style>
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #f5f5f5;
+    }
+
+    body > .footer-container {
+      padding: 60px 15px 0;
+    }
+    .footer-container .text-muted {
+      margin: 20px 0;
+    }
+    .footer > .footer-container {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    code {
+      font-size: 80%;
+    }
+  </style>
 </head>
 <body>
 <c:url var="login_action" value="/login"/>
@@ -44,30 +68,22 @@
     </div>
   </nav>
 </div>
-<!--
-<div class="container">
-  <div class="container" style="margin-top:30px">
-    <div class="col-md-4 col-md-offset-4">
-      <div class="panel panel-default">
-        <div class="panel-heading"><h3><strong>Войти</strong></h3></div>
-        <div class="panel-body">
-          <!--form:form role="form" method="post" action="${login_action}" modelAttribute="loginAuth">
-            <div class="form-group">
-              <label for="login">Логин</label>
-              <!--form:input path="login" id="login"/>
-            </div>
-            <div class="form-group">
-              <label for="password">Пароль</label>
-              <!--form:password path="password" id="password"/>
-            </div>
-            <button class="btn btn-sm btn-default" type="submit">Войти</button>
-          <!--/form:form>
-        </div>
-      </div>
-    </div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Добро пожаловать!</h1>
+    <p>LaksmiMed - сервис, предоставляющий Вам  широкий набор инструментов для работы с медицинскими картами пациентов
+      и статистической обработки медицинских данных для постановки диагноза и проведения исследований
+    </p>
+    <button class="btn btn-primary btn-default" onclick="location.href='<c:url value="/about"/>'">Узнайте больше!</button>
   </div>
 </div>
--->
+<footer class="footer">
+  <div class="footer-container">
+    <p class="text-muted">©2015-2016 Ярных Роман <a href="mailto:egdeveloper@mail.ru">egdeveloper@mail.ru</a>.
+    Проект размещен в свободном доступе на github: <a href="https://github.com/egdeveloper/LaksmiMed">https://github.com/egdeveloper/LaksmiMed</a>
+    </p>
+  </div>
+</footer>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>

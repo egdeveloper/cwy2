@@ -3,6 +3,7 @@ package org.egdeveloper.data.dao;
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.IMedicalTest;
 import org.egdeveloper.data.entities.Patient;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class PatientDAO implements IPatientDAO{
     @Override
     public List<Patient> getPatients(){
         return sessionFactory.getCurrentSession().createQuery("from Patient").list();
+    }
+
+    @Override
+    public Patient getPatientById(Integer id){
+        Query query = sessionFactory.getCurrentSession().createQuery("from Patient where id = :id");
+        query.setParameter("id", id);
+        return (Patient)query.uniqueResult();
     }
 
     @Override

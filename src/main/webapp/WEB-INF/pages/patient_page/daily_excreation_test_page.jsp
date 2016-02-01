@@ -12,7 +12,7 @@
 <c:url var="addDailyExcreationTest" value="/addDailyExcreationTest"/>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
+    <legend>Суточная экскреция</legend>
     <form:form cssClass="form-horizontal" method="post" action="${addDailyExcreationTest}" modelAttribute="dailyExcreationTest">
       <div class="row">
         <div class="form-group">

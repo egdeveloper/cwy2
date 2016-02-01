@@ -35,6 +35,11 @@ public class PatientService implements IPatientService{
     }
 
     @Transactional
+    public Patient getPatientById(Integer id){
+        return patientDAO.getPatientById(id);
+    }
+
+    @Transactional
     public void removePatient(Integer id){
         patientDAO.removePatient(id);
     }

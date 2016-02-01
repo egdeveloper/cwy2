@@ -28,6 +28,13 @@ public interface IPatientDAO {
     List<Patient> getPatients();
 
     /**
+     * Get unique patient record
+     * @param id unique patient id
+     * @return Patient instance
+     */
+    Patient getPatientById(Integer id);
+
+    /**
      * Remove existing patient record
      * @param id id of existing patient record
      */
