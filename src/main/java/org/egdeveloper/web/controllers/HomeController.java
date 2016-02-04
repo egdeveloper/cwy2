@@ -27,7 +27,7 @@ public class HomeController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap){
         modelMap.addAttribute("loginAuth", new Login());
-        return "home/index";
+        return "home/Index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
