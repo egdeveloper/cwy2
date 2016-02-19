@@ -47,11 +47,11 @@ public class PatientEditorController {
     }
 
     @RequestMapping(value = "/personalPatientPage", method = RequestMethod.GET)
-    public String getPersonalPatientPage(@ModelAttribute("patient") Patient patient, ModelMap modelMap){
+    public String getPersonalPatientPage(@ModelAttribute("patientInfo") Patient patient, ModelMap modelMap){
         //if(session.getAttribute("patientInfo") != null)
         //    session.removeAttribute("patientInfo");
         //session.setAttribute("patientInfo", patient);
-        modelMap.addAttribute("patientInfo", patient);
+        //modelMap.addAttribute("patientInfo", patient);
         return "/patient_page/personal_patient_page";
     }
 
@@ -168,7 +168,17 @@ public class PatientEditorController {
                                          BindingResult bindingResult,
                                          ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<DailyExcreationTest> dailyExcreationTests = patient.getDailyExcreationTests();
+                dailyExcreationTests.add(test);
+                patient.setDailyExcreationTests(dailyExcreationTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addDailyExcreationTest";
     }
 
     @RequestMapping(value = "addTitrationTest", method = RequestMethod.POST)
@@ -176,7 +186,17 @@ public class PatientEditorController {
                                    BindingResult bindingResult,
                                    ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<TitrationTest> titrationTests = patient.getTitrationTests();
+                titrationTests.add(test);
+                patient.setTitrationTests(titrationTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addTitrationTest";
     }
 
     @RequestMapping(value = "addUreaColorTest", method = RequestMethod.POST)
@@ -184,7 +204,17 @@ public class PatientEditorController {
                                    BindingResult bindingResult,
                                    ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<UreaColorTest> ureaColorTests = patient.getUreaColorTests();
+                ureaColorTests.add(test);
+                patient.setUreaColorTests(ureaColorTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addUreaColorTest";
     }
 
     @RequestMapping(value = "addUreaStoneTest", method = RequestMethod.POST)
@@ -192,6 +222,16 @@ public class PatientEditorController {
                                    BindingResult bindingResult,
                                    ModelMap modelMap, HttpSession session)
     {
-        return "redirect:/";
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patientInfo");
+            if(patient != null){
+                Set<UreaStoneTest> ureaStoneTests = patient.getUreaStoneTests();
+                ureaStoneTests.add(test);
+                patient.setUreaStoneTests(ureaStoneTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addUreaStoneTest";
     }
 }

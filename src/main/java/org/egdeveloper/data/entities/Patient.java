@@ -1,4 +1,5 @@
 package org.egdeveloper.data.entities;
+import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.data.entities.custom_types.*;
 
 import javax.persistence.*;
@@ -145,25 +146,32 @@ public class Patient implements Serializable{
     private String diseaseDuration;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<BioChemTest> bioChemTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<CommonBloodTest> commonBloodTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<CommonUreaTest> commonUreaTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<TitrationTest> titrationTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<UreaColorTest> ureaColorTests = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
     private Set<UreaStoneTest> ureaStoneTests = new HashSet<>();
 
 
@@ -403,6 +411,7 @@ public class Patient implements Serializable{
         this.diseaseDuration = diseaseDuration;
     }
 
+    @MedTest
     public Set<BioChemTest> getBioChemTests() {
         return bioChemTests;
     }
@@ -411,6 +420,7 @@ public class Patient implements Serializable{
         this.bioChemTests = bioChemTests;
     }
 
+    @MedTest
     public Set<CommonBloodTest> getCommonBloodTests() {
         return commonBloodTests;
     }
@@ -419,6 +429,7 @@ public class Patient implements Serializable{
         this.commonBloodTests = commonBloodTests;
     }
 
+    @MedTest
     public Set<CommonUreaTest> getCommonUreaTests() {
         return commonUreaTests;
     }
@@ -427,6 +438,7 @@ public class Patient implements Serializable{
         this.commonUreaTests = commonUreaTests;
     }
 
+    @MedTest
     public Set<DailyExcreationTest> getDailyExcreationTests() {
         return dailyExcreationTests;
     }
@@ -435,6 +447,7 @@ public class Patient implements Serializable{
         this.dailyExcreationTests = dailyExcreationTests;
     }
 
+    @MedTest
     public Set<TitrationTest> getTitrationTests() {
         return titrationTests;
     }
@@ -443,6 +456,7 @@ public class Patient implements Serializable{
         this.titrationTests = titrationTests;
     }
 
+    @MedTest
     public Set<UreaColorTest> getUreaColorTests() {
         return ureaColorTests;
     }
@@ -451,6 +465,7 @@ public class Patient implements Serializable{
         this.ureaColorTests = ureaColorTests;
     }
 
+    @MedTest
     public Set<UreaStoneTest> getUreaStoneTests() {
         return ureaStoneTests;
     }

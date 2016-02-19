@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +25,15 @@ public class HomeController {
     @Qualifier("doctorService")
     private IDoctorService doctorService;
 
+    @Autowired
+    @Qualifier("signupValidator")
+    private Validator validator;
+
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap){
         modelMap.addAttribute("loginAuth", new Login());
-        return "home/Index";
+        modelMap.addAttribute("signupData", new Signup());
+        return "home/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -53,8 +59,22 @@ public class HomeController {
         return "home/help";
     }
 
+    /*
     @RequestMapping(value = "/registerNewDoctor", method = RequestMethod.GET)
     public ModelAndView registerNewDoctor(){
         return new ModelAndView("registration/register", "signupData", new Signup());
+    }
+    */
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
+        validator.validate(signup, bindingResult);
+        if(bindingResult.hasErrors()){
+            return "home/index";
+        }
+        else {
+            doctorService.addDoctor(signup.getDoctorAccount());
+            return "redirect:/";
+        }
     }
 }

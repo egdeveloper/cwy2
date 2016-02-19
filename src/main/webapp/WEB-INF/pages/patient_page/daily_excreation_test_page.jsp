@@ -5,8 +5,8 @@
 <html>
 <head>
   <title></title>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">
+  <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
+  <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css"/>">
 </head>
 <body>
 <c:url var="addDailyExcreationTest" value="/addDailyExcreationTest"/>
@@ -87,7 +87,7 @@
   </fieldset>
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 </body>
 </html>
 

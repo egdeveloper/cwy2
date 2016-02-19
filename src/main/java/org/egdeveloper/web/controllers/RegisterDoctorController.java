@@ -25,6 +25,8 @@ public class RegisterDoctorController {
     @Qualifier("signupValidator")
     private Validator validator;
 
+    /*
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
         validator.validate(signup, bindingResult);
@@ -36,4 +38,5 @@ public class RegisterDoctorController {
             return "redirect:/";
         }
     }
+    */
 }

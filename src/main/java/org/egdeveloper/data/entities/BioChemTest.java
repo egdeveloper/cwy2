@@ -1,20 +1,21 @@
 package org.egdeveloper.data.entities;
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Calendar;
 
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Биохимический анализ крови")
 public class BioChemTest implements Serializable, IMedicalTest{
 
 
@@ -24,139 +25,201 @@ public class BioChemTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "commonProtein")
     @NotNull
+    @DisplayName("Общий белок")
+    @StatVariable
     private double commonProtein;
 
     @Column(name = "urea")
     @NotNull
+    @DisplayName("Мочевина")
+    @StatVariable
     private double urea;
 
     @Column(name = "creatinine")
     @NotNull
+    @DisplayName("Креатинин")
+    @StatVariable
     private double creatinine;
 
     @Column(name = "commonBiliRuby")
     @NotNull
+    @DisplayName("Общий билирубин")
+    @StatVariable
     private double commonBiliRuby;
 
     @Column(name = "linkedBiliRuby")
     @NotNull
+    @DisplayName("Связанный билирубин")
+    @StatVariable
     private double linkedBiliRuby;
 
     @Column(name = "cholesterol")
     @NotNull
+    @DisplayName("Холестерин")
+    @StatVariable
     private double cholesterol;
 
     @Column(name = "TAG")
     @NotNull
+    @DisplayName("Триглицериды")
+    @StatVariable
     private double TAG;
 
     @Column(name = "HDL")
     @NotNull
+    @DisplayName("Липопр. выс. кон.")
+    @StatVariable
     private double HDL;
 
     @Column(name = "LDL")
     @NotNull
+    @DisplayName("Липопр. низ. кон.")
+    @StatVariable
     private double LDL;
 
     @Column(name = "cholesterolRatio")
     @NotNull
+    @DisplayName("Коэф. атер.")
+    @StatVariable
     private double cholesterolRatio;
 
     @Column(name = "ALT")
     @NotNull
+    @DisplayName("Аланинаминотрасфераза")
+    @StatVariable
     private double ALT;
 
     @Column(name = "AST")
     @NotNull
+    @DisplayName("Аспартатаминотрансфераза")
+    @StatVariable
     private double AST;
 
     @Column(name = "ALKP")
     @NotNull
+    @DisplayName("Щелочная фосфотаза")
+    @StatVariable
     private double ALKP;
 
     @Column(name = "CK")
     @NotNull
+    @DisplayName("Креатинфосфокиназа")
+    @StatVariable
     private double CK;
 
     @Column(name = "CKMB")
     @NotNull
+    @DisplayName("Креатинфосфокиназа МВ")
+    @StatVariable
     private double CKMB;
 
     @Column(name = "LDH")
     @NotNull
+    @DisplayName("Лактатдкгидрогеназа")
+    @StatVariable
     private double LDH;
 
     @Column(name = "GGT")
     @NotNull
+    @DisplayName("ГГТ")
+    @StatVariable
     private double GGT;
 
     @Column(name = "amylase")
     @NotNull
+    @DisplayName("Амилаза")
+    @StatVariable
     private double amylase;
 
     @Column(name = "pancrAmylase")
     @NotNull
+    @DisplayName("Пакриатическая амилаза")
+    @StatVariable
     private double pancrAmylase;
 
     @Column(name = "glucose")
     @NotNull
+    @DisplayName("Глюкоза")
+    @StatVariable
     private double glucose;
 
     @Column(name = "ureaAcid")
     @NotNull
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     private double ureaAcid;
 
     @Column(name = "CRP")
     @NotNull
+    @DisplayName("С-реактивный белок")
+    @StatVariable
     private double CRP;
 
     @Column(name = "RF")
     @NotNull
+    @DisplayName("Ревматоидный фактор")
+    @StatVariable
     private double RF;
 
     @Column(name = "potassium")
     @NotNull
+    @DisplayName("Калий")
+    @StatVariable
     private double potassium;
 
     @Column(name = "sodium")
     @NotNull
+    @DisplayName("Натрий")
+    @StatVariable
     private double sodium;
 
     @Column(name = "chlorine")
     @NotNull
+    @DisplayName("Хлор")
+    @StatVariable
     private double chlorine;
 
     @Column(name = "commonCalcium")
     @NotNull
+    @DisplayName("Общий кальций")
+    @StatVariable
     private double commonCalcium;
 
     @Column(name = "ionCalcium")
     @NotNull
+    @DisplayName("Ионизированный кальций")
+    @StatVariable
     private double ionCalcium;
 
     @Column(name = "phosphor")
     @NotNull
+    @DisplayName("Фосфор")
+    @StatVariable
     private double phosphor;
 
     @Column(name = "ferrum")
     @NotNull
+    @DisplayName("Железо")
+    @StatVariable
     private double ferrum;
 
     @Column(name = "ferritin")
     @NotNull
+    @DisplayName("Ферритин")
+    @StatVariable
     private double ferritin;
 
     @OneToOne
@@ -187,6 +250,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Общий белок")
+    @StatVariable
     public double getCommonProtein() {
         return commonProtein;
     }
@@ -195,6 +260,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.commonProtein = commonProtein;
     }
 
+    @DisplayName("Мочевина")
+    @StatVariable
     public double getUrea() {
         return urea;
     }
@@ -203,6 +270,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.urea = urea;
     }
 
+    @DisplayName("Креатинин")
+    @StatVariable
     public double getCreatinine() {
         return creatinine;
     }
@@ -211,6 +280,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.creatinine = creatinine;
     }
 
+    @DisplayName("Общий билирубин")
+    @StatVariable
     public double getCommonBiliRuby() {
         return commonBiliRuby;
     }
@@ -219,6 +290,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.commonBiliRuby = commonBiliRuby;
     }
 
+    @DisplayName("Связанный билирубин")
+    @StatVariable
     public double getLinkedBiliRuby() {
         return linkedBiliRuby;
     }
@@ -227,6 +300,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.linkedBiliRuby = linkedBiliRuby;
     }
 
+    @DisplayName("Холестерин")
+    @StatVariable
     public double getCholesterol() {
         return cholesterol;
     }
@@ -235,6 +310,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.cholesterol = cholesterol;
     }
 
+    @DisplayName("Триглицериды")
+    @StatVariable
     public double getTAG() {
         return TAG;
     }
@@ -243,6 +320,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.TAG = TAG;
     }
 
+    @DisplayName("Липопр. выс. кон.")
+    @StatVariable
     public double getHDL() {
         return HDL;
     }
@@ -251,6 +330,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.HDL = HDL;
     }
 
+    @DisplayName("Липопр. низ. кон.")
+    @StatVariable
     public double getLDL() {
         return LDL;
     }
@@ -259,6 +340,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.LDL = LDL;
     }
 
+    @DisplayName("Коэф. атер.")
+    @StatVariable
     public double getCholesterolRatio() {
         return cholesterolRatio;
     }
@@ -267,6 +350,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.cholesterolRatio = cholesterolRatio;
     }
 
+    @DisplayName("Аланинаминотрасфераза")
+    @StatVariable
     public double getALT() {
         return ALT;
     }
@@ -275,6 +360,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.ALT = ALT;
     }
 
+    @DisplayName("Аспартатаминотрансфераза")
+    @StatVariable
     public double getAST() {
         return AST;
     }
@@ -283,6 +370,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.AST = AST;
     }
 
+    @DisplayName("Щелочная фосфотаза")
+    @StatVariable
     public double getALKP() {
         return ALKP;
     }
@@ -291,6 +380,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.ALKP = ALKP;
     }
 
+    @DisplayName("Креатинфосфокиназа")
+    @StatVariable
     public double getCK() {
         return CK;
     }
@@ -299,6 +390,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.CK = CK;
     }
 
+    @DisplayName("Креатинфосфокиназа МВ")
+    @StatVariable
     public double getCKMB() {
         return CKMB;
     }
@@ -307,6 +400,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.CKMB = CKMB;
     }
 
+    @DisplayName("Лактатдкгидрогеназа")
+    @StatVariable
     public double getLDH() {
         return LDH;
     }
@@ -315,6 +410,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.LDH = LDH;
     }
 
+    @DisplayName("ГГТ")
+    @StatVariable
     public double getGGT() {
         return GGT;
     }
@@ -323,6 +420,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.GGT = GGT;
     }
 
+    @DisplayName("Амилаза")
+    @StatVariable
     public double getAmylase() {
         return amylase;
     }
@@ -331,6 +430,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.amylase = amylase;
     }
 
+    @DisplayName("Пакриатическая амилаза")
+    @StatVariable
     public double getPancrAmylase() {
         return pancrAmylase;
     }
@@ -339,6 +440,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.pancrAmylase = pancrAmylase;
     }
 
+    @DisplayName("Глюкоза")
+    @StatVariable
     public double getGlucose() {
         return glucose;
     }
@@ -347,6 +450,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.glucose = glucose;
     }
 
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     public double getUreaAcid() {
         return ureaAcid;
     }
@@ -355,6 +460,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.ureaAcid = ureaAcid;
     }
 
+    @DisplayName("С-реактивный белок")
+    @StatVariable
     public double getCRP() {
         return CRP;
     }
@@ -363,6 +470,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.CRP = CRP;
     }
 
+    @DisplayName("Ревматоидный фактор")
+    @StatVariable
     public double getRF() {
         return RF;
     }
@@ -371,6 +480,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.RF = RF;
     }
 
+    @DisplayName("Калий")
+    @StatVariable
     public double getPotassium() {
         return potassium;
     }
@@ -379,6 +490,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.potassium = potassium;
     }
 
+    @DisplayName("Натрий")
+    @StatVariable
     public double getSodium() {
         return sodium;
     }
@@ -387,6 +500,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.sodium = sodium;
     }
 
+    @DisplayName("Хлор")
+    @StatVariable
     public double getChlorine() {
         return chlorine;
     }
@@ -395,6 +510,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.chlorine = chlorine;
     }
 
+    @DisplayName("Общий кальций")
+    @StatVariable
     public double getCommonCalcium() {
         return commonCalcium;
     }
@@ -403,6 +520,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.commonCalcium = commonCalcium;
     }
 
+    @DisplayName("Ионизированный кальций")
+    @StatVariable
     public double getIonCalcium() {
         return ionCalcium;
     }
@@ -411,6 +530,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.ionCalcium = ionCalcium;
     }
 
+    @DisplayName("Фосфор")
+    @StatVariable
     public double getPhosphor() {
         return phosphor;
     }
@@ -419,6 +540,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.phosphor = phosphor;
     }
 
+    @DisplayName("Железо")
+    @StatVariable
     public double getFerrum() {
         return ferrum;
     }
@@ -427,6 +550,8 @@ public class BioChemTest implements Serializable, IMedicalTest{
         this.ferrum = ferrum;
     }
 
+    @DisplayName("Ферритин")
+    @StatVariable
     public double getFerritin() {
         return ferritin;
     }

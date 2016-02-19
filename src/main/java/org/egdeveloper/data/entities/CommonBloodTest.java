@@ -1,5 +1,8 @@
 package org.egdeveloper.data.entities;
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -11,12 +14,11 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
 
-/**
- * Created by egdeveloper on 02.01.16.
- */
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Общий анализ крови")
 public class CommonBloodTest implements Serializable, IMedicalTest{
 
 
@@ -26,67 +28,93 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "hemoglobin")
     @NotNull
+    @DisplayName("Гемоглобин")
+    @StatVariable
     private double hemoglobin;
 
     @Column(name = "RBCells")
     @NotNull
+    @DisplayName("Эритроциты")
+    @StatVariable
     private double RBCells;
 
     @Column(name = "colorIndex")
     @NotNull
+    @DisplayName("Цветовой показатель")
+    @StatVariable
     private double colorIndex;
 
     @Column(name = "IMRBCells")
     @NotNull
+    @DisplayName("Ретикулоциты")
+    @StatVariable
     private double IMRBCells;
 
     @Column(name = "platelets")
     @NotNull
+    @DisplayName("Тромбоциты")
+    @StatVariable
     private double platelets;
 
     @Column(name = "ESR")
     @NotNull
+    @DisplayName("СОЭ")
+    @StatVariable
     private double ESR;
 
     @Column(name = "WBCells")
     @NotNull
+    @DisplayName("Лейкоциты")
+    @StatVariable
     private double WBCells;
 
     @Column(name = "bandCells")
     @NotNull
+    @DisplayName("Палочкоядерные")
+    @StatVariable
     private double bandCells;
 
     @Column(name = "segmentCells")
     @NotNull
+    @DisplayName("Сегментоядерные")
+    @StatVariable
     private double segmentCells;
 
     @Column(name = "eosinCells")
     @NotNull
+    @DisplayName("Эозинофилы")
+    @StatVariable
     private double eosinCells;
 
     @Column(name = "basophil")
     @NotNull
+    @DisplayName("Базофилы")
+    @StatVariable
     private double basophil;
 
     @Column(name = "NKCells")
     @NotNull
+    @DisplayName("Лимфоциты")
+    @StatVariable
     private double NKCells;
 
     @Column(name = "monoCells")
     @NotNull
+    @DisplayName("Моноциты")
+    @StatVariable
     private double monoCells;
 
     @OneToOne
@@ -117,6 +145,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Гемоглобин")
+    @StatVariable
     public double getHemoglobin() {
         return hemoglobin;
     }
@@ -125,6 +155,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.hemoglobin = hemoglobin;
     }
 
+    @DisplayName("Эритроциты")
+    @StatVariable
     public double getRBCells() {
         return RBCells;
     }
@@ -133,6 +165,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.RBCells = RBCells;
     }
 
+    @DisplayName("Цветовой показатель")
+    @StatVariable
     public double getColorIndex() {
         return colorIndex;
     }
@@ -141,6 +175,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.colorIndex = colorIndex;
     }
 
+    @DisplayName("Ретикулоциты")
+    @StatVariable
     public double getIMRBCells() {
         return IMRBCells;
     }
@@ -149,6 +185,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.IMRBCells = IMRBCells;
     }
 
+    @DisplayName("Тромбоциты")
+    @StatVariable
     public double getPlatelets() {
         return platelets;
     }
@@ -157,6 +195,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.platelets = platelets;
     }
 
+    @DisplayName("СОЭ")
+    @StatVariable
     public double getESR() {
         return ESR;
     }
@@ -165,6 +205,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.ESR = ESR;
     }
 
+    @DisplayName("Лейкоциты")
+    @StatVariable
     public double getWBCells() {
         return WBCells;
     }
@@ -173,6 +215,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.WBCells = WBCells;
     }
 
+    @DisplayName("Палочкоядерные")
+    @StatVariable
     public double getBandCells() {
         return bandCells;
     }
@@ -181,6 +225,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.bandCells = bandCells;
     }
 
+    @DisplayName("Сегментоядерные")
+    @StatVariable
     public double getSegmentCells() {
         return segmentCells;
     }
@@ -189,6 +235,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.segmentCells = segmentCells;
     }
 
+    @DisplayName("Эозинофилы")
+    @StatVariable
     public double getEosinCells() {
         return eosinCells;
     }
@@ -197,6 +245,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.eosinCells = eosinCells;
     }
 
+    @DisplayName("Базофилы")
+    @StatVariable
     public double getBasophil() {
         return basophil;
     }
@@ -205,6 +255,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.basophil = basophil;
     }
 
+    @DisplayName("Лимфоциты")
+    @StatVariable
     public double getNKCells() {
         return NKCells;
     }
@@ -213,6 +265,8 @@ public class CommonBloodTest implements Serializable, IMedicalTest{
         this.NKCells = NKCells;
     }
 
+    @DisplayName("Моноциты")
+    @StatVariable
     public double getMonoCells() {
         return monoCells;
     }

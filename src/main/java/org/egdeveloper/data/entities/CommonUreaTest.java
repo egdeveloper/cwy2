@@ -1,5 +1,8 @@
 package org.egdeveloper.data.entities;
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -14,6 +17,8 @@ import java.util.Calendar;
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Общий анализ мочи")
 public class CommonUreaTest implements Serializable, IMedicalTest{
 
     @Id
@@ -22,79 +27,97 @@ public class CommonUreaTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "amount")
     @NotNull
+    @DisplayName("Количество мочи")
     private double amount;
 
     @Column(name = "PH")
     @NotNull
+    @DisplayName("Ph")
     private double PH;
 
     @Column(name = "WBCells")
     @NotNull
+    @DisplayName("Лейкоциты")
+    @StatVariable
     private double WBCells;
 
     @Column(name = "RBCells")
     @NotNull
+    @DisplayName("Эритроциты")
+    @StatVariable
     private double RBCells;
 
     @Column(name = "color")
     @NotNull
+    @DisplayName("Цвет")
     private String color;
 
     @Column(name = "transparency")
     @NotNull
+    @DisplayName("Прозрачность")
     private String transparency;
 
     @Column(name = "protein")
     @NotNull
+    @DisplayName("Белок")
     private String protein;
 
     @Column(name = "glucose")
     @NotNull
+    @DisplayName("Глюкоза")
     private String glucose;
 
     @Column(name = "ketoneBodies")
     @NotNull
+    @DisplayName("Кетоновые тела")
     private String ketoneBodies;
 
     @Column(name = "bloodReaction")
     @NotNull
+    @DisplayName("Реакция на кровь")
     private String bloodReaction;
 
     @Column(name = "biliRuby")
     @NotNull
+    @DisplayName("Билирубин")
     private String biliRuby;
 
     @Column(name = "mucus")
     @NotNull
+    @DisplayName("Слизь")
     private String mucus;
 
     @Column(name = "bacteria")
     @NotNull
+    @DisplayName("Бактерии")
     private String bacteria;
 
     @Column(name = "salt")
     @NotNull
+    @DisplayName("Соли")
     private String salt;
 
     @Column(name = "ureaBilins")
     @NotNull
+    @DisplayName("Уробилиноиды")
     private String ureaBilins;
 
     @Column(name = "cylinder")
     @NotNull
+    @DisplayName("Цилиндры")
     private String cylinder;
 
     @OneToOne
@@ -141,6 +164,8 @@ public class CommonUreaTest implements Serializable, IMedicalTest{
         this.PH = PH;
     }
 
+    @DisplayName("Лейкоциты")
+    @StatVariable
     public double getWBCells() {
         return WBCells;
     }
@@ -149,6 +174,8 @@ public class CommonUreaTest implements Serializable, IMedicalTest{
         this.WBCells = WBCells;
     }
 
+    @DisplayName("Эритроциты")
+    @StatVariable
     public double getRBCells() {
         return RBCells;
     }

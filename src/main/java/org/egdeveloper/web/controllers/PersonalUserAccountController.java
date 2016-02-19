@@ -47,7 +47,7 @@ public class PersonalUserAccountController {
     public String getPatientPersonalPage(@PathVariable("patientId") Integer patientId, RedirectAttributes redirectAttributes){
         Patient patient = patientService.getPatientById(patientId);
         if(patient != null) {
-            redirectAttributes.addFlashAttribute("patient", patient);
+            redirectAttributes.addFlashAttribute("patientInfo", patient);
             return "redirect:/personalPatientPage";
         }
         else

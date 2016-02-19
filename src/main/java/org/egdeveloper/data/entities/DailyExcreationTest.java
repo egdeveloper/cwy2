@@ -1,5 +1,8 @@
 package org.egdeveloper.data.entities;
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -14,6 +17,8 @@ import java.util.Calendar;
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Суточная экскреция")
 public class DailyExcreationTest implements Serializable, IMedicalTest{
 
     @Id
@@ -22,51 +27,69 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "creatinine")
     @NotNull
+    @DisplayName("Креатинин")
+    @StatVariable
     private double creatinine;
 
     @Column(name = "urea")
     @NotNull
+    @DisplayName("Мочевина")
+    @StatVariable
     private double urea;
 
     @Column(name = "ureaAcid")
     @NotNull
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     private double ureaAcid;
 
     @Column(name = "calcium")
     @NotNull
+    @DisplayName("Кальций")
+    @StatVariable
     private double calcium;
 
     @Column(name = "potassium")
     @NotNull
+    @DisplayName("Калий")
+    @StatVariable
     private double potassium;
 
     @Column(name = "magnesium")
     @NotNull
+    @DisplayName("Магний")
+    @StatVariable
     private double magnesium;
 
     @Column(name = "sodium")
     @NotNull
+    @DisplayName("Натрий")
+    @StatVariable
     private double sodium;
 
     @Column(name = "phosphorOxide")
     @NotNull
+    @DisplayName("Оксид Фосфора")
+    @StatVariable
     private double phosphorOxide;
 
     @Column(name = "chlorine")
     @NotNull
+    @DisplayName("Хлор")
+    @StatVariable
     private double chlorine;
 
     @OneToOne
@@ -97,6 +120,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Креатинин")
+    @StatVariable
     public double getCreatinine() {
         return creatinine;
     }
@@ -105,6 +130,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.creatinine = creatinine;
     }
 
+    @DisplayName("Мочевина")
+    @StatVariable
     public double getUrea() {
         return urea;
     }
@@ -113,6 +140,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.urea = urea;
     }
 
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     public double getUreaAcid() {
         return ureaAcid;
     }
@@ -121,6 +150,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.ureaAcid = ureaAcid;
     }
 
+    @DisplayName("Кальций")
+    @StatVariable
     public double getCalcium() {
         return calcium;
     }
@@ -129,6 +160,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.calcium = calcium;
     }
 
+    @DisplayName("Калий")
+    @StatVariable
     public double getPotassium() {
         return potassium;
     }
@@ -137,6 +170,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.potassium = potassium;
     }
 
+    @DisplayName("Магний")
+    @StatVariable
     public double getMagnesium() {
         return magnesium;
     }
@@ -145,6 +180,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.magnesium = magnesium;
     }
 
+    @DisplayName("Натрий")
+    @StatVariable
     public double getSodium() {
         return sodium;
     }
@@ -153,6 +190,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.sodium = sodium;
     }
 
+    @DisplayName("Оксид Фосфора")
+    @StatVariable
     public double getPhosphorOxide() {
         return phosphorOxide;
     }
@@ -161,6 +200,8 @@ public class DailyExcreationTest implements Serializable, IMedicalTest{
         this.phosphorOxide = phosphorOxide;
     }
 
+    @DisplayName("Хлор")
+    @StatVariable
     public double getChlorine() {
         return chlorine;
     }

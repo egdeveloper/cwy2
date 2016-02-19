@@ -1,4 +1,7 @@
 package org.egdeveloper.data.entities;
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -12,6 +15,8 @@ import java.util.Calendar;
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Мочевой камень")
 public class UreaStoneTest implements Serializable, IMedicalTest{
 
     @Id
@@ -20,39 +25,48 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "size")
     @NotNull
+    @DisplayName("Размер")
+    @StatVariable
     private double size;
 
     @Column(name = "density")
     @NotNull
+    @DisplayName("Плотность")
+    @StatVariable
     private double density;
 
     @Column(name = "location")
     @NotNull
+    @DisplayName("Локализация")
     private String location;
 
     @Column(name = "form")
     @NotNull
+    @DisplayName("Форма")
     private String form;
 
     @Column(name = "hardness")
     @NotNull
+    @DisplayName("Жесткость")
+    @StatVariable
     private double hardness;
 
     @Column(name = "addInfo")
     @NotNull
+    @DisplayName("Дополнительная информация о камне")
     private String addInfo;
 
     @OneToOne
@@ -83,6 +97,8 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Размер")
+    @StatVariable
     public double getSize() {
         return size;
     }
@@ -91,6 +107,8 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
         this.size = size;
     }
 
+    @DisplayName("Плотность")
+    @StatVariable
     public double getDensity() {
         return density;
     }
@@ -99,6 +117,7 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
         this.density = density;
     }
 
+    @DisplayName("Локализация")
     public String getLocation() {
         return location;
     }
@@ -107,6 +126,7 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
         this.location = location;
     }
 
+    @DisplayName("Форма")
     public String getForm() {
         return form;
     }
@@ -115,6 +135,8 @@ public class UreaStoneTest implements Serializable, IMedicalTest{
         this.form = form;
     }
 
+    @DisplayName("Жесткость")
+    @StatVariable
     public double getHardness() {
         return hardness;
     }

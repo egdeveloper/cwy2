@@ -1,6 +1,9 @@
 package org.egdeveloper.data.entities;
 
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -14,6 +17,8 @@ import java.util.Calendar;
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Хроматография")
 public class UreaColorTest implements Serializable, IMedicalTest{
 
     @Id
@@ -22,51 +27,69 @@ public class UreaColorTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "DUV")
     @NotNull
+    @DisplayName("Диурез")
+    @StatVariable
     private double DUV;
 
     @Column(name = "ClSalt")
     @NotNull
+    @DisplayName("Хлорид")
+    @StatVariable
     private double ClSalt;
 
     @Column(name = "NO2Salt")
     @NotNull
+    @DisplayName("Нитрит")
+    @StatVariable
     private double NO2Salt;
 
     @Column(name = "NO3Salt")
     @NotNull
+    @DisplayName("Нитрат")
+    @StatVariable
     private double NO3Salt;
 
     @Column(name = "SO3Salt")
     @NotNull
+    @DisplayName("Сульфат")
+    @StatVariable
     private double SO3Salt;
 
     @Column(name = "PO3Salt")
     @NotNull
+    @DisplayName("Фосфат")
+    @StatVariable
     private double PO3Salt;
 
     @Column(name = "citrate")
     @NotNull
+    @DisplayName("Цитрат")
+    @StatVariable
     private double citrate;
 
     @Column(name = "isoCitrate")
     @NotNull
+    @DisplayName("Изоцитрат")
+    @StatVariable
     private double isoCitrate;
 
     @Column(name = "ureaAcid")
     @NotNull
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     private double ureaAcid;
 
     @OneToOne
@@ -97,6 +120,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Диурез")
+    @StatVariable
     public double getDUV() {
         return DUV;
     }
@@ -105,6 +130,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.DUV = DUV;
     }
 
+    @DisplayName("Хлорид")
+    @StatVariable
     public double getClSalt() {
         return ClSalt;
     }
@@ -113,6 +140,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         ClSalt = clSalt;
     }
 
+    @DisplayName("Нитрит")
+    @StatVariable
     public double getNO2Salt() {
         return NO2Salt;
     }
@@ -121,6 +150,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.NO2Salt = NO2Salt;
     }
 
+    @DisplayName("Нитрат")
+    @StatVariable
     public double getNO3Salt() {
         return NO3Salt;
     }
@@ -129,6 +160,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.NO3Salt = NO3Salt;
     }
 
+    @DisplayName("Сульфат")
+    @StatVariable
     public double getSO3Salt() {
         return SO3Salt;
     }
@@ -137,6 +170,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.SO3Salt = SO3Salt;
     }
 
+    @DisplayName("Фосфат")
+    @StatVariable
     public double getPO3Salt() {
         return PO3Salt;
     }
@@ -145,6 +180,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.PO3Salt = PO3Salt;
     }
 
+    @DisplayName("Цитрат")
+    @StatVariable
     public double getCitrate() {
         return citrate;
     }
@@ -153,6 +190,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.citrate = citrate;
     }
 
+    @DisplayName("Изоцитрат")
+    @StatVariable
     public double getIsoCitrate() {
         return isoCitrate;
     }
@@ -161,6 +200,8 @@ public class UreaColorTest implements Serializable, IMedicalTest{
         this.isoCitrate = isoCitrate;
     }
 
+    @DisplayName("Мочевая кислота")
+    @StatVariable
     public double getUreaAcid() {
         return ureaAcid;
     }

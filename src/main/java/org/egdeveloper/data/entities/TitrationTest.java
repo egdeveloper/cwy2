@@ -1,5 +1,8 @@
 package org.egdeveloper.data.entities;
 
+import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
@@ -14,6 +17,8 @@ import java.util.Calendar;
 
 @Entity
 @Table
+@MedTest
+@DisplayName("Титриметрия")
 public class TitrationTest implements Serializable, IMedicalTest{
 
     @Id
@@ -22,19 +27,21 @@ public class TitrationTest implements Serializable, IMedicalTest{
     private int id;
 
     @NotNull
-    //@NotEmpty
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "testDate")
+    @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
     @NotNull
     @Column(name = "description")
+    @DisplayName("Дополнительная информация")
     private String description;
 
     @Column(name = "oxalate")
     @NotNull
+    @DisplayName("Оксалат")
+    @StatVariable
     private double oxalate;
 
     @OneToOne
@@ -65,6 +72,8 @@ public class TitrationTest implements Serializable, IMedicalTest{
         this.description = description;
     }
 
+    @DisplayName("Оксалат")
+    @StatVariable
     public double getOxalate() {
         return oxalate;
     }
