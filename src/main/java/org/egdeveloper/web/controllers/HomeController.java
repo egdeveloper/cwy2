@@ -33,7 +33,7 @@ public class HomeController {
     public String index(ModelMap modelMap){
         modelMap.addAttribute("loginAuth", new Login());
         modelMap.addAttribute("signupData", new Signup());
-        return "home/IndexPage";
+        return "Home/IndexPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -51,12 +51,12 @@ public class HomeController {
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(ModelMap modelMap){
-        return "home/AboutPage";
+        return "Home/AboutPage";
     }
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(ModelMap modelMap){
-        return "home/HelpPage";
+        return "Home/HelpPage";
     }
 
     /*
@@ -70,7 +70,7 @@ public class HomeController {
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
         validator.validate(signup, bindingResult);
         if(bindingResult.hasErrors()){
-            return "home/IndexPage";
+            return "Home/IndexPage";
         }
         else {
             doctorService.addDoctor(signup.getDoctorAccount());
