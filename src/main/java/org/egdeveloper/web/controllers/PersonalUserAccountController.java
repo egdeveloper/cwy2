@@ -26,7 +26,7 @@ public class PersonalUserAccountController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
         session.setAttribute("doctor", doctor);
-        return "/doctor_page/main_doctor_page";
+        return "doctor_page/MainDoctorPage";
     }
 
     @RequestMapping(value = "/personalPage", method = RequestMethod.GET)
