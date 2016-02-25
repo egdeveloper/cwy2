@@ -29,7 +29,7 @@ public class PatientEditorController {
     public String getPatientInfoEditor(@ModelAttribute("doctor") Doctor doctor, ModelMap modelMap){
         modelMap.addAttribute("doctorInfo", doctor);
         modelMap.addAttribute("patientInfo", new Patient());
-        return "Patient/PatientEditPage";
+        return "PatientPages/PatientEditPage";
     }
 
     @RequestMapping(value = "/editPatientInfo", method = RequestMethod.POST)
@@ -38,7 +38,7 @@ public class PatientEditorController {
     {
         Doctor doctor = (Doctor)session.getAttribute("doctorInfo");
         if(bindingResult.hasErrors()) {
-            return "Patient/PatientEditPage";
+            return "PatientPages/PatientEditPage";
         }
         patientService.addPatient(doctor, patient);
         sessionStatus.setComplete();
@@ -51,7 +51,7 @@ public class PatientEditorController {
         //    session.removeAttribute("patientInfo");
         //session.setAttribute("patientInfo", patient);
         //modelMap.addAttribute("patientInfo", patient);
-        return "Patient/PersonalPatientPage";
+        return "PatientPages/PersonalPatientPage";
     }
 
     //get methods
@@ -61,49 +61,49 @@ public class PatientEditorController {
     public String addBiochemTest(ModelMap modelMap)
     {
         modelMap.addAttribute("biochemTest", new BioChemTest());
-        return "Patient/BiochemTestPage";
+        return "PatientPages/BiochemTestPage";
     }
 
     @RequestMapping(value = "/addCommonBloodTest", method = RequestMethod.GET)
     public String addCommonBloodTest(ModelMap modelMap)
     {
         modelMap.addAttribute("commonBloodTest", new CommonBloodTest());
-        return "Patient/CommonBloodTestPage";
+        return "PatientPages/CommonBloodTestPage";
     }
 
     @RequestMapping(value = "/addCommonUreaTest", method = RequestMethod.GET)
     public String addCommonUreaTest(ModelMap modelMap)
     {
         modelMap.addAttribute("commonUreaTest", new CommonUreaTest());
-        return "Patient/CommonUreaTestPage";
+        return "PatientPages/CommonUreaTestPage";
     }
 
     @RequestMapping(value = "/addDailyExcreationTest", method = RequestMethod.GET)
     public String addDailyExcreationTest(ModelMap modelMap)
     {
         modelMap.addAttribute("dailyExcreationTest", new DailyExcreationTest());
-        return "Patient/DailyExcreationTestPage";
+        return "PatientPages/DailyExcreationTestPage";
     }
 
     @RequestMapping(value = "/addTitrationTest", method = RequestMethod.GET)
     public String addTitrationTest(ModelMap modelMap)
     {
         modelMap.addAttribute("titrationTest", new TitrationTest());
-        return "Patient/TitrationTestPage";
+        return "PatientPages/TitrationTestPage";
     }
 
     @RequestMapping(value = "/addUreaColorTest", method = RequestMethod.GET)
     public String addUreaColorTest(ModelMap modelMap)
     {
         modelMap.addAttribute("ureaColorTest", new UreaColorTest());
-        return "Patient/UreaColorTestPage";
+        return "PatientPages/UreaColorTestPage";
     }
 
     @RequestMapping(value = "/addUreaStoneTest", method = RequestMethod.GET)
     public String addUreaStoneTest(ModelMap modelMap)
     {
         modelMap.addAttribute("ureaStoneTest", new UreaStoneTest());
-        return "Patient/UreaStoneTestPage";
+        return "PatientPages/UreaStoneTestPage";
     }
 
     //post methods
