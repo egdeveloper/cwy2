@@ -43,11 +43,11 @@
     }
   </style>
 </head>
-<body>
+<body style="padding-top: 50px;">
 <c:url var="registerAction" value="/register"/>
 <c:url var="login_action" value="/login"/>
 <div class="container">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <div class="navbar-brand">LaksmiMed</div>

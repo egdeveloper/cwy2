@@ -5,37 +5,24 @@
     <title></title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
 </head>
-<body>
+<body style="padding-top: 50px;">
 <div class="container">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <div class="navbar-brand"><a>LaksmiMed</a></div>
+                <div class="navbar-brand">LaksmiMed</div>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="<c:url value="/main"/>">Главная</a></li>
                 <li><a href="<c:url value="/about"/>">О сайте</a></li>
                 <li><a href="<c:url value="/help"/>">Помощь</a></li>
             </ul>
-            <ul class="nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="<c:url value="/logout"/>">Выйти</a></li>
             </ul>
         </div>
     </nav>
     <div class="row">
-        <h2>${doctor.fullName}</h2>
-    </div>
-    <div class="row">
-        <h2>${doctor.jobPost}</h2>
-    </div>
-    <div class="row">
-        <h2>${doctor.jobPlace}</h2>
-    </div>
-    <div class="row">
-        <h2>${doctor.phoneNumber}</h2>
-    </div>
-    <div class="row">
-        <h2>${doctor.email}</h2>
     </div>
 </div>
 </body>

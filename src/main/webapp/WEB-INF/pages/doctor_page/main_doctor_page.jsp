@@ -29,9 +29,9 @@
         }
     </style>
 </head>
-<body>
+<body style="padding-top: 70px;">
 <div class="container">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand">LaksmiMed</div>
