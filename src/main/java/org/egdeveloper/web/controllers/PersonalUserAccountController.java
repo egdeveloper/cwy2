@@ -26,14 +26,14 @@ public class PersonalUserAccountController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
         session.setAttribute("doctor", doctor);
-        return "doctor_page/MainDoctorPage";
+        return "Doctor/MainDoctorPage";
     }
 
     @RequestMapping(value = "/personalPage", method = RequestMethod.GET)
     public String personalPage(ModelMap modelMap, HttpSession session){
         Doctor doctor = (Doctor)session.getAttribute("doctor");
         modelMap.addAttribute("doctorInfo", doctor);
-        return "doctor_page/PersonalPage";
+        return "Doctor/PersonalPage";
     }
 
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
