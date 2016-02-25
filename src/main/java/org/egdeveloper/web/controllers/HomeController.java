@@ -56,7 +56,7 @@ public class HomeController {
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(ModelMap modelMap){
-        return "home/Help";
+        return "home/HelpPage";
     }
 
     /*
