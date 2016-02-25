@@ -33,7 +33,7 @@ public class HomeController {
     public String index(ModelMap modelMap){
         modelMap.addAttribute("loginAuth", new Login());
         modelMap.addAttribute("signupData", new Signup());
-        return "home/index";
+        return "home/IndexPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -70,7 +70,7 @@ public class HomeController {
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
         validator.validate(signup, bindingResult);
         if(bindingResult.hasErrors()){
-            return "home/index";
+            return "home/IndexPage";
         }
         else {
             doctorService.addDoctor(signup.getDoctorAccount());
