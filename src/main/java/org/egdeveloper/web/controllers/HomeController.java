@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import org.egdeveloper.web.form.Login;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,12 +51,12 @@ public class HomeController {
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(ModelMap modelMap){
-        return "home/about";
+        return "home/AboutPage";
     }
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(ModelMap modelMap){
-        return "home/help";
+        return "home/Help";
     }
 
     /*
