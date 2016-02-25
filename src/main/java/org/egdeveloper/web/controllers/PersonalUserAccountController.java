@@ -33,7 +33,7 @@ public class PersonalUserAccountController {
     public String personalPage(ModelMap modelMap, HttpSession session){
         Doctor doctor = (Doctor)session.getAttribute("doctor");
         modelMap.addAttribute("doctorInfo", doctor);
-        return "doctor_page/personal_page";
+        return "doctor_page/PersonalPage";
     }
 
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
