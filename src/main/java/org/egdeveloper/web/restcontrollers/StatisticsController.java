@@ -25,7 +25,7 @@ public class StatisticsController {
     IPatientService patientService;
 
     @RequestMapping(value = "beforeTreatmentStat", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Map<Comparable<?>, Long>> beforeTreatmentStat(){
+    public @ResponseBody Map<Object, Object> beforeTreatmentStat(){
         return statService.beforeTreatmentStat();
     }
 

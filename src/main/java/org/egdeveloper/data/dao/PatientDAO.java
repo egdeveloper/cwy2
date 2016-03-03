@@ -1,8 +1,6 @@
 package org.egdeveloper.data.dao;
 
-import org.egdeveloper.data.entities.Doctor;
-import org.egdeveloper.data.entities.IMedicalTest;
-import org.egdeveloper.data.entities.Patient;
+import org.egdeveloper.data.entities.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -44,7 +42,7 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void editPatientInfo(Patient patient) {
-        sessionFactory.getCurrentSession().saveOrUpdate(patient);
+        sessionFactory.getCurrentSession().update(patient);
     }
 
     @Override
@@ -57,6 +55,27 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void addMedicalTest(Patient patient, IMedicalTest test) {
-
+        if(test instanceof BioChemTest){
+            patient.getBioChemTests().add((BioChemTest) test);
+        }
+        else if(test instanceof CommonBloodTest){
+            patient.getCommonBloodTests().add((CommonBloodTest) test);
+        }
+        else if(test instanceof CommonUreaTest){
+            patient.getCommonUreaTests().add((CommonUreaTest) test);
+        }
+        else if(test instanceof DailyExcreationTest){
+            patient.getDailyExcreationTests().add((DailyExcreationTest) test);
+        }
+        else if(test instanceof TitrationTest){
+            patient.getTitrationTests().add((TitrationTest) test);
+        }
+        else if(test instanceof UreaColorTest){
+            patient.getUreaColorTests().add((UreaColorTest) test);
+        }
+        else if(test instanceof UreaStoneTest){
+            patient.getUreaStoneTests().add((UreaStoneTest) test);
+        }
+        sessionFactory.getCurrentSession().update(patient);
     }
 }

@@ -473,4 +473,17 @@ public class Patient implements Serializable{
     public void setUreaStoneTests(Set<UreaStoneTest> ureaStoneTests) {
         this.ureaStoneTests = ureaStoneTests;
     }
+
+    @Transient
+    public Set<IMedicalTest> retrieveAllPatientTests(){
+        Set<IMedicalTest> tests = new HashSet<>();
+        tests.addAll(getBioChemTests());
+        tests.addAll(getCommonBloodTests());
+        tests.addAll(getCommonUreaTests());
+        tests.addAll(getDailyExcreationTests());
+        tests.addAll(getTitrationTests());
+        tests.addAll(getUreaColorTests());
+        tests.addAll(getUreaStoneTests());
+        return tests;
+    }
 }

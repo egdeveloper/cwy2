@@ -255,7 +255,7 @@
 
 		noop: function() {},
 
-		// See test/unit/core.js for details concerning isFunction.
+		// See service/unit/core.js for details concerning isFunction.
 		// Since version 1.3, DOM methods and functions like alert
 		// aren't supported. They return false on IE (#2968).
 		isFunction: function( obj ) {
@@ -1122,7 +1122,7 @@
 				// Support: IE<10
 				// Check if getElementById returns elements by name
 				// The broken getElementById methods don't pick up programatically-set names,
-				// so use a roundabout getElementsByName test
+				// so use a roundabout getElementsByName service
 				support.getById = assert(function( div ) {
 					docElem.appendChild( div ).id = expando;
 					return !document.getElementsByName || !document.getElementsByName( expando ).length;
@@ -1216,7 +1216,7 @@
 					// Regex strategy adopted from Diego Perini
 					assert(function( div ) {
 						// Select is set to empty string on purpose
-						// This is to test IE's treatment of not explicitly
+						// This is to service IE's treatment of not explicitly
 						// setting a boolean content attribute,
 						// since its presence should be enough
 						// http://bugs.jquery.com/ticket/12359
@@ -1226,7 +1226,7 @@
 
 						// Support: IE8, Opera 11-12.16
 						// Nothing should be selected when empty strings follow ^= or $= or *=
-						// The test attribute must be unknown in Opera but "safe" for WinRT
+						// The service attribute must be unknown in Opera but "safe" for WinRT
 						// http://msdn.microsoft.com/en-us/library/ie/hh465388.aspx#attribute_section
 						if ( div.querySelectorAll("[msallowcapture^='']").length ) {
 							rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:''|\"\")" );
@@ -3701,7 +3701,7 @@
 	support.ownFirst = i === "0";
 
 // Note: most support tests are defined in their respective modules.
-// false until the test is run
+// false until the service is run
 	support.inlineBlockNeedsLayout = false;
 
 // Execute ASAP in case we need to set body.style.zoom
@@ -5152,7 +5152,7 @@
 				) {
 
 					// Call a native DOM method on the target with the same name name as the event.
-					// Can't use an .isFunction() check here because IE6/7 fails that test.
+					// Can't use an .isFunction() check here because IE6/7 fails that service.
 					// Don't do default actions on window, that's where global variables be (#6170)
 					if ( ontype && elem[ type ] && !jQuery.isWindow( elem ) ) {
 
@@ -6826,7 +6826,7 @@
 					return;
 				}
 
-				// Hook needed; redefine it so that the support test is not executed again.
+				// Hook needed; redefine it so that the support service is not executed again.
 				return ( this.get = hookFn ).apply( this, arguments );
 			}
 		};

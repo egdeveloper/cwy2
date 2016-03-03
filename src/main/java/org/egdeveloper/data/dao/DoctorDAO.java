@@ -20,6 +20,11 @@ public class DoctorDAO implements IDoctorDAO{
     }
 
     @Override
+    public void updateDoctorInfo(Doctor doctor) {
+        sessionFactory.getCurrentSession().update(doctor);
+    }
+
+    @Override
     public List<Doctor> getDoctors(){
         return sessionFactory.getCurrentSession().createQuery("from Doctor").list();
     }

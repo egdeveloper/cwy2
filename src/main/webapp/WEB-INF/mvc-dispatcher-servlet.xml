@@ -66,6 +66,7 @@
        <bean id="doctorService" class="org.egdeveloper.service.DoctorService"/>
        <bean id="patientService" class="org.egdeveloper.service.PatientService"/>
        <bean id="statService" class="org.egdeveloper.service.StatService"/>
+       <bean id="userAuthService" class="org.egdeveloper.service.UserAuthService"/>
        <mvc:annotation-driven />
        <!--
        <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>

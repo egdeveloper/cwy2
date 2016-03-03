@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css"/>">
 </head>
-<c:url var="editAction" value="/editPatientInfo"/>
+<c:url var="createPatientEntry" value="/createPatientEntry"/>
 <body>
 <div class="container">
-  <form:form cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${editAction}" modelAttribute="patientInfo">
+  <form:form cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${createPatientEntry}" modelAttribute="patientInfo">
     <div class="form-group">
       <label class="col-lg-3 control-label">ФИО</label>
       <form:input cssClass="form-control" path="fullName" id="fullNameInput"/>

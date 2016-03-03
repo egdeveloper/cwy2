@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Entity
 @Table
 @MedTest
+@EntityID("bioChemTest")
 @DisplayName("Биохимический анализ крови")
 public class BioChemTest implements Serializable, IMedicalTest{
 

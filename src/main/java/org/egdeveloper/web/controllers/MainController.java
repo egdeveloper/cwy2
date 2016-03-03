@@ -2,6 +2,7 @@ package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.Patient;
+import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,29 +18,35 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("doctor")
-public class PersonalUserAccountController {
+public class MainController {
 
     @Autowired
     @Qualifier("patientService")
     private IPatientService patientService;
 
+    @Autowired
+    @Qualifier("doctorService")
+    private IDoctorService doctorService;
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String mainDoctorPage(@ModelAttribute("doctorAccount") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
-        session.setAttribute("doctor", doctor);
+    public String mainDoctorPage(@ModelAttribute("doctor") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
         return "DoctorPages/MainDoctorPage";
     }
 
     @RequestMapping(value = "/personalPage", method = RequestMethod.GET)
     public String personalPage(ModelMap modelMap, HttpSession session){
-        Doctor doctor = (Doctor)session.getAttribute("doctor");
-        modelMap.addAttribute("doctorInfo", doctor);
         return "DoctorPages/PersonalPage";
+    }
+
+    @RequestMapping(value = "/updatePersonalDoctorInfo", method = RequestMethod.POST)
+    public String updatePersonalDoctorInfo(@ModelAttribute("doctor") Doctor doctor, BindingResult bindingResult){
+        if(!bindingResult.hasErrors())
+            doctorService.updateDoctorInfo(doctor);
+        return "redirect:/personalPage";
     }
 
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
     public String getPatientInfoEditor(RedirectAttributes attributes, HttpSession session){
-        Doctor doctor = (Doctor)session.getAttribute("doctor");
-        attributes.addFlashAttribute("doctor", doctor);
         return "redirect:/editPatientInfo";
     }
 
@@ -47,7 +54,7 @@ public class PersonalUserAccountController {
     public String getPatientPersonalPage(@PathVariable("patientId") Integer patientId, RedirectAttributes redirectAttributes){
         Patient patient = patientService.getPatientById(patientId);
         if(patient != null) {
-            redirectAttributes.addFlashAttribute("patientInfo", patient);
+            redirectAttributes.addFlashAttribute("patient", patient);
             return "redirect:/personalPatientPage";
         }
         else
@@ -58,5 +65,10 @@ public class PersonalUserAccountController {
     public String logout(SessionStatus sessionStatus){
         sessionStatus.setComplete();
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/beforeTreatmentStatVisualization", method = RequestMethod.GET)
+    public String beforeTreatmentStatVisualization(){
+        return "StatisticsPages/StatBeforeTreatmentPage";
     }
 }

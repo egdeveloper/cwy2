@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css"/>">
+  <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
 </head>
 <body>
   <c:url var="addBiochemTest" value="/addBiochemTest"/>
@@ -17,7 +18,7 @@
         <div class="row">
           <div class="form-group">
             <label class="control-label">Дата</label>
-            <form:input cssClass="form-control" path="testDate"/>
+            <form:input cssClass="form-control dateField" path="testDate"/>
           </div>
         </div> <!-- testDate -->
         <div class="row">
@@ -220,5 +221,15 @@
   </div>
   <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".dateField").datepicker({
+        format : "dd.mm.yyyy",
+        autoclose: true,
+        locale: 'ru'
+      });
+    });
+  </script>
 </body>
 </html>

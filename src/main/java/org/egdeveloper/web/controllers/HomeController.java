@@ -2,6 +2,7 @@ package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.service.IDoctorService;
+import org.egdeveloper.service.IUserAuthService;
 import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,10 @@ public class HomeController {
     private IDoctorService doctorService;
 
     @Autowired
+    @Qualifier("userAuthService")
+    private IUserAuthService userAuthService;
+
+    @Autowired
     @Qualifier("signupValidator")
     private Validator validator;
 
@@ -39,9 +44,9 @@ public class HomeController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String logIn(@ModelAttribute("loginAuth") @Valid Login loginAuth, BindingResult bindingResult, ModelMap modelMap, RedirectAttributes attributes){
         if(!bindingResult.hasErrors()) {
-            Doctor doctor = doctorService.getDoctorByLoginAndPassword(loginAuth.getLogin(), loginAuth.getPassword());
+            Doctor doctor = userAuthService.authUser(loginAuth);
             if(doctor != null) {
-                attributes.addFlashAttribute("doctorAccount", doctor);
+                attributes.addFlashAttribute("doctor", doctor);
                 return "redirect:/main";
             }
         }
@@ -59,12 +64,6 @@ public class HomeController {
         return "Home/HelpPage";
     }
 
-    /*
-    @RequestMapping(value = "/registerNewDoctor", method = RequestMethod.GET)
-    public ModelAndView registerNewDoctor(){
-        return new ModelAndView("registration/register", "signupData", new Signup());
-    }
-    */
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
@@ -73,7 +72,7 @@ public class HomeController {
             return "HomePages/IndexPage";
         }
         else {
-            doctorService.addDoctor(signup.getDoctorAccount());
+            userAuthService.registerNewUserAccount(signup);
             return "redirect:/";
         }
     }

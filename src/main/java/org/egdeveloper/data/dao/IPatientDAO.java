@@ -49,9 +49,9 @@ public interface IPatientDAO {
 
 
     /**
-     * Add medicatl test to existing patient record
+     * Add medicatl service to existing patient record
      * @param patient patient record
-     * @param test test instance
+     * @param test service instance
      */
     void addMedicalTest(Patient patient, IMedicalTest test);
 }

@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.attributes.StatVariable;
 import org.hibernate.annotations.Type;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 @Entity
 @Table
 @MedTest
+@EntityID("commonUreaTest")
 @DisplayName("Общий анализ мочи")
 public class CommonUreaTest implements Serializable, IMedicalTest{
 

@@ -20,6 +20,12 @@ public interface IDoctorDAO {
     void addDoctor(Doctor doctor);
 
     /**
+     * Update existing doctor's record in database
+     * @param doctor existing doctor's entry
+     */
+    void updateDoctorInfo(Doctor doctor);
+
+    /**
      * Get all doctor's records
      * @return list of existing doctor's records from local database
      */

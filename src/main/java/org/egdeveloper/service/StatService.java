@@ -2,6 +2,7 @@ package org.egdeveloper.service;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.attributes.StatVariable;
 import org.egdeveloper.data.entities.*;
@@ -42,9 +43,9 @@ public class StatService implements IStatService {
 
     @Override
     @Transactional
-    public Map<String, Map<Comparable<?>, Long>> beforeTreatmentStat() {
+    public Map<Object, Object> beforeTreatmentStat() {
         List<Patient> patients = patientService.getPatients();
-        Map<String, Map<Comparable<?>, Long>> statData = new HashMap<>();
+        Map<Object, Object> statData = new HashMap<>();
         Frequency ageStat = new Frequency();
         Frequency durationStat = new Frequency();
         Frequency genderStat = new Frequency();
@@ -60,6 +61,7 @@ public class StatService implements IStatService {
             genderStat.addValue(p.getGender().gender2String());
             regionStat.addValue(p.getRegion().trim());
         });
+        statData.put("volume", patients.size());
         statData.put("age", frequency2Map(ageStat));
         statData.put("duration", frequency2Map(durationStat));
         statData.put("gender", frequency2Map(genderStat));
@@ -85,7 +87,8 @@ public class StatService implements IStatService {
                 }
                 indicators.put(indGetter.getAnnotation(DisplayName.class).value(), indicatorSamples);
             }
-            indicatorsStat.put(((DisplayName)testClass.getAnnotation(DisplayName.class)).value(), indicators);
+            //indicatorsStat.put(((DisplayName)testClass.getAnnotation(DisplayName.class)).value(), indicators);
+            indicatorsStat.put(((EntityID)testClass.getAnnotation(EntityID.class)).value(), indicators);
         }
         return indicatorsStat;
     }

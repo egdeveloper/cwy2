@@ -18,25 +18,25 @@ import javax.validation.Valid;
 import java.util.Set;
 
 @Controller
-@SessionAttributes(value = {"doctorInfo", "patientInfo"})
+@SessionAttributes(value = {"doctor", "patient"})
 public class PatientEditorController {
 
     @Autowired
     @Qualifier("patientService")
     private IPatientService patientService;
 
-    @RequestMapping(value = "/editPatientInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/createPatientEntry", method = RequestMethod.GET)
     public String getPatientInfoEditor(@ModelAttribute("doctor") Doctor doctor, ModelMap modelMap){
-        modelMap.addAttribute("doctorInfo", doctor);
-        modelMap.addAttribute("patientInfo", new Patient());
+        //modelMap.addAttribute("doctorInfo", doctor);
+        modelMap.addAttribute("patientEntry", new Patient());
         return "PatientPages/PatientEditPage";
     }
 
-    @RequestMapping(value = "/editPatientInfo", method = RequestMethod.POST)
-    public String editPatientInfo(@ModelAttribute("patientInfo") @Valid Patient patient,
+    @RequestMapping(value = "/createPatientEntry", method = RequestMethod.POST)
+    public String createPatientEntry(@ModelAttribute("patientEntry") @Valid Patient patient,
                                   BindingResult bindingResult, ModelMap modelMap, HttpSession session, SessionStatus sessionStatus)
     {
-        Doctor doctor = (Doctor)session.getAttribute("doctorInfo");
+        Doctor doctor = (Doctor)session.getAttribute("doctor");
         if(bindingResult.hasErrors()) {
             return "PatientPages/PatientEditPage";
         }
@@ -45,8 +45,17 @@ public class PatientEditorController {
         return "redirect:/main";
     }
 
+    @RequestMapping(value = "/updatePatientEntry", method = RequestMethod.POST)
+    public String updatePatientEntry(@ModelAttribute("patient") @Valid Patient patient,
+                                     BindingResult bindingResult, ModelMap modelMap, HttpSession session)
+    {
+        if(!bindingResult.hasErrors())
+            patientService.editPatientInfo(patient);
+        return "redirect:/personalPatientPage";
+    }
+
     @RequestMapping(value = "/personalPatientPage", method = RequestMethod.GET)
-    public String getPersonalPatientPage(@ModelAttribute("patientInfo") Patient patient, ModelMap modelMap){
+    public String getPersonalPatientPage(@ModelAttribute("patient") Patient patient, ModelMap modelMap){
         //if(session.getAttribute("patientInfo") != null)
         //    session.removeAttribute("patientInfo");
         //session.setAttribute("patientInfo", patient);
@@ -114,7 +123,7 @@ public class PatientEditorController {
                                  ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<BioChemTest> bioChemTests = patient.getBioChemTests();
                 bioChemTests.add(test);
@@ -132,7 +141,7 @@ public class PatientEditorController {
                                      ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<CommonBloodTest> commonBloodTests = patient.getCommonBloodTests();
                 commonBloodTests.add(test);
@@ -150,7 +159,7 @@ public class PatientEditorController {
                                     ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<CommonUreaTest> commonUreaTests = patient.getCommonUreaTests();
                 commonUreaTests.add(test);
@@ -168,7 +177,7 @@ public class PatientEditorController {
                                          ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<DailyExcreationTest> dailyExcreationTests = patient.getDailyExcreationTests();
                 dailyExcreationTests.add(test);
@@ -186,7 +195,7 @@ public class PatientEditorController {
                                    ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<TitrationTest> titrationTests = patient.getTitrationTests();
                 titrationTests.add(test);
@@ -204,7 +213,7 @@ public class PatientEditorController {
                                    ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<UreaColorTest> ureaColorTests = patient.getUreaColorTests();
                 ureaColorTests.add(test);
@@ -222,7 +231,7 @@ public class PatientEditorController {
                                    ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
-            Patient patient = (Patient)session.getAttribute("patientInfo");
+            Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
                 Set<UreaStoneTest> ureaStoneTests = patient.getUreaStoneTests();
                 ureaStoneTests.add(test);

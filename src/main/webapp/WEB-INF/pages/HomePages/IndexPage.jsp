@@ -58,20 +58,6 @@
         <li><a href="<c:url value="/help"/>">Помощь</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <!--li><a href="<c:url value="/registerNewDoctor"/>">Регистрация</a></li>
-        <!--
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Войти</a>
-          <div class="dropdown-menu" style="padding:15px; padding-bottom:0px;">
-            <!--form:form class="form" method="post" action="${login_action}" modelAttribute="loginAuth">
-              <!--form:input style="margin-bottom: 15px;" path="login" id="loginInput" placeholder="Имя пользователя"/>
-              <!--form:password style="margin-bottom: 15px;" path="password" id="passwordInput" placeholder="Пароль"/><br>
-              <button class="btn btn-sm btn-default" type="submit">Войти</button>
-              <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Войти">
-            <--/form:form>
-          </div>
-        </li>
-        -->
         <li><a href="#" data-toggle="modal" data-target="#login-modal">Войти</a></li>
       </ul>
     </div>
@@ -202,8 +188,5 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
-<script type="text/javascript">
-
-</script>
 </body>
 </html>

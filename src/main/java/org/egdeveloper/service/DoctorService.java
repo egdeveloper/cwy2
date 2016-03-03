@@ -22,6 +22,11 @@ public class DoctorService implements IDoctorService{
         doctorDAO.addDoctor(doctor);
     }
 
+    @Override
+    public void updateDoctorInfo(Doctor doctor) {
+        doctorDAO.updateDoctorInfo(doctor);
+    }
+
     @Transactional
     public List<Doctor> getDoctors(){
         return doctorDAO.getDoctors();
