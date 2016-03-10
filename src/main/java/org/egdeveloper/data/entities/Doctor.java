@@ -12,12 +12,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Doctor")
-public class Doctor implements Serializable{
+public class Doctor extends AbstractEntity implements Serializable{
 
-    @Id
-    @Column(name = "doctor_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    public Doctor(){}
 
     @NotEmpty(message = "Введите свое ФИО!")
     @Column(name = "fullName", nullable = false)
@@ -49,16 +46,6 @@ public class Doctor implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Patient> patients = new HashSet<>();
-
-    public Doctor(){}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFullName() {
         return fullName;

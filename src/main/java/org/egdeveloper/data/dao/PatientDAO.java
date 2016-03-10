@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,7 +53,7 @@ public class PatientDAO implements IPatientDAO{
     }
 
     @Override
-    public void addMedicalTest(Patient patient, IMedicalTest test) {
+    public void addMedicalTest(Patient patient, MedicalTest test) {
         if(test instanceof BioChemTest){
             patient.getBioChemTests().add((BioChemTest) test);
         }

@@ -50,6 +50,7 @@ public class StatService implements IStatService {
         Frequency durationStat = new Frequency();
         Frequency genderStat = new Frequency();
         Frequency regionStat = new Frequency();
+        Frequency badHabitsStat = new Frequency();
         LocalDate now = LocalDate.now();
         patients.forEach(p -> {
             //age statistics
@@ -60,12 +61,14 @@ public class StatService implements IStatService {
             //gender statistics
             genderStat.addValue(p.getGender().gender2String());
             regionStat.addValue(p.getRegion().trim());
+            badHabitsStat.addValue(p.getBadHabits().trim());
         });
         statData.put("volume", patients.size());
         statData.put("age", frequency2Map(ageStat));
         statData.put("duration", frequency2Map(durationStat));
         statData.put("gender", frequency2Map(genderStat));
         statData.put("region", frequency2Map(regionStat));
+        statData.put("badHabits", frequency2Map(badHabitsStat));
         return statData;
     }
 
@@ -79,10 +82,10 @@ public class StatService implements IStatService {
 
         for(Class testClass : indGetters.keySet()){
             Map<String, Map<LocalDate, Double>> indicators = new HashMap<>();
-            Set<IMedicalTest> tests = (Set<IMedicalTest>)indGetters.get(testClass).getKey().invoke(patient);
+            Set<MedicalTest> tests = (Set<MedicalTest>)indGetters.get(testClass).getKey().invoke(patient);
             for(Method indGetter : indGetters.get(testClass).getValue()){
                 Map<LocalDate, Double> indicatorSamples = new HashMap<>();
-                for(IMedicalTest test : tests){
+                for(MedicalTest test : tests){
                     indicatorSamples.put(test.getTestDate(), (Double) indGetter.invoke(test));
                 }
                 indicators.put(indGetter.getAnnotation(DisplayName.class).value(), indicatorSamples);

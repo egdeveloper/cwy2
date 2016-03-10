@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Set;
 
 @Controller
-@SessionAttributes(value = {"doctor", "patient"})
+@SessionAttributes(value = {"doctorAccount", "patient"})
 public class PatientEditorController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class PatientEditorController {
     private IPatientService patientService;
 
     @RequestMapping(value = "/createPatientEntry", method = RequestMethod.GET)
-    public String getPatientInfoEditor(@ModelAttribute("doctor") Doctor doctor, ModelMap modelMap){
+    public String getPatientInfoEditor(@ModelAttribute("doctorAccount") Doctor doctor, ModelMap modelMap){
         //modelMap.addAttribute("doctorInfo", doctor);
         modelMap.addAttribute("patientEntry", new Patient());
         return "PatientPages/PatientEditPage";
@@ -36,7 +36,7 @@ public class PatientEditorController {
     public String createPatientEntry(@ModelAttribute("patientEntry") @Valid Patient patient,
                                   BindingResult bindingResult, ModelMap modelMap, HttpSession session, SessionStatus sessionStatus)
     {
-        Doctor doctor = (Doctor)session.getAttribute("doctor");
+        Doctor doctor = (Doctor)session.getAttribute("doctorAccount");
         if(bindingResult.hasErrors()) {
             return "PatientPages/PatientEditPage";
         }

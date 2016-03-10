@@ -16,8 +16,15 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="<c:url value="/main"/>">Главная</a></li>
-                <li><a href="<c:url value="/about"/>">О сайте</a></li>
-                <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сайт <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/about"/>">О сайте</a></li>
+                        <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                    </ul>
+                </li>
+                <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+                <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<c:url value="/logout"/>">Выйти</a></li>

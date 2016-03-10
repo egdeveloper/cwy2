@@ -5,12 +5,35 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
+
 </head>
 <c:url var="createPatientEntry" value="/createPatientEntry"/>
-<body>
+<body style="padding-top: 70px;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">LaksmiMed</div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="<c:url value="/main"/>">Главная</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сайт <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="<c:url value="/about"/>">О сайте</a></li>
+          <li><a href="<c:url value="/help"/>">Помощь</a></li>
+        </ul>
+      </li>
+      <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+      <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout"/>">Выйти</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
-  <form:form cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${createPatientEntry}" modelAttribute="patientInfo">
+  <form:form cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${createPatientEntry}" modelAttribute="patientEntry">
     <div class="form-group">
       <label class="col-lg-3 control-label">ФИО</label>
       <form:input cssClass="form-control" path="fullName" id="fullNameInput"/>
@@ -24,7 +47,7 @@
     </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Дата рождения</label>
-      <form:input cssClass="form-control" path="birthdate" id="birthdateInput"/>
+      <form:input cssClass="form-control dateField" path="birthdate" id="birthdateInput"/>
     </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Номер карты</label>
@@ -144,5 +167,100 @@
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/typehead/typehead.js"/>"></script>
+<script>
+  $(document).ready(function(){
+    $(".dateField").datepicker({
+      format : "dd.mm.yyyy",
+      autoclose: true,
+      locale: 'ru'
+    });
+  });
+  var states = ["Адыгея Респ",
+    "Алтай Респ",
+    "Алтайский край",
+    "Амурская обл",
+    "Архангельская обл",
+    "Астраханская обл",
+    "Башкортостан Респ",
+    "Белгородская обл",
+    "Брянская обл",
+    "Бурятия Респ",
+    "Владимирская обл",
+    "Волгоградская обл",
+    "Вологодская обл",
+    "Воронежская обл",
+    "Дагестан Респ",
+    "Еврейская Аобл",
+    "Забайкальский край",
+    "Ивановская обл",
+    "Ингушетия Респ",
+    "Иркутская обл",
+    "Кабардино-Балкарская Респ",
+    "Калининградская обл",
+    "Калмыкия Респ",
+    "Калужская обл",
+    "Камчатский край",
+    "Карачаево-Черкесская Респ",
+    "Карелия Респ",
+    "Кемеровская обл",
+    "Кировская обл",
+    "Коми Респ",
+    "Костромская обл",
+    "Краснодарский край",
+    "Красноярский край",
+    "Курганская обл",
+    "Курская обл",
+    "Ленинградская обл",
+    "Липецкая обл",
+    "Магаданская обл",
+    "Марий Эл Респ",
+    "Мордовия Респ",
+    "Москва г",
+    "Московская обл",
+    "Мурманская обл",
+    "Ненецкий АО",
+    "Нижегородская обл",
+    "Новгородская обл",
+    "Новосибирская обл",
+    "Омская обл",
+    "Оренбургская обл",
+    "Орловская обл",
+    "Пензенская обл",
+    "Пермский край",
+    "Приморский край",
+    "Псковская обл",
+    "Ростовская обл",
+    "Рязанская обл",
+    "Самарская обл",
+    "Санкт-Петербург г",
+    "Саратовская обл",
+    "Саха /Якутия/ Респ",
+    "Сахалинская обл",
+    "Свердловская обл",
+    "Северная Осетия - Алания Респ",
+    "Смоленская обл",
+    "Ставропольский край",
+    "Тамбовская обл",
+    "Татарстан Респ",
+    "Тверская обл",
+    "Томская обл",
+    "Тульская обл",
+    "Тыва Респ",
+    "Тюменская обл",
+    "Удмуртская Респ",
+    "Ульяновская обл",
+    "Хабаровский край",
+    "Хакасия Респ",
+    "Ханты-Мансийский Автономный округ - Югра АО",
+    "Челябинская обл",
+    "Чеченская Респ",
+    "Чувашская Респ",
+    "Чукотский АО",
+    "Ямало-Ненецкий АО",
+    "Ярославская обл"
+  ];
+</script>
 </body>
 </html>

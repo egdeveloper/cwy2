@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
-                <li><a href="#">Пациенты</a></li>
+                <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<c:url value="/personalPage"/>">Личная страница</a></li>

@@ -44,13 +44,20 @@
                      <list>
                             <value>org.egdeveloper.data.entities.Doctor</value>
                             <value>org.egdeveloper.data.entities.Patient</value>
+                            <value>org.egdeveloper.data.entities.BioChemTest</value>
+                            <value>org.egdeveloper.data.entities.CommonBloodTest</value>
+                            <value>org.egdeveloper.data.entities.CommonUreaTest</value>
+                            <value>org.egdeveloper.data.entities.DailyExcreationTest</value>
+                            <value>org.egdeveloper.data.entities.TitrationTest</value>
+                            <value>org.egdeveloper.data.entities.UreaColorTest</value>
+                            <value>org.egdeveloper.data.entities.UreaStoneTest</value>
                      </list>
               </property>
               <property name="hibernateProperties">
                      <props>
                             <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                             <prop key="hibernate.show_sql">true</prop>
-                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+                            <prop key="hibernate.hbm2ddl.auto">create</prop>
                             <prop key="javax.persistence.validation.mode">none</prop>
                      </props>
               </property>

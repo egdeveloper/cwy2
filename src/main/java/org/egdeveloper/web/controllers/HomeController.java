@@ -54,9 +54,9 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    @RequestMapping(value = "/about2", method = RequestMethod.GET)
     public String about(ModelMap modelMap){
-        return "HomePages/AboutPage";
+        return "HomePages/About2Page";
     }
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class HomeController {
     public String registerNewDoctor(@ModelAttribute("signupData") @Valid Signup signup, BindingResult bindingResult, ModelMap modelMap){
         validator.validate(signup, bindingResult);
         if(bindingResult.hasErrors()){
-            return "HomePages/IndexPage";
+            return "redirect:/";
         }
         else {
             userAuthService.registerNewUserAccount(signup);

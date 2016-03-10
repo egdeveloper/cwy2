@@ -30,7 +30,17 @@ public class MainController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String mainDoctorPage(@ModelAttribute("doctor") Doctor doctor, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
-        return "DoctorPages/MainDoctorPage";
+        return "DoctorPages/MainPage";
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String aboutPage(){
+        return "HomePages/AboutPage";
+    }
+
+    @RequestMapping(value = "/patientList", method = RequestMethod.GET)
+    public String patientList(ModelMap modelMap){
+        return "DoctorPages/PatientListPage";
     }
 
     @RequestMapping(value = "/personalPage", method = RequestMethod.GET)
@@ -47,7 +57,9 @@ public class MainController {
 
     @RequestMapping(value = "/patientInfoEditor", method = RequestMethod.GET)
     public String getPatientInfoEditor(RedirectAttributes attributes, HttpSession session){
-        return "redirect:/editPatientInfo";
+        Doctor doctorAccount = (Doctor) session.getAttribute("doctor");
+        attributes.addFlashAttribute("doctorAccount", doctorAccount);
+        return "redirect:/createPatientEntry";
     }
 
     @RequestMapping(value = "/patients/{patientId}", method = RequestMethod.GET)

@@ -6,9 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,14 +17,11 @@ import org.joda.time.LocalDate;
 
 @Entity
 @Table(name = "Patient")
-public class Patient implements Serializable{
+public class Patient extends AbstractEntity implements Serializable{
+
+    public Patient(){}
 
     //Fields
-
-    @Id
-    @Column(name = "patient_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @Size(max = 255)
     @NotEmpty(message = "Введите ФИО пациента")
@@ -35,8 +33,6 @@ public class Patient implements Serializable{
     private Gender gender;
 
     @NotNull
-    //@NotEmpty(message = "Введите дату рождения")
-    //@Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "birthdate", nullable = false)
@@ -78,17 +74,14 @@ public class Patient implements Serializable{
     @Column(name = "email", nullable = false)
     private String email;
 
-    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "rh", nullable = false)
     private Rh rh;
 
-    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "bloodGroup", nullable = false)
     private BloodGroup bloodGroup;
 
-    //@NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "disability", nullable = false)
     private Disability disability;
@@ -148,42 +141,34 @@ public class Patient implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<BioChemTest> bioChemTests = new HashSet<>();
+    private Set<BioChemTest> bioChemTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<CommonBloodTest> commonBloodTests = new HashSet<>();
+    private Set<CommonBloodTest> commonBloodTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<CommonUreaTest> commonUreaTests = new HashSet<>();
+    private Set<CommonUreaTest> commonUreaTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<DailyExcreationTest> dailyExcreationTests = new HashSet<>();
+    private Set<DailyExcreationTest> dailyExcreationTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<TitrationTest> titrationTests = new HashSet<>();
+    private Set<TitrationTest> titrationTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<UreaColorTest> ureaColorTests = new HashSet<>();
+    private Set<UreaColorTest> ureaColorTests = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<UreaStoneTest> ureaStoneTests = new HashSet<>();
+    private Set<UreaStoneTest> ureaStoneTests = new TreeSet<>();
 
 
     //Getters and setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFullName() {
         return fullName;
@@ -346,7 +331,6 @@ public class Patient implements Serializable{
     }
 
 
-
     public String getJobConditions() {
         return jobConditions;
     }
@@ -475,8 +459,8 @@ public class Patient implements Serializable{
     }
 
     @Transient
-    public Set<IMedicalTest> retrieveAllPatientTests(){
-        Set<IMedicalTest> tests = new HashSet<>();
+    public Set<MedicalTest> retrieveAllPatientTests(){
+        Set<MedicalTest> tests = new HashSet<>();
         tests.addAll(getBioChemTests());
         tests.addAll(getCommonBloodTests());
         tests.addAll(getCommonUreaTests());
@@ -485,5 +469,104 @@ public class Patient implements Serializable{
         tests.addAll(getUreaColorTests());
         tests.addAll(getUreaStoneTests());
         return tests;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Patient)) return false;
+
+        Patient patient = (Patient) o;
+
+        if (super.getId() != patient.getId()) return false;
+        if (fullName != null ? !fullName.equals(patient.fullName) : patient.fullName != null) return false;
+        if (gender != patient.gender) return false;
+        if (birthdate != null ? !birthdate.equals(patient.birthdate) : patient.birthdate != null) return false;
+        if (cardNumber != null ? !cardNumber.equals(patient.cardNumber) : patient.cardNumber != null) return false;
+        if (passport != null ? !passport.equals(patient.passport) : patient.passport != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(patient.phoneNumber) : patient.phoneNumber != null) return false;
+        if (country != null ? !country.equals(patient.country) : patient.country != null) return false;
+        if (postIndex != null ? !postIndex.equals(patient.postIndex) : patient.postIndex != null) return false;
+        if (region != null ? !region.equals(patient.region) : patient.region != null) return false;
+        if (city != null ? !city.equals(patient.city) : patient.city != null) return false;
+        if (address != null ? !address.equals(patient.address) : patient.address != null) return false;
+        if (email != null ? !email.equals(patient.email) : patient.email != null) return false;
+        if (rh != patient.rh) return false;
+        if (bloodGroup != patient.bloodGroup) return false;
+        if (disability != patient.disability) return false;
+        if (TIN != null ? !TIN.equals(patient.TIN) : patient.TIN != null) return false;
+        if (OMICard != null ? !OMICard.equals(patient.OMICard) : patient.OMICard != null) return false;
+        if (jobPlace != null ? !jobPlace.equals(patient.jobPlace) : patient.jobPlace != null) return false;
+        if (occupation != null ? !occupation.equals(patient.occupation) : patient.occupation != null) return false;
+        if (jobPost != null ? !jobPost.equals(patient.jobPost) : patient.jobPost != null) return false;
+        if (jobConditions != null ? !jobConditions.equals(patient.jobConditions) : patient.jobConditions != null)
+            return false;
+        if (complaints != null ? !complaints.equals(patient.complaints) : patient.complaints != null) return false;
+        if (premedication != null ? !premedication.equals(patient.premedication) : patient.premedication != null)
+            return false;
+        if (associatedDisease != null ? !associatedDisease.equals(patient.associatedDisease) : patient.associatedDisease != null)
+            return false;
+        if (preMedicalSupplies != null ? !preMedicalSupplies.equals(patient.preMedicalSupplies) : patient.preMedicalSupplies != null)
+            return false;
+        if (badHabits != null ? !badHabits.equals(patient.badHabits) : patient.badHabits != null) return false;
+        if (preUreaStoneDescription != null ? !preUreaStoneDescription.equals(patient.preUreaStoneDescription) : patient.preUreaStoneDescription != null)
+            return false;
+        if (diseaseDuration != null ? !diseaseDuration.equals(patient.diseaseDuration) : patient.diseaseDuration != null)
+            return false;
+        if (bioChemTests != null ? !bioChemTests.equals(patient.bioChemTests) : patient.bioChemTests != null)
+            return false;
+        if (commonBloodTests != null ? !commonBloodTests.equals(patient.commonBloodTests) : patient.commonBloodTests != null)
+            return false;
+        if (commonUreaTests != null ? !commonUreaTests.equals(patient.commonUreaTests) : patient.commonUreaTests != null)
+            return false;
+        if (dailyExcreationTests != null ? !dailyExcreationTests.equals(patient.dailyExcreationTests) : patient.dailyExcreationTests != null)
+            return false;
+        if (titrationTests != null ? !titrationTests.equals(patient.titrationTests) : patient.titrationTests != null)
+            return false;
+        if (ureaColorTests != null ? !ureaColorTests.equals(patient.ureaColorTests) : patient.ureaColorTests != null)
+            return false;
+        return ureaStoneTests != null ? ureaStoneTests.equals(patient.ureaStoneTests) : patient.ureaStoneTests == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.getId();
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
+        result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
+        result = 31 * result + (passport != null ? passport.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (postIndex != null ? postIndex.hashCode() : 0);
+        result = 31 * result + (region != null ? region.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (rh != null ? rh.hashCode() : 0);
+        result = 31 * result + (bloodGroup != null ? bloodGroup.hashCode() : 0);
+        result = 31 * result + (disability != null ? disability.hashCode() : 0);
+        result = 31 * result + (TIN != null ? TIN.hashCode() : 0);
+        result = 31 * result + (OMICard != null ? OMICard.hashCode() : 0);
+        result = 31 * result + (jobPlace != null ? jobPlace.hashCode() : 0);
+        result = 31 * result + (occupation != null ? occupation.hashCode() : 0);
+        result = 31 * result + (jobPost != null ? jobPost.hashCode() : 0);
+        result = 31 * result + (jobConditions != null ? jobConditions.hashCode() : 0);
+        result = 31 * result + (complaints != null ? complaints.hashCode() : 0);
+        result = 31 * result + (premedication != null ? premedication.hashCode() : 0);
+        result = 31 * result + (associatedDisease != null ? associatedDisease.hashCode() : 0);
+        result = 31 * result + (preMedicalSupplies != null ? preMedicalSupplies.hashCode() : 0);
+        result = 31 * result + (badHabits != null ? badHabits.hashCode() : 0);
+        result = 31 * result + (preUreaStoneDescription != null ? preUreaStoneDescription.hashCode() : 0);
+        result = 31 * result + (diseaseDuration != null ? diseaseDuration.hashCode() : 0);
+        result = 31 * result + (bioChemTests != null ? bioChemTests.hashCode() : 0);
+        result = 31 * result + (commonBloodTests != null ? commonBloodTests.hashCode() : 0);
+        result = 31 * result + (commonUreaTests != null ? commonUreaTests.hashCode() : 0);
+        result = 31 * result + (dailyExcreationTests != null ? dailyExcreationTests.hashCode() : 0);
+        result = 31 * result + (titrationTests != null ? titrationTests.hashCode() : 0);
+        result = 31 * result + (ureaColorTests != null ? ureaColorTests.hashCode() : 0);
+        result = 31 * result + (ureaStoneTests != null ? ureaStoneTests.hashCode() : 0);
+        return result;
     }
 }

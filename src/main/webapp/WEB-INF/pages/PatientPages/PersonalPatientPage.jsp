@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
     <script type="text/javascript" src="<c:url value="/resources/js/plotly.js"/>"></script>
+    <style rel="stylesheet" type="text/css">
+        .test-button{
+            text-align: center;
+        }
+    </style>
 </head>
 <body style="padding-top: 60px;">
 <c:url var="updatePatientEntry" value="/updatePatientEntry"/>
@@ -18,8 +23,15 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="<c:url value="/main"/>">Главная</a></li>
-                <li><a href="<c:url value="/about"/>">О сайте</a></li>
-                <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сайт <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/about"/>">О сайте</a></li>
+                        <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                    </ul>
+                </li>
+                <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+                <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<c:url value="/personalPage"/>">Личная страница</a></li>
@@ -228,8 +240,37 @@
                 </div>
             </div>
             <div class="tab-pane" id="medicalTests" style="margin-top: 10px">
-                <div class="row">
-
+                <div class="row" style="padding-bottom: 15px;">
+                    <div class="col-sm-6">
+                        <div class="btn-group">
+                            <button id="addTestButton" class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Добавить анализ</button>
+                            <ul class = "dropdown-menu" role = "menu">
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addBiochemTest"/>">Биохимический анализ крови</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addCommonBloodTest"/>">Общий анализ крови</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addCommonUreaTest"/>">Общий анализ мочи</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addDailyExcreationTest"/>">Суточная экскреция</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addTitrationTest"/>">Титриметрия</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addUreaColorTest"/>">Хроматография</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addUreaStoneTest"/>">Мочевой камень</a>
+                                </li>
+                           </ul>
+                        </div>
+                        <button id="openTestButton" class="btn btn-success" type="button">Открыть анализ</button>
+                        <button id="removeTestButton" class="btn btn-danger" type="button">Удалить анализ</button>
+                    </div>
                 </div>
                 <div class="row">
                     <table class="table table-striped table-bordered" cellpadding="0" width="100%">
@@ -251,41 +292,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addCommonBloodTest"/>">
-                        <button class="col-md-5 btn btn-primary">Общий анализ крови</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addBiochemTest"/>">
-                        <button class="col-md-5 btn btn-primary">Биохимический анализ</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addCommonUreaTest"/>">
-                        <button class="col-md-5 btn btn-primary">Общий анализ мочи</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addDailyExcreationTest"/>">
-                        <button class="col-md-5 btn btn-primary">Суточная экскреция</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addTitrationTest"/>">
-                        <button class="col-md-5 btn btn-primary">Титриметрия</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addUreaColorTest"/>">
-                        <button class="col-md-5 btn btn-primary">Хроматография</button>
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <form method="get" action="<c:url value="/addUreaStoneTest"/>">
-                        <button class="col-md-5 btn btn-primary">Мочевой камень</button>
-                    </form>
-                </div>
+
             </div>
             <div class="tab-pane" id="testDynamics" style="margin-top: 10px;">
                 <div class="row">
@@ -315,6 +322,29 @@
             </div>
         </div>
     </form:form>
+    <div id="addTestModalDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить медицинский анализ</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="list-group">
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addCommonBloodTest"/>">Общий анализ крови</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addBiochemTest"/>">Биохимический анализ</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addCommonUreaTest"/>">Общий анализ мочи</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addDailyExcreationTest"/>">Суточная экскреция</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addTitrationTest"/>">Титриметрия</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addUreaColorTest"/>">Хроматография</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addUreaStoneTest"/>">Мочевой камень</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
@@ -331,7 +361,7 @@
     });
 
     function retrieveTestDynamics(patientId, callback){
-        $.getJSON("/indicatorsDynamics/" + patientId.toString(), callback);
+        $.getJSON("<c:url value="/indicatorsDynamics/"/>" + patientId.toString(), callback);
     }
 
     function visualizeTestDynamics(testType, testData){
@@ -342,9 +372,15 @@
             if($.isEmptyObject(testIndicators[indicatorKey]))
                 return;
             var timePoints = Object.keys(testIndicators[indicatorKey]).map(function(timeKey){
-                return timeKey + " 00:00:00";
+                return timeKey;
+            }).sort(function(a, b){
+                return (new Date(a)) - (new Date(b));
             });
-            var valuePoints = Object.keys(testIndicators[indicatorKey]).map(function(timeKey){
+            var valuePoints = Object.keys(testIndicators[indicatorKey])
+                    .sort(function(a, b){
+                        return (new Date(a)) - (new Date(b));
+                    })
+                    .map(function(timeKey){
                 return testIndicators[indicatorKey][timeKey];
             });
             var chartData = [{

@@ -32,6 +32,11 @@ public class DoctorService implements IDoctorService{
         return doctorDAO.getDoctors();
     }
 
+    @Override
+    public Doctor getDoctorByID(Integer doctorID) {
+        return doctorDAO.getDoctorById(doctorID);
+    }
+
     @Transactional
     public void removeDoctor(Integer id){
         doctorDAO.removeDoctor(id);

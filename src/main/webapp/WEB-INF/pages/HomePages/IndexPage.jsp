@@ -14,6 +14,12 @@
   <title></title>
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
   <style>
+    .carousel-caption{
+      display: inline-block;
+      vertical-align: middle;
+      text-align:center;
+      background-color: rgba(0,0,0,0.5);
+    }
     .nav-tabs {
       margin-bottom: 15px;
     }
@@ -41,27 +47,74 @@
     code {
       font-size: 80%;
     }
+
+    .marketing{
+      margin-bottom: 20px;
+    }
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    .featurette-divider {
+      margin: 10px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 20px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+      min-width: 100%;
+      width: auto !important;
+    }
   </style>
 </head>
 <body style="padding-top: 50px;">
 <c:url var="registerAction" value="/register"/>
 <c:url var="login_action" value="/login"/>
-<div class="container">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <div class="navbar-brand">LaksmiMed</div>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="<c:url value="/"/>">Главная</a></li>
-        <li><a href="<c:url value="/about"/>">О сайте</a></li>
-        <li><a href="<c:url value="/help"/>">Помощь</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" data-target="#login-modal">Войти</a></li>
-      </ul>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <div class="navbar-brand">LaksmiMed</div>
     </div>
-  </nav>
+    <ul class="nav navbar-nav">
+      <li><a href="<c:url value="/"/>">Главная</a></li>
+      <li><a href="<c:url value="/about2"/>">О сайте</a></li>
+      <li><a href="<c:url value="/help"/>">Помощь</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" data-toggle="modal" data-target="#login-modal">Войти</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
   <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -169,24 +222,70 @@
     </div>
   </div>
 </div>
-<div class="jumbotron">
-  <div class="container">
-    <h1>Добро пожаловать!</h1>
-    <p>LaksmiMed - сервис, предоставляющий Вам  широкий набор инструментов для работы с медицинскими картами пациентов
-      и статистической обработки медицинских данных для постановки диагноза и проведения исследований
+<header id="slideShow" class="carousel slide">
+  <ol class="carousel-indicators" style="margin-top: 10px;">
+    <li data-target="#slideShow" data-slide-to="0" class="active"></li>
+    <li data-target="#slideShow" data-slide-to="1"></li>
+    <li data-target="#slideshow" data-slide-ti="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="<c:url value="/resources/img/healthcare-banner.jpg"/>" style="height: 500px; width: 1440px;"/>
+      <div class="carousel-caption">
+          <h2>
+            LaksmiMed - сервис, предоставляющий Вам  широкий набор инструментов для работы с медицинскими картами пациентов
+            и статистической обработки медицинских данных для постановки диагноза и проведения исследований
+            <br/>
+          </h2>
+          <a class="btn btn-lg btn-primary" href="#" data-toggle="modal" data-target="#login-modal" role="button">Войти</a>
+      </div>
+    </div>
+    <div class="item">
+      <img src="<c:url value="/resources/img/slider-img.jpg"/>" style="height: 500px; width: 1440px;"/>
+      <div class="carousel-caption">
+        <h2>
+          Контролируйте поток пациентов, отслеживайте динамику их здоровья, составляйте отчеты с возможностью прикрепления к анализам
+          необходимый контент
+        </h2>
+      </div>
+    </div>
+    <div class="item">
+      <img src="<c:url value="/resources/img/slider4.jpg"/>" style="height: 500px; width: 1440px;"/>
+      <div class="carousel-caption">
+        <h2>
+          Коммуницируйте с другими врачами, следите за статистическими сводками и своевременно диагностируйте
+          заболевания
+        </h2>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#slideShow" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#slideShow" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</header>
+<div class="container marketing" style="margin-top: 20px; margin-bottom: 20px;">
+  <div class="featurette">
+      <h2 class="featurette-heading">Оптимизируйте работу с медицинскими картами. <span class="text-muted">Это очень легко. Попробуйте!</span></h2>
+      <p class="lead">Полностью электронная система учета медицинских документов, медицинских карт и анализов. Вам больше не нужно
+      вручную заполнять отчеты.
+      </p>
+  </div>
+  <hr class="featurette-divider">
+  <div class="featurette">
+    <h2 class="featurette-heading">Организуйте процедуру занесения анализов в базу данных и следите за динамикой показателей пациента. <span class="text-muted">Высокая точность диагностики!</span></h2>
+    <p class="lead">Большая кипа анализов и отчетов по ним - забудьте об этом кошмаре. Диагностика и лечени пациентов - основная задача, а остальным
+      пусть занимается автоматизированная система сбора и обработки медицинских анализов.
     </p>
-    <button class="btn btn-primary btn-default" onclick="location.href='<c:url value="/about"/>'">Узнайте больше!</button>
   </div>
 </div>
-<footer class="footer">
-  <div class="footer-container">
-    <p class="text-muted">©2015-2016 Ярных Роман <a href="mailto:egdeveloper@mail.ru">egdeveloper@mail.ru</a>.
-    Проект размещен в свободном доступе на github: <a href="https://github.com/egdeveloper/LaksmiMed">https://github.com/egdeveloper/LaksmiMed</a>
-    </p>
-  </div>
-</footer>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+<script type="text/javascript">
+  $("#slideShow").carousel({interval: 5000});
+</script>
 </body>
 </html>

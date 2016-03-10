@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: egdeveloper
-  Date: 23.11.15
-  Time: 14:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,9 +15,16 @@
                     <div class="navbar-brand">LaksmiMed</div>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="<c:url value="/"/>">Главная</a></li>
-                    <li><a href="<c:url value="/about"/>">О сайте</a></li>
-                    <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                    <li><a href="<c:url value="/main"/>">Главная</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сайт <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<c:url value="/about"/>">О сайте</a></li>
+                            <li><a href="<c:url value="/help"/>">Помощь</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+                    <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="<c:url value="/logout"/>">Выйти</a></li>
@@ -36,10 +36,10 @@
         </div>
         <div class="row">
             <p class="lead">
-                Наша задача заключается в создании удобного и мощного инструмента для врачей, нуждающихся повышении эффективности
-                каждодневной работы с медицинскими картами и учета пациентов, статистической обработки
+                Наша задача заключается в создании удобного и мощного инструмента для врачей, нуждающихся в повышении эффективности
+                каждодневной работы с медицинскими картами и учетом пациентов, статистической обработки
                 медицинских обследований с целью выявления закономерностей в возникновении тех или иных заболеваний.
-                Конечной целью наша проекта - сделать диагностирование быстрым и безошибочным.
+                Конечная цель нашего проекта - сделать диагностирование быстрым и безошибочным.
             </p>
         </div>
         <div class="row">

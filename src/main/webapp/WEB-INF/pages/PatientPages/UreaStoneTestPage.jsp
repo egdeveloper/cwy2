@@ -6,10 +6,33 @@
 <head>
   <title></title>
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css"/>">
+  <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
 </head>
-<body>
+<body style="padding-top: 70px;">
 <c:url var="addUreaStoneTest" value="/addUreaStoneTest"/>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">LaksmiMed</div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="<c:url value="/main"/>">Главная</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сайт <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="<c:url value="/about"/>">О сайте</a></li>
+          <li><a href="<c:url value="/help"/>">Помощь</a></li>
+        </ul>
+      </li>
+      <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+      <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/personalPage"/>">Личная страница</a></li>
+      <li><a href="<c:url value="/logout"/>">Выйти</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
   <fieldset>
     <legend>Мочевой камень</legend>
@@ -17,7 +40,7 @@
       <div class="row">
         <div class="form-group">
           <label class="control-label">Дата</label>
-          <form:input cssClass="form-control" path="testDate"/>
+          <form:input cssClass="form-control dateField" path="testDate"/>
         </div>
       </div>
       <div class="row">
@@ -70,6 +93,16 @@
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".dateField").datepicker({
+      format : "dd.mm.yyyy",
+      autoclose: true,
+      locale: 'ru'
+    });
+  });
+</script>
 </body>
 </html>
 
