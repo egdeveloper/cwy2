@@ -1,5 +1,6 @@
 package org.egdeveloper.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
@@ -17,7 +18,9 @@ import javax.validation.constraints.NotNull;
 public class BioChemTest extends MedicalTest {
 
 
-    public BioChemTest(){}
+    public BioChemTest(){
+        super();
+    }
 
 
     @Column(name = "commonProtein")
@@ -270,32 +273,39 @@ public class BioChemTest extends MedicalTest {
         this.cholesterol = cholesterol;
     }
 
+
     @DisplayName("Триглицериды")
     @StatVariable
+    @JsonProperty("TAG")
     public double getTAG() {
         return TAG;
     }
 
+    @JsonProperty("TAG")
     public void setTAG(double TAG) {
         this.TAG = TAG;
     }
 
     @DisplayName("Липопр. выс. кон.")
     @StatVariable
+    @JsonProperty("HDL")
     public double getHDL() {
         return HDL;
     }
 
+    @JsonProperty("HDL")
     public void setHDL(double HDL) {
         this.HDL = HDL;
     }
 
     @DisplayName("Липопр. низ. кон.")
     @StatVariable
+    @JsonProperty("LDL")
     public double getLDL() {
         return LDL;
     }
 
+    @JsonProperty("LDL")
     public void setLDL(double LDL) {
         this.LDL = LDL;
     }
@@ -312,70 +322,84 @@ public class BioChemTest extends MedicalTest {
 
     @DisplayName("Аланинаминотрасфераза")
     @StatVariable
+    @JsonProperty("ALT")
     public double getALT() {
         return ALT;
     }
 
+    @JsonProperty("ALT")
     public void setALT(double ALT) {
         this.ALT = ALT;
     }
 
     @DisplayName("Аспартатаминотрансфераза")
     @StatVariable
+    @JsonProperty("AST")
     public double getAST() {
         return AST;
     }
 
+    @JsonProperty("AST")
     public void setAST(double AST) {
         this.AST = AST;
     }
 
     @DisplayName("Щелочная фосфотаза")
     @StatVariable
+    @JsonProperty("ALKP")
     public double getALKP() {
         return ALKP;
     }
 
+    @JsonProperty("ALKP")
     public void setALKP(double ALKP) {
         this.ALKP = ALKP;
     }
 
     @DisplayName("Креатинфосфокиназа")
     @StatVariable
+    @JsonProperty("CK")
     public double getCK() {
         return CK;
     }
 
+    @JsonProperty("CK")
     public void setCK(double CK) {
         this.CK = CK;
     }
 
     @DisplayName("Креатинфосфокиназа МВ")
     @StatVariable
+    @JsonProperty("CKMB")
     public double getCKMB() {
         return CKMB;
     }
 
+    @JsonProperty("CKMB")
     public void setCKMB(double CKMB) {
         this.CKMB = CKMB;
     }
 
     @DisplayName("Лактатдкгидрогеназа")
     @StatVariable
+    @JsonProperty("LDH")
     public double getLDH() {
         return LDH;
     }
 
+    @JsonProperty("LDH")
     public void setLDH(double LDH) {
         this.LDH = LDH;
     }
 
     @DisplayName("ГГТ")
     @StatVariable
+    @JsonProperty("GGT")
     public double getGGT() {
         return GGT;
     }
 
+    @JsonProperty("GGT")
     public void setGGT(double GGT) {
         this.GGT = GGT;
     }
@@ -422,20 +446,24 @@ public class BioChemTest extends MedicalTest {
 
     @DisplayName("С-реактивный белок")
     @StatVariable
+    @JsonProperty("CRP")
     public double getCRP() {
         return CRP;
     }
 
+    @JsonProperty("CRP")
     public void setCRP(double CRP) {
         this.CRP = CRP;
     }
 
     @DisplayName("Ревматоидный фактор")
     @StatVariable
+    @JsonProperty("RF")
     public double getRF() {
         return RF;
     }
 
+    @JsonProperty("RF")
     public void setRF(double RF) {
         this.RF = RF;
     }

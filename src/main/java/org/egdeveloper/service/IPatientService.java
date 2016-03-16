@@ -10,5 +10,6 @@ public interface IPatientService {
     void editPatientInfo(Patient patient);
     List<Patient> getPatients();
     Patient getPatientById(Integer id);
+    boolean checkPatientExist(Patient patient);
     void removePatient(Integer id);
 }

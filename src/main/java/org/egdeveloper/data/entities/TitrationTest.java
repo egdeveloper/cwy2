@@ -16,7 +16,9 @@ import javax.validation.constraints.NotNull;
 @DisplayName("Титриметрия")
 public class TitrationTest extends MedicalTest {
 
-    public TitrationTest(){}
+    public TitrationTest(){
+        super();
+    }
 
     @Column(name = "oxalate")
     @NotNull

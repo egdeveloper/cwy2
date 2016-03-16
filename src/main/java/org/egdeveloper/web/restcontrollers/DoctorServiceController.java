@@ -1,9 +1,7 @@
 package org.egdeveloper.web.restcontrollers;
 
 import org.egdeveloper.data.entities.Doctor;
-import org.egdeveloper.data.entities.Patient;
 import org.egdeveloper.service.IDoctorService;
-import org.egdeveloper.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -15,16 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/webService")
-public class RESTClientRequestsHandlerController {
-
+@RequestMapping("/doctorService")
+public class DoctorServiceController {
     @Autowired
     @Qualifier("doctorService")
     private IDoctorService doctorService;
-
-    @Autowired
-    @Qualifier("patientService")
-    private IPatientService patientService;
 
     /**
      * Create doctor account
@@ -41,6 +34,7 @@ public class RESTClientRequestsHandlerController {
         doctorService.addDoctor(doctor);
         return doctor;
     }
+
     /**
      * Update current doctor account
      * @param doctorID doctor id
@@ -76,16 +70,11 @@ public class RESTClientRequestsHandlerController {
     }
 
     /**
-     * Retrieve patients from doctor entry
-     * @param doctorID doctor id
-     * @return response entry
+     * Fetch all doctor accounts
+     * @return doctor accounts
      */
-    @RequestMapping(value = "/doctors/{doctorID}/patients", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Patient>> retrievePatientsForDoctor(@PathVariable("doctorID") Integer doctorID)
-    {
-        Doctor doctorEntry = doctorService.getDoctorByID(doctorID);
-        if(doctorEntry == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(doctorEntry.getPatients(), HttpStatus.OK);
+    @RequestMapping(value = "/doctors", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Collection<Doctor>> getDoctors(){
+        return new ResponseEntity<>(doctorService.getDoctors(), HttpStatus.OK);
     }
 }

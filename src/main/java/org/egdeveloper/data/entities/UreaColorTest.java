@@ -1,6 +1,7 @@
 package org.egdeveloper.data.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
@@ -16,7 +17,9 @@ import javax.validation.constraints.NotNull;
 @DisplayName("Хроматография")
 public class UreaColorTest extends MedicalTest {
 
-    public UreaColorTest(){}
+    public UreaColorTest(){
+        super();
+    }
 
     @Column(name = "DUV")
     @NotNull
@@ -78,60 +81,72 @@ public class UreaColorTest extends MedicalTest {
 
     @DisplayName("Диурез")
     @StatVariable
+    @JsonProperty("DUV")
     public double getDUV() {
         return DUV;
     }
 
+    @JsonProperty("DUV")
     public void setDUV(double DUV) {
         this.DUV = DUV;
     }
 
     @DisplayName("Хлорид")
     @StatVariable
+    @JsonProperty("ClSalt")
     public double getClSalt() {
         return ClSalt;
     }
 
+    @JsonProperty("ClSalt")
     public void setClSalt(double clSalt) {
         ClSalt = clSalt;
     }
 
     @DisplayName("Нитрит")
     @StatVariable
+    @JsonProperty("NO2Salt")
     public double getNO2Salt() {
         return NO2Salt;
     }
 
+    @JsonProperty("NO2Salt")
     public void setNO2Salt(double NO2Salt) {
         this.NO2Salt = NO2Salt;
     }
 
     @DisplayName("Нитрат")
     @StatVariable
+    @JsonProperty("NO3Salt")
     public double getNO3Salt() {
         return NO3Salt;
     }
 
+    @JsonProperty("NO3Salt")
     public void setNO3Salt(double NO3Salt) {
         this.NO3Salt = NO3Salt;
     }
 
     @DisplayName("Сульфат")
     @StatVariable
+    @JsonProperty("SO3Salt")
     public double getSO3Salt() {
         return SO3Salt;
     }
 
+    @JsonProperty("SO3Salt")
     public void setSO3Salt(double SO3Salt) {
         this.SO3Salt = SO3Salt;
     }
 
     @DisplayName("Фосфат")
     @StatVariable
+    @JsonProperty("PO3Salt")
     public double getPO3Salt() {
         return PO3Salt;
     }
 
+    @JsonProperty("PO3Salt")
     public void setPO3Salt(double PO3Salt) {
         this.PO3Salt = PO3Salt;
     }

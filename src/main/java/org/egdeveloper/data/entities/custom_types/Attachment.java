@@ -2,14 +2,22 @@ package org.egdeveloper.data.entities.custom_types;
 
 import org.egdeveloper.attributes.DisplayName;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Arrays;
 
 @DisplayName("Приложение к анализу")
+@Embeddable
 public class Attachment implements Serializable{
 
+    @Column(name = "attachmentContentType")
     private String contentType;
+
+    @Column(name = "attachmentName")
     private String name;
+
+    @Column(name = "attachmentContent")
     private byte[] content;
 
     public String getContentType() {

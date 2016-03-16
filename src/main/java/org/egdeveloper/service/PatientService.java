@@ -39,6 +39,11 @@ public class PatientService implements IPatientService{
         return patientDAO.getPatientById(id);
     }
 
+    @Override
+    public boolean checkPatientExist(Patient patient) {
+        return patientDAO.checkPatientExist(patient);
+    }
+
     @Transactional
     public void removePatient(Integer id){
         patientDAO.removePatient(id);

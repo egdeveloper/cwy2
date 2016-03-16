@@ -45,6 +45,11 @@ public class PatientDAO implements IPatientDAO{
     }
 
     @Override
+    public boolean checkPatientExist(Patient patient) {
+        return !(patient == null || getPatientById(patient.getId()) == null);
+    }
+
+    @Override
     public void removePatient(Integer id){
         Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, id);
         if(patient != null){

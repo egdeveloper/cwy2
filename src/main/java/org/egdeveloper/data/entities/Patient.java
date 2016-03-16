@@ -1,5 +1,10 @@
 package org.egdeveloper.data.entities;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.MedTest;
+import org.egdeveloper.converters.CustomDateTimeDeserializer;
+import org.egdeveloper.converters.CustomDateTimeSerializer;
 import org.egdeveloper.data.entities.custom_types.*;
 
 import javax.persistence.*;
@@ -24,15 +29,20 @@ public class Patient extends AbstractEntity implements Serializable{
     //Fields
 
     @Size(max = 255)
+    @JsonProperty("fullName")
     @NotEmpty(message = "Введите ФИО пациента")
     @Column(name = "fullName", nullable = false)
     private String fullName;
 
+    @JsonProperty("gender")
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @NotNull
+    @JsonProperty("birthdate")
+    @JsonSerialize(using = CustomDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomDateTimeDeserializer.class)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "birthdate", nullable = false)
@@ -40,65 +50,86 @@ public class Patient extends AbstractEntity implements Serializable{
 
     @NotNull
     @NotEmpty(message = "Введите номер карты")
+    @JsonProperty("cardNumber")
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
 
     @NotNull
+    @JsonProperty("passport")
     @Column(name = "passport", nullable = false)
     private String passport;
 
     @NotNull
+    @JsonProperty("phoneNumber")
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
     @NotNull
+    @JsonProperty("country")
     @Column(name = "country", nullable = false)
     private String country;
 
     @NotNull
+    @JsonProperty("postIndex")
     @Column(name = "postIndex", nullable = false)
     private String postIndex;
 
     @NotNull
+    @JsonProperty("region")
     @Column(name = "region", nullable = false)
     private String region;
 
     @NotNull
+    @JsonProperty("city")
     @Column(name = "city", nullable = false)
     private String city;
 
     @NotNull
+    @JsonProperty("address")
     @Column(name = "address", nullable = false)
     private String address;
 
+    @JsonProperty("email")
     @Column(name = "email", nullable = false)
     private String email;
 
+    @JsonProperty("patientState")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "patientState", nullable = false)
+    private PatientState patientState;
+
+    @JsonProperty("rh")
     @Enumerated(EnumType.STRING)
     @Column(name = "rh", nullable = false)
     private Rh rh;
 
+    @JsonProperty("bloodGroup")
     @Enumerated(EnumType.STRING)
     @Column(name = "bloodGroup", nullable = false)
     private BloodGroup bloodGroup;
 
+    @JsonProperty("disability")
     @Enumerated(EnumType.STRING)
     @Column(name = "disability", nullable = false)
     private Disability disability;
 
     @NotNull
+    @JsonProperty("TIN")
     @Column(name = "TIN", nullable = false)
     private String TIN;
 
     @NotNull
+    @JsonProperty("OMICard")
     @Column(name = "OMICard", nullable = false)
     private String OMICard;
 
     @NotNull
+    @JsonProperty("jobPlace")
     @Column(name = "jobPlace", nullable = false)
     private String jobPlace;
 
     @NotNull
+    @JsonProperty("occupation")
     @Column(name = "occupation", nullable = false)
     private String occupation;
 
@@ -107,34 +138,42 @@ public class Patient extends AbstractEntity implements Serializable{
     private String jobPost;
 
     @NotNull
+    @JsonProperty("jobConditions")
     @Column(name = "jobConditions", nullable = false)
     private String jobConditions;
 
     @NotNull
+    @JsonProperty("complaints")
     @Column(name = "complaints", nullable = false)
     private String complaints;
 
     @NotNull
+    @JsonProperty("premedication")
     @Column(name = "premedication", nullable = false)
     private String premedication;
 
     @NotNull
+    @JsonProperty("associatedDisease")
     @Column(name = "associatedDisease", nullable = false)
     private String associatedDisease;
 
     @NotNull
+    @JsonProperty("preMedicalSupplies")
     @Column(name = "preMedicalSupplies", nullable = false)
     private String preMedicalSupplies;
 
     @NotNull
+    @JsonProperty("badHabits")
     @Column(name = "badHabits", nullable = false)
     private String badHabits;
 
     @NotNull
+    @JsonProperty("preUreaStoneDescription")
     @Column(name = "preUreaStoneDescription", nullable = false)
     private String preUreaStoneDescription;
 
     @NotNull
+    @JsonProperty("diseaseDuration")
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;
 
@@ -266,6 +305,13 @@ public class Patient extends AbstractEntity implements Serializable{
         this.email = email;
     }
 
+    public PatientState getPatientState(){
+        return patientState;
+    }
+
+    public void setPatientState(PatientState patientState){
+        this.patientState = patientState;
+    }
     public Rh getRh() {
         return rh;
     }
@@ -290,18 +336,22 @@ public class Patient extends AbstractEntity implements Serializable{
         this.disability = disability;
     }
 
+    @JsonProperty("TIN")
     public String getTIN() {
         return TIN;
     }
 
+    @JsonProperty("TIN")
     public void setTIN(String TIN) {
         this.TIN = TIN;
     }
 
+    @JsonProperty("OMICard")
     public String getOMICard() {
         return OMICard;
     }
 
+    @JsonProperty("OMICard")
     public void setOMICard(String OMICard) {
         this.OMICard = OMICard;
     }

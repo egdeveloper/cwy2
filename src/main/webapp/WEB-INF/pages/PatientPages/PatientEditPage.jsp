@@ -86,6 +86,16 @@
       <form:input cssClass="form-control" path="email" id="emailInput"/>
     </div>
     <div class="form-group">
+      <label class="col-lg-3 control-label">Состояние пациента</label>
+      <form:select cssClass="form-control" path="patientState">
+        <form:option value="HEALTHY">здоров</form:option>
+        <form:option value="FAIR">стабилен</form:option>
+        <form:option value="SERIOUS">болен</form:option>
+        <form:option value="CRITICAL">серьезно болен</form:option>
+        <form:option value="UNDERTERMINED">неопределенное</form:option>
+      </form:select>
+    </div>
+    <div class="form-group">
       <label class="col-lg-3 control-label">Резус-фактор</label>
       <form:select cssClass="form-control" path="rh">
         <form:option value="POSITIVE">Rh+</form:option>

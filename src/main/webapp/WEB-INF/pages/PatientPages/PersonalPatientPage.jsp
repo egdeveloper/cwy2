@@ -166,6 +166,18 @@
             </div>
             <div class="tab-pane" id="medicalPatientInfo" style="margin-top:10px">
                 <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Состояние пациента: </label>
+                    <div class="col-sm-10">
+                        <form:select cssClass="form-control" path="patientState">
+                            <form:option value="HEALTHY">здоров</form:option>
+                            <form:option value="FAIR">стабилен</form:option>
+                            <form:option value="SERIOUS">болен</form:option>
+                            <form:option value="CRITICAL">серьезно болен</form:option>
+                            <form:option value="UNDERTERMINED">неопределенное</form:option>
+                        </form:select>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Резус-фактор: </label>
                     <div class="col-sm-10">
                         <form:select cssClass="form-control" path="rh">
@@ -350,6 +362,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pathFactory.js"/>"></script>
 <script type="text/javascript">
 
     $(document).ready(function(){
@@ -361,7 +374,7 @@
     });
 
     function retrieveTestDynamics(patientId, callback){
-        $.getJSON("<c:url value="/indicatorsDynamics/"/>" + patientId.toString(), callback);
+        $.getJSON(retrievePath("/indicatorsDynamics") + patientId.toString(), callback);
     }
 
     function visualizeTestDynamics(testType, testData){

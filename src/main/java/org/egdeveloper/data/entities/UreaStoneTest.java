@@ -14,7 +14,9 @@ import javax.validation.constraints.NotNull;
 @DisplayName("Мочевой камень")
 public class UreaStoneTest extends MedicalTest {
 
-    public UreaStoneTest(){}
+    public UreaStoneTest(){
+        super();
+    }
 
     @Column(name = "size")
     @NotNull

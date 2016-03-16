@@ -83,6 +83,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/pathFactory.js"/>"></script>
     <script>
         String.prototype.isEmpty = function() {
             return (this.length === 0 || !this.trim());
@@ -149,7 +150,7 @@
             Plotly.newPlot('badHabitsStatBar', badHabitsData, {title: 'Вредные привычки'});
         }
         $(document).ready(function(){
-            requestForBeforeTreatmentStat(<c:url value="/beforeTreatmentStat"/>, visualizeBeforeTreatmentStatData);
+            requestForBeforeTreatmentStat(retrievePath("/beforeTreatmentStat"), visualizeBeforeTreatmentStatData);
         });
     </script>
 </body>

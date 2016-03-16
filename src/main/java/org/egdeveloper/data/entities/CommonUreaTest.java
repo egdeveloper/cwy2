@@ -1,5 +1,6 @@
 package org.egdeveloper.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
@@ -16,7 +17,9 @@ import javax.validation.constraints.NotNull;
 @DisplayName("Общий анализ мочи")
 public class CommonUreaTest extends MedicalTest {
 
-    public CommonUreaTest(){}
+    public CommonUreaTest(){
+        super();
+    }
 
     @Column(name = "amount")
     @NotNull
@@ -112,30 +115,36 @@ public class CommonUreaTest extends MedicalTest {
         this.amount = amount;
     }
 
+    @JsonProperty("PH")
     public double getPH() {
         return PH;
     }
 
+    @JsonProperty("PH")
     public void setPH(double PH) {
         this.PH = PH;
     }
 
     @DisplayName("Лейкоциты")
     @StatVariable
+    @JsonProperty("WBCells")
     public double getWBCells() {
         return WBCells;
     }
 
+    @JsonProperty("WBCells")
     public void setWBCells(double WBCells) {
         this.WBCells = WBCells;
     }
 
     @DisplayName("Эритроциты")
     @StatVariable
+    @JsonProperty("RBCells")
     public double getRBCells() {
         return RBCells;
     }
 
+    @JsonProperty("RBCells")
     public void setRBCells(double RBCells) {
         this.RBCells = RBCells;
     }

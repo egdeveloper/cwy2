@@ -47,6 +47,8 @@ public interface IPatientDAO {
      */
     void editPatientInfo(Patient patient);
 
+    boolean checkPatientExist(Patient patient);
+
 
     /**
      * Add medicatl service to existing patient record

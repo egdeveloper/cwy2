@@ -16,7 +16,9 @@ import javax.validation.constraints.NotNull;
 @DisplayName("Суточная экскреция")
 public class DailyExcreationTest extends MedicalTest {
 
-    public DailyExcreationTest(){}
+    public DailyExcreationTest(){
+        super();
+    }
 
     @Column(name = "creatinine")
     @NotNull

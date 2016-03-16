@@ -1,5 +1,6 @@
 package org.egdeveloper.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
@@ -17,7 +18,9 @@ import javax.validation.constraints.NotNull;
 public class CommonBloodTest extends MedicalTest {
 
 
-    public CommonBloodTest(){}
+    public CommonBloodTest(){
+        super();
+    }
 
     @Column(name = "hemoglobin")
     @NotNull
@@ -113,10 +116,12 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Эритроциты")
     @StatVariable
+    @JsonProperty("RBCells")
     public double getRBCells() {
         return RBCells;
     }
 
+    @JsonProperty("RBCells")
     public void setRBCells(double RBCells) {
         this.RBCells = RBCells;
     }
@@ -133,10 +138,12 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Ретикулоциты")
     @StatVariable
+    @JsonProperty("IMRBCells")
     public double getIMRBCells() {
         return IMRBCells;
     }
 
+    @JsonProperty("IMRBCells")
     public void setIMRBCells(double IMRBCells) {
         this.IMRBCells = IMRBCells;
     }
@@ -153,20 +160,24 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("СОЭ")
     @StatVariable
+    @JsonProperty("ESR")
     public double getESR() {
         return ESR;
     }
 
+    @JsonProperty("ESR")
     public void setESR(double ESR) {
         this.ESR = ESR;
     }
 
     @DisplayName("Лейкоциты")
     @StatVariable
+    @JsonProperty("WBCells")
     public double getWBCells() {
         return WBCells;
     }
 
+    @JsonProperty("WBCells")
     public void setWBCells(double WBCells) {
         this.WBCells = WBCells;
     }
@@ -213,10 +224,12 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Лимфоциты")
     @StatVariable
+    @JsonProperty("NKCells")
     public double getNKCells() {
         return NKCells;
     }
 
+    @JsonProperty("NKCells")
     public void setNKCells(double NKCells) {
         this.NKCells = NKCells;
     }
