@@ -6,10 +6,9 @@ Web application based on Spring MVC Framework. Data access provided by Hibernate
 Soon future developers who want to be involved in development our project will given an API for creating REST client application
 ## Keep in touch with us
 If you want to get more information about our application you can go to link [http://laksmimed.ru/LaksmiMed](http://laksmimed.ru/LaksmiMed).
-This link provide you access to our free application  
-![application](/src/main/webapp/resources/img/healthcare-banner.jpg). 
-[git](/.gitignore)
-
+This link provide you access to our free application    
+![application](/src/main/webapp/resources/img/healthcare-banner.jpg)    
+  
 My email: [egdeveloper@mail.ru](mailto:egdeveloper@mail.ru)  
 Github account: [https://github.com/egdeveloper](https://github.com/egdeveloper)  
 Twitter: [@egdeveloper](https://twitter.com/egdeveloper)  
