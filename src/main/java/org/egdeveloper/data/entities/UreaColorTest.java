@@ -25,37 +25,37 @@ public class UreaColorTest extends MedicalTest {
     @NotNull
     @DisplayName("Диурез")
     @StatVariable
-    private double DUV;
+    private double duv;
 
     @Column(name = "ClSalt")
     @NotNull
     @DisplayName("Хлорид")
     @StatVariable
-    private double ClSalt;
+    private double clSalt;
 
     @Column(name = "NO2Salt")
     @NotNull
     @DisplayName("Нитрит")
     @StatVariable
-    private double NO2Salt;
+    private double no2Salt;
 
     @Column(name = "NO3Salt")
     @NotNull
     @DisplayName("Нитрат")
     @StatVariable
-    private double NO3Salt;
+    private double no3Salt;
 
     @Column(name = "SO3Salt")
     @NotNull
     @DisplayName("Сульфат")
     @StatVariable
-    private double SO3Salt;
+    private double so3Salt;
 
     @Column(name = "PO3Salt")
     @NotNull
     @DisplayName("Фосфат")
     @StatVariable
-    private double PO3Salt;
+    private double po3Salt;
 
     @Column(name = "citrate")
     @NotNull
@@ -75,80 +75,76 @@ public class UreaColorTest extends MedicalTest {
     @StatVariable
     private double ureaAcid;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
-
     @DisplayName("Диурез")
     @StatVariable
-    @JsonProperty("DUV")
-    public double getDUV() {
-        return DUV;
+    //@JsonProperty("duv")
+    public double getDuv() {
+        return duv;
     }
 
-    @JsonProperty("DUV")
-    public void setDUV(double DUV) {
-        this.DUV = DUV;
+    //@JsonProperty("duv")
+    public void setDuv(double duv) {
+        this.duv = duv;
     }
 
     @DisplayName("Хлорид")
     @StatVariable
-    @JsonProperty("ClSalt")
+    //@JsonProperty("clSalt")
     public double getClSalt() {
-        return ClSalt;
+        return clSalt;
     }
 
-    @JsonProperty("ClSalt")
+    //@JsonProperty("clSalt")
     public void setClSalt(double clSalt) {
-        ClSalt = clSalt;
+        this.clSalt = clSalt;
     }
 
     @DisplayName("Нитрит")
     @StatVariable
-    @JsonProperty("NO2Salt")
-    public double getNO2Salt() {
-        return NO2Salt;
+    //@JsonProperty("no2Salt")
+    public double getNo2Salt() {
+        return no2Salt;
     }
 
-    @JsonProperty("NO2Salt")
-    public void setNO2Salt(double NO2Salt) {
-        this.NO2Salt = NO2Salt;
+    //@JsonProperty("no2Salt")
+    public void setNo2Salt(double no2Salt) {
+        this.no2Salt = no2Salt;
     }
 
     @DisplayName("Нитрат")
     @StatVariable
-    @JsonProperty("NO3Salt")
-    public double getNO3Salt() {
-        return NO3Salt;
+    //@JsonProperty("no3Salt")
+    public double getNo3Salt() {
+        return no3Salt;
     }
 
-    @JsonProperty("NO3Salt")
-    public void setNO3Salt(double NO3Salt) {
-        this.NO3Salt = NO3Salt;
+    //@JsonProperty("no3Salt")
+    public void setNo3Salt(double no3Salt) {
+        this.no3Salt = no3Salt;
     }
 
     @DisplayName("Сульфат")
     @StatVariable
-    @JsonProperty("SO3Salt")
-    public double getSO3Salt() {
-        return SO3Salt;
+    //@JsonProperty("so3Salt")
+    public double getSo3Salt() {
+        return so3Salt;
     }
 
-    @JsonProperty("SO3Salt")
-    public void setSO3Salt(double SO3Salt) {
-        this.SO3Salt = SO3Salt;
+    //@JsonProperty("so3Salt")
+    public void setSo3Salt(double so3Salt) {
+        this.so3Salt = so3Salt;
     }
 
     @DisplayName("Фосфат")
     @StatVariable
-    @JsonProperty("PO3Salt")
-    public double getPO3Salt() {
-        return PO3Salt;
+    //@JsonProperty("po3Salt")
+    public double getPo3Salt() {
+        return po3Salt;
     }
 
-    @JsonProperty("PO3Salt")
-    public void setPO3Salt(double PO3Salt) {
-        this.PO3Salt = PO3Salt;
+    //@JsonProperty("po3Salt")
+    public void setPo3Salt(double po3Salt) {
+        this.po3Salt = po3Salt;
     }
 
     @DisplayName("Цитрат")
@@ -179,14 +175,6 @@ public class UreaColorTest extends MedicalTest {
 
     public void setUreaAcid(double ureaAcid) {
         this.ureaAcid = ureaAcid;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
 }

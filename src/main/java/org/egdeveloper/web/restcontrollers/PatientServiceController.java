@@ -1,6 +1,7 @@
 package org.egdeveloper.web.restcontrollers;
 
 import org.egdeveloper.data.entities.Doctor;
+import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.data.entities.Patient;
 import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.service.IPatientService;
@@ -32,7 +33,7 @@ public class PatientServiceController {
      * @param patient patient instance
      * @return patient
      */
-    @RequestMapping(value = "/doctors/{doctorID}/patient", method = RequestMethod.POST)
+    @RequestMapping(value = "/doctors/{doctorID}/patient", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public ResponseEntity<Patient> addPatient(@PathVariable("doctorID") Integer doctorID, @RequestBody Patient patient){
         Doctor doctor = doctorService.getDoctorByID(doctorID);
         if(doctor == null)
@@ -41,7 +42,7 @@ public class PatientServiceController {
         return new ResponseEntity<>(patient, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/patient", method = RequestMethod.PUT)
+    @RequestMapping(value = "/patient", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
     public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient){
         if(!patientService.checkPatientExist(patient))
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -54,7 +55,7 @@ public class PatientServiceController {
      * @param patientID patient id
      * @return patient
      */
-    @RequestMapping(value = "/patients/{patientID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/patients/{patientID}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Patient> getPatientById(@PathVariable("patientID") Integer patientID){
         Patient patient = patientService.getPatientById(patientID);
         if(patient == null)
@@ -66,7 +67,7 @@ public class PatientServiceController {
      * Find all patients
      * @return patients
      */
-    @RequestMapping(value = "/patients", method = RequestMethod.GET)
+    @RequestMapping(value = "/patients", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<Patient>> findAllPatients(){
         return new ResponseEntity<>(patientService.getPatients(), HttpStatus.OK);
     }
@@ -76,7 +77,7 @@ public class PatientServiceController {
      * @param doctorID doctor id
      * @return patients
      */
-    @RequestMapping(value = "/doctors/{doctorID}/patients", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctors/{doctorID}/patients", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<Patient>> retrievePatientsForDoctor(@PathVariable("doctorID") Integer doctorID)
     {
         Doctor doctorEntry = doctorService.getDoctorByID(doctorID);
@@ -90,12 +91,23 @@ public class PatientServiceController {
      * @param patientID patient ID
      * @return patient
      */
-    @RequestMapping(value = "/patients/{patientID}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/patients/{patientID}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Patient> deletePatient(@PathVariable("patientID") Integer patientID){
         Patient patient = patientService.getPatientById(patientID);
         if(patient == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         patientService.removePatient(patientID);
         return new ResponseEntity<>(patient, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/patients/{patientID}/medicalTest", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public ResponseEntity<MedicalTest> addMedicalTest(@PathVariable("patientID") Integer patientID, @RequestBody MedicalTest medicalTest){
+        Patient patient = patientService.getPatientById(patientID);
+        if(patient == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if(medicalTest == null)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        patientService.addMedicalTest(patientID, medicalTest);
+        return new ResponseEntity<>(medicalTest, HttpStatus.OK);
     }
 }

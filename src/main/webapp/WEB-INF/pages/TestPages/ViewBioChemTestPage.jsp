@@ -35,8 +35,26 @@
   </nav>
   <div class="container">
     <fieldset>
-      <legend>Биохимический анализ крови</legend>
-      <form:form cssClass="form-horizontal" method="post" action="${addBiochemTest}" modelAttribute="biochemTest">
+      <div class="page-header">
+        <div class="btn-toolbar pull-right">
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
+            <ul class = "dropdown-menu" role = "menu">
+              <li>
+                <a class="dropdown-item" href="">PDF</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">Word</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">Excel</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <h2>Биохимический анализ крови</h2>
+      </div>
+      <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
         <div class="row">
           <div class="form-group">
             <label class="control-label">Дата</label>
@@ -234,9 +252,6 @@
             <label class="control-label">Ферритин</label>
             <form:input cssClass="form-control" path="ferritin"/>
           </div>
-        </div>
-        <div class="row">
-          <button type="submit" class="btn btn-primary">Сохранить анализы</button>
         </div>
       </form:form>
     </fieldset>

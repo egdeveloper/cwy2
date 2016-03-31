@@ -29,19 +29,19 @@ public class CommonUreaTest extends MedicalTest {
     @Column(name = "PH")
     @NotNull
     @DisplayName("Ph")
-    private double PH;
+    private double ph;
 
     @Column(name = "WBCells")
     @NotNull
     @DisplayName("Лейкоциты")
     @StatVariable
-    private double WBCells;
+    private double wbCells;
 
     @Column(name = "RBCells")
     @NotNull
     @DisplayName("Эритроциты")
     @StatVariable
-    private double RBCells;
+    private double rbCells;
 
     @Column(name = "color")
     @NotNull
@@ -103,10 +103,6 @@ public class CommonUreaTest extends MedicalTest {
     @DisplayName("Цилиндры")
     private String cylinder;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
-
     public double getAmount() {
         return amount;
     }
@@ -115,38 +111,38 @@ public class CommonUreaTest extends MedicalTest {
         this.amount = amount;
     }
 
-    @JsonProperty("PH")
-    public double getPH() {
-        return PH;
+    //@JsonProperty("ph")
+    public double getPh() {
+        return ph;
     }
 
-    @JsonProperty("PH")
-    public void setPH(double PH) {
-        this.PH = PH;
+    //@JsonProperty("ph")
+    public void setPh(double PH) {
+        this.ph = ph;
     }
 
     @DisplayName("Лейкоциты")
     @StatVariable
-    @JsonProperty("WBCells")
-    public double getWBCells() {
-        return WBCells;
+    //@JsonProperty("wbCells")
+    public double getWbCells() {
+        return wbCells;
     }
 
-    @JsonProperty("WBCells")
-    public void setWBCells(double WBCells) {
-        this.WBCells = WBCells;
+    //@JsonProperty("wbCells")
+    public void setWbCells(double WBCells) {
+        this.wbCells = wbCells;
     }
 
     @DisplayName("Эритроциты")
     @StatVariable
-    @JsonProperty("RBCells")
-    public double getRBCells() {
-        return RBCells;
+    //@JsonProperty("rbCells")
+    public double getRbCells() {
+        return rbCells;
     }
 
-    @JsonProperty("RBCells")
-    public void setRBCells(double RBCells) {
-        this.RBCells = RBCells;
+    //@JsonProperty("rbCells")
+    public void setRbCells(double rbCells) {
+        this.rbCells = rbCells;
     }
 
     public String getColor() {
@@ -243,14 +239,6 @@ public class CommonUreaTest extends MedicalTest {
 
     public void setCylinder(String cylinder) {
         this.cylinder = cylinder;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
 }

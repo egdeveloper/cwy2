@@ -32,7 +32,7 @@ public class CommonBloodTest extends MedicalTest {
     @NotNull
     @DisplayName("Эритроциты")
     @StatVariable
-    private double RBCells;
+    private double rbCells;
 
     @Column(name = "colorIndex")
     @NotNull
@@ -44,7 +44,7 @@ public class CommonBloodTest extends MedicalTest {
     @NotNull
     @DisplayName("Ретикулоциты")
     @StatVariable
-    private double IMRBCells;
+    private double imrbCells;
 
     @Column(name = "platelets")
     @NotNull
@@ -56,13 +56,13 @@ public class CommonBloodTest extends MedicalTest {
     @NotNull
     @DisplayName("СОЭ")
     @StatVariable
-    private double ESR;
+    private double esr;
 
     @Column(name = "WBCells")
     @NotNull
     @DisplayName("Лейкоциты")
     @StatVariable
-    private double WBCells;
+    private double wbCells;
 
     @Column(name = "bandCells")
     @NotNull
@@ -92,17 +92,13 @@ public class CommonBloodTest extends MedicalTest {
     @NotNull
     @DisplayName("Лимфоциты")
     @StatVariable
-    private double NKCells;
+    private double nkCells;
 
     @Column(name = "monoCells")
     @NotNull
     @DisplayName("Моноциты")
     @StatVariable
     private double monoCells;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
 
     @DisplayName("Гемоглобин")
     @StatVariable
@@ -116,14 +112,14 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Эритроциты")
     @StatVariable
-    @JsonProperty("RBCells")
-    public double getRBCells() {
-        return RBCells;
+    //@JsonProperty("rbCells")
+    public double getRbCells() {
+        return rbCells;
     }
 
-    @JsonProperty("RBCells")
-    public void setRBCells(double RBCells) {
-        this.RBCells = RBCells;
+    //@JsonProperty("rbCells")
+    public void setRbCells(double rbCells) {
+        this.rbCells = rbCells;
     }
 
     @DisplayName("Цветовой показатель")
@@ -138,14 +134,14 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Ретикулоциты")
     @StatVariable
-    @JsonProperty("IMRBCells")
-    public double getIMRBCells() {
-        return IMRBCells;
+    //@JsonProperty("imrbCells")
+    public double getImrbCells() {
+        return imrbCells;
     }
 
-    @JsonProperty("IMRBCells")
-    public void setIMRBCells(double IMRBCells) {
-        this.IMRBCells = IMRBCells;
+    //@JsonProperty("imrbCells")
+    public void setImrbCells(double IMRBCells) {
+        this.imrbCells = imrbCells;
     }
 
     @DisplayName("Тромбоциты")
@@ -160,26 +156,26 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("СОЭ")
     @StatVariable
-    @JsonProperty("ESR")
-    public double getESR() {
-        return ESR;
+    //@JsonProperty("esr")
+    public double getEsr() {
+        return esr;
     }
 
-    @JsonProperty("ESR")
-    public void setESR(double ESR) {
-        this.ESR = ESR;
+    //@JsonProperty("esr")
+    public void setEsr(double esr) {
+        this.esr = esr;
     }
 
     @DisplayName("Лейкоциты")
     @StatVariable
-    @JsonProperty("WBCells")
-    public double getWBCells() {
-        return WBCells;
+    //@JsonProperty("wbCells")
+    public double getWbCells() {
+        return wbCells;
     }
 
-    @JsonProperty("WBCells")
-    public void setWBCells(double WBCells) {
-        this.WBCells = WBCells;
+    //@JsonProperty("wbCells")
+    public void setWbCells(double wbCells) {
+        this.wbCells = wbCells;
     }
 
     @DisplayName("Палочкоядерные")
@@ -224,14 +220,14 @@ public class CommonBloodTest extends MedicalTest {
 
     @DisplayName("Лимфоциты")
     @StatVariable
-    @JsonProperty("NKCells")
-    public double getNKCells() {
-        return NKCells;
+    //@JsonProperty("nkCells")
+    public double getNkCells() {
+        return nkCells;
     }
 
-    @JsonProperty("NKCells")
-    public void setNKCells(double NKCells) {
-        this.NKCells = NKCells;
+    //@JsonProperty("nkCells")
+    public void setNkCells(double nkCells) {
+        this.nkCells = nkCells;
     }
 
     @DisplayName("Моноциты")
@@ -242,14 +238,6 @@ public class CommonBloodTest extends MedicalTest {
 
     public void setMonoCells(double monoCells) {
         this.monoCells = monoCells;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
 }

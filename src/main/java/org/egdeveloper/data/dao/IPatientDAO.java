@@ -40,6 +40,13 @@ public interface IPatientDAO {
      */
     void removePatient(Integer id);
 
+    /**
+     * Get patient entry from doctor record, delete it and update doctor record
+     * @param doctor doctor record
+     * @param patientId patientID
+     */
+    void removePatientAndUpdateDoctor(Doctor doctor, Integer patientId);
+
 
     /**
      * Edit patient info
@@ -52,8 +59,8 @@ public interface IPatientDAO {
 
     /**
      * Add medicatl service to existing patient record
-     * @param patient patient record
+     * @param patientID patient id
      * @param test service instance
      */
-    void addMedicalTest(Patient patient, MedicalTest test);
+    void addMedicalTest(Integer patientID, MedicalTest test);
 }

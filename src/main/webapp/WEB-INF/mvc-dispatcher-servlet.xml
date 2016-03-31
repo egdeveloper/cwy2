@@ -86,9 +86,13 @@
                      </list>
               </property>
        </bean>
-
+       <bean id="jsonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+       <bean id="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+       <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
        <!-- Configure bean to convert JSON to POJO and vice versa -->
        <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+              <property name="supportedMediaTypes" value="application/json"/>
+              <property name="objectMapper" ref="jsonObjectMapper"/>
        </bean>
        <mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>

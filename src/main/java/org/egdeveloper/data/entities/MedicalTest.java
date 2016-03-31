@@ -1,13 +1,18 @@
 package org.egdeveloper.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.DisplayName;
+import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.converters.CustomDateTimeDeserializer;
 import org.egdeveloper.converters.CustomDateTimeSerializer;
 import org.egdeveloper.data.entities.custom_types.Attachment;
 import org.egdeveloper.data.entities.custom_types.PatientState;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +25,7 @@ import java.util.Set;
 
 @MedTest
 @MappedSuperclass
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public abstract class MedicalTest extends AbstractEntity implements Serializable, Comparable<MedicalTest>{
 
     public MedicalTest(){
@@ -45,8 +51,10 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     @DisplayName("Состояние пациента")
     private PatientState patientState;
 
-    @ElementCollection
+
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "TestAttachments", joinColumns = @JoinColumn(name = "testID"))
+    @Fetch(FetchMode.SELECT)
     private Set<Attachment> attachment;
 
     /**
@@ -101,6 +109,7 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
      * Get test attachment
      * @return test attachment
      */
+    @JsonProperty("attachments")
     public Set<Attachment> getAttachment(){
         return attachment;
     }
@@ -109,6 +118,7 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
      * Set test attachment
      * @param attachment attachment
      */
+    @JsonProperty("attachments")
     public void setAttachment(Set<Attachment> attachment){
         this.attachment = attachment;
     }
@@ -120,6 +130,11 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     @Transient
     public String retrieveName(){
         return this.getClass().getAnnotation(DisplayName.class).value();
+    }
+
+    @Transient
+    public String retrieveEntityID(){
+        return this.getClass().getAnnotation(EntityID.class).value();
     }
 
     @Override

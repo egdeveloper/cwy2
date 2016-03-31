@@ -73,6 +73,16 @@ public class MainController {
             return "redirect:/main";
     }
 
+    @RequestMapping(value = "/deletePatientEntry/{patientID}", method = RequestMethod.POST)
+    public String deletePatientEntry(@PathVariable("patientID") Integer patientID,
+                                     RedirectAttributes redirectAttributes,
+                                     HttpSession session)
+    {
+        Doctor doctorAccount = (Doctor)session.getAttribute("doctor");
+        patientService.removePatientAndUpdateDoctor(doctorAccount, patientID);
+        return "redirect:/patientList";
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(SessionStatus sessionStatus){
         sessionStatus.setComplete();

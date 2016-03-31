@@ -58,19 +58,19 @@
       <div class="row">
         <div class="form-group">
           <label class="control-label">Ph</label>
-          <form:input cssClass="form-control" path="PH"/>
+          <form:input cssClass="form-control" path="ph"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
           <label class="control-label">Лейкоциты</label>
-          <form:input cssClass="form-control" path="WBCells"/>
+          <form:input cssClass="form-control" path="wbCells"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
           <label class="control-label">Эритроциты</label>
-          <form:input cssClass="form-control" path="RBCells"/>
+          <form:input cssClass="form-control" path="rbCells"/>
         </div>
       </div>
       <div class="row">

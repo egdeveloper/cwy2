@@ -2,6 +2,7 @@ package org.egdeveloper.service;
 
 import org.egdeveloper.data.dao.IPatientDAO;
 import org.egdeveloper.data.entities.Doctor;
+import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.data.entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,5 +48,15 @@ public class PatientService implements IPatientService{
     @Transactional
     public void removePatient(Integer id){
         patientDAO.removePatient(id);
+    }
+
+    @Override
+    public void removePatientAndUpdateDoctor(Doctor doctor, Integer patientID) {
+        patientDAO.removePatientAndUpdateDoctor(doctor, patientID);
+    }
+
+    @Override
+    public void addMedicalTest(Integer patientID, MedicalTest medicalTest) {
+        patientDAO.addMedicalTest(patientID, medicalTest);
     }
 }

@@ -74,10 +74,6 @@ public class DailyExcreationTest extends MedicalTest {
     @StatVariable
     private double chlorine;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
-
     @DisplayName("Креатинин")
     @StatVariable
     public double getCreatinine() {
@@ -166,14 +162,6 @@ public class DailyExcreationTest extends MedicalTest {
 
     public void setChlorine(double chlorine) {
         this.chlorine = chlorine;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
 }

@@ -1,17 +1,17 @@
 package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.*;
+import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -25,9 +25,12 @@ public class PatientEditorController {
     @Qualifier("patientService")
     private IPatientService patientService;
 
+    @Autowired
+    @Qualifier("doctorService")
+    private IDoctorService doctorService;
+
     @RequestMapping(value = "/createPatientEntry", method = RequestMethod.GET)
     public String getPatientInfoEditor(@ModelAttribute("doctorAccount") Doctor doctor, ModelMap modelMap){
-        //modelMap.addAttribute("doctorInfo", doctor);
         modelMap.addAttribute("patientEntry", new Patient());
         return "PatientPages/PatientEditPage";
     }
@@ -56,10 +59,6 @@ public class PatientEditorController {
 
     @RequestMapping(value = "/personalPatientPage", method = RequestMethod.GET)
     public String getPersonalPatientPage(@ModelAttribute("patient") Patient patient, ModelMap modelMap){
-        //if(session.getAttribute("patientInfo") != null)
-        //    session.removeAttribute("patientInfo");
-        //session.setAttribute("patientInfo", patient);
-        //modelMap.addAttribute("patientInfo", patient);
         return "PatientPages/PersonalPatientPage";
     }
 
@@ -241,5 +240,34 @@ public class PatientEditorController {
             }
         }
         return "redirect:/addUreaStoneTest";
+    }
+
+    @RequestMapping(value = "/viewMedicalTest/{testName}/{testID}", method = RequestMethod.GET)
+    public String showMedicalTestInfo(@PathVariable("testName") String testName,
+                                      @PathVariable("testID") Integer testID,
+                                      ModelMap modelMap,
+                                      HttpSession session)
+    {
+        Patient patient = (Patient) session.getAttribute("patient");
+        MedicalTest medicalTest = null;
+        if(testName.equals("bioChemTest"))
+            medicalTest = patient.getBioChemTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("commonBloodTest"))
+            medicalTest = patient.getCommonBloodTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("commonUreaTest"))
+            medicalTest = patient.getCommonUreaTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("dailyExcreationTest"))
+            medicalTest = patient.getDailyExcreationTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("titrationTest"))
+            medicalTest = patient.getTitrationTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("ureaColorTest"))
+            medicalTest = patient.getUreaColorTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("ureaStoneTest"))
+            medicalTest = patient.getUreaStoneTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(medicalTest != null) {
+            modelMap.put("medicalTest", medicalTest);
+            return "TestPages/View" + testName.substring(0, 1).toUpperCase() + testName.substring(1) + "Page";
+        }
+        return "redirect:/personalPatientPage";
     }
 }

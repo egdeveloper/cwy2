@@ -56,14 +56,12 @@
     </nav>
     <div class="row">
         <div class="col-sm-6">
-            <button class="btn btn-primary" onclick="location.href='<c:url value="/patientInfoEditor"/>'">Добавить пациента</button>
-            <button class="btn btn-primary">Открыть страницу пациента</button>
-            <button class="btn btn-primary">Удалить пациента</button>
+            <button class="btn btn-success" onclick="location.href='<c:url value="/patientInfoEditor"/>'">Добавить пациента</button>
         </div>
     </div>
     <br/>
     <div class="row">
-        <table class="table table-striped table-bordered" cellpadding="0" width="100%">
+        <table class="table table-striped table-bordered" cellpadding="0" style="width: auto;">
             <thead>
             <tr>
                 <td>№</td>
@@ -72,6 +70,8 @@
                 <td>Дата рождения</td>
                 <td>Номер карты</td>
                 <td>Адрес проживания</td>
+                <td></td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -83,6 +83,18 @@
                     <td>${patient.birthdate}</td>
                     <td>${patient.cardNumber}</td>
                     <td>${patient.postIndex}, ${patient.region}, ${patient.city}, ${patient.address}</td>
+                    <td>
+                        <button class="btn btn-success" onclick="location.href='<c:url value="/patients/${patient.id}"/>'">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <form id="deletePatientForm_${patient.id}" action="<c:url value="/deletePatientEntry/${patient.id}"/>" method="post">
+                            <button id="deletePatientButton_${patient.id}" class="btn btn-danger deletePatientButtonClass" type="button">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -97,4 +109,52 @@
 </body>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/bootbox/bootbox.min.js"/>"></script>
+<script type="text/javascript">
+    /*
+    $(".deletePatietnButtonClass").each(function(button){
+        button.click(function(){
+            bootbox.dialog({
+                message: "Вы действительно хотите удалить запись о пациенте?",
+                title: "Потверждение удаления",
+                cancel:{
+                    label: "Отмена",
+                    className: "btn btn-primary"
+                },
+                remove:{
+                    label: "OK",
+                    className: "btn btn-success",
+                    callback: function(){
+                        button.closest().submit();
+                    }
+                }
+            })
+        });
+    });
+    */
+    $(".deletePatientButtonClass").each(function(){
+        var deleteForm = $(this).closest("form");
+        $(this).click(function(){
+            bootbox.dialog({
+                message: "Вы дейстительно хотите удалить запись о пациенте?",
+                buttons: {
+                    no: {
+                        label: "Нет",
+                        className: "btn-danger",
+                        callback: function() {
+
+                        }
+                    },
+                    yes: {
+                        label: "Да",
+                        className: "btn-success",
+                        callback: function() {
+                            deleteForm.submit();
+                        }
+                    }
+                }
+            });
+        })
+    });
+</script>
 </html>

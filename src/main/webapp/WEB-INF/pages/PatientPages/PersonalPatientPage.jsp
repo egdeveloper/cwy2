@@ -1,3 +1,4 @@
+<%@ page import="org.egdeveloper.data.entities.MedicalTest" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -280,29 +281,50 @@
                                 </li>
                            </ul>
                         </div>
-                        <button id="openTestButton" class="btn btn-success" type="button">Открыть анализ</button>
-                        <button id="removeTestButton" class="btn btn-danger" type="button">Удалить анализ</button>
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-striped table-bordered" cellpadding="0" width="100%">
-                        <thead>
-                            <tr>
-                                <td>№</td>
-                                <td>Тип анализа</td>
-                                <td>Дата проведения</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="test" items="${patient.retrieveAllPatientTests()}" varStatus="counter">
-                                <tr>
-                                    <td>${counter.count}</td>
-                                    <td>${test.retrieveName()}</td>
-                                    <td>${test.testDate}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                    <c:choose>
+                        <c:when test="${patient.retrieveAllPatientTests().size() > 0}">
+                                <table class="table table-striped table-bordered" cellpadding="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <td>№</td>
+                                        <td>Тип анализа</td>
+                                        <td>Дата проведения</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="test" items="${patient.retrieveAllPatientTests()}" varStatus="counter">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${test.retrieveName()}</td>
+                                                <td>${test.testDate}</td>
+                                                <td>
+                                                    <button class="btn btn-success" type="button" onclick="location.href='<c:url value="/viewMedicalTest/${test.retrieveEntityID()}/${test.id}"/>'">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <form>
+                                                        <button class="btn btn-danger" type="button">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="alert alert-warning" role="alert">
+                                У пациента нет еще ни одного прикрепленного анализа
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
 
             </div>
@@ -374,7 +396,7 @@
     });
 
     function retrieveTestDynamics(patientId, callback){
-        $.getJSON(retrievePath("/indicatorsDynamics") + patientId.toString(), callback);
+        $.getJSON(retrievePath("/indicatorsDynamics") + "/" + patientId.toString(), callback);
     }
 
     function visualizeTestDynamics(testType, testData){

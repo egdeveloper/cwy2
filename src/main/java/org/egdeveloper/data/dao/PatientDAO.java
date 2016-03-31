@@ -19,9 +19,10 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void addPatient(Doctor doctor, Patient patient){
+        patient.setDoctor(doctor);
         Session session = sessionFactory.getCurrentSession();
         session.save(patient);
-        Set<Patient> patients = doctor.getPatients();
+        List<Patient> patients = doctor.getPatients();
         patients.add(patient);
         doctor.setPatients(patients);
         session.saveOrUpdate(doctor);
@@ -50,15 +51,30 @@ public class PatientDAO implements IPatientDAO{
     }
 
     @Override
-    public void removePatient(Integer id){
-        Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, id);
+    public void removePatient(Integer patientId){
+        Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, patientId);
         if(patient != null){
+            patient.getDoctor().getPatients().remove(patient);
+            sessionFactory.getCurrentSession().update(patient.getDoctor());
+            patient.setDoctor(null);
             sessionFactory.getCurrentSession().delete(patient);
         }
     }
 
     @Override
-    public void addMedicalTest(Patient patient, MedicalTest test) {
+    public void removePatientAndUpdateDoctor(Doctor doctor, Integer patientId) {
+        Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, patientId);
+        if(patient != null){
+            doctor.getPatients().remove(patient);
+            sessionFactory.getCurrentSession().merge(doctor);
+            patient.setDoctor(null);
+            sessionFactory.getCurrentSession().delete(patient);
+        }
+    }
+
+    @Override
+    public void addMedicalTest(Integer patientID, MedicalTest test) {
+        Patient patient = this.getPatientById(patientID);
         if(test instanceof BioChemTest){
             patient.getBioChemTests().add((BioChemTest) test);
         }

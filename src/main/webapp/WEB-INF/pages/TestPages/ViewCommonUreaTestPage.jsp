@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
 </head>
 <body style="padding-top: 70px;">
-<c:url var="addCommonBloodTest" value="/addCommonBloodTest"/>
+<c:url var="addCommonUreaTest" value="/addCommonUreaTest"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -35,8 +35,26 @@
 </nav>
 <div class="container">
   <fieldset>
-    <legend>Общий анализ крови</legend>
-    <form:form cssClass="form-horizontal" method="post" action="${addCommonBloodTest}" modelAttribute="commonBloodTest">
+    <div class="page-header">
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
+          <ul class = "dropdown-menu" role = "menu">
+            <li>
+              <a class="dropdown-item" href="">PDF</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">Word</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">Excel</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h2>Общий анализ мочи</h2>
+    </div>
+    <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
       <div class="row">
         <div class="form-group">
           <label class="control-label">Дата</label>
@@ -51,38 +69,14 @@
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Гемоглобин</label>
-          <form:input cssClass="form-control" path="hemoglobin"/>
+          <label class="control-label">Количество мочи</label>
+          <form:input cssClass="form-control" path="amount"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Эритроциты</label>
-          <form:input cssClass="form-control" path="rbCells"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Цветовой показатель</label>
-          <form:input cssClass="form-control" path="colorIndex"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Ретикулоциты</label>
-          <form:input cssClass="form-control" path="imrbCells"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Тромбоциты</label>
-          <form:input cssClass="form-control" path="platelets"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">СОЭ</label>
-          <form:input cssClass="form-control" path="esr"/>
+          <label class="control-label">Ph</label>
+          <form:input cssClass="form-control" path="ph"/>
         </div>
       </div>
       <div class="row">
@@ -93,43 +87,81 @@
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Палочкоядерные</label>
-          <form:input cssClass="form-control" path="bandCells"/>
+          <label class="control-label">Эритроциты</label>
+          <form:input cssClass="form-control" path="rbCells"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Сегментоядерные</label>
-          <form:input cssClass="form-control" path="segmentCells"/>
+          <label class="control-label">Цвет</label>
+          <form:input cssClass="form-control" path="color"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Эозинофилы</label>
-          <form:input cssClass="form-control" path="eosinCells"/>
+          <label class="control-label">Прозрачность</label>
+          <form:input cssClass="form-control" path="transparency"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Базофилы</label>
-          <form:input cssClass="form-control" path="basophil"/>
+          <label class="control-label">Белок</label>
+          <form:input cssClass="form-control" path="protein"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Лимфоциты</label>
-          <form:input cssClass="form-control" path="nkCells"/>
+          <label class="control-label">Глюкоза</label>
+          <form:input cssClass="form-control" path="glucose"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Моноциты</label>
-          <form:input cssClass="form-control" path="monoCells"/>
+          <label class="control-label">Кетоновые тела</label>
+          <form:input cssClass="form-control" path="ketoneBodies"/>
         </div>
       </div>
-
       <div class="row">
-        <button type="submit" class="btn btn-primary">Сохранить анализы</button>
+        <div class="form-group">
+          <label class="control-label">Реакция на кровь</label>
+          <form:input cssClass="form-control" path="bloodReaction"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Билирубин</label>
+          <form:input cssClass="form-control" path="biliRuby"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Слизь</label>
+          <form:input cssClass="form-control" path="mucus"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Бактерии</label>
+          <form:input cssClass="form-control" path="bacteria"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Соли</label>
+          <form:input cssClass="form-control" path="salt"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Уробилиноиды</label>
+          <form:input cssClass="form-control" path="ureaBilins"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Цилиндры</label>
+          <form:input cssClass="form-control" path="cylinder"/>
+        </div>
       </div>
     </form:form>
   </fieldset>
@@ -148,3 +180,4 @@
 </script>
 </body>
 </html>
+

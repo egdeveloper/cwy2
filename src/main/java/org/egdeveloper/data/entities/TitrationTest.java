@@ -26,10 +26,6 @@ public class TitrationTest extends MedicalTest {
     @StatVariable
     private double oxalate;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
-
     @DisplayName("Оксалат")
     @StatVariable
     public double getOxalate() {
@@ -38,13 +34,5 @@ public class TitrationTest extends MedicalTest {
 
     public void setOxalate(double oxalate) {
         this.oxalate = oxalate;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 }

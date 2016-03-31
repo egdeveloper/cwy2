@@ -1,17 +1,21 @@
 package org.egdeveloper.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @Entity
 @Table(name = "Doctor")
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public class Doctor extends AbstractEntity implements Serializable{
 
     public Doctor(){}
@@ -45,7 +49,7 @@ public class Doctor extends AbstractEntity implements Serializable{
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Patient> patients = new HashSet<>();
+    private List<Patient> patients = new ArrayList<>();
 
     public String getFullName() {
         return fullName;
@@ -103,11 +107,11 @@ public class Doctor extends AbstractEntity implements Serializable{
         this.phoneNumber = phone_number;
     }
 
-    public Set<Patient> getPatients() {
+    public List<Patient> getPatients() {
         return patients;
     }
 
-    public void setPatients(Set<Patient> patients) {
+    public void setPatients(List<Patient> patients) {
         this.patients = patients;
     }
 }

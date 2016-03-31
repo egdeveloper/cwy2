@@ -6,7 +6,11 @@
     <title></title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
-
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
 </head>
 <c:url var="createPatientEntry" value="/createPatientEntry"/>
 <body style="padding-top: 70px;">
@@ -33,52 +37,52 @@
   </div>
 </nav>
 <div class="container">
-  <form:form cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${createPatientEntry}" modelAttribute="patientEntry">
+  <form:form id="createPatientEntryForm" cssClass="form" cssStyle="margin-left: 10px; margin-top: 10px;" role="form" method="post" action="${createPatientEntry}" modelAttribute="patientEntry">
     <div class="form-group">
-      <label class="col-lg-3 control-label">ФИО</label>
+      <label class="col-lg-3 control-label">ФИО <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="fullName" id="fullNameInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Пол</label>
+      <label class="col-lg-3 control-label">Пол <span style="color: red">*</span></label>
       <form:select cssClass="form-control" path="gender">
         <form:option value="MALE">мужской</form:option>
         <form:option value="FEMALE">женский</form:option>
       </form:select>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Дата рождения</label>
+      <label class="col-lg-3 control-label">Дата рождения <span style="color: red">*</span></label>
       <form:input cssClass="form-control dateField" path="birthdate" id="birthdateInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Номер карты</label>
+      <label class="col-lg-3 control-label">Номер карты <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="cardNumber" id="cardNumberInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Паспорт</label>
+      <label class="col-lg-3 control-label">Паспорт <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="passport" id="passportInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Номер телефона</label>
+      <label class="col-lg-3 control-label">Номер телефона <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="phoneNumber" id="phoneNumberInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Страна</label>
+      <label class="col-lg-3 control-label">Страна <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="country" id="countryInput"/>
     </div>
     <div class="form-group">
-      <label class="control-label">Почтовый индекс</label>
+      <label class="col-lg-3 control-label">Почтовый индекс <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="postIndex" id="postIndexInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Регион</label>
+      <label class="col-lg-3 control-label">Регион <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="region" id="regionInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Населенный пункт</label>
+      <label class="col-lg-3 control-label">Населенный пункт <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="city" id="cityInput"/>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">Адрес</label>
+      <label class="col-lg-3 control-label">Адрес <span style="color: red">*</span></label>
       <form:input cssClass="form-control" path="address" id="addressInput"/>
     </div>
     <div class="form-group">
@@ -126,7 +130,7 @@
     </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Страховой полис</label>
-      <form:input cssClass="form-control" path="OMICard" id="OMICardInput"/>
+      <form:input cssClass="form-control" path="OMICard" id="omiCardInput"/>
     </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Место работы</label>
@@ -172,14 +176,102 @@
       <label class="col-lg-3 control-label">Длительность заболевания</label>
       <form:input cssClass="form-control" path="diseaseDuration" id="diseaseDurationInput"/>
     </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button id="createPatientEntryButton" type="button" class="btn btn-primary">Сохранить</button>
   </form:form>
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/typehead/typehead.js"/>"></script>
 <script>
+
+  createPatientEntryForm = $("#createPatientEntryForm");
+
+  $(document).ready(function(){
+    createPatientEntryForm.validate({
+      rules: {
+        fullName: {
+          required: true
+        },
+        birthdate: {
+          required: true
+        },
+        cardNumber: {
+          required: true
+        },
+        passport: {
+          required: true
+        },
+        phoneNumber: {
+          required: true
+        },
+        country: {
+          required: true
+        },
+        postIndex: {
+          required: true
+        },
+        region: {
+          required: true
+        },
+        city: {
+          required: true
+        },
+        address: {
+          required: true
+        },
+        email: {
+          email: true
+        }
+      },
+      focusCleanup: true,
+      onkeyup: false,
+      messages: {
+        fullName: {
+          required: "Введите ФИО пациента!"
+        },
+        birthdate: {
+          required: "Введите дату рождения!"
+        },
+        cardNumber: {
+          required: "Введите номер карты!"
+        },
+        passport: {
+          required: "Введите паспортные данные!"
+        },
+        phoneNumber: {
+          required: "Введите номер телефона!"
+        },
+        country: {
+          required: "Введите страну проживания!"
+        },
+        postIndex: {
+          required: "Введите почтовый индекс!"
+        },
+        region: {
+          required: "Введите регион проживания!"
+        },
+        city: {
+          required: "Введите населенный пункт!"
+        },
+        address: {
+          required: "Введите адрес проживания!"
+        },
+        email: {
+          email: "Электронная почта задана неправильно!"
+        }
+      }
+    });
+  });
+
+  $("#createPatientEntryButton").click(function(){
+    if(createPatientEntryForm.valid()){
+      createPatientEntryForm.submit();
+    }
+  });
+
+  /*
   $(document).ready(function(){
     $(".dateField").datepicker({
       format : "dd.mm.yyyy",
@@ -187,6 +279,7 @@
       locale: 'ru'
     });
   });
+  */
   var states = ["Адыгея Респ",
     "Алтай Респ",
     "Алтайский край",

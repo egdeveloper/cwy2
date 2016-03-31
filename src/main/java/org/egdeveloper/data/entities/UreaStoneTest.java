@@ -51,10 +51,6 @@ public class UreaStoneTest extends MedicalTest {
     @DisplayName("Дополнительная информация о камне")
     private String addInfo;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
-
     @DisplayName("Размер")
     @StatVariable
     public double getSize() {
@@ -109,13 +105,5 @@ public class UreaStoneTest extends MedicalTest {
 
     public void setAddInfo(String addInfo) {
         this.addInfo = addInfo;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 }

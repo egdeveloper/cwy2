@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
 </head>
 <body style="padding-top: 70px;">
-<c:url var="addUreaColorTest" value="/addUreaColorTest"/>
+<c:url var="addDailyExcreationTest" value="/addDailyExcreationTest"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -35,8 +35,26 @@
 </nav>
 <div class="container">
   <fieldset>
-    <legend>Хроматография</legend>
-    <form:form cssClass="form-horizontal" method="post" action="${addUreaColorTest}" modelAttribute="ureaColorTest">
+    <div class="page-header">
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
+          <ul class = "dropdown-menu" role = "menu">
+            <li>
+              <a class="dropdown-item" href="">PDF</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">Word</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">Excel</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h2>Суточная экскреция</h2>
+    </div>
+    <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
       <div class="row">
         <div class="form-group">
           <label class="control-label">Дата</label>
@@ -51,50 +69,14 @@
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Диурез</label>
-          <form:input cssClass="form-control" path="duv"/>
+          <label class="control-label">Креатинин</label>
+          <form:input cssClass="form-control" path="creatinine"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="control-label">Хлорид</label>
-          <form:input cssClass="form-control" path="clSalt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Нитрит</label>
-          <form:input cssClass="form-control" path="no2Salt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Нитрат</label>
-          <form:input cssClass="form-control" path="no3Salt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Сульфат</label>
-          <form:input cssClass="form-control" path="so3Salt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Фосфат</label>
-          <form:input cssClass="form-control" path="po3Salt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Цитрат</label>
-          <form:input cssClass="form-control" path="citrate"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Изоцитрат</label>
-          <form:input cssClass="form-control" path="isoCitrate"/>
+          <label class="control-label">Мочевина</label>
+          <form:input cssClass="form-control" path="urea"/>
         </div>
       </div>
       <div class="row">
@@ -104,7 +86,40 @@
         </div>
       </div>
       <div class="row">
-        <button type="submit" class="btn btn-primary">Сохранить анализы</button>
+        <div class="form-group">
+          <label class="control-label">Кальций</label>
+          <form:input cssClass="form-control" path="calcium"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Калий</label>
+          <form:input cssClass="form-control" path="potassium"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Магний</label>
+          <form:input cssClass="form-control" path="magnesium"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Натрий</label>
+          <form:input cssClass="form-control" path="sodium"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Оксид Фосфора</label>
+          <form:input cssClass="form-control" path="phosphorOxide"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Хлор</label>
+          <form:input cssClass="form-control" path="chlorine"/>
+        </div>
       </div>
     </form:form>
   </fieldset>

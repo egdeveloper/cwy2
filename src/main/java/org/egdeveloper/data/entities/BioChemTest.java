@@ -63,19 +63,19 @@ public class BioChemTest extends MedicalTest {
     @NotNull
     @DisplayName("Триглицериды")
     @StatVariable
-    private double TAG;
+    private double tag;
 
     @Column(name = "HDL")
     @NotNull
     @DisplayName("Липопр. выс. кон.")
     @StatVariable
-    private double HDL;
+    private double hdl;
 
     @Column(name = "LDL")
     @NotNull
     @DisplayName("Липопр. низ. кон.")
     @StatVariable
-    private double LDL;
+    private double ldl;
 
     @Column(name = "cholesterolRatio")
     @NotNull
@@ -87,43 +87,43 @@ public class BioChemTest extends MedicalTest {
     @NotNull
     @DisplayName("Аланинаминотрасфераза")
     @StatVariable
-    private double ALT;
+    private double alt;
 
     @Column(name = "AST")
     @NotNull
     @DisplayName("Аспартатаминотрансфераза")
     @StatVariable
-    private double AST;
+    private double ast;
 
     @Column(name = "ALKP")
     @NotNull
     @DisplayName("Щелочная фосфотаза")
     @StatVariable
-    private double ALKP;
+    private double alkp;
 
     @Column(name = "CK")
     @NotNull
     @DisplayName("Креатинфосфокиназа")
     @StatVariable
-    private double CK;
+    private double ck;
 
     @Column(name = "CKMB")
     @NotNull
     @DisplayName("Креатинфосфокиназа МВ")
     @StatVariable
-    private double CKMB;
+    private double ckmb;
 
     @Column(name = "LDH")
     @NotNull
     @DisplayName("Лактатдкгидрогеназа")
     @StatVariable
-    private double LDH;
+    private double ldh;
 
     @Column(name = "GGT")
     @NotNull
     @DisplayName("ГГТ")
     @StatVariable
-    private double GGT;
+    private double ggt;
 
     @Column(name = "amylase")
     @NotNull
@@ -153,13 +153,13 @@ public class BioChemTest extends MedicalTest {
     @NotNull
     @DisplayName("С-реактивный белок")
     @StatVariable
-    private double CRP;
+    private double crp;
 
     @Column(name = "RF")
     @NotNull
     @DisplayName("Ревматоидный фактор")
     @StatVariable
-    private double RF;
+    private double rf;
 
     @Column(name = "potassium")
     @NotNull
@@ -208,10 +208,6 @@ public class BioChemTest extends MedicalTest {
     @DisplayName("Ферритин")
     @StatVariable
     private double ferritin;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Patient patient;
 
     @DisplayName("Общий белок")
     @StatVariable
@@ -276,38 +272,38 @@ public class BioChemTest extends MedicalTest {
 
     @DisplayName("Триглицериды")
     @StatVariable
-    @JsonProperty("TAG")
-    public double getTAG() {
-        return TAG;
+    //@JsonProperty("tag")
+    public double getTag() {
+        return tag;
     }
 
-    @JsonProperty("TAG")
-    public void setTAG(double TAG) {
-        this.TAG = TAG;
+    //@JsonProperty("tag")
+    public void setTag(double tag) {
+        this.tag = tag;
     }
 
     @DisplayName("Липопр. выс. кон.")
     @StatVariable
-    @JsonProperty("HDL")
-    public double getHDL() {
-        return HDL;
+    //@JsonProperty("hdl")
+    public double getHdl() {
+        return hdl;
     }
 
-    @JsonProperty("HDL")
-    public void setHDL(double HDL) {
-        this.HDL = HDL;
+    //@JsonProperty("hdl")
+    public void setHdl(double hdl) {
+        this.hdl = hdl;
     }
 
     @DisplayName("Липопр. низ. кон.")
     @StatVariable
-    @JsonProperty("LDL")
-    public double getLDL() {
-        return LDL;
+    //@JsonProperty("ldl")
+    public double getLdl() {
+        return ldl;
     }
 
-    @JsonProperty("LDL")
-    public void setLDL(double LDL) {
-        this.LDL = LDL;
+    //@JsonProperty("ldl")
+    public void setLdl(double ldl) {
+        this.ldl = ldl;
     }
 
     @DisplayName("Коэф. атер.")
@@ -322,86 +318,86 @@ public class BioChemTest extends MedicalTest {
 
     @DisplayName("Аланинаминотрасфераза")
     @StatVariable
-    @JsonProperty("ALT")
-    public double getALT() {
-        return ALT;
+    //@JsonProperty("alt")
+    public double getAlt() {
+        return alt;
     }
 
-    @JsonProperty("ALT")
-    public void setALT(double ALT) {
-        this.ALT = ALT;
+    //@JsonProperty("alt")
+    public void setAlt(double alt) {
+        this.alt = alt;
     }
 
     @DisplayName("Аспартатаминотрансфераза")
     @StatVariable
-    @JsonProperty("AST")
-    public double getAST() {
-        return AST;
+    //@JsonProperty("ast")
+    public double getAst() {
+        return ast;
     }
 
-    @JsonProperty("AST")
-    public void setAST(double AST) {
-        this.AST = AST;
+    //@JsonProperty("ast")
+    public void setAst(double ast) {
+        this.ast = ast;
     }
 
     @DisplayName("Щелочная фосфотаза")
     @StatVariable
-    @JsonProperty("ALKP")
-    public double getALKP() {
-        return ALKP;
+    //@JsonProperty("alkp")
+    public double getAlkp() {
+        return alkp;
     }
 
-    @JsonProperty("ALKP")
-    public void setALKP(double ALKP) {
-        this.ALKP = ALKP;
+    //@JsonProperty("alkp")
+    public void setAlkp(double alkp) {
+        this.alkp = alkp;
     }
 
     @DisplayName("Креатинфосфокиназа")
     @StatVariable
-    @JsonProperty("CK")
-    public double getCK() {
-        return CK;
+    //@JsonProperty("ck")
+    public double getCk() {
+        return ck;
     }
 
-    @JsonProperty("CK")
-    public void setCK(double CK) {
-        this.CK = CK;
+    //@JsonProperty("ck")
+    public void setCk(double ck) {
+        this.ck = ck;
     }
 
     @DisplayName("Креатинфосфокиназа МВ")
     @StatVariable
-    @JsonProperty("CKMB")
-    public double getCKMB() {
-        return CKMB;
+    //@JsonProperty("ckmb")
+    public double getCkmb() {
+        return ckmb;
     }
 
-    @JsonProperty("CKMB")
-    public void setCKMB(double CKMB) {
-        this.CKMB = CKMB;
+    //@JsonProperty("ckmb")
+    public void setCkmb(double ckmb) {
+        this.ckmb = ckmb;
     }
 
     @DisplayName("Лактатдкгидрогеназа")
     @StatVariable
-    @JsonProperty("LDH")
-    public double getLDH() {
-        return LDH;
+    //@JsonProperty("ldh")
+    public double getLdh() {
+        return ldh;
     }
 
-    @JsonProperty("LDH")
-    public void setLDH(double LDH) {
-        this.LDH = LDH;
+    //@JsonProperty("ldh")
+    public void setLdh(double ldh) {
+        this.ldh = ldh;
     }
 
     @DisplayName("ГГТ")
     @StatVariable
-    @JsonProperty("GGT")
-    public double getGGT() {
-        return GGT;
+    //@JsonProperty("ggt")
+    public double getGgt() {
+        return ggt;
     }
 
-    @JsonProperty("GGT")
-    public void setGGT(double GGT) {
-        this.GGT = GGT;
+    //@JsonProperty("ggt")
+    public void setGgt(double ggt) {
+        this.ggt = ggt;
     }
 
     @DisplayName("Амилаза")
@@ -446,26 +442,26 @@ public class BioChemTest extends MedicalTest {
 
     @DisplayName("С-реактивный белок")
     @StatVariable
-    @JsonProperty("CRP")
-    public double getCRP() {
-        return CRP;
+    //@JsonProperty("crp")
+    public double getCrp() {
+        return crp;
     }
 
-    @JsonProperty("CRP")
-    public void setCRP(double CRP) {
-        this.CRP = CRP;
+    //@JsonProperty("crp")
+    public void setCrp(double crp) {
+        this.crp = crp;
     }
 
     @DisplayName("Ревматоидный фактор")
     @StatVariable
-    @JsonProperty("RF")
-    public double getRF() {
-        return RF;
+    //@JsonProperty("rf")
+    public double getRf() {
+        return rf;
     }
 
-    @JsonProperty("RF")
-    public void setRF(double RF) {
-        this.RF = RF;
+    //@JsonProperty("rf")
+    public void setRf(double rf) {
+        this.rf = rf;
     }
 
     @DisplayName("Калий")
@@ -546,14 +542,6 @@ public class BioChemTest extends MedicalTest {
 
     public void setFerritin(double ferritin) {
         this.ferritin = ferritin;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
 }
