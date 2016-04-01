@@ -6,6 +6,7 @@ import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.attributes.StatVariable;
 import org.egdeveloper.data.entities.*;
+import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class StatService implements IStatService {
     @Override
     @Transactional
     public Map<Object, Object> indicatorsDynamics(Integer patientId) throws IllegalAccessException, InvocationTargetException {
-        Map<Object, Object> indicatorsStat = new HashMap();
+        Map<Object, Object> indicatorsStat = new HashMap<>();
 
         //Get patient by id
         Patient patient = patientService.getPatientById(patientId);
@@ -94,6 +95,13 @@ public class StatService implements IStatService {
             indicatorsStat.put(((EntityID)testClass.getAnnotation(EntityID.class)).value(), indicators);
         }
         return indicatorsStat;
+    }
+
+    @Override
+    public Map<Object, Object> indicatorDeviationsForStoneTypesStat(TreatmentNumber treatmentNumber) {
+        Map<Object, Object> indicatorDeviations = new HashMap<>();
+
+        return indicatorDeviations;
     }
 
     private Map<Comparable<?>, Long> frequency2Map (Frequency frequency){

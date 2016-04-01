@@ -1,10 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,30 +18,31 @@ public class CommonUreaTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "amount")
-    @NotNull
+    @Column(name = "amount", nullable = false)
     @DisplayName("Количество мочи")
+    @IndicatorNorm(minCritical = 1008.0, min = 1018.0, max = 1025.0, maxCritical = 1035.0)
+    @StatVariable
     private double amount;
 
-    @Column(name = "PH")
-    @NotNull
+    @Column(name = "PH", nullable = false)
     @DisplayName("Ph")
+    @IndicatorNorm(minCritical = 3.5, min = 5.5, max = 7.0, maxCritical = 9.0)
+    @StatVariable
     private double ph;
 
-    @Column(name = "WBCells")
-    @NotNull
+    @Column(name = "WBCells", nullable = false)
     @DisplayName("Лейкоциты")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 5.0, maxCritical = 7.0)
     @StatVariable
     private double wbCells;
 
-    @Column(name = "RBCells")
-    @NotNull
+    @Column(name = "RBCells", nullable = false)
     @DisplayName("Эритроциты")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 9.0, maxCritical = 11.0)
     @StatVariable
     private double rbCells;
 
-    @Column(name = "color")
-    @NotNull
+    @Column(name = "color", nullable = false)
     @DisplayName("Цвет")
     private String color;
 
@@ -53,53 +51,43 @@ public class CommonUreaTest extends MedicalTest {
     @DisplayName("Прозрачность")
     private String transparency;
 
-    @Column(name = "protein")
-    @NotNull
+    @Column(name = "protein", nullable = false)
     @DisplayName("Белок")
     private String protein;
 
-    @Column(name = "glucose")
-    @NotNull
+    @Column(name = "glucose", nullable = false)
     @DisplayName("Глюкоза")
     private String glucose;
 
-    @Column(name = "ketoneBodies")
-    @NotNull
+    @Column(name = "ketoneBodies", nullable = false)
     @DisplayName("Кетоновые тела")
     private String ketoneBodies;
 
-    @Column(name = "bloodReaction")
-    @NotNull
+    @Column(name = "bloodReaction", nullable = false)
     @DisplayName("Реакция на кровь")
     private String bloodReaction;
 
-    @Column(name = "biliRuby")
-    @NotNull
+    @Column(name = "biliRuby", nullable = false)
     @DisplayName("Билирубин")
     private String biliRuby;
 
-    @Column(name = "mucus")
-    @NotNull
+    @Column(name = "mucus", nullable = false)
     @DisplayName("Слизь")
     private String mucus;
 
-    @Column(name = "bacteria")
-    @NotNull
+    @Column(name = "bacteria", nullable = false)
     @DisplayName("Бактерии")
     private String bacteria;
 
-    @Column(name = "salt")
-    @NotNull
+    @Column(name = "salt", nullable = false)
     @DisplayName("Соли")
     private String salt;
 
-    @Column(name = "ureaBilins")
-    @NotNull
+    @Column(name = "ureaBilins", nullable = false)
     @DisplayName("Уробилиноиды")
     private String ureaBilins;
 
-    @Column(name = "cylinder")
-    @NotNull
+    @Column(name = "cylinder", nullable = false)
     @DisplayName("Цилиндры")
     private String cylinder;
 

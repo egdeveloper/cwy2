@@ -44,7 +44,6 @@ public class Patient extends AbstractEntity implements Serializable{
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
-    @NotNull
     @JsonProperty("birthdate")
     @JsonSerialize(using = CustomDateTimeSerializer.class)
     @JsonDeserialize(using = CustomDateTimeDeserializer.class)
@@ -53,43 +52,35 @@ public class Patient extends AbstractEntity implements Serializable{
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
-    @NotNull
     @NotEmpty(message = "Введите номер карты")
     @JsonProperty("cardNumber")
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
 
-    @NotNull
     @JsonProperty("passport")
     @Column(name = "passport", nullable = false)
     private String passport;
 
-    @NotNull
     @JsonProperty("phoneNumber")
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @NotNull
     @JsonProperty("country")
     @Column(name = "country", nullable = false)
     private String country;
 
-    @NotNull
     @JsonProperty("postIndex")
     @Column(name = "postIndex", nullable = false)
     private String postIndex;
 
-    @NotNull
     @JsonProperty("region")
     @Column(name = "region", nullable = false)
     private String region;
 
-    @NotNull
     @JsonProperty("city")
     @Column(name = "city", nullable = false)
     private String city;
 
-    @NotNull
     @JsonProperty("address")
     @Column(name = "address", nullable = false)
     private String address;
@@ -118,66 +109,53 @@ public class Patient extends AbstractEntity implements Serializable{
     @Column(name = "disability", nullable = false)
     private Disability disability;
 
-    @NotNull
     @JsonProperty("tin")
     @Column(name = "TIN", nullable = false)
     private String TIN;
 
-    @NotNull
     @JsonProperty("omiCard")
     @Column(name = "OMICard", nullable = false)
     private String OMICard;
 
-    @NotNull
     @JsonProperty("jobPlace")
     @Column(name = "jobPlace", nullable = false)
     private String jobPlace;
 
-    @NotNull
     @JsonProperty("occupation")
     @Column(name = "occupation", nullable = false)
     private String occupation;
 
-    @NotNull
     @Column(name = "post", nullable = false)
     private String jobPost;
 
-    @NotNull
     @JsonProperty("jobConditions")
     @Column(name = "jobConditions", nullable = false)
     private String jobConditions;
 
-    @NotNull
     @JsonProperty("complaints")
     @Column(name = "complaints", nullable = false)
     private String complaints;
 
-    @NotNull
     @JsonProperty("premedication")
     @Column(name = "premedication", nullable = false)
     private String premedication;
 
-    @NotNull
     @JsonProperty("associatedDisease")
     @Column(name = "associatedDisease", nullable = false)
     private String associatedDisease;
 
-    @NotNull
     @JsonProperty("preMedicalSupplies")
     @Column(name = "preMedicalSupplies", nullable = false)
     private String preMedicalSupplies;
 
-    @NotNull
     @JsonProperty("badHabits")
     @Column(name = "badHabits", nullable = false)
     private String badHabits;
 
-    @NotNull
     @JsonProperty("preUreaStoneDescription")
     @Column(name = "preUreaStoneDescription", nullable = false)
     private String preUreaStoneDescription;
 
-    @NotNull
     @JsonProperty("diseaseDuration")
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;

@@ -2,10 +2,7 @@ package org.egdeveloper.data.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,63 +18,63 @@ public class UreaColorTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "DUV")
-    @NotNull
+    @Column(name = "DUV", nullable = false)
     @DisplayName("Диурез")
+    @IndicatorNorm(minCritical = 720, min = 880, max = 1350, maxCritical = 1650)
     @StatVariable
     private double duv;
 
-    @Column(name = "ClSalt")
-    @NotNull
+    @Column(name = "ClSalt", nullable = false)
     @DisplayName("Хлорид")
+    @IndicatorNorm(minCritical = 160, min = 200, max = 252, maxCritical = 312)
     @StatVariable
     private double clSalt;
 
-    @Column(name = "NO2Salt")
-    @NotNull
+    @Column(name = "NO2Salt", nullable = false)
     @DisplayName("Нитрит")
+    @IndicatorNorm(minCritical = 0, min = 0, max = 0, maxCritical = 0.05)
     @StatVariable
     private double no2Salt;
 
-    @Column(name = "NO3Salt")
-    @NotNull
+    @Column(name = "NO3Salt", nullable = false)
     @DisplayName("Нитрат")
+    @IndicatorNorm(minCritical = 0.7, min = 0.9, max = 2.06, maxCritical = 2.46)
     @StatVariable
     private double no3Salt;
 
-    @Column(name = "SO3Salt")
-    @NotNull
+    @Column(name = "SO3Salt", nullable = false)
     @DisplayName("Сульфат")
+    @IndicatorNorm(minCritical = 23.6, min = 29.6, max = 38.0, maxCritical = 46.0)
     @StatVariable
     private double so3Salt;
 
-    @Column(name = "PO3Salt")
-    @NotNull
+    @Column(name = "PO3Salt", nullable = false)
     @DisplayName("Фосфат")
+    @IndicatorNorm(minCritical = 9.5, min = 11.5, max = 62.0, maxCritical = 74.0)
     @StatVariable
     private double po3Salt;
 
-    @Column(name = "citrate")
-    @NotNull
+    @Column(name = "citrate", nullable = false)
     @DisplayName("Цитрат")
+    @IndicatorNorm(minCritical = 2.2, min = 2.6, max = 4.8, maxCritical = 5.8)
     @StatVariable
     private double citrate;
 
-    @Column(name = "isoCitrate")
-    @NotNull
+    @Column(name = "isoCitrate", nullable = false)
     @DisplayName("Изоцитрат")
+    @IndicatorNorm(minCritical = 0.63, min = 0.77, max = 1.8, maxCritical = 2.2)
     @StatVariable
     private double isoCitrate;
 
-    @Column(name = "ureaAcid")
-    @NotNull
+    @Column(name = "ureaAcid", nullable = false)
     @DisplayName("Мочевая кислота")
+    @IndicatorNorm(minCritical = 5.9, min = 7.1, max = 11.7, maxCritical = 14.3)
     @StatVariable
     private double ureaAcid;
 
     @DisplayName("Диурез")
+    @IndicatorNorm(minCritical = 720, min = 880, max = 1350, maxCritical = 1650)
     @StatVariable
-    //@JsonProperty("duv")
     public double getDuv() {
         return duv;
     }

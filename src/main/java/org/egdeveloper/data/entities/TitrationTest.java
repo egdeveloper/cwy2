@@ -1,9 +1,6 @@
 package org.egdeveloper.data.entities;
 
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,9 +17,9 @@ public class TitrationTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "oxalate")
-    @NotNull
+    @Column(name = "oxalate", nullable = false)
     @DisplayName("Оксалат")
+    @IndicatorNorm(minCritical = 25, min = 35, max = 55, maxCritical = 65)
     @StatVariable
     private double oxalate;
 

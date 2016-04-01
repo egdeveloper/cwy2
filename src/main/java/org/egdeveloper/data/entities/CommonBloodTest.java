@@ -1,13 +1,8 @@
 package org.egdeveloper.data.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -22,81 +17,81 @@ public class CommonBloodTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "hemoglobin")
-    @NotNull
+    @Column(name = "hemoglobin", nullable = false)
     @DisplayName("Гемоглобин")
+    @IndicatorNorm(minCritical = 110.0, min = 120.0, max = 140.0, maxCritical = 150.0)
     @StatVariable
     private double hemoglobin;
 
-    @Column(name = "RBCells")
-    @NotNull
+    @Column(name = "RBCells", nullable = false)
     @DisplayName("Эритроциты")
+    @IndicatorNorm(minCritical = 3.2, min = 3.7, max = 4.7, maxCritical = 5.2)
     @StatVariable
     private double rbCells;
 
-    @Column(name = "colorIndex")
-    @NotNull
+    @Column(name = "colorIndex", nullable = false)
     @DisplayName("Цветовой показатель")
+    @IndicatorNorm(minCritical = 0.75, min = 0.85, max = 0.95, maxCritical = 1.25)
     @StatVariable
     private double colorIndex;
 
-    @Column(name = "IMRBCells")
-    @NotNull
+    @Column(name = "IMRBCells", nullable = false)
     @DisplayName("Ретикулоциты")
+    @IndicatorNorm(minCritical = 0.1, min = 0.2, max = 1.2, maxCritical = 1.3)
     @StatVariable
     private double imrbCells;
 
-    @Column(name = "platelets")
-    @NotNull
+    @Column(name = "platelets", nullable = false)
     @DisplayName("Тромбоциты")
+    @IndicatorNorm(minCritical = 160.0, min = 180.0, max = 300.0, maxCritical = 340.0)
     @StatVariable
     private double platelets;
 
-    @Column(name = "ESR")
-    @NotNull
+    @Column(name = "ESR", nullable = false)
     @DisplayName("СОЭ")
+    @IndicatorNorm(minCritical = 1.0, min = 3.0, max = 12.0, maxCritical = 18.0)
     @StatVariable
     private double esr;
 
-    @Column(name = "WBCells")
-    @NotNull
+    @Column(name = "WBCells", nullable = false)
     @DisplayName("Лейкоциты")
+    @IndicatorNorm(minCritical = 3.0, min = 5.0, max = 7.0, maxCritical = 11.0)
     @StatVariable
     private double wbCells;
 
-    @Column(name = "bandCells")
-    @NotNull
+    @Column(name = "bandCells", nullable = false)
     @DisplayName("Палочкоядерные")
+    @IndicatorNorm(minCritical = 0.5, min = 1.5, max = 5.0, maxCritical = 7.0)
     @StatVariable
     private double bandCells;
 
-    @Column(name = "segmentCells")
-    @NotNull
+    @Column(name = "segmentCells", nullable = false)
     @DisplayName("Сегментоядерные")
+    @IndicatorNorm(minCritical = 37.0, min = 57.0, max = 62.0, maxCritical = 82.0)
     @StatVariable
     private double segmentCells;
 
-    @Column(name = "eosinCells")
-    @NotNull
+    @Column(name = "eosinCells", nullable = false)
     @DisplayName("Эозинофилы")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 4.0, maxCritical = 6.0)
     @StatVariable
     private double eosinCells;
 
-    @Column(name = "basophil")
-    @NotNull
+    @Column(name = "basophil", nullable = false)
     @DisplayName("Базофилы")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 0.9, maxCritical = 1.1)
     @StatVariable
     private double basophil;
 
-    @Column(name = "NKCells")
-    @NotNull
+    @Column(name = "NKCells", nullable = false)
     @DisplayName("Лимфоциты")
+    @IndicatorNorm(minCritical = 13.0, min = 23.0, max = 35.0, maxCritical = 45.0)
     @StatVariable
     private double nkCells;
 
-    @Column(name = "monoCells")
-    @NotNull
+    @Column(name = "monoCells", nullable = false)
     @DisplayName("Моноциты")
+    @IndicatorNorm(minCritical = 1.0, min = 3.0, max = 7.0, maxCritical = 11.0)
     @StatVariable
     private double monoCells;
 

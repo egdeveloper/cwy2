@@ -1,10 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,190 +19,189 @@ public class BioChemTest extends MedicalTest {
         super();
     }
 
-
-    @Column(name = "commonProtein")
-    @NotNull
+    @Column(name = "commonProtein", nullable = false)
     @DisplayName("Общий белок")
+    @IndicatorNorm(minCritical = 56.0, min = 76.0, max = 77.0, maxCritical = 97.0)
     @StatVariable
     private double commonProtein;
 
-    @Column(name = "urea")
-    @NotNull
+    @Column(name = "urea", nullable = false)
     @DisplayName("Мочевина")
+    @IndicatorNorm(minCritical = 1.2, min = 2.2, max = 7.8, maxCritical = 8.8)
     @StatVariable
     private double urea;
 
-    @Column(name = "creatinine")
-    @NotNull
+    @Column(name = "creatinine", nullable = false)
     @DisplayName("Креатинин")
+    @IndicatorNorm(minCritical = 43.0, min = 63.0, max = 105.0, maxCritical = 125.0)
     @StatVariable
     private double creatinine;
 
-    @Column(name = "commonBiliRuby")
-    @NotNull
+    @Column(name = "commonBiliRuby", nullable = false)
     @DisplayName("Общий билирубин")
+    @IndicatorNorm(minCritical = 1.5, min = 2.5, max = 18.0, maxCritical = 24.0)
     @StatVariable
     private double commonBiliRuby;
 
-    @Column(name = "linkedBiliRuby")
-    @NotNull
+    @Column(name = "linkedBiliRuby", nullable = false)
     @DisplayName("Связанный билирубин")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 2.9, maxCritical = 3.9)
     @StatVariable
     private double linkedBiliRuby;
 
-    @Column(name = "cholesterol")
-    @NotNull
+    @Column(name = "cholesterol", nullable = false)
     @DisplayName("Холестерин")
+    @IndicatorNorm(minCritical = 3.13, min = 4.13, max = 4.7, maxCritical = 5.7)
     @StatVariable
     private double cholesterol;
 
-    @Column(name = "TAG")
-    @NotNull
+    @Column(name = "TAG", nullable = false)
     @DisplayName("Триглицериды")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 1.6, maxCritical = 1.8)
     @StatVariable
     private double tag;
 
-    @Column(name = "HDL")
-    @NotNull
+    @Column(name = "HDL", nullable = false)
     @DisplayName("Липопр. выс. кон.")
+    @IndicatorNorm(minCritical = 0.8, min = 1.0, max = 1.44, maxCritical = 1.64)
     @StatVariable
     private double hdl;
 
-    @Column(name = "LDL")
-    @NotNull
+    @Column(name = "LDL", nullable = false)
     @DisplayName("Липопр. низ. кон.")
+    @IndicatorNorm(minCritical = 1.0, min = 1.4, max = 4.2, maxCritical = 4.6)
     @StatVariable
     private double ldl;
 
-    @Column(name = "cholesterolRatio")
-    @NotNull
+    @Column(name = "cholesterolRatio", nullable = false)
     @DisplayName("Коэф. атер.")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 2.8, maxCritical = 3.2)
     @StatVariable
     private double cholesterolRatio;
 
-    @Column(name = "ALT")
-    @NotNull
+    @Column(name = "ALT", nullable = false)
     @DisplayName("Аланинаминотрасфераза")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 37.0, maxCritical = 47.0)
     @StatVariable
     private double alt;
 
-    @Column(name = "AST")
-    @NotNull
+    @Column(name = "AST", nullable = false)
     @DisplayName("Аспартатаминотрансфераза")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 32.0, maxCritical = 42.0)
     @StatVariable
     private double ast;
 
-    @Column(name = "ALKP")
-    @NotNull
+    @Column(name = "ALKP", nullable = false)
     @DisplayName("Щелочная фосфотаза")
+    @IndicatorNorm(minCritical = 70.0, min = 90.0, max = 276.0, maxCritical = 336.0)
     @StatVariable
     private double alkp;
 
-    @Column(name = "CK")
-    @NotNull
+    @Column(name = "CK", nullable = false)
     @DisplayName("Креатинфосфокиназа")
+    @IndicatorNorm(minCritical = 14.0, min = 34.0, max = 170.0, maxCritical = 210.0)
     @StatVariable
     private double ck;
 
-    @Column(name = "CKMB")
-    @NotNull
+    @Column(name = "CKMB", nullable = false)
     @DisplayName("Креатинфосфокиназа МВ")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 22.0, maxCritical = 28.0)
     @StatVariable
     private double ckmb;
 
-    @Column(name = "LDH")
-    @NotNull
+    @Column(name = "LDH", nullable = false)
     @DisplayName("Лактатдкгидрогеназа")
+    @IndicatorNorm(minCritical = 195.0, min = 225.0, max = 420.0, maxCritical = 480.0)
     @StatVariable
     private double ldh;
 
-    @Column(name = "GGT")
-    @NotNull
+    @Column(name = "GGT", nullable = false)
     @DisplayName("ГГТ")
+    @IndicatorNorm(minCritical = 6.0, min = 16.0, max = 56.0, maxCritical = 66.0)
     @StatVariable
     private double ggt;
 
-    @Column(name = "amylase")
-    @NotNull
+    @Column(name = "amylase", nullable = false)
     @DisplayName("Амилаза")
+    @IndicatorNorm(minCritical = 23.0, min = 33.0, max = 90.0, maxCritical = 110.0)
     @StatVariable
     private double amylase;
 
-    @Column(name = "pancrAmylase")
-    @NotNull
+    @Column(name = "pancrAmylase", nullable = false)
     @DisplayName("Пакриатическая амилаза")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 48.0, maxCritical = 58.0)
     @StatVariable
     private double pancrAmylase;
 
-    @Column(name = "glucose")
-    @NotNull
+    @Column(name = "glucose", nullable = false)
     @DisplayName("Глюкоза")
+    @IndicatorNorm(minCritical = 3.7, min = 4.7, max = 5.9, maxCritical = 6.9)
     @StatVariable
     private double glucose;
 
-    @Column(name = "ureaAcid")
-    @NotNull
+    @Column(name = "ureaAcid", nullable = false)
     @DisplayName("Мочевая кислота")
+    @IndicatorNorm(minCritical = 150.0, min = 250.0, max = 370.0, maxCritical = 470.0)
     @StatVariable
     private double ureaAcid;
 
-    @Column(name = "CRP")
-    @NotNull
+    @Column(name = "CRP", nullable = false)
     @DisplayName("С-реактивный белок")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 4.5, maxCritical = 5.5)
     @StatVariable
     private double crp;
 
-    @Column(name = "RF")
-    @NotNull
+    @Column(name = "RF", nullable = false)
     @DisplayName("Ревматоидный фактор")
+    @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 35.0, maxCritical = 45.0)
     @StatVariable
     private double rf;
 
-    @Column(name = "potassium")
-    @NotNull
+    @Column(name = "potassium", nullable = false)
     @DisplayName("Калий")
+    @IndicatorNorm(minCritical = 3.0, min = 4.0, max = 4.6, maxCritical = 5.6)
     @StatVariable
     private double potassium;
 
-    @Column(name = "sodium")
-    @NotNull
+    @Column(name = "sodium", nullable = false)
     @DisplayName("Натрий")
+    @IndicatorNorm(minCritical = 134.0, min = 138.0, max = 143.0, maxCritical = 147.0)
     @StatVariable
     private double sodium;
 
-    @Column(name = "chlorine")
-    @NotNull
+    @Column(name = "chlorine", nullable = false)
     @DisplayName("Хлор")
+    @IndicatorNorm(minCritical = 96.0, min = 100.0, max = 105.0, maxCritical = 109.0)
     @StatVariable
     private double chlorine;
 
-    @Column(name = "commonCalcium")
-    @NotNull
+    @Column(name = "commonCalcium", nullable = false)
     @DisplayName("Общий кальций")
+    @IndicatorNorm(minCritical = 1.92, min = 2.2, max = 2.5, maxCritical = 2.7)
     @StatVariable
     private double commonCalcium;
 
-    @Column(name = "ionCalcium")
-    @NotNull
+    @Column(name = "ionCalcium", nullable = false)
     @DisplayName("Ионизированный кальций")
+    @IndicatorNorm(minCritical = 1.11, min = 1.21, max = 1.27, maxCritical = 1.37)
     @StatVariable
     private double ionCalcium;
 
-    @Column(name = "phosphor")
-    @NotNull
+    @Column(name = "phosphor", nullable = false)
     @DisplayName("Фосфор")
+    @IndicatorNorm(minCritical = 0.71, min = 0.92, max = 1.52, maxCritical = 1.72)
     @StatVariable
     private double phosphor;
 
-    @Column(name = "ferrum")
-    @NotNull
+    @Column(name = "ferrum", nullable = false)
     @DisplayName("Железо")
+    @IndicatorNorm(minCritical = 8.7, min = 12.7, max = 26.6, maxCritical = 30.6)
     @StatVariable
     private double ferrum;
 
-    @Column(name = "ferritin")
-    @NotNull
+    @Column(name = "ferritin", nullable = false)
     @DisplayName("Ферритин")
+    @IndicatorNorm(minCritical = 26.5, min = 36.5, max = 211.7, maxCritical = 251.7)
     @StatVariable
     private double ferritin;
 
