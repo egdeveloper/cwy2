@@ -1,4 +1,4 @@
-package org.egdeveloper.converters;
+package org.egdeveloper.converters.deserializers;
 
 
 import com.fasterxml.jackson.core.JsonParser;

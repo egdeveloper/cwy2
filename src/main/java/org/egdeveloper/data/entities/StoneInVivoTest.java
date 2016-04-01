@@ -3,51 +3,34 @@ import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.attributes.StatVariable;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
 @MedTest
-@EntityID("ureaStoneTest")
-@DisplayName("Мочевой камень")
-public class UreaStoneTest extends MedicalTest {
+@EntityID("stoneInVivoTest")
+@DisplayName("Камень IN VIVO")
+public class StoneInVivoTest extends MedicalTest {
 
-    public UreaStoneTest(){
+    public StoneInVivoTest(){
         super();
     }
 
-    @Column(name = "size")
-    @NotNull
+    @Column(name = "size", nullable = false)
     @DisplayName("Размер")
     @StatVariable
     private double size;
 
-    @Column(name = "density")
-    @NotNull
+    @Column(name = "density", nullable = false)
     @DisplayName("Плотность")
     @StatVariable
     private double density;
 
-    @Column(name = "location")
-    @NotNull
+    @Column(name = "location", nullable = false)
     @DisplayName("Локализация")
     private String location;
 
-    @Column(name = "form")
-    @NotNull
-    @DisplayName("Форма")
-    private String form;
-
-    @Column(name = "hardness")
-    @NotNull
-    @DisplayName("Жесткость")
-    @StatVariable
-    private double hardness;
-
-    @Column(name = "addInfo")
-    @NotNull
+    @Column(name = "addInfo", nullable = false)
     @DisplayName("Дополнительная информация о камне")
     private String addInfo;
 
@@ -78,25 +61,6 @@ public class UreaStoneTest extends MedicalTest {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    @DisplayName("Форма")
-    public String getForm() {
-        return form;
-    }
-
-    public void setForm(String form) {
-        this.form = form;
-    }
-
-    @DisplayName("Жесткость")
-    @StatVariable
-    public double getHardness() {
-        return hardness;
-    }
-
-    public void setHardness(double hardness) {
-        this.hardness = hardness;
     }
 
     public String getAddInfo() {

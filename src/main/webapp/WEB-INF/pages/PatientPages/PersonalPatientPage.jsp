@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Пациент ${patient.fullName}</title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
     <script type="text/javascript" src="<c:url value="/resources/js/plotly.js"/>"></script>
@@ -277,7 +277,10 @@
                                     <a class="dropdown-item" href="<c:url value="/addUreaColorTest"/>">Хроматография</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="<c:url value="/addUreaStoneTest"/>">Мочевой камень</a>
+                                    <a class="dropdown-item" href="<c:url value="/addStoneInVivoTest"/>">Камень In Vivo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/addStoneInVitroTest"/>">Камень In Vitro</a>
                                 </li>
                            </ul>
                         </div>
@@ -340,7 +343,8 @@
                                 <option value="dailyExcreationTest">Суточная экскреция</option>
                                 <option value="titrationTest">Титриметрия</option>
                                 <option value="ureaColorTest">Хроматография</option>
-                                <option value="ureaStoneTest">Мочевой камень</option>
+                                <option value="stoneInVivoTest">Камень In Vivo</option>
+                                <option value="stoneInVitroTest">Камень In Vitro</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -372,7 +376,8 @@
                             <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addDailyExcreationTest"/>">Суточная экскреция</a>
                             <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addTitrationTest"/>">Титриметрия</a>
                             <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addUreaColorTest"/>">Хроматография</a>
-                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addUreaStoneTest"/>">Мочевой камень</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addStoneInVivoTest"/>">Камень In Vivo</a>
+                            <a role="button" class="col-md-5 btn btn-primary test-button" href="<c:url value="/addStoneInVitroTest"/>">Камень In Vitro</a>
                         </div>
                     </div>
                 </div>

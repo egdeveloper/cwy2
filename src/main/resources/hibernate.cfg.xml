@@ -13,6 +13,7 @@
         <mapping class="org.egdeveloper.data.entities.DailyExcreationTest"/>
         <mapping class="org.egdeveloper.data.entities.TitrationTest"/>
         <mapping class="org.egdeveloper.data.entities.UreaColorTest"/>
-        <mapping class="org.egdeveloper.data.entities.UreaStoneTest"/>
+        <mapping class="org.egdeveloper.data.entities.StoneInVivoTest"/>
+        <mapping class="org.egdeveloper.data.entities.StoneInVitroTest"/>
     </session-factory>
 </hibernate-configuration>

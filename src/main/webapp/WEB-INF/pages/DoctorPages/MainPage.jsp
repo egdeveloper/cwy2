@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Добро пожаловать!</title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <style>
         .footer {
@@ -45,7 +45,13 @@
                         <li><a href="<c:url value="/help"/>">Помощь</a></li>
                     </ul>
                 </li>
-                <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+                        <li><a href="">По видам камня</a></li>
+                    </ul>
+                </li>
                 <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -189,6 +189,11 @@
   createPatientEntryForm = $("#createPatientEntryForm");
 
   $(document).ready(function(){
+    $(".dateField").datepicker({
+      format : "dd.mm.yyyy",
+      autoclose: true,
+      locale: 'ru'
+    });
     createPatientEntryForm.validate({
       rules: {
         fullName: {
@@ -270,16 +275,6 @@
       createPatientEntryForm.submit();
     }
   });
-
-  /*
-  $(document).ready(function(){
-    $(".dateField").datepicker({
-      format : "dd.mm.yyyy",
-      autoclose: true,
-      locale: 'ru'
-    });
-  });
-  */
   var states = ["Адыгея Респ",
     "Алтай Респ",
     "Алтайский край",

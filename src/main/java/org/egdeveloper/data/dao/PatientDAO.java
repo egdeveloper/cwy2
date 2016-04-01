@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 
 @Repository("patientDAO")
@@ -93,8 +92,8 @@ public class PatientDAO implements IPatientDAO{
         else if(test instanceof UreaColorTest){
             patient.getUreaColorTests().add((UreaColorTest) test);
         }
-        else if(test instanceof UreaStoneTest){
-            patient.getUreaStoneTests().add((UreaStoneTest) test);
+        else if(test instanceof StoneInVivoTest){
+            patient.getStoneInVivoTests().add((StoneInVivoTest) test);
         }
         sessionFactory.getCurrentSession().update(patient);
     }

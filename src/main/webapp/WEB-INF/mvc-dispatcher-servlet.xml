@@ -50,14 +50,15 @@
                             <value>org.egdeveloper.data.entities.DailyExcreationTest</value>
                             <value>org.egdeveloper.data.entities.TitrationTest</value>
                             <value>org.egdeveloper.data.entities.UreaColorTest</value>
-                            <value>org.egdeveloper.data.entities.UreaStoneTest</value>
+                            <value>org.egdeveloper.data.entities.StoneInVivoTest</value>
+                            <value>org.egdeveloper.data.entities.StoneInVitroTest</value>
                      </list>
               </property>
               <property name="hibernateProperties">
                      <props>
                             <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                             <prop key="hibernate.show_sql">true</prop>
-                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+                            <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
                             <prop key="javax.persistence.validation.mode">none</prop>
                      </props>
               </property>
@@ -83,6 +84,7 @@
               <property name="messageConverters">
                      <list>
                             <ref bean="jsonMessageConverter"/>
+                            <ref bean="xmlMessageConverter"/>
                      </list>
               </property>
        </bean>
@@ -94,5 +96,6 @@
               <property name="supportedMediaTypes" value="application/json"/>
               <property name="objectMapper" ref="jsonObjectMapper"/>
        </bean>
+       <bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
        <mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>

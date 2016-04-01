@@ -1,15 +1,18 @@
 package org.egdeveloper.data.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.converters.CustomDateTimeDeserializer;
-import org.egdeveloper.converters.CustomDateTimeSerializer;
+import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
+import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
 import org.egdeveloper.data.entities.custom_types.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +26,7 @@ import org.joda.time.LocalDate;
 @Entity
 @Table(name = "Patient")
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
+@XmlRootElement(name = "patient")
 public class Patient extends AbstractEntity implements Serializable{
 
     public Patient(){}
@@ -30,18 +34,18 @@ public class Patient extends AbstractEntity implements Serializable{
     //Fields
 
     @Size(max = 255)
-    //@JsonProperty("fullName")
+    @JsonProperty("fullName")
     @NotEmpty(message = "Введите ФИО пациента")
     @Column(name = "fullName", nullable = false)
     private String fullName;
 
-    //@JsonProperty("gender")
+    @JsonProperty("gender")
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @NotNull
-    //@JsonProperty("birthdate")
+    @JsonProperty("birthdate")
     @JsonSerialize(using = CustomDateTimeSerializer.class)
     @JsonDeserialize(using = CustomDateTimeDeserializer.class)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
@@ -51,86 +55,86 @@ public class Patient extends AbstractEntity implements Serializable{
 
     @NotNull
     @NotEmpty(message = "Введите номер карты")
-    //@JsonProperty("cardNumber")
+    @JsonProperty("cardNumber")
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
 
     @NotNull
-    //@JsonProperty("passport")
+    @JsonProperty("passport")
     @Column(name = "passport", nullable = false)
     private String passport;
 
     @NotNull
-    //@JsonProperty("phoneNumber")
+    @JsonProperty("phoneNumber")
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
     @NotNull
-    //@JsonProperty("country")
+    @JsonProperty("country")
     @Column(name = "country", nullable = false)
     private String country;
 
     @NotNull
-    //@JsonProperty("postIndex")
+    @JsonProperty("postIndex")
     @Column(name = "postIndex", nullable = false)
     private String postIndex;
 
     @NotNull
-    //@JsonProperty("region")
+    @JsonProperty("region")
     @Column(name = "region", nullable = false)
     private String region;
 
     @NotNull
-    //@JsonProperty("city")
+    @JsonProperty("city")
     @Column(name = "city", nullable = false)
     private String city;
 
     @NotNull
-    //@JsonProperty("address")
+    @JsonProperty("address")
     @Column(name = "address", nullable = false)
     private String address;
 
-    //@JsonProperty("email")
+    @JsonProperty("email")
     @Column(name = "email", nullable = false)
     private String email;
 
-    //@JsonProperty("patientState")
+    @JsonProperty("patientState")
     @Enumerated(EnumType.STRING)
     @Column(name = "patientState", nullable = false)
     private PatientState patientState;
 
-    //@JsonProperty("rh")
+    @JsonProperty("rh")
     @Enumerated(EnumType.STRING)
     @Column(name = "rh", nullable = false)
     private Rh rh;
 
-    //@JsonProperty("bloodGroup")
+    @JsonProperty("bloodGroup")
     @Enumerated(EnumType.STRING)
     @Column(name = "bloodGroup", nullable = false)
     private BloodGroup bloodGroup;
 
-    //@JsonProperty("disability")
+    @JsonProperty("disability")
     @Enumerated(EnumType.STRING)
     @Column(name = "disability", nullable = false)
     private Disability disability;
 
     @NotNull
-    //@JsonProperty("tin")
+    @JsonProperty("tin")
     @Column(name = "TIN", nullable = false)
     private String TIN;
 
     @NotNull
-    //@JsonProperty("omiCard")
+    @JsonProperty("omiCard")
     @Column(name = "OMICard", nullable = false)
     private String OMICard;
 
     @NotNull
-    //@JsonProperty("jobPlace")
+    @JsonProperty("jobPlace")
     @Column(name = "jobPlace", nullable = false)
     private String jobPlace;
 
     @NotNull
-    //@JsonProperty("occupation")
+    @JsonProperty("occupation")
     @Column(name = "occupation", nullable = false)
     private String occupation;
 
@@ -139,47 +143,48 @@ public class Patient extends AbstractEntity implements Serializable{
     private String jobPost;
 
     @NotNull
-    //@JsonProperty("jobConditions")
+    @JsonProperty("jobConditions")
     @Column(name = "jobConditions", nullable = false)
     private String jobConditions;
 
     @NotNull
-    //@JsonProperty("complaints")
+    @JsonProperty("complaints")
     @Column(name = "complaints", nullable = false)
     private String complaints;
 
     @NotNull
-    //@JsonProperty("premedication")
+    @JsonProperty("premedication")
     @Column(name = "premedication", nullable = false)
     private String premedication;
 
     @NotNull
-    //@JsonProperty("associatedDisease")
+    @JsonProperty("associatedDisease")
     @Column(name = "associatedDisease", nullable = false)
     private String associatedDisease;
 
     @NotNull
-    //@JsonProperty("preMedicalSupplies")
+    @JsonProperty("preMedicalSupplies")
     @Column(name = "preMedicalSupplies", nullable = false)
     private String preMedicalSupplies;
 
     @NotNull
-    //@JsonProperty("badHabits")
+    @JsonProperty("badHabits")
     @Column(name = "badHabits", nullable = false)
     private String badHabits;
 
     @NotNull
-    //@JsonProperty("preUreaStoneDescription")
+    @JsonProperty("preUreaStoneDescription")
     @Column(name = "preUreaStoneDescription", nullable = false)
     private String preUreaStoneDescription;
 
     @NotNull
-    //@JsonProperty("diseaseDuration")
+    @JsonProperty("diseaseDuration")
     @Column(name = "diseaseDuration", nullable = false)
     private String diseaseDuration;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Doctor doctor;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -208,7 +213,11 @@ public class Patient extends AbstractEntity implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MedTest
-    private Set<UreaStoneTest> ureaStoneTests = new TreeSet<>();
+    private Set<StoneInVivoTest> stoneInVivoTests = new TreeSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @MedTest
+    private Set<StoneInVitroTest> stoneInVitroTests = new TreeSet<>();
 
 
     //Getters and setters
@@ -340,26 +349,18 @@ public class Patient extends AbstractEntity implements Serializable{
         this.disability = disability;
     }
 
-    //@JsonSerialize
-    //@JsonProperty(value = "tin")
     public String getTIN() {
         return TIN;
     }
 
-    //@JsonDeserialize
-    //@JsonProperty(value = "tin")
     public void setTIN(String TIN) {
         this.TIN = TIN;
     }
 
-    //@JsonSerialize
-    //@JsonProperty(value = "omiCard")
     public String getOMICard() {
         return OMICard;
     }
 
-    //@JsonDeserialize
-    //@JsonProperty(value = "omiCard")
     public void setOMICard(String OMICard) {
         this.OMICard = OMICard;
     }
@@ -516,12 +517,21 @@ public class Patient extends AbstractEntity implements Serializable{
     }
 
     @MedTest
-    public Set<UreaStoneTest> getUreaStoneTests() {
-        return ureaStoneTests;
+    public Set<StoneInVivoTest> getStoneInVivoTests() {
+        return stoneInVivoTests;
     }
 
-    public void setUreaStoneTests(Set<UreaStoneTest> ureaStoneTests) {
-        this.ureaStoneTests = ureaStoneTests;
+    public void setStoneInVivoTests(Set<StoneInVivoTest> stoneInVivoTests) {
+        this.stoneInVivoTests = stoneInVivoTests;
+    }
+
+    @MedTest
+    public Set<StoneInVitroTest> getStoneInVitroTests() {
+        return stoneInVitroTests;
+    }
+
+    public void setStoneInVitroTests(Set<StoneInVitroTest> stoneInVitroTests) {
+        this.stoneInVitroTests = stoneInVitroTests;
     }
 
     @Transient
@@ -533,7 +543,8 @@ public class Patient extends AbstractEntity implements Serializable{
         tests.addAll(getDailyExcreationTests());
         tests.addAll(getTitrationTests());
         tests.addAll(getUreaColorTests());
-        tests.addAll(getUreaStoneTests());
+        tests.addAll(getStoneInVivoTests());
+        tests.addAll(getStoneInVitroTests());
         return tests;
     }
 
@@ -591,7 +602,7 @@ public class Patient extends AbstractEntity implements Serializable{
             return false;
         if (ureaColorTests != null ? !ureaColorTests.equals(patient.ureaColorTests) : patient.ureaColorTests != null)
             return false;
-        return ureaStoneTests != null ? ureaStoneTests.equals(patient.ureaStoneTests) : patient.ureaStoneTests == null;
+        return stoneInVivoTests != null ? stoneInVivoTests.equals(patient.stoneInVivoTests) : patient.stoneInVivoTests == null;
 
     }
 
@@ -632,7 +643,7 @@ public class Patient extends AbstractEntity implements Serializable{
         result = 31 * result + (dailyExcreationTests != null ? dailyExcreationTests.hashCode() : 0);
         result = 31 * result + (titrationTests != null ? titrationTests.hashCode() : 0);
         result = 31 * result + (ureaColorTests != null ? ureaColorTests.hashCode() : 0);
-        result = 31 * result + (ureaStoneTests != null ? ureaStoneTests.hashCode() : 0);
+        result = 31 * result + (stoneInVivoTests != null ? stoneInVivoTests.hashCode() : 0);
         return result;
     }
 }

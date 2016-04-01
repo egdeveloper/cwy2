@@ -6,12 +6,10 @@ import org.egdeveloper.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -107,11 +105,18 @@ public class PatientEditorController {
         return "PatientPages/UreaColorTestPage";
     }
 
-    @RequestMapping(value = "/addUreaStoneTest", method = RequestMethod.GET)
-    public String addUreaStoneTest(ModelMap modelMap)
+    @RequestMapping(value = "/addStoneInVivoTest", method = RequestMethod.GET)
+    public String addStoneInVivoTest(ModelMap modelMap)
     {
-        modelMap.addAttribute("ureaStoneTest", new UreaStoneTest());
-        return "PatientPages/UreaStoneTestPage";
+        modelMap.addAttribute("stoneInVivoTest", new StoneInVivoTest());
+        return "PatientPages/StoneInVivoTestPage";
+    }
+
+    @RequestMapping(value = "/addStoneInVitroTest", method = RequestMethod.GET)
+    public String addStoneInVitroTest(ModelMap modelMap)
+    {
+        modelMap.addAttribute("stoneInVitroTest", new StoneInVitroTest());
+        return "PatientPages/StoneInVitroTestPage";
     }
 
     //post methods
@@ -224,22 +229,40 @@ public class PatientEditorController {
         return "redirect:/addUreaColorTest";
     }
 
-    @RequestMapping(value = "addUreaStoneTest", method = RequestMethod.POST)
-    public String addUreaStoneTest(@ModelAttribute("ureaStoneTest") @Valid UreaStoneTest test,
+    @RequestMapping(value = "addStoneInVivoTest", method = RequestMethod.POST)
+    public String addStoneInVivoTest(@ModelAttribute("stoneInVivoTest") @Valid StoneInVivoTest test,
                                    BindingResult bindingResult,
                                    ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<UreaStoneTest> ureaStoneTests = patient.getUreaStoneTests();
-                ureaStoneTests.add(test);
-                patient.setUreaStoneTests(ureaStoneTests);
+                Set<StoneInVivoTest> stoneInVivoTests = patient.getStoneInVivoTests();
+                stoneInVivoTests.add(test);
+                patient.setStoneInVivoTests(stoneInVivoTests);
                 patientService.editPatientInfo(patient);
                 return "redirect:/personalPatientPage";
             }
         }
-        return "redirect:/addUreaStoneTest";
+        return "redirect:/addStoneInVivoTest";
+    }
+
+    @RequestMapping(value = "addStoneInVitroTest", method = RequestMethod.POST)
+    public String addStoneInVitroTest(@ModelAttribute("stoneInVitroTest") @Valid StoneInVitroTest test,
+                                     BindingResult bindingResult,
+                                     ModelMap modelMap, HttpSession session)
+    {
+        if(!bindingResult.hasErrors()){
+            Patient patient = (Patient)session.getAttribute("patient");
+            if(patient != null){
+                Set<StoneInVitroTest> stoneInVitroTests = patient.getStoneInVitroTests();
+                stoneInVitroTests.add(test);
+                patient.setStoneInVitroTests(stoneInVitroTests);
+                patientService.editPatientInfo(patient);
+                return "redirect:/personalPatientPage";
+            }
+        }
+        return "redirect:/addStoneInVitroTest";
     }
 
     @RequestMapping(value = "/viewMedicalTest/{testName}/{testID}", method = RequestMethod.GET)
@@ -262,8 +285,10 @@ public class PatientEditorController {
             medicalTest = patient.getTitrationTests().stream().filter(t -> testID == t.getId()).findFirst().get();
         if(testName.equals("ureaColorTest"))
             medicalTest = patient.getUreaColorTests().stream().filter(t -> testID == t.getId()).findFirst().get();
-        if(testName.equals("ureaStoneTest"))
-            medicalTest = patient.getUreaStoneTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("stoneInVivoTest"))
+            medicalTest = patient.getStoneInVivoTests().stream().filter(t -> testID == t.getId()).findFirst().get();
+        if(testName.equals("stoneInVitroTest"))
+            medicalTest = patient.getStoneInVitroTests().stream().filter(t -> testID == t.getId()).findFirst().get();
         if(medicalTest != null) {
             modelMap.put("medicalTest", medicalTest);
             return "TestPages/View" + testName.substring(0, 1).toUpperCase() + testName.substring(1) + "Page";

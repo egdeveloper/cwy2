@@ -7,10 +7,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.converters.CustomDateTimeDeserializer;
-import org.egdeveloper.converters.CustomDateTimeSerializer;
+import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
+import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
 import org.egdeveloper.data.entities.custom_types.Attachment;
 import org.egdeveloper.data.entities.custom_types.PatientState;
+import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
@@ -32,17 +33,23 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
         attachment = new HashSet<>();
     }
 
-    @NotNull
     @JsonSerialize(using = CustomDateTimeSerializer.class)
     @JsonDeserialize(using = CustomDateTimeDeserializer.class)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    @Column(name = "testDate")
+    @Column(name = "testDate", nullable = false)
     @DisplayName("Дата проведения анализа")
     private LocalDate testDate;
 
-    @NotNull
-    @Column(name = "description")
+    @Column(name = "treatment", nullable = false)
+    @DisplayName("Лечение")
+    private String treatment;
+
+    @Column(name = "treatmentNumber", nullable = false)
+    @DisplayName("Стадия лечения")
+    private TreatmentNumber treatmentNumber;
+
+    @Column(name = "description", nullable = false)
     @DisplayName("Дополнительная информация")
     private String description;
 
@@ -87,6 +94,38 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
      */
     public void setDescription(String description){
         this.description = description;
+    }
+
+    /**
+     * Get treatment
+     * @return treatment
+     */
+    public String getTreatment() {
+        return treatment;
+    }
+
+    /**
+     * Set treatment
+     * @param treatment treatment
+     */
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
+    /**
+     * Get number of treatment
+     * @return treatment number
+     */
+    public TreatmentNumber getTreatmentNumber() {
+        return treatmentNumber;
+    }
+
+    /**
+     * Set treatment number
+     * @param treatmentNumber treatment number
+     */
+    public void setTreatmentNumber(TreatmentNumber treatmentNumber) {
+        this.treatmentNumber = treatmentNumber;
     }
 
     /**

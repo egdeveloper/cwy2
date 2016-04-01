@@ -1,4 +1,4 @@
-package org.egdeveloper.converters;
+package org.egdeveloper.converters.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;

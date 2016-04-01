@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title></title>
+  <title>${patient.fullName} - Титриметрия</title>
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
 </head>
@@ -51,11 +51,49 @@
       </div>
       <div class="row">
         <div class="form-group">
+          <label class="control-label">Лечение до проведения анализа</label>
+          <form:input cssClass="form-control" path="treatment"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Номер стадии лечения</label>
+          <form:select cssClass="form-control" path="treatmentNumber">
+            <form:option value="NONE">не было</form:option>
+            <form:option value="I">лечение 1</form:option>
+            <form:option value="II">лечение 2</form:option>
+            <form:option value="III">лечение 3</form:option>
+            <form:option value="IV">лечение 4</form:option>
+            <form:option value="V">лечение 5</form:option>
+            <form:option value="VI">лечение 6</form:option>
+            <form:option value="VII">лечение 7</form:option>
+            <form:option value="VIII">лечение 8</form:option>
+            <form:option value="IX">лечение 9</form:option>
+            <form:option value="X">лечение 10</form:option>
+            <form:option value="XI">лечение 11</form:option>
+            <form:option value="XII">лечение 12</form:option>
+          </form:select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="control-label">Состояние пациента на момент обследования</label>
+          <form:select cssClass="form-control" path="patientState">
+            <form:option value="HEALTHY">здоров</form:option>
+            <form:option value="FAIR">стабилен</form:option>
+            <form:option value="SERIOUS">болен</form:option>
+            <form:option value="CRITICAL">серьезно болен</form:option>
+            <form:option value="UNDERTERMINED">неопределенное</form:option>
+          </form:select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
           <label class="control-label">Оксалат</label>
           <form:input cssClass="form-control" path="oxalate"/>
         </div>
       </div>
-      <div class="row">
+      <div class="row pull-right">
         <button type="submit" class="btn btn-primary">Сохранить анализы</button>
       </div>
     </form:form>
