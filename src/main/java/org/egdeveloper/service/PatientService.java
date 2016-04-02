@@ -59,4 +59,14 @@ public class PatientService implements IPatientService{
     public void addMedicalTest(Integer patientID, MedicalTest medicalTest) {
         patientDAO.addMedicalTest(patientID, medicalTest);
     }
+
+    @Override
+    public <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass) {
+        return patientDAO.retrieveMedicalTestsByType(medicalTestClass);
+    }
+
+    @Override
+    public List<MedicalTest> retrieveAllMedicalTests() {
+        return patientDAO.retrieveAllMedicalTests();
+    }
 }

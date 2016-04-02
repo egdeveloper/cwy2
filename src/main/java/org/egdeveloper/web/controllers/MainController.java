@@ -93,4 +93,9 @@ public class MainController {
     public String beforeTreatmentStatVisualization(){
         return "StatisticsPages/StatBeforeTreatmentPage";
     }
+
+    @RequestMapping(value = "/indicatorDeviationsStatPage", method = RequestMethod.GET)
+    public String indicatorDeviationsStatPage(){
+        return "StatisticsPages/IndicatorDeviationsStatPage";
+    }
 }

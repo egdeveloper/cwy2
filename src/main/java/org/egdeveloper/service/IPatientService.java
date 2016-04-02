@@ -15,4 +15,6 @@ public interface IPatientService {
     void removePatient(Integer patientId);
     void removePatientAndUpdateDoctor(Doctor doctor, Integer patientID);
     void addMedicalTest(Integer patientID, MedicalTest medicalTest);
+    <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass);
+    List<MedicalTest> retrieveAllMedicalTests();
 }

@@ -1,5 +1,6 @@
 package org.egdeveloper.web.restcontrollers;
 
+import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
 import org.egdeveloper.service.IDoctorService;
 import org.egdeveloper.service.IPatientService;
 import org.egdeveloper.service.IStatService;
@@ -24,7 +25,7 @@ public class StatisticsController {
     @Qualifier("patientService")
     IPatientService patientService;
 
-    @RequestMapping(value = "beforeTreatmentStat", method = RequestMethod.GET)
+    @RequestMapping(value = "/beforeTreatmentStat", method = RequestMethod.GET)
     public @ResponseBody Map<Object, Object> beforeTreatmentStat(){
         return statService.beforeTreatmentStat();
     }
@@ -33,4 +34,10 @@ public class StatisticsController {
     public @ResponseBody Map<Object, Object> indicatorsDynamics(@PathVariable("pid") Integer pid) throws IllegalAccessException, InvocationTargetException{
         return statService.indicatorsDynamics(pid);
     }
+
+    @RequestMapping(value = "/indicatorDeviations/{treatmentNumber}", method = RequestMethod.GET)
+    public @ResponseBody Map<String, Map<String, Integer>> indicatorDeviations(@PathVariable("treatmentNumber") String treatmentNumber) throws IllegalAccessException{
+        return statService.indicatorDeviations(TreatmentNumber.valueOf(treatmentNumber));
+    }
+
 }

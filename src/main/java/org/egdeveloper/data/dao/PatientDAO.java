@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -74,6 +75,7 @@ public class PatientDAO implements IPatientDAO{
     @Override
     public void addMedicalTest(Integer patientID, MedicalTest test) {
         Patient patient = this.getPatientById(patientID);
+        test.setPatient(patient);
         if(test instanceof BioChemTest){
             patient.getBioChemTests().add((BioChemTest) test);
         }
@@ -96,5 +98,25 @@ public class PatientDAO implements IPatientDAO{
             patient.getStoneInVivoTests().add((StoneInVivoTest) test);
         }
         sessionFactory.getCurrentSession().update(patient);
+    }
+
+    @Override
+    public <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass){
+        Query query = sessionFactory.getCurrentSession().createQuery("from " + medicalTestClass.getSimpleName());
+        return (List<T>)query.list();
+    }
+
+    @Override
+    public List<MedicalTest> retrieveAllMedicalTests() {
+        List<MedicalTest> medicalTests = new ArrayList<>();
+        medicalTests.addAll(retrieveMedicalTestsByType(BioChemTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(CommonBloodTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(CommonUreaTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(DailyExcreationTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(StoneInVitroTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(StoneInVivoTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(TitrationTest.class));
+        medicalTests.addAll(retrieveMedicalTestsByType(UreaColorTest.class));
+        return medicalTests;
     }
 }

@@ -54,6 +54,11 @@ public interface IPatientDAO {
      */
     void editPatientInfo(Patient patient);
 
+    /**
+     * Check is patient exists
+     * @param patient patient
+     * @return check result
+     */
     boolean checkPatientExist(Patient patient);
 
 
@@ -63,4 +68,8 @@ public interface IPatientDAO {
      * @param test service instance
      */
     void addMedicalTest(Integer patientID, MedicalTest test);
+
+    <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass);
+
+    List<MedicalTest> retrieveAllMedicalTests();
 }

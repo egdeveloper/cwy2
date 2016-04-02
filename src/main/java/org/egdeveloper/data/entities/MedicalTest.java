@@ -64,6 +64,9 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     @Fetch(FetchMode.SELECT)
     private Set<Attachment> attachment;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Patient patient;
+
     /**
      * Retrieve defined test date
      * @return test date
@@ -160,6 +163,22 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     @JsonProperty("attachments")
     public void setAttachment(Set<Attachment> attachment){
         this.attachment = attachment;
+    }
+
+    /**
+     * Get test owner
+     * @return patient
+     */
+    public Patient getPatient() {
+        return patient;
+    }
+
+    /**
+     * Set test owner
+     * @param patient patient
+     */
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     /**

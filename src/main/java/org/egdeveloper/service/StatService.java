@@ -1,11 +1,9 @@
 package org.egdeveloper.service;
 
 import org.apache.commons.math3.stat.Frequency;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 import org.egdeveloper.data.entities.*;
+import org.egdeveloper.data.entities.custom_types.StoneXRay;
 import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -15,16 +13,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("statService")
 @Transactional
 public class StatService implements IStatService {
 
-    private Map<Class, Pair<Method, Method[]>> indGetters = new HashMap<Class, Pair<Method, Method[]>>();
+    private Map<Class, Pair<Method, Method[]>> indGetters = new HashMap<>();
+    private Map<Class, List<Field>> indFields = new HashMap<>();
 
     public StatService(){
         Method[] testGetters = getMethodsAnnotatedBy(Patient.class, MedTest.class);
@@ -32,6 +33,14 @@ public class StatService implements IStatService {
             Class testClazz = innerGenericType(testGetter);
             indGetters.put(testClazz, new Pair<>(testGetter, indicatorsGetters(testClazz)));
         }
+        indFields.put(BioChemTest.class, testIndicators(BioChemTest.class));
+        indFields.put(CommonBloodTest.class, testIndicators(CommonBloodTest.class));
+        indFields.put(CommonUreaTest.class, testIndicators(CommonUreaTest.class));
+        indFields.put(DailyExcreationTest.class, testIndicators(DailyExcreationTest.class));
+        indFields.put(StoneInVitroTest.class, testIndicators(StoneInVitroTest.class));
+        indFields.put(StoneInVivoTest.class, testIndicators(StoneInVivoTest.class));
+        indFields.put(TitrationTest.class, testIndicators(TitrationTest.class));
+        indFields.put(UreaColorTest.class, testIndicators(UreaColorTest.class));
     }
 
     @Autowired
@@ -100,8 +109,50 @@ public class StatService implements IStatService {
     @Override
     public Map<Object, Object> indicatorDeviationsForStoneTypesStat(TreatmentNumber treatmentNumber) {
         Map<Object, Object> indicatorDeviations = new HashMap<>();
-
+        /*
+        StoneXRay[] stoneXRays = StoneXRay.values();
+        List<StoneInVitroTest> stoneTests = patientService.retrieveMedicalTestsByType(StoneInVitroTest.class);
+        for(StoneXRay xRay : stoneXRays){
+            List<Patient> patientsWithDefStone = stoneTests
+                    .stream()
+                    .parallel()
+                    .filter(t -> t.getXray().equals(xRay) && t.getTreatmentNumber().equals(treatmentNumber))
+                    .map(StoneInVitroTest::getPatient)
+                    .collect(Collectors.toList());
+        }
+        */
         return indicatorDeviations;
+    }
+
+    @Override
+    public Map<String, Map<String, Integer>> indicatorDeviations(TreatmentNumber treatmentNumber) throws IllegalAccessException {
+        Map<String, Map<String, Integer>> deviations = new HashMap<>();
+        for(Class testClazz : indFields.keySet()){
+            deviations.put(((DisplayName)testClazz.getAnnotation(DisplayName.class)).value(), indicatorDeviations(testClazz, treatmentNumber));
+        }
+        return deviations;
+    }
+
+    @Override
+    public <T extends MedicalTest> Map<String, Integer> indicatorDeviations(Class<T> testClass, TreatmentNumber treatmentNumber) throws IllegalAccessException{
+        Map<String, Integer> deviations = new HashMap<>();
+        List<T> tests = patientService.retrieveMedicalTestsByType(testClass)
+                .stream()
+                .parallel()
+                .filter(t -> t.getTreatmentNumber().equals(treatmentNumber))
+                .collect(Collectors.toList());
+        deviations.put("volume", tests.size());
+        List<Field> inds = indFields.get(testClass);
+        for(T test : tests){
+            for(Field indicator : inds){
+                String indName = indicator.getAnnotation(DisplayName.class).value();
+                if(!isWithinNormalRange(test, indicator)) {
+                    int devCount = deviations.containsKey(indName) ? deviations.get(indName) : 0;
+                    deviations.put(indName, devCount + 1);
+                }
+            }
+        }
+        return deviations;
     }
 
     private Map<Comparable<?>, Long> frequency2Map (Frequency frequency){
@@ -112,6 +163,17 @@ public class StatService implements IStatService {
             map.put(entry.getKey(), entry.getValue());
         }
         return map;
+    }
+
+    private <T extends MedicalTest> List<Field> testIndicators(Class<T> testClass){
+        List<Field> inds = new ArrayList<>();
+        for(Field field : testClass.getDeclaredFields()){
+            if(field.isAnnotationPresent(StatVariable.class)){
+                field.setAccessible(true);
+                inds.add(field);
+            }
+        }
+        return inds;
     }
 
     private Method[] indicatorsGetters(Class test){
@@ -131,6 +193,12 @@ public class StatService implements IStatService {
         Method[] selMethods = new Method[methods.size()];
         methods.toArray(selMethods);
         return selMethods;
+    }
+
+    private boolean isWithinNormalRange(MedicalTest test, Field indicatorField) throws IllegalAccessException{
+        double indicatorValue = indicatorField.getDouble(test);
+        IndicatorNorm indicatorNorm = indicatorField.getAnnotation(IndicatorNorm.class);
+        return indicatorValue >= indicatorNorm.min() && indicatorValue <= indicatorNorm.max();
     }
 
     private class Pair<K, V>{

@@ -13,4 +13,7 @@ public enum StoneXRay {
     StoneXRay(String xray){
         this.xray = xray;
     }
+    public String stoneXray2String(){
+        return xray;
+    }
 }
