@@ -162,55 +162,55 @@
                 <div class="tab-pane" id="signup">
                   <form:form id="signup-form" role="form" cssClass="form-horizontal" method="post" action="${registerAction}" modelAttribute="signupData">
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">ФИО</label>
+                      <label class="col-sm-4 control-label">ФИО <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="fullName" placeholder="ФИО"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Должность</label>
+                      <label class="col-sm-4 control-label">Должность <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="jobPost" id="jobPost" placeholder="Должность"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Место работы</label>
+                      <label class="col-sm-4 control-label">Место работы <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="jobPlace" id="jobPlace" placeholder="Место работы"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Телефон</label>
+                      <label class="col-sm-4 control-label">Телефон <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="phoneNumber" id="phoneNumber" placeholder="Телефон"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Электронная почта</label>
+                      <label class="col-sm-4 control-label">Электронная почта <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="email" id="email" placeholder="Электронная почта"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Логин</label>
+                      <label class="col-sm-4 control-label">Логин <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:input cssClass="form-control" path="login" id="login" placeholder="Логин"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Пароль</label>
+                      <label class="col-sm-4 control-label">Пароль <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:password cssClass="form-control" path="password" id="password" placeholder="Пароль"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label">Подтверждение пароля</label>
+                      <label class="col-sm-4 control-label">Подтверждение пароля <span style="color: red">*</span></label>
                       <div class="col-sm-8">
                         <form:password cssClass="form-control" path="confirmPassword" id="confirmPassword" placeholder="Подтверждение пароля"/>
                       </div>
                     </div>
                     <div class="row pull-right">
-                      <button type="submit" class="btn btn-primary">Регистрация</button>
+                      <button id="signup-button" type="submit" class="btn btn-primary">Регистрация</button>
                     </div>
                   </form:form>
                 </div>
@@ -282,10 +282,46 @@
   </div>
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 <script type="text/javascript">
   $("#slideShow").carousel({interval: 5000});
+
+  $(document).ready(function(){
+    $("#signup-form").validate({
+      rules: {
+        fullName: {
+          required: true
+        },
+        jobPost: {
+          required: true
+        },
+        jobPlace: {
+          required: true
+        }
+      },
+      focusCleanup: true,
+      onkeyup: false,
+      messages: {
+        fullName: {
+          required: "Введите ФИО"
+        },
+        jobPost: {
+          required: "Введите должность"
+        },
+        jobPlace: {
+          required: "Введите место работы"
+        }
+      }
+    });
+  });
+
+  $("#signup-button").click(function(){
+    if($("#signup-form").valid()){
+      $("#signup-form").submit();
+    }
+  });
 </script>
 </body>
 </html>

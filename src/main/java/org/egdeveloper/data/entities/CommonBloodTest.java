@@ -1,8 +1,9 @@
 package org.egdeveloper.data.entities;
 
 import org.egdeveloper.attributes.*;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
@@ -17,221 +18,250 @@ public class CommonBloodTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "hemoglobin", nullable = false)
+    @Indicator
+    @Column(name = "hemoglobin", nullable = true)
     @DisplayName("Гемоглобин")
     @IndicatorNorm(minCritical = 110.0, min = 120.0, max = 140.0, maxCritical = 150.0)
     @StatVariable
-    private double hemoglobin;
+    private Double hemoglobin;
 
-    @Column(name = "RBCells", nullable = false)
+    @Indicator
+    @Column(name = "RBCells", nullable = true)
     @DisplayName("Эритроциты")
     @IndicatorNorm(minCritical = 3.2, min = 3.7, max = 4.7, maxCritical = 5.2)
     @StatVariable
-    private double rbCells;
+    private Double rbCells;
 
-    @Column(name = "colorIndex", nullable = false)
+    @Indicator
+    @Column(name = "colorIndex", nullable = true)
     @DisplayName("Цветовой показатель")
     @IndicatorNorm(minCritical = 0.75, min = 0.85, max = 0.95, maxCritical = 1.25)
     @StatVariable
-    private double colorIndex;
+    private Double colorIndex;
 
-    @Column(name = "IMRBCells", nullable = false)
+    @Indicator
+    @Column(name = "IMRBCells", nullable = true)
     @DisplayName("Ретикулоциты")
     @IndicatorNorm(minCritical = 0.1, min = 0.2, max = 1.2, maxCritical = 1.3)
     @StatVariable
-    private double imrbCells;
+    private Double imrbCells;
 
-    @Column(name = "platelets", nullable = false)
+    @Indicator
+    @Column(name = "platelets", nullable = true)
     @DisplayName("Тромбоциты")
     @IndicatorNorm(minCritical = 160.0, min = 180.0, max = 300.0, maxCritical = 340.0)
     @StatVariable
-    private double platelets;
+    private Double platelets;
 
-    @Column(name = "ESR", nullable = false)
+    @Indicator
+    @Column(name = "ESR", nullable = true)
     @DisplayName("СОЭ")
     @IndicatorNorm(minCritical = 1.0, min = 3.0, max = 12.0, maxCritical = 18.0)
     @StatVariable
-    private double esr;
+    private Double esr;
 
-    @Column(name = "WBCells", nullable = false)
+    @Indicator
+    @Column(name = "WBCells", nullable = true)
     @DisplayName("Лейкоциты")
     @IndicatorNorm(minCritical = 3.0, min = 5.0, max = 7.0, maxCritical = 11.0)
     @StatVariable
-    private double wbCells;
+    private Double wbCells;
 
-    @Column(name = "bandCells", nullable = false)
+    @Indicator
+    @Column(name = "bandCells", nullable = true)
     @DisplayName("Палочкоядерные")
     @IndicatorNorm(minCritical = 0.5, min = 1.5, max = 5.0, maxCritical = 7.0)
     @StatVariable
-    private double bandCells;
+    private Double bandCells;
 
-    @Column(name = "segmentCells", nullable = false)
+    @Indicator
+    @Column(name = "segmentCells", nullable = true)
     @DisplayName("Сегментоядерные")
     @IndicatorNorm(minCritical = 37.0, min = 57.0, max = 62.0, maxCritical = 82.0)
     @StatVariable
-    private double segmentCells;
+    private Double segmentCells;
 
-    @Column(name = "eosinCells", nullable = false)
+    @Indicator
+    @Column(name = "eosinCells", nullable = true)
     @DisplayName("Эозинофилы")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 4.0, maxCritical = 6.0)
     @StatVariable
-    private double eosinCells;
+    private Double eosinCells;
 
-    @Column(name = "basophil", nullable = false)
+    @Indicator
+    @Column(name = "basophil", nullable = true)
     @DisplayName("Базофилы")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 0.9, maxCritical = 1.1)
     @StatVariable
-    private double basophil;
+    private Double basophil;
 
-    @Column(name = "NKCells", nullable = false)
+    @Indicator
+    @Column(name = "NKCells", nullable = true)
     @DisplayName("Лимфоциты")
     @IndicatorNorm(minCritical = 13.0, min = 23.0, max = 35.0, maxCritical = 45.0)
     @StatVariable
-    private double nkCells;
+    private Double nkCells;
 
-    @Column(name = "monoCells", nullable = false)
+    @Indicator
+    @Column(name = "monoCells", nullable = true)
     @DisplayName("Моноциты")
     @IndicatorNorm(minCritical = 1.0, min = 3.0, max = 7.0, maxCritical = 11.0)
     @StatVariable
-    private double monoCells;
+    private Double monoCells;
 
+    @Indicator
     @DisplayName("Гемоглобин")
     @StatVariable
-    public double getHemoglobin() {
+    public Double getHemoglobin() {
         return hemoglobin;
     }
 
-    public void setHemoglobin(double hemoglobin) {
+    @Indicator
+    public void setHemoglobin(Double hemoglobin) {
         this.hemoglobin = hemoglobin;
     }
 
+    @Indicator
     @DisplayName("Эритроциты")
     @StatVariable
-    //@JsonProperty("rbCells")
-    public double getRbCells() {
+    public Double getRbCells() {
         return rbCells;
     }
 
-    //@JsonProperty("rbCells")
-    public void setRbCells(double rbCells) {
+    @Indicator
+    public void setRbCells(Double rbCells) {
         this.rbCells = rbCells;
     }
 
+    @Indicator
     @DisplayName("Цветовой показатель")
     @StatVariable
-    public double getColorIndex() {
+    public Double getColorIndex() {
         return colorIndex;
     }
 
-    public void setColorIndex(double colorIndex) {
+    @Indicator
+    public void setColorIndex(Double colorIndex) {
         this.colorIndex = colorIndex;
     }
 
+    @Indicator
     @DisplayName("Ретикулоциты")
     @StatVariable
-    //@JsonProperty("imrbCells")
-    public double getImrbCells() {
+    public Double getImrbCells() {
         return imrbCells;
     }
 
-    //@JsonProperty("imrbCells")
-    public void setImrbCells(double IMRBCells) {
+    @Indicator
+    public void setImrbCells(Double IMRBCells) {
         this.imrbCells = imrbCells;
     }
 
+    @Indicator
     @DisplayName("Тромбоциты")
     @StatVariable
-    public double getPlatelets() {
+    public Double getPlatelets() {
         return platelets;
     }
 
-    public void setPlatelets(double platelets) {
+    @Indicator
+    public void setPlatelets(Double platelets) {
         this.platelets = platelets;
     }
 
+    @Indicator
     @DisplayName("СОЭ")
     @StatVariable
-    //@JsonProperty("esr")
-    public double getEsr() {
+    public Double getEsr() {
         return esr;
     }
 
-    //@JsonProperty("esr")
-    public void setEsr(double esr) {
+    @Indicator
+    public void setEsr(Double esr) {
         this.esr = esr;
     }
 
+    @Indicator
     @DisplayName("Лейкоциты")
     @StatVariable
-    //@JsonProperty("wbCells")
-    public double getWbCells() {
+    public Double getWbCells() {
         return wbCells;
     }
 
-    //@JsonProperty("wbCells")
-    public void setWbCells(double wbCells) {
+    @Indicator
+    public void setWbCells(Double wbCells) {
         this.wbCells = wbCells;
     }
 
+    @Indicator
     @DisplayName("Палочкоядерные")
     @StatVariable
-    public double getBandCells() {
+    public Double getBandCells() {
         return bandCells;
     }
 
-    public void setBandCells(double bandCells) {
+    @Indicator
+    public void setBandCells(Double bandCells) {
         this.bandCells = bandCells;
     }
 
+    @Indicator
     @DisplayName("Сегментоядерные")
     @StatVariable
-    public double getSegmentCells() {
+    public Double getSegmentCells() {
         return segmentCells;
     }
 
-    public void setSegmentCells(double segmentCells) {
+    @Indicator
+    public void setSegmentCells(Double segmentCells) {
         this.segmentCells = segmentCells;
     }
 
+    @Indicator
     @DisplayName("Эозинофилы")
     @StatVariable
-    public double getEosinCells() {
+    public Double getEosinCells() {
         return eosinCells;
     }
 
-    public void setEosinCells(double eosinCells) {
+    @Indicator
+    public void setEosinCells(Double eosinCells) {
         this.eosinCells = eosinCells;
     }
 
+    @Indicator
     @DisplayName("Базофилы")
     @StatVariable
-    public double getBasophil() {
+    public Double getBasophil() {
         return basophil;
     }
 
-    public void setBasophil(double basophil) {
+    @Indicator
+    public void setBasophil(Double basophil) {
         this.basophil = basophil;
     }
 
+    @Indicator
     @DisplayName("Лимфоциты")
     @StatVariable
-    //@JsonProperty("nkCells")
-    public double getNkCells() {
+    public Double getNkCells() {
         return nkCells;
     }
 
-    //@JsonProperty("nkCells")
-    public void setNkCells(double nkCells) {
+    @Indicator
+    public void setNkCells(Double nkCells) {
         this.nkCells = nkCells;
     }
 
+    @Indicator
     @DisplayName("Моноциты")
     @StatVariable
-    public double getMonoCells() {
+    public Double getMonoCells() {
         return monoCells;
     }
 
-    public void setMonoCells(double monoCells) {
+    @Indicator
+    public void setMonoCells(Double monoCells) {
         this.monoCells = monoCells;
     }
 

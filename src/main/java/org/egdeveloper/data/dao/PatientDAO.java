@@ -4,6 +4,7 @@ import org.egdeveloper.data.entities.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,7 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void addPatient(Doctor doctor, Patient patient){
+        /*
         patient.setDoctor(doctor);
         Session session = sessionFactory.getCurrentSession();
         session.save(patient);
@@ -26,11 +28,50 @@ public class PatientDAO implements IPatientDAO{
         patients.add(patient);
         doctor.setPatients(patients);
         session.saveOrUpdate(doctor);
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            patient.setDoctor(doctor);
+            session.save(patient);
+            List<Patient> patients = doctor.getPatients();
+            patients.add(patient);
+            doctor.setPatients(patients);
+            session.saveOrUpdate(doctor);
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public List<Patient> getPatients(){
+        /*
         return sessionFactory.getCurrentSession().createQuery("from Patient").list();
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            List<Patient> patients = (List<Patient>) session.createQuery("from Patient").list();
+            tx.commit();
+            return patients;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
@@ -41,7 +82,7 @@ public class PatientDAO implements IPatientDAO{
     }
 
     @Override
-    public void editPatientInfo(Patient patient) {
+    public void updatePatient(Patient patient) {
         sessionFactory.getCurrentSession().update(patient);
     }
 
@@ -54,9 +95,10 @@ public class PatientDAO implements IPatientDAO{
     public void removePatient(Integer patientId){
         Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, patientId);
         if(patient != null){
-            patient.getDoctor().getPatients().remove(patient);
-            sessionFactory.getCurrentSession().update(patient.getDoctor());
-            patient.setDoctor(null);
+            Doctor doctor = patient.getDoctor();
+            doctor.getPatients().remove(patient);
+            sessionFactory.getCurrentSession().update(doctor);
+            //patient.setDoctor(null);
             sessionFactory.getCurrentSession().delete(patient);
         }
     }
@@ -75,28 +117,13 @@ public class PatientDAO implements IPatientDAO{
     @Override
     public void addMedicalTest(Integer patientID, MedicalTest test) {
         Patient patient = this.getPatientById(patientID);
+        this.addMedicalTest(patient, test);
+    }
+
+    @Override
+    public void addMedicalTest(Patient patient, MedicalTest test) {
+        patient.addMedicalTest(test);
         test.setPatient(patient);
-        if(test instanceof BioChemTest){
-            patient.getBioChemTests().add((BioChemTest) test);
-        }
-        else if(test instanceof CommonBloodTest){
-            patient.getCommonBloodTests().add((CommonBloodTest) test);
-        }
-        else if(test instanceof CommonUreaTest){
-            patient.getCommonUreaTests().add((CommonUreaTest) test);
-        }
-        else if(test instanceof DailyExcreationTest){
-            patient.getDailyExcreationTests().add((DailyExcreationTest) test);
-        }
-        else if(test instanceof TitrationTest){
-            patient.getTitrationTests().add((TitrationTest) test);
-        }
-        else if(test instanceof UreaColorTest){
-            patient.getUreaColorTests().add((UreaColorTest) test);
-        }
-        else if(test instanceof StoneInVivoTest){
-            patient.getStoneInVivoTests().add((StoneInVivoTest) test);
-        }
         sessionFactory.getCurrentSession().update(patient);
     }
 
@@ -105,6 +132,27 @@ public class PatientDAO implements IPatientDAO{
         Query query = sessionFactory.getCurrentSession().createQuery("from " + medicalTestClass.getSimpleName());
         return (List<T>)query.list();
     }
+
+    @Override
+    public <T extends MedicalTest> T getMedicalTestByID(Class<T> medicalTestClazz, int testID) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            T medicalTest = (T) session.get(medicalTestClazz, testID);
+            tx.commit();
+            return medicalTest;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
+    }
+
 
     @Override
     public List<MedicalTest> retrieveAllMedicalTests() {

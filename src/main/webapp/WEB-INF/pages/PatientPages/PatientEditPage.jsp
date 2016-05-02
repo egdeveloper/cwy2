@@ -28,7 +28,14 @@
           <li><a href="<c:url value="/help"/>">Помощь</a></li>
         </ul>
       </li>
-      <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+          <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+          <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+        </ul>
+      </li>
       <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -181,6 +188,7 @@
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery-mask/jquery.mask.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/datepicker/js/bootstrap-datepicker.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/typehead/typehead.js"/>"></script>
@@ -268,6 +276,7 @@
         }
       }
     });
+    $("#phoneNumberInput").mask("+7-(999)-999-99-99", {placeholder: "+7-(___)-___-__-__"});
   });
 
   $("#createPatientEntryButton").click(function(){

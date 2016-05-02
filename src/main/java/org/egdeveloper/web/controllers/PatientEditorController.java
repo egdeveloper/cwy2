@@ -1,8 +1,8 @@
 package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.*;
-import org.egdeveloper.service.IDoctorService;
-import org.egdeveloper.service.IPatientService;
+import org.egdeveloper.service.data.IDoctorService;
+import org.egdeveloper.service.data.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Set;
 
 @Controller
 @SessionAttributes(value = {"doctorAccount", "patient"})
@@ -43,7 +42,7 @@ public class PatientEditorController {
         }
         patientService.addPatient(doctor, patient);
         sessionStatus.setComplete();
-        return "redirect:/main";
+        return "redirect:/patientList";
     }
 
     @RequestMapping(value = "/updatePatientEntry", method = RequestMethod.POST)
@@ -51,7 +50,7 @@ public class PatientEditorController {
                                      BindingResult bindingResult, ModelMap modelMap, HttpSession session)
     {
         if(!bindingResult.hasErrors())
-            patientService.editPatientInfo(patient);
+            patientService.updatePatient(patient);
         return "redirect:/personalPatientPage";
     }
 
@@ -129,10 +128,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<BioChemTest> bioChemTests = patient.getBioChemTests();
-                bioChemTests.add(test);
-                patient.setBioChemTests(bioChemTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -147,10 +143,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<CommonBloodTest> commonBloodTests = patient.getCommonBloodTests();
-                commonBloodTests.add(test);
-                patient.setCommonBloodTests(commonBloodTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -165,10 +158,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<CommonUreaTest> commonUreaTests = patient.getCommonUreaTests();
-                commonUreaTests.add(test);
-                patient.setCommonUreaTests(commonUreaTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -183,10 +173,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<DailyExcreationTest> dailyExcreationTests = patient.getDailyExcreationTests();
-                dailyExcreationTests.add(test);
-                patient.setDailyExcreationTests(dailyExcreationTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -201,10 +188,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<TitrationTest> titrationTests = patient.getTitrationTests();
-                titrationTests.add(test);
-                patient.setTitrationTests(titrationTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -219,10 +203,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<UreaColorTest> ureaColorTests = patient.getUreaColorTests();
-                ureaColorTests.add(test);
-                patient.setUreaColorTests(ureaColorTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -237,10 +218,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<StoneInVivoTest> stoneInVivoTests = patient.getStoneInVivoTests();
-                stoneInVivoTests.add(test);
-                patient.setStoneInVivoTests(stoneInVivoTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }
@@ -255,10 +233,7 @@ public class PatientEditorController {
         if(!bindingResult.hasErrors()){
             Patient patient = (Patient)session.getAttribute("patient");
             if(patient != null){
-                Set<StoneInVitroTest> stoneInVitroTests = patient.getStoneInVitroTests();
-                stoneInVitroTests.add(test);
-                patient.setStoneInVitroTests(stoneInVitroTests);
-                patientService.editPatientInfo(patient);
+                patientService.addMedicalTest(patient, test);
                 return "redirect:/personalPatientPage";
             }
         }

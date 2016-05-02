@@ -1,6 +1,6 @@
 package org.egdeveloper.web.restcontrollers;
 
-import org.egdeveloper.service.IUserAuthService;
+import org.egdeveloper.service.security.IUserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;

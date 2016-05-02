@@ -1,10 +1,9 @@
 package org.egdeveloper.data.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
@@ -19,524 +18,590 @@ public class BioChemTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "commonProtein", nullable = false)
+    @Indicator
+    @Column(name = "commonProtein", nullable = true)
     @DisplayName("Общий белок")
     @IndicatorNorm(minCritical = 56.0, min = 76.0, max = 77.0, maxCritical = 97.0)
     @StatVariable
-    private double commonProtein;
+    private Double commonProtein;
 
-    @Column(name = "urea", nullable = false)
+    @Indicator
+    @Column(name = "urea", nullable = true)
     @DisplayName("Мочевина")
     @IndicatorNorm(minCritical = 1.2, min = 2.2, max = 7.8, maxCritical = 8.8)
     @StatVariable
-    private double urea;
+    private Double urea;
 
-    @Column(name = "creatinine", nullable = false)
+    @Column(name = "creatinine", nullable = true)
     @DisplayName("Креатинин")
     @IndicatorNorm(minCritical = 43.0, min = 63.0, max = 105.0, maxCritical = 125.0)
     @StatVariable
-    private double creatinine;
+    private Double creatinine;
 
-    @Column(name = "commonBiliRuby", nullable = false)
+    @Indicator
+    @Column(name = "commonBiliRuby", nullable = true)
     @DisplayName("Общий билирубин")
     @IndicatorNorm(minCritical = 1.5, min = 2.5, max = 18.0, maxCritical = 24.0)
     @StatVariable
-    private double commonBiliRuby;
+    private Double commonBiliRuby;
 
-    @Column(name = "linkedBiliRuby", nullable = false)
+    @Indicator
+    @Column(name = "linkedBiliRuby", nullable = true)
     @DisplayName("Связанный билирубин")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 2.9, maxCritical = 3.9)
     @StatVariable
-    private double linkedBiliRuby;
+    private Double linkedBiliRuby;
 
-    @Column(name = "cholesterol", nullable = false)
+    @Indicator
+    @Column(name = "cholesterol", nullable = true)
     @DisplayName("Холестерин")
     @IndicatorNorm(minCritical = 3.13, min = 4.13, max = 4.7, maxCritical = 5.7)
     @StatVariable
-    private double cholesterol;
+    private Double cholesterol;
 
-    @Column(name = "TAG", nullable = false)
+    @Column(name = "TAG", nullable = true)
     @DisplayName("Триглицериды")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 1.6, maxCritical = 1.8)
     @StatVariable
-    private double tag;
+    private Double tag;
 
-    @Column(name = "HDL", nullable = false)
+    @Indicator
+    @Column(name = "HDL", nullable = true)
     @DisplayName("Липопр. выс. кон.")
     @IndicatorNorm(minCritical = 0.8, min = 1.0, max = 1.44, maxCritical = 1.64)
     @StatVariable
-    private double hdl;
+    private Double hdl;
 
-    @Column(name = "LDL", nullable = false)
+    @Indicator
+    @Column(name = "LDL", nullable = true)
     @DisplayName("Липопр. низ. кон.")
     @IndicatorNorm(minCritical = 1.0, min = 1.4, max = 4.2, maxCritical = 4.6)
     @StatVariable
-    private double ldl;
+    private Double ldl;
 
-    @Column(name = "cholesterolRatio", nullable = false)
+    @Indicator
+    @Column(name = "cholesterolRatio", nullable = true)
     @DisplayName("Коэф. атер.")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 2.8, maxCritical = 3.2)
     @StatVariable
-    private double cholesterolRatio;
+    private Double cholesterolRatio;
 
-    @Column(name = "ALT", nullable = false)
+    @Indicator
+    @Column(name = "ALT", nullable = true)
     @DisplayName("Аланинаминотрасфераза")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 37.0, maxCritical = 47.0)
     @StatVariable
-    private double alt;
+    private Double alt;
 
-    @Column(name = "AST", nullable = false)
+    @Indicator
+    @Column(name = "AST", nullable = true)
     @DisplayName("Аспартатаминотрансфераза")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 32.0, maxCritical = 42.0)
     @StatVariable
-    private double ast;
+    private Double ast;
 
-    @Column(name = "ALKP", nullable = false)
+    @Indicator
+    @Column(name = "ALKP", nullable = true)
     @DisplayName("Щелочная фосфотаза")
     @IndicatorNorm(minCritical = 70.0, min = 90.0, max = 276.0, maxCritical = 336.0)
     @StatVariable
-    private double alkp;
+    private Double alkp;
 
-    @Column(name = "CK", nullable = false)
+    @Indicator
+    @Column(name = "CK", nullable = true)
     @DisplayName("Креатинфосфокиназа")
     @IndicatorNorm(minCritical = 14.0, min = 34.0, max = 170.0, maxCritical = 210.0)
     @StatVariable
-    private double ck;
+    private Double ck;
 
-    @Column(name = "CKMB", nullable = false)
+    @Indicator
+    @Column(name = "CKMB", nullable = true)
     @DisplayName("Креатинфосфокиназа МВ")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 22.0, maxCritical = 28.0)
     @StatVariable
-    private double ckmb;
+    private Double ckmb;
 
-    @Column(name = "LDH", nullable = false)
+    @Indicator
+    @Column(name = "LDH", nullable = true)
     @DisplayName("Лактатдкгидрогеназа")
     @IndicatorNorm(minCritical = 195.0, min = 225.0, max = 420.0, maxCritical = 480.0)
     @StatVariable
-    private double ldh;
+    private Double ldh;
 
-    @Column(name = "GGT", nullable = false)
+    @Indicator
+    @Column(name = "GGT", nullable = true)
     @DisplayName("ГГТ")
     @IndicatorNorm(minCritical = 6.0, min = 16.0, max = 56.0, maxCritical = 66.0)
     @StatVariable
-    private double ggt;
+    private Double ggt;
 
-    @Column(name = "amylase", nullable = false)
+    @Indicator
+    @Column(name = "amylase", nullable = true)
     @DisplayName("Амилаза")
     @IndicatorNorm(minCritical = 23.0, min = 33.0, max = 90.0, maxCritical = 110.0)
     @StatVariable
-    private double amylase;
+    private Double amylase;
 
-    @Column(name = "pancrAmylase", nullable = false)
+    @Indicator
+    @Column(name = "pancrAmylase", nullable = true)
     @DisplayName("Пакриатическая амилаза")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 48.0, maxCritical = 58.0)
     @StatVariable
-    private double pancrAmylase;
+    private Double pancrAmylase;
 
-    @Column(name = "glucose", nullable = false)
+    @Indicator
+    @Column(name = "glucose", nullable = true)
     @DisplayName("Глюкоза")
     @IndicatorNorm(minCritical = 3.7, min = 4.7, max = 5.9, maxCritical = 6.9)
     @StatVariable
-    private double glucose;
+    private Double glucose;
 
-    @Column(name = "ureaAcid", nullable = false)
+    @Indicator
+    @Column(name = "ureaAcid", nullable = true)
     @DisplayName("Мочевая кислота")
     @IndicatorNorm(minCritical = 150.0, min = 250.0, max = 370.0, maxCritical = 470.0)
     @StatVariable
-    private double ureaAcid;
+    private Double ureaAcid;
 
-    @Column(name = "CRP", nullable = false)
+    @Indicator
+    @Column(name = "CRP", nullable = true)
     @DisplayName("С-реактивный белок")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 4.5, maxCritical = 5.5)
     @StatVariable
-    private double crp;
+    private Double crp;
 
-    @Column(name = "RF", nullable = false)
+    @Indicator
+    @Column(name = "RF", nullable = true)
     @DisplayName("Ревматоидный фактор")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 35.0, maxCritical = 45.0)
     @StatVariable
-    private double rf;
+    private Double rf;
 
-    @Column(name = "potassium", nullable = false)
+    @Indicator
+    @Column(name = "potassium", nullable = true)
     @DisplayName("Калий")
     @IndicatorNorm(minCritical = 3.0, min = 4.0, max = 4.6, maxCritical = 5.6)
     @StatVariable
-    private double potassium;
+    private Double potassium;
 
-    @Column(name = "sodium", nullable = false)
+    @Indicator
+    @Column(name = "sodium", nullable = true)
     @DisplayName("Натрий")
     @IndicatorNorm(minCritical = 134.0, min = 138.0, max = 143.0, maxCritical = 147.0)
     @StatVariable
-    private double sodium;
+    private Double sodium;
 
-    @Column(name = "chlorine", nullable = false)
+    @Indicator
+    @Column(name = "chlorine", nullable = true)
     @DisplayName("Хлор")
     @IndicatorNorm(minCritical = 96.0, min = 100.0, max = 105.0, maxCritical = 109.0)
     @StatVariable
-    private double chlorine;
+    private Double chlorine;
 
-    @Column(name = "commonCalcium", nullable = false)
+    @Indicator
+    @Column(name = "commonCalcium", nullable = true)
     @DisplayName("Общий кальций")
     @IndicatorNorm(minCritical = 1.92, min = 2.2, max = 2.5, maxCritical = 2.7)
     @StatVariable
-    private double commonCalcium;
+    private Double commonCalcium;
 
-    @Column(name = "ionCalcium", nullable = false)
+    @Indicator
+    @Column(name = "ionCalcium", nullable = true)
     @DisplayName("Ионизированный кальций")
     @IndicatorNorm(minCritical = 1.11, min = 1.21, max = 1.27, maxCritical = 1.37)
     @StatVariable
-    private double ionCalcium;
+    private Double ionCalcium;
 
-    @Column(name = "phosphor", nullable = false)
+    @Indicator
+    @Column(name = "phosphor", nullable = true)
     @DisplayName("Фосфор")
     @IndicatorNorm(minCritical = 0.71, min = 0.92, max = 1.52, maxCritical = 1.72)
     @StatVariable
-    private double phosphor;
+    private Double phosphor;
 
-    @Column(name = "ferrum", nullable = false)
+    @Indicator
+    @Column(name = "ferrum", nullable = true)
     @DisplayName("Железо")
     @IndicatorNorm(minCritical = 8.7, min = 12.7, max = 26.6, maxCritical = 30.6)
     @StatVariable
-    private double ferrum;
+    private Double ferrum;
 
-    @Column(name = "ferritin", nullable = false)
+    @Indicator
+    @Column(name = "ferritin", nullable = true)
     @DisplayName("Ферритин")
     @IndicatorNorm(minCritical = 26.5, min = 36.5, max = 211.7, maxCritical = 251.7)
     @StatVariable
-    private double ferritin;
+    private Double ferritin;
 
+    @Indicator
     @DisplayName("Общий белок")
     @StatVariable
-    public double getCommonProtein() {
+    public Double getCommonProtein() {
         return commonProtein;
     }
 
-    public void setCommonProtein(double commonProtein) {
+    @Indicator
+    public void setCommonProtein(Double commonProtein) {
         this.commonProtein = commonProtein;
     }
 
+    @Indicator
     @DisplayName("Мочевина")
     @StatVariable
-    public double getUrea() {
+    public Double getUrea() {
         return urea;
     }
 
-    public void setUrea(double urea) {
+    @Indicator
+    public void setUrea(Double urea) {
         this.urea = urea;
     }
 
+    @Indicator
     @DisplayName("Креатинин")
     @StatVariable
-    public double getCreatinine() {
+    public Double getCreatinine() {
         return creatinine;
     }
 
-    public void setCreatinine(double creatinine) {
+    @Indicator
+    public void setCreatinine(Double creatinine) {
         this.creatinine = creatinine;
     }
 
+    @Indicator
     @DisplayName("Общий билирубин")
     @StatVariable
-    public double getCommonBiliRuby() {
+    public Double getCommonBiliRuby() {
         return commonBiliRuby;
     }
 
-    public void setCommonBiliRuby(double commonBiliRuby) {
+    @Indicator
+    public void setCommonBiliRuby(Double commonBiliRuby) {
         this.commonBiliRuby = commonBiliRuby;
     }
 
+    @Indicator
     @DisplayName("Связанный билирубин")
     @StatVariable
-    public double getLinkedBiliRuby() {
+    public Double getLinkedBiliRuby() {
         return linkedBiliRuby;
     }
 
-    public void setLinkedBiliRuby(double linkedBiliRuby) {
+    @Indicator
+    public void setLinkedBiliRuby(Double linkedBiliRuby) {
         this.linkedBiliRuby = linkedBiliRuby;
     }
 
+    @Indicator
     @DisplayName("Холестерин")
     @StatVariable
-    public double getCholesterol() {
+    public Double getCholesterol() {
         return cholesterol;
     }
 
-    public void setCholesterol(double cholesterol) {
+    @Indicator
+    public void setCholesterol(Double cholesterol) {
         this.cholesterol = cholesterol;
     }
 
 
+    @Indicator
     @DisplayName("Триглицериды")
     @StatVariable
-    //@JsonProperty("tag")
-    public double getTag() {
+    public Double getTag() {
         return tag;
     }
 
-    //@JsonProperty("tag")
-    public void setTag(double tag) {
+    @Indicator
+    public void setTag(Double tag) {
         this.tag = tag;
     }
 
+    @Indicator
     @DisplayName("Липопр. выс. кон.")
     @StatVariable
-    //@JsonProperty("hdl")
-    public double getHdl() {
+    public Double getHdl() {
         return hdl;
     }
 
-    //@JsonProperty("hdl")
-    public void setHdl(double hdl) {
+    @Indicator
+    public void setHdl(Double hdl) {
         this.hdl = hdl;
     }
 
+    @Indicator
     @DisplayName("Липопр. низ. кон.")
     @StatVariable
-    //@JsonProperty("ldl")
-    public double getLdl() {
+    public Double getLdl() {
         return ldl;
     }
 
-    //@JsonProperty("ldl")
-    public void setLdl(double ldl) {
+    @Indicator
+    public void setLdl(Double ldl) {
         this.ldl = ldl;
     }
 
+    @Indicator
     @DisplayName("Коэф. атер.")
     @StatVariable
-    public double getCholesterolRatio() {
+    public Double getCholesterolRatio() {
         return cholesterolRatio;
     }
 
-    public void setCholesterolRatio(double cholesterolRatio) {
+    @Indicator
+    public void setCholesterolRatio(Double cholesterolRatio) {
         this.cholesterolRatio = cholesterolRatio;
     }
 
+    @Indicator
     @DisplayName("Аланинаминотрасфераза")
     @StatVariable
-    //@JsonProperty("alt")
-    public double getAlt() {
+    public Double getAlt() {
         return alt;
     }
 
-    //@JsonProperty("alt")
-    public void setAlt(double alt) {
+    @Indicator
+    public void setAlt(Double alt) {
         this.alt = alt;
     }
 
+    @Indicator
     @DisplayName("Аспартатаминотрансфераза")
     @StatVariable
-    //@JsonProperty("ast")
-    public double getAst() {
+    public Double getAst() {
         return ast;
     }
 
-    //@JsonProperty("ast")
-    public void setAst(double ast) {
+    @Indicator
+    public void setAst(Double ast) {
         this.ast = ast;
     }
 
     @DisplayName("Щелочная фосфотаза")
     @StatVariable
-    //@JsonProperty("alkp")
-    public double getAlkp() {
+    public Double getAlkp() {
         return alkp;
     }
 
-    //@JsonProperty("alkp")
-    public void setAlkp(double alkp) {
+    @Indicator
+    public void setAlkp(Double alkp) {
         this.alkp = alkp;
     }
 
+    @Indicator
     @DisplayName("Креатинфосфокиназа")
     @StatVariable
-    //@JsonProperty("ck")
-    public double getCk() {
+    public Double getCk() {
         return ck;
     }
 
-    //@JsonProperty("ck")
-    public void setCk(double ck) {
+    @Indicator
+    public void setCk(Double ck) {
         this.ck = ck;
     }
 
+    @Indicator
     @DisplayName("Креатинфосфокиназа МВ")
     @StatVariable
-    //@JsonProperty("ckmb")
-    public double getCkmb() {
+    public Double getCkmb() {
         return ckmb;
     }
 
-    //@JsonProperty("ckmb")
-    public void setCkmb(double ckmb) {
+    @Indicator
+    public void setCkmb(Double ckmb) {
         this.ckmb = ckmb;
     }
 
+    @Indicator
     @DisplayName("Лактатдкгидрогеназа")
     @StatVariable
-    //@JsonProperty("ldh")
-    public double getLdh() {
+    public Double getLdh() {
         return ldh;
     }
 
-    //@JsonProperty("ldh")
-    public void setLdh(double ldh) {
+    @Indicator
+    public void setLdh(Double ldh) {
         this.ldh = ldh;
     }
 
+    @Indicator
     @DisplayName("ГГТ")
     @StatVariable
-    //@JsonProperty("ggt")
-    public double getGgt() {
+    public Double getGgt() {
         return ggt;
     }
 
-    //@JsonProperty("ggt")
-    public void setGgt(double ggt) {
+    @Indicator
+    public void setGgt(Double ggt) {
         this.ggt = ggt;
     }
 
+    @Indicator
     @DisplayName("Амилаза")
     @StatVariable
-    public double getAmylase() {
+    public Double getAmylase() {
         return amylase;
     }
 
-    public void setAmylase(double amylase) {
+    @Indicator
+    public void setAmylase(Double amylase) {
         this.amylase = amylase;
     }
 
+    @Indicator
     @DisplayName("Пакриатическая амилаза")
     @StatVariable
-    public double getPancrAmylase() {
+    public Double getPancrAmylase() {
         return pancrAmylase;
     }
 
-    public void setPancrAmylase(double pancrAmylase) {
+    @Indicator
+    public void setPancrAmylase(Double pancrAmylase) {
         this.pancrAmylase = pancrAmylase;
     }
 
+    @Indicator
     @DisplayName("Глюкоза")
     @StatVariable
-    public double getGlucose() {
+    public Double getGlucose() {
         return glucose;
     }
 
-    public void setGlucose(double glucose) {
+    @Indicator
+    public void setGlucose(Double glucose) {
         this.glucose = glucose;
     }
 
+    @Indicator
     @DisplayName("Мочевая кислота")
     @StatVariable
-    public double getUreaAcid() {
+    public Double getUreaAcid() {
         return ureaAcid;
     }
 
-    public void setUreaAcid(double ureaAcid) {
+    @Indicator
+    public void setUreaAcid(Double ureaAcid) {
         this.ureaAcid = ureaAcid;
     }
 
+    @Indicator
     @DisplayName("С-реактивный белок")
     @StatVariable
-    //@JsonProperty("crp")
-    public double getCrp() {
+    public Double getCrp() {
         return crp;
     }
 
-    //@JsonProperty("crp")
-    public void setCrp(double crp) {
+    @Indicator
+    public void setCrp(Double crp) {
         this.crp = crp;
     }
 
+    @Indicator
     @DisplayName("Ревматоидный фактор")
     @StatVariable
-    //@JsonProperty("rf")
-    public double getRf() {
+    public Double getRf() {
         return rf;
     }
 
-    //@JsonProperty("rf")
-    public void setRf(double rf) {
+    @Indicator
+    public void setRf(Double rf) {
         this.rf = rf;
     }
 
+    @Indicator
     @DisplayName("Калий")
     @StatVariable
-    public double getPotassium() {
+    public Double getPotassium() {
         return potassium;
     }
 
-    public void setPotassium(double potassium) {
+    @Indicator
+    public void setPotassium(Double potassium) {
         this.potassium = potassium;
     }
 
+    @Indicator
     @DisplayName("Натрий")
     @StatVariable
-    public double getSodium() {
+    public Double getSodium() {
         return sodium;
     }
 
-    public void setSodium(double sodium) {
+    @Indicator
+    public void setSodium(Double sodium) {
         this.sodium = sodium;
     }
 
+    @Indicator
     @DisplayName("Хлор")
     @StatVariable
-    public double getChlorine() {
+    public Double getChlorine() {
         return chlorine;
     }
 
-    public void setChlorine(double chlorine) {
+    @Indicator
+    public void setChlorine(Double chlorine) {
         this.chlorine = chlorine;
     }
 
+    @Indicator
     @DisplayName("Общий кальций")
     @StatVariable
-    public double getCommonCalcium() {
+    public Double getCommonCalcium() {
         return commonCalcium;
     }
 
-    public void setCommonCalcium(double commonCalcium) {
+    @Indicator
+    public void setCommonCalcium(Double commonCalcium) {
         this.commonCalcium = commonCalcium;
     }
 
+    @Indicator
     @DisplayName("Ионизированный кальций")
     @StatVariable
-    public double getIonCalcium() {
+    public Double getIonCalcium() {
         return ionCalcium;
     }
 
-    public void setIonCalcium(double ionCalcium) {
+    @Indicator
+    public void setIonCalcium(Double ionCalcium) {
         this.ionCalcium = ionCalcium;
     }
 
+    @Indicator
     @DisplayName("Фосфор")
     @StatVariable
-    public double getPhosphor() {
+    public Double getPhosphor() {
         return phosphor;
     }
 
-    public void setPhosphor(double phosphor) {
+    @Indicator
+    public void setPhosphor(Double phosphor) {
         this.phosphor = phosphor;
     }
 
+    @Indicator
     @DisplayName("Железо")
     @StatVariable
-    public double getFerrum() {
+    public Double getFerrum() {
         return ferrum;
     }
 
-    public void setFerrum(double ferrum) {
+    @Indicator
+    public void setFerrum(Double ferrum) {
         this.ferrum = ferrum;
     }
 
+    @Indicator
     @DisplayName("Ферритин")
     @StatVariable
-    public double getFerritin() {
+    public Double getFerritin() {
         return ferritin;
     }
 
-    public void setFerritin(double ferritin) {
+    @Indicator
+    public void setFerritin(Double ferritin) {
         this.ferritin = ferritin;
     }
 

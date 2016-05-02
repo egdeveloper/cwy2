@@ -4,8 +4,10 @@ import org.egdeveloper.data.entities.Doctor;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("doctorDAO")
@@ -16,21 +18,75 @@ public class DoctorDAO implements IDoctorDAO{
 
     @Override
     public void addDoctor(Doctor doctor){
+        /*
         sessionFactory.getCurrentSession().save(doctor);
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            session.save(doctor);
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public void updateDoctorInfo(Doctor doctor) {
+        /*
         sessionFactory.getCurrentSession().update(doctor);
+         */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(doctor);
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public List<Doctor> getDoctors(){
-        return sessionFactory.getCurrentSession().createQuery("from Doctor").list();
+        /*
+        sessionFactory.getCurrentSession().createQuery("from Doctor").list();
+         */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        List<Doctor> doctors = new ArrayList<>();
+        try{
+            tx = session.beginTransaction();
+            doctors = (List<Doctor>)session.createQuery("from Doctor").list();
+            tx.commit();
+            return doctors;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
-    public Doctor getDoctorByLoginAndPassword(String login, String password){
+    public Doctor getDoctorByLogin(String login){
+        /*
         Query query = sessionFactory.getCurrentSession().createQuery("from Doctor where login = :login and password = :password");
         query.setParameter("login", login);
         query.setParameter("password", password);
@@ -39,13 +95,56 @@ public class DoctorDAO implements IDoctorDAO{
             return null;
         else
             return (Doctor)doctorList.get(0);
+            */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        Doctor doctor = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from Doctor where login = :login");
+            query.setParameter("login", login);
+            List doctorList = query.list();
+            tx.commit();
+            if(doctorList != null && doctorList.size() > 0)
+                doctor = (Doctor)doctorList.get(0);
+            return doctor;
+        }
+        catch (Exception exception) {
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public Doctor getDoctorById(Integer id) {
+        /*
         Query query = sessionFactory.getCurrentSession().createQuery("from Doctor where id = :id");
         query.setParameter("id", id);
         return (Doctor)query.uniqueResult();
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        Doctor doctor;
+        try{
+            tx = session.beginTransaction();
+            Query query = sessionFactory.getCurrentSession().createQuery("from Doctor where id = :id");
+            query.setParameter("id", id);
+            doctor = (Doctor)query.uniqueResult();
+            tx.commit();
+            return doctor;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override

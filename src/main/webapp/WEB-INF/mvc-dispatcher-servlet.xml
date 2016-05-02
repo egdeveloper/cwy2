@@ -11,18 +11,24 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
-       <context:component-scan base-package="org.egdeveloper.data"/>
-       <context:component-scan base-package="org.egdeveloper.service"/>
-       <context:component-scan base-package="org.egdeveloper.web.controllers"/>
-       <context:component-scan base-package="org.egdeveloper.web.restcontrollers"/>
-       <context:component-scan base-package="org.egdeveloper.validators"/>
-
+       <context:component-scan base-package="org.egdeveloper"/>
+       <bean class="org.egdeveloper.service.generators.ReportGeneratorService" name="reportGeneratorService">
+              <property name="reportGenerators">
+                     <map>
+                            <entry key="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                   <bean class="org.egdeveloper.generators.ExcelReportGenerator"/>
+                            </entry>
+                            <entry key="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                   <bean class="org.egdeveloper.generators.WordReportGenerator"/>
+                            </entry>
+                     </map>
+              </property>
+       </bean>
+       <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
               <property name="prefix" value="/WEB-INF/pages/"/>
               <property name="suffix" value=".jsp"/>
        </bean>
-
        <bean id="messageSource"
              class="org.springframework.context.support.ResourceBundleMessageSource">
               <property name="basename" value="validation" />
@@ -36,7 +42,6 @@
               <property name="password" value="BriefHistoryOfTime"/>
               <property name="validationQuery" value="SELECT 1"/>
        </bean>
-
        <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
               <property name="dataSource" ref="dataSource"/>
               <property name="packagesToScan" value="org.egdeveloper.data.entities"/>
@@ -58,28 +63,16 @@
                      <props>
                             <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                             <prop key="hibernate.show_sql">true</prop>
-                            <prop key="hibernate.hbm2ddl.auto">create</prop>
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
                             <prop key="javax.persistence.validation.mode">none</prop>
                      </props>
               </property>
        </bean>
-
        <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
               <property name="sessionFactory" ref="sessionFactory"/>
        </bean>
-
        <tx:annotation-driven transaction-manager="transactionManager"/>
-       <bean id="doctorDAO" class="org.egdeveloper.data.dao.DoctorDAO"/>
-       <bean id="patientDAO" class="org.egdeveloper.data.dao.PatientDAO"/>
-       <bean id="doctorService" class="org.egdeveloper.service.DoctorService"/>
-       <bean id="patientService" class="org.egdeveloper.service.PatientService"/>
-       <bean id="statService" class="org.egdeveloper.service.StatService"/>
-       <bean id="userAuthService" class="org.egdeveloper.service.UserAuthService"/>
        <mvc:annotation-driven />
-       <!--
-       <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-       <bean id="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
-       -->
        <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
               <property name="messageConverters">
                      <list>
@@ -88,14 +81,13 @@
                      </list>
               </property>
        </bean>
-       <bean id="jsonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
        <bean id="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
        <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-       <!-- Configure bean to convert JSON to POJO and vice versa -->
        <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
               <property name="supportedMediaTypes" value="application/json"/>
-              <property name="objectMapper" ref="jsonObjectMapper"/>
+              <property name="objectMapper" ref="customJSONMapper"/>
        </bean>
+       <bean id="customJSONMapper" class="org.egdeveloper.converters.CustomJSONMapper"/>
        <bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
        <mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>

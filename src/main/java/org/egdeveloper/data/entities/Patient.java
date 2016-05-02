@@ -1,17 +1,15 @@
 package org.egdeveloper.data.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
+import org.egdeveloper.converters.deserializers.PatientDeserializer;
 import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
+import org.egdeveloper.converters.serializers.PatientSerializer;
 import org.egdeveloper.data.entities.custom_types.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,21 +21,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.joda.time.LocalDate;
 
+@JsonSerialize(using = PatientSerializer.class)
+@JsonDeserialize(using = PatientDeserializer.class)
 @Entity
 @Table(name = "Patient")
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 @XmlRootElement(name = "patient")
-public class Patient extends AbstractEntity implements Serializable{
+public class Patient extends Person implements Serializable{
 
     public Patient(){}
 
     //Fields
-
-    @Size(max = 255)
-    @JsonProperty("fullName")
-    @NotEmpty(message = "Введите ФИО пациента")
-    @Column(name = "fullName", nullable = false)
-    private String fullName;
 
     @JsonProperty("gender")
     @Enumerated(EnumType.STRING)
@@ -61,10 +54,6 @@ public class Patient extends AbstractEntity implements Serializable{
     @Column(name = "passport", nullable = false)
     private String passport;
 
-    @JsonProperty("phoneNumber")
-    @Column(name = "phoneNumber", nullable = false)
-    private String phoneNumber;
-
     @JsonProperty("country")
     @Column(name = "country", nullable = false)
     private String country;
@@ -84,10 +73,6 @@ public class Patient extends AbstractEntity implements Serializable{
     @JsonProperty("address")
     @Column(name = "address", nullable = false)
     private String address;
-
-    @JsonProperty("email")
-    @Column(name = "email", nullable = false)
-    private String email;
 
     @JsonProperty("patientState")
     @Enumerated(EnumType.STRING)
@@ -117,16 +102,9 @@ public class Patient extends AbstractEntity implements Serializable{
     @Column(name = "OMICard", nullable = false)
     private String OMICard;
 
-    @JsonProperty("jobPlace")
-    @Column(name = "jobPlace", nullable = false)
-    private String jobPlace;
-
     @JsonProperty("occupation")
     @Column(name = "occupation", nullable = false)
     private String occupation;
-
-    @Column(name = "post", nullable = false)
-    private String jobPost;
 
     @JsonProperty("jobConditions")
     @Column(name = "jobConditions", nullable = false)
@@ -200,14 +178,6 @@ public class Patient extends AbstractEntity implements Serializable{
 
     //Getters and setters
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -238,14 +208,6 @@ public class Patient extends AbstractEntity implements Serializable{
 
     public void setPassport(String passport) {
         this.passport = passport;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getCountry() {
@@ -286,14 +248,6 @@ public class Patient extends AbstractEntity implements Serializable{
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public PatientState getPatientState(){
@@ -341,22 +295,6 @@ public class Patient extends AbstractEntity implements Serializable{
 
     public void setOMICard(String OMICard) {
         this.OMICard = OMICard;
-    }
-
-    public String getJobPlace() {
-        return jobPlace;
-    }
-
-    public String getJobPost() {
-        return jobPost;
-    }
-
-    public void setJobPost(String jobPost) {
-        this.jobPost = jobPost;
-    }
-
-    public void setJobPlace(String jobPlace) {
-        this.jobPlace = jobPlace;
     }
 
     public String getOccupation() {
@@ -524,6 +462,35 @@ public class Patient extends AbstractEntity implements Serializable{
         tests.addAll(getStoneInVivoTests());
         tests.addAll(getStoneInVitroTests());
         return tests;
+    }
+
+    @Transient
+    public void addMedicalTest(MedicalTest test){
+        test.setPatient(this);
+        if(test instanceof BioChemTest){
+            getBioChemTests().add((BioChemTest) test);
+        }
+        else if(test instanceof CommonBloodTest){
+            getCommonBloodTests().add((CommonBloodTest) test);
+        }
+        else if(test instanceof CommonUreaTest){
+            getCommonUreaTests().add((CommonUreaTest) test);
+        }
+        else if(test instanceof DailyExcreationTest){
+            getDailyExcreationTests().add((DailyExcreationTest) test);
+        }
+        else if(test instanceof TitrationTest){
+            getTitrationTests().add((TitrationTest) test);
+        }
+        else if(test instanceof UreaColorTest){
+            getUreaColorTests().add((UreaColorTest) test);
+        }
+        else if(test instanceof StoneInVivoTest){
+            getStoneInVivoTests().add((StoneInVivoTest) test);
+        }
+        else if(test instanceof StoneInVitroTest){
+            getStoneInVitroTests().add((StoneInVitroTest) test);
+        }
     }
 
     @Override

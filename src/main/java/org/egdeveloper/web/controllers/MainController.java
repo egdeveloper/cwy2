@@ -2,8 +2,8 @@ package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.Patient;
-import org.egdeveloper.service.IDoctorService;
-import org.egdeveloper.service.IPatientService;
+import org.egdeveloper.service.data.IDoctorService;
+import org.egdeveloper.service.data.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -97,5 +97,15 @@ public class MainController {
     @RequestMapping(value = "/indicatorDeviationsStatPage", method = RequestMethod.GET)
     public String indicatorDeviationsStatPage(){
         return "StatisticsPages/IndicatorDeviationsStatPage";
+    }
+
+    @RequestMapping(value = "/indicatorDeviationsForStoneTypeStatPage")
+    public String indicatorDeviationsForStoneTypeStatPage(){
+        return "StatisticsPages/IndicatorDeviationsForStoneTypeStatPage";
+    }
+
+    @RequestMapping(value = "/stoneComponentsStatPage")
+    public String stoneComponentsStatPage(){
+        return "StatisticsPages/StoneComponentsStatPage";
     }
 }

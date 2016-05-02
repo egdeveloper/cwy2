@@ -1,4 +1,4 @@
-package org.egdeveloper.service;
+package org.egdeveloper.service.statistics;
 
 
 import org.egdeveloper.data.entities.MedicalTest;
@@ -11,6 +11,7 @@ public interface IStatService {
     Map<Object, Object> beforeTreatmentStat();
     Map<Object, Object> indicatorsDynamics(Integer patientId) throws IllegalAccessException, InvocationTargetException;
     Map<Object, Object> indicatorDeviationsForStoneTypesStat(TreatmentNumber treatmentNumber);
-    Map<String, Map<String, Integer>> indicatorDeviations(TreatmentNumber treatmentNumber) throws IllegalAccessException;
-    <T extends MedicalTest> Map<String, Integer> indicatorDeviations(Class<T> testClass, TreatmentNumber treatmentNumber) throws IllegalAccessException;
+    <T extends MedicalTest> Map<Object, Object> indicatorDeviationsForStoneTypesStat(Class<T> testClazz, TreatmentNumber treatmentNumber) throws IllegalAccessException;
+    Map<Object, Object> indicatorDeviations(TreatmentNumber treatmentNumber) throws IllegalAccessException;
+    <T extends MedicalTest> Map<String, Map<String, Integer>> indicatorDeviations(Class<T> testClass, TreatmentNumber treatmentNumber) throws IllegalAccessException;
 }

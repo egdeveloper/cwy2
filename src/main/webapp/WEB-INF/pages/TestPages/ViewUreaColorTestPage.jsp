@@ -35,6 +35,7 @@
 </nav>
 <div class="container">
   <fieldset>
+    <form:form modelAttribute="medicalTest">
     <div class="page-header">
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
@@ -44,7 +45,7 @@
               <a class="dropdown-item" href="">PDF</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">Word</a>
+              <a id="exportTestToWordInput" class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
             </li>
             <li>
               <a class="dropdown-item" href="">Excel</a>
@@ -54,7 +55,7 @@
       </div>
       <h2>Хроматография</h2>
     </div>
-    <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
+      <div class="form-horizontal">
       <div class="row">
         <div class="form-group">
           <label class="control-label">Дата</label>
@@ -158,6 +159,7 @@
           <label class="control-label">Мочевая кислота</label>
           <form:input cssClass="form-control" path="ureaAcid"/>
         </div>
+      </div>
       </div>
     </form:form>
   </fieldset>

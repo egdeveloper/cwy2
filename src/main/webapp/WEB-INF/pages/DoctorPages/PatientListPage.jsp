@@ -45,7 +45,14 @@
                         <li><a href="<c:url value="/help"/>">Помощь</a></li>
                     </ul>
                 </li>
-                <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+                        <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+                        <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+                    </ul>
+                </li>
                 <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -61,51 +68,55 @@
     </div>
     <br/>
     <div class="row">
-        <table class="table table-striped table-bordered" cellpadding="0" style="width: auto;">
-            <thead>
-            <tr>
-                <td>№</td>
-                <td>ФИО</td>
-                <td>Пол</td>
-                <td>Дата рождения</td>
-                <td>Номер карты</td>
-                <td>Адрес проживания</td>
-                <td></td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="patient" items="${doctor.patients}" varStatus="counter">
-                <tr>
-                    <td>${counter.count}</td>
-                    <td><a href="<c:url value="/patients/${patient.id}"/>">${patient.fullName}</a></td>
-                    <td>${patient.gender.gender2String()}</td>
-                    <td>${patient.birthdate}</td>
-                    <td>${patient.cardNumber}</td>
-                    <td>${patient.postIndex}, ${patient.region}, ${patient.city}, ${patient.address}</td>
-                    <td>
-                        <button class="btn btn-success" onclick="location.href='<c:url value="/patients/${patient.id}"/>'">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                    <td>
-                        <form id="deletePatientForm_${patient.id}" action="<c:url value="/deletePatientEntry/${patient.id}"/>" method="post">
-                            <button id="deletePatientButton_${patient.id}" class="btn btn-danger deletePatientButtonClass" type="button">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <c:choose>
+            <c:when test="${doctor.patients.size() > 0}">
+                <table class="table table-striped table-bordered" cellpadding="0" style="width: auto;">
+                    <thead>
+                    <tr>
+                        <td>№</td>
+                        <td>ФИО</td>
+                        <td>Пол</td>
+                        <td>Дата рождения</td>
+                        <td>Номер карты</td>
+                        <td>Адрес проживания</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="patient" items="${doctor.patients}" varStatus="counter">
+                        <tr>
+                            <td>${counter.count}</td>
+                            <td><a href="<c:url value="/patients/${patient.id}"/>">${patient.fullName}</a></td>
+                            <td>${patient.gender.gender2String()}</td>
+                            <td>${patient.birthdate}</td>
+                            <td>${patient.cardNumber}</td>
+                            <td>${patient.postIndex}, ${patient.region}, ${patient.city}, ${patient.address}</td>
+                            <td>
+                                <button class="btn btn-success" onclick="location.href='<c:url value="/patients/${patient.id}"/>'">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <form id="deletePatientForm_${patient.id}" action="<c:url value="/deletePatientEntry/${patient.id}"/>" method="post">
+                                    <button id="deletePatientButton_${patient.id}" class="btn btn-danger deletePatientButtonClass" type="button">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <div class="alert alert-warning" role="alert">
+                    В базе данных нет ни одной записи о пациентах. Добавьте запись!
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
-<footer class="footer">
-    <div class="footer-container">
-        <p class="text-muted">©Ярных Роман <a href="mailto:egdeveloper@mail.ru">egdeveloper@mail.ru</a></p>
-    </div>
-</footer>
 </body>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>

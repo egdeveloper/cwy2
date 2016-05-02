@@ -1,11 +1,7 @@
 package org.egdeveloper.data.entities;
 
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
+import org.egdeveloper.attributes.*;
 import org.egdeveloper.data.entities.custom_types.StoneXRay;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,53 +15,65 @@ public class StoneInVitroTest extends MedicalTest {
         super();
     }
 
+    @Indicator
     @Column(name = "stoneType", nullable = false)
     @DisplayName("Вид камня")
     private String stoneType;
 
+    @Indicator
     @Column(name = "xray", nullable = false)
     @Enumerated(EnumType.STRING)
     @DisplayName("Рентгеноскопия")
     private StoneXRay xray;
 
-    @Column(name = "hardness", nullable = false)
+    @Indicator
+    @Column(name = "hardness", nullable = true)
     @DisplayName("Твердость")
-    private double hardness;
+    private Double hardness;
 
+    @Indicator
     @Column(name = "addInfo", nullable = false)
     @DisplayName("Дополнительная информация о камне")
     private String addInfo;
 
+    @Indicator
     public String getStoneType() {
         return stoneType;
     }
 
+    @Indicator
     public void setStoneType(String stoneType) {
         this.stoneType = stoneType;
     }
 
+    @Indicator
     public StoneXRay getXray() {
         return xray;
     }
 
+    @Indicator
     public void setXray(StoneXRay xray) {
         this.xray = xray;
     }
 
+    @Indicator
     @DisplayName("Твердость")
     @StatVariable
-    public double getHardness() {
+    public Double getHardness() {
         return hardness;
     }
 
-    public void setHardness(double hardness) {
+    @Indicator
+    public void setHardness(Double hardness) {
         this.hardness = hardness;
     }
 
+    @Indicator
     public String getAddInfo() {
         return addInfo;
     }
 
+    @Indicator
     public void setAddInfo(String addInfo) {
         this.addInfo = addInfo;
     }

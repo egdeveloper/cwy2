@@ -35,6 +35,7 @@
   </nav>
   <div class="container">
     <fieldset>
+      <form:form modelAttribute="medicalTest">
       <div class="page-header">
         <div class="btn-toolbar pull-right">
           <div class="btn-group">
@@ -44,7 +45,7 @@
                 <a class="dropdown-item" href="">PDF</a>
               </li>
               <li>
-                <a class="dropdown-item" href="">Word</a>
+                <a class="dropdown-item" href="/generateTestReport/${medicalTest.retrieveTestID()}/${medicalTest.id}" type="application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
               </li>
               <li>
                 <a class="dropdown-item" href="">Excel</a>
@@ -54,241 +55,242 @@
         </div>
         <h2>Биохимический анализ крови</h2>
       </div>
-      <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Дата</label>
-            <form:input cssClass="form-control dateField" path="testDate"/>
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Дата</label>
+              <form:input cssClass="form-control dateField" path="testDate"/>
+            </div>
+          </div> <!-- testDate -->
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Описание</label>
+              <form:input cssClass="form-control" path="description"/>
+            </div>
           </div>
-        </div> <!-- testDate -->
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Описание</label>
-            <form:input cssClass="form-control" path="description"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Лечение до проведения анализа</label>
+              <form:input cssClass="form-control" path="treatment"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Лечение до проведения анализа</label>
-            <form:input cssClass="form-control" path="treatment"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Номер стадии лечения</label>
+              <form:select cssClass="form-control" path="treatmentNumber">
+                <form:option value="NONE">не было</form:option>
+                <form:option value="I">лечение 1</form:option>
+                <form:option value="II">лечение 2</form:option>
+                <form:option value="III">лечение 3</form:option>
+                <form:option value="IV">лечение 4</form:option>
+                <form:option value="V">лечение 5</form:option>
+                <form:option value="VI">лечение 6</form:option>
+                <form:option value="VII">лечение 7</form:option>
+                <form:option value="VIII">лечение 8</form:option>
+                <form:option value="IX">лечение 9</form:option>
+                <form:option value="X">лечение 10</form:option>
+                <form:option value="XI">лечение 11</form:option>
+                <form:option value="XII">лечение 12</form:option>
+              </form:select>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Номер стадии лечения</label>
-            <form:select cssClass="form-control" path="treatmentNumber">
-              <form:option value="NONE">не было</form:option>
-              <form:option value="I">лечение 1</form:option>
-              <form:option value="II">лечение 2</form:option>
-              <form:option value="III">лечение 3</form:option>
-              <form:option value="IV">лечение 4</form:option>
-              <form:option value="V">лечение 5</form:option>
-              <form:option value="VI">лечение 6</form:option>
-              <form:option value="VII">лечение 7</form:option>
-              <form:option value="VIII">лечение 8</form:option>
-              <form:option value="IX">лечение 9</form:option>
-              <form:option value="X">лечение 10</form:option>
-              <form:option value="XI">лечение 11</form:option>
-              <form:option value="XII">лечение 12</form:option>
-            </form:select>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Состояние пациента на момент обследования</label>
+              <form:select cssClass="form-control" path="patientState">
+                <form:option value="HEALTHY">здоров</form:option>
+                <form:option value="FAIR">стабилен</form:option>
+                <form:option value="SERIOUS">болен</form:option>
+                <form:option value="CRITICAL">серьезно болен</form:option>
+                <form:option value="UNDERTERMINED">неопределенное</form:option>
+              </form:select>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Состояние пациента на момент обследования</label>
-            <form:select cssClass="form-control" path="patientState">
-              <form:option value="HEALTHY">здоров</form:option>
-              <form:option value="FAIR">стабилен</form:option>
-              <form:option value="SERIOUS">болен</form:option>
-              <form:option value="CRITICAL">серьезно болен</form:option>
-              <form:option value="UNDERTERMINED">неопределенное</form:option>
-            </form:select>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Общий белок</label>
+              <form:input cssClass="form-control" path="commonProtein"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Общий белок</label>
-            <form:input cssClass="form-control" path="commonProtein"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Мочевина</label>
+              <form:input cssClass="form-control" path="urea"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Мочевина</label>
-            <form:input cssClass="form-control" path="urea"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Креатинин</label>
+              <form:input cssClass="form-control" path="creatinine"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Креатинин</label>
-            <form:input cssClass="form-control" path="creatinine"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Общий билирубин</label>
+              <form:input cssClass="form-control" path="commonBiliRuby"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Общий билирубин</label>
-            <form:input cssClass="form-control" path="commonBiliRuby"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Связанный билирубин</label>
+              <form:input cssClass="form-control" path="linkedBiliRuby"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Связанный билирубин</label>
-            <form:input cssClass="form-control" path="linkedBiliRuby"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Холестерин</label>
+              <form:input cssClass="form-control" path="cholesterol"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Холестерин</label>
-            <form:input cssClass="form-control" path="cholesterol"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Триглицериды</label>
+              <form:input cssClass="form-control" path="tag"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Триглицериды</label>
-            <form:input cssClass="form-control" path="tag"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Липопр. выс. кон.</label>
+              <form:input cssClass="form-control" path="hdl"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Липопр. выс. кон.</label>
-            <form:input cssClass="form-control" path="hdl"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Липопр. низ. кон.</label>
+              <form:input cssClass="form-control" path="ldl"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Липопр. низ. кон.</label>
-            <form:input cssClass="form-control" path="ldl"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Коэф. атер.</label>
+              <form:input cssClass="form-control" path="cholesterolRatio"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Коэф. атер.</label>
-            <form:input cssClass="form-control" path="cholesterolRatio"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Аланинаминотрасфераза</label>
+              <form:input cssClass="form-control" path="alt"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Аланинаминотрасфераза</label>
-            <form:input cssClass="form-control" path="alt"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Аспартатаминотрансфераза</label>
+              <form:input cssClass="form-control" path="ast"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Аспартатаминотрансфераза</label>
-            <form:input cssClass="form-control" path="ast"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Щелочная фосфотаза</label>
+              <form:input cssClass="form-control" path="alkp"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Щелочная фосфотаза</label>
-            <form:input cssClass="form-control" path="alkp"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Креатинфосфокиназа</label>
+              <form:input cssClass="form-control" path="ck"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Креатинфосфокиназа</label>
-            <form:input cssClass="form-control" path="ck"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Креатинфосфокиназа МВ</label>
+              <form:input cssClass="form-control" path="ckmb"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Креатинфосфокиназа МВ</label>
-            <form:input cssClass="form-control" path="ckmb"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Лактатдкгидрогеназа</label>
+              <form:input cssClass="form-control" path="ldh"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Лактатдкгидрогеназа</label>
-            <form:input cssClass="form-control" path="ldh"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">ГГТ</label>
+              <form:input cssClass="form-control" path="ggt"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">ГГТ</label>
-            <form:input cssClass="form-control" path="ggt"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Амилаза</label>
+              <form:input cssClass="form-control" path="amylase"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Амилаза</label>
-            <form:input cssClass="form-control" path="amylase"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Пакриатическая амилаза</label>
+              <form:input cssClass="form-control" path="pancrAmylase"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Пакриатическая амилаза</label>
-            <form:input cssClass="form-control" path="pancrAmylase"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Глюкоза</label>
+              <form:input cssClass="form-control" path="glucose"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Глюкоза</label>
-            <form:input cssClass="form-control" path="glucose"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Мочевая кислота</label>
+              <form:input cssClass="form-control" path="ureaAcid"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Мочевая кислота</label>
-            <form:input cssClass="form-control" path="ureaAcid"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">С-реактивный белок</label>
+              <form:input cssClass="form-control" path="crp"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">С-реактивный белок</label>
-            <form:input cssClass="form-control" path="crp"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Ревматоидный фактор</label>
+              <form:input cssClass="form-control" path="rf"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Ревматоидный фактор</label>
-            <form:input cssClass="form-control" path="rf"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Калий</label>
+              <form:input cssClass="form-control" path="potassium"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Калий</label>
-            <form:input cssClass="form-control" path="potassium"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Натрий</label>
+              <form:input cssClass="form-control" path="sodium"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Натрий</label>
-            <form:input cssClass="form-control" path="sodium"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Хлор</label>
+              <form:input cssClass="form-control" path="chlorine"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Хлор</label>
-            <form:input cssClass="form-control" path="chlorine"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Общий кальций</label>
+              <form:input cssClass="form-control" path="commonCalcium"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Общий кальций</label>
-            <form:input cssClass="form-control" path="commonCalcium"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Ионизированный кальций</label>
+              <form:input cssClass="form-control" path="ionCalcium"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Ионизированный кальций</label>
-            <form:input cssClass="form-control" path="ionCalcium"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Фосфор</label>
+              <form:input cssClass="form-control" path="phosphor"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Фосфор</label>
-            <form:input cssClass="form-control" path="phosphor"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Железо</label>
+              <form:input cssClass="form-control" path="ferrum"/>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Железо</label>
-            <form:input cssClass="form-control" path="ferrum"/>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <label class="control-label">Ферритин</label>
-            <form:input cssClass="form-control" path="ferritin"/>
+          <div class="row">
+            <div class="form-group">
+              <label class="control-label">Ферритин</label>
+              <form:input cssClass="form-control" path="ferritin"/>
+            </div>
           </div>
         </div>
       </form:form>

@@ -1,7 +1,6 @@
 package org.egdeveloper.data.dao;
 
 import org.egdeveloper.data.entities.Doctor;
-
 import java.util.List;
 
 
@@ -34,10 +33,9 @@ public interface IDoctorDAO {
     /**
      * Get existing doctor's record by it's login and password
      * @param login login
-     * @param password password
      * @return existing doctor's record
      */
-    Doctor getDoctorByLoginAndPassword(String login, String password);
+    Doctor getDoctorByLogin(String login);
 
     /**
      * Get doctor's record from local database

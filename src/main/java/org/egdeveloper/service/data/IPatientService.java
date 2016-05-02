@@ -1,4 +1,4 @@
-package org.egdeveloper.service;
+package org.egdeveloper.service.data;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.MedicalTest;
@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface IPatientService {
     void addPatient(Doctor doctor, Patient patient);
-    void editPatientInfo(Patient patient);
+    void updatePatient(Patient patient);
     List<Patient> getPatients();
     Patient getPatientById(Integer id);
     boolean checkPatientExist(Patient patient);
     void removePatient(Integer patientId);
     void removePatientAndUpdateDoctor(Doctor doctor, Integer patientID);
     void addMedicalTest(Integer patientID, MedicalTest medicalTest);
-    <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass);
+    void addMedicalTest(Patient patient, MedicalTest medicalTest);
+    <T extends MedicalTest> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass);
+    <T extends MedicalTest> T getMedicalTestByID(Class<T> medicalTestClazz, int testID);
     List<MedicalTest> retrieveAllMedicalTests();
 }

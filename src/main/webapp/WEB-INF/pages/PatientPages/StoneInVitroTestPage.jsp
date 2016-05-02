@@ -7,6 +7,12 @@
     <title>${patient.fullName} - Камень In Vitro</title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrap-datepicker/datepicker/css/datepicker.css"/>"/>
+    <style rel="stylesheet" type="text/css">
+        .panel-body > .row{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body style="padding-top: 70px;">
 <c:url var="addStoneInVitroTest" value="/addStoneInVitroTest"/>
@@ -24,7 +30,14 @@
                     <li><a href="<c:url value="/help"/>">Помощь</a></li>
                 </ul>
             </li>
-            <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+                    <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+                    <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+                </ul>
+            </li>
             <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -36,90 +49,113 @@
 <div class="container">
     <fieldset>
         <legend>Камень In Vitro</legend>
-        <form:form cssClass="form-horizontal" method="post" action="${addStoneInVitroTest}" modelAttribute="stoneInVitroTest">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Дата</label>
-                    <form:input cssClass="form-control dateField" path="testDate"/>
+        <form:form method="post" action="${addStoneInVitroTest}" modelAttribute="stoneInVitroTest">
+            <div class="panel panel-primary" style="margin-bottom: 20px;">
+                <div class="panel-heading">
+                    Основная информация
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <label class="col-md-12">ФИО пациента: ${patient.fullName}</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Дата</label>
+                                <form:input cssClass="form-control dateField" path="testDate"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Состояние пациента на момент обследования</label>
+                                <form:select cssClass="form-control" path="patientState">
+                                    <form:option value="HEALTHY">здоров</form:option>
+                                    <form:option value="FAIR">стабилен</form:option>
+                                    <form:option value="SERIOUS">болен</form:option>
+                                    <form:option value="CRITICAL">серьезно болен</form:option>
+                                    <form:option value="UNDERTERMINED">неопределенное</form:option>
+                                </form:select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Номер стадии лечения</label>
+                                <form:select cssClass="form-control" path="treatmentNumber">
+                                    <form:option value="NONE">не было</form:option>
+                                    <form:option value="I">лечение 1</form:option>
+                                    <form:option value="II">лечение 2</form:option>
+                                    <form:option value="III">лечение 3</form:option>
+                                    <form:option value="IV">лечение 4</form:option>
+                                    <form:option value="V">лечение 5</form:option>
+                                    <form:option value="VI">лечение 6</form:option>
+                                    <form:option value="VII">лечение 7</form:option>
+                                    <form:option value="VIII">лечение 8</form:option>
+                                    <form:option value="IX">лечение 9</form:option>
+                                    <form:option value="X">лечение 10</form:option>
+                                    <form:option value="XI">лечение 11</form:option>
+                                    <form:option value="XII">лечение 12</form:option>
+                                </form:select>
+                            </div>
+                        </div>
+                    </div> <!-- testDate, patientState, treatmentNumber -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Лечение до проведения анализа</label>
+                                <form:input cssClass="form-control" path="treatment"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Описание</label>
+                                <form:input cssClass="form-control" path="description"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Описание</label>
-                    <form:input cssClass="form-control" path="description"/>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Показатели
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label">Вид камня</label>
+                            <form:input cssClass="form-control" path="stoneType"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label">Рентгеноскопия камня</label>
+                            <form:select cssClass="form-control" path="xray">
+                                <form:option value="OXALATES">оксалаты</form:option>
+                                <form:option value="URATES">ураты</form:option>
+                                <form:option value="PHOSPHATES">фосфаты</form:option>
+                                <form:option value="OXALATES_URATES">оксалаты + ураты</form:option>
+                                <form:option value="OXALATES_PHOSPHATES">оксалаты + фосфаты</form:option>
+                                <form:option value="URATES_PHOSPHATES">ураты + фосфаты</form:option>
+                                <form:option value="OXALATES_URATES_PHOSPHATES">оксалаты + ураты + фосфаты</form:option>
+                            </form:select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label">Твердость</label>
+                            <form:input cssClass="form-control" path="hardness"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label">Доп. информация</label>
+                            <form:input cssClass="form-control" path="addInfo"/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Лечение до проведения анализа</label>
-                    <form:input cssClass="form-control" path="treatment"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Номер стадии лечения</label>
-                    <form:select cssClass="form-control" path="treatmentNumber">
-                        <form:option value="NONE">не было</form:option>
-                        <form:option value="I">лечение 1</form:option>
-                        <form:option value="II">лечение 2</form:option>
-                        <form:option value="III">лечение 3</form:option>
-                        <form:option value="IV">лечение 4</form:option>
-                        <form:option value="V">лечение 5</form:option>
-                        <form:option value="VI">лечение 6</form:option>
-                        <form:option value="VII">лечение 7</form:option>
-                        <form:option value="VIII">лечение 8</form:option>
-                        <form:option value="IX">лечение 9</form:option>
-                        <form:option value="X">лечение 10</form:option>
-                        <form:option value="XI">лечение 11</form:option>
-                        <form:option value="XII">лечение 12</form:option>
-                    </form:select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Состояние пациента на момент обследования</label>
-                    <form:select cssClass="form-control" path="patientState">
-                        <form:option value="HEALTHY">здоров</form:option>
-                        <form:option value="FAIR">стабилен</form:option>
-                        <form:option value="SERIOUS">болен</form:option>
-                        <form:option value="CRITICAL">серьезно болен</form:option>
-                        <form:option value="UNDERTERMINED">неопределенное</form:option>
-                    </form:select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Вид камня</label>
-                    <form:input cssClass="form-control" path="stoneType"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Рентгеноскопия камня</label>
-                    <form:select cssClass="form-control" path="xray">
-                        <form:option value="OXALATES">оксалаты</form:option>
-                        <form:option value="URATES">ураты</form:option>
-                        <form:option value="PHOSPHATES">фосфаты</form:option>
-                        <form:option value="OXALATES_URATES">оксалаты + ураты</form:option>
-                        <form:option value="OXALATES_PHOSPHATES">оксалаты + фосфаты</form:option>
-                        <form:option value="URATES_PHOSPHATES">ураты + фосфаты</form:option>
-                        <form:option value="OXALATES_URATES_PHOSPHATES">оксалаты + ураты + фосфаты</form:option>
-                    </form:select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Твердость</label>
-                    <form:input cssClass="form-control" path="hardness"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label">Доп. информация</label>
-                    <form:input cssClass="form-control" path="addInfo"/>
-                </div>
-            </div>
-            <div class="row pull-left">
+            <div class="row pull-right">
                 <button type="submit" class="btn btn-primary">Сохранить анализы</button>
             </div>
         </form:form>

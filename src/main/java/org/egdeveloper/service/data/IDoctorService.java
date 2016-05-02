@@ -1,4 +1,4 @@
-package org.egdeveloper.service;
+package org.egdeveloper.service.data;
 
 
 import org.egdeveloper.data.entities.Doctor;
@@ -11,5 +11,5 @@ public interface IDoctorService {
     List<Doctor> getDoctors();
     Doctor getDoctorByID(Integer doctorId);
     void removeDoctor(Integer id);
-    Doctor getDoctorByLoginAndPassword(String login, String password);
+    Doctor getDoctorByLogin(String login);
 }

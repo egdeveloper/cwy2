@@ -47,12 +47,11 @@ public interface IPatientDAO {
      */
     void removePatientAndUpdateDoctor(Doctor doctor, Integer patientId);
 
-
     /**
-     * Edit patient info
+     * Update patient info
      * @param patient patient record
      */
-    void editPatientInfo(Patient patient);
+    void updatePatient(Patient patient);
 
     /**
      * Check is patient exists
@@ -61,15 +60,33 @@ public interface IPatientDAO {
      */
     boolean checkPatientExist(Patient patient);
 
-
     /**
-     * Add medicatl service to existing patient record
+     * Add medical test to existing patient record
      * @param patientID patient id
-     * @param test service instance
+     * @param test test
      */
     void addMedicalTest(Integer patientID, MedicalTest test);
 
+    /**
+     * Add medical test to existing patient record
+     * @param patient patient
+     * @param test test
+     */
+    void addMedicalTest(Patient patient, MedicalTest test);
+
+    /**
+     * Retrieve all medical tests by defined test type
+     * @param medicalTestClass medical test type
+     * @param <T> medical test generic type
+     * @return list of medical tests
+     */
     <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass);
 
+    <T extends MedicalTest> T getMedicalTestByID(Class<T> medicalTestClass, int testID);
+
+    /**
+     * Retrieve all medical tests from database
+     * @return list of medical tests
+     */
     List<MedicalTest> retrieveAllMedicalTests();
 }

@@ -1,5 +1,4 @@
-package org.egdeveloper.service;
-
+package org.egdeveloper.service.security;
 
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.web.form.Login;

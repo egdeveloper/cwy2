@@ -1,9 +1,9 @@
 package org.egdeveloper.data.entities;
 
 import org.egdeveloper.attributes.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
@@ -17,147 +17,174 @@ public class DailyExcreationTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "creatinine", nullable = false)
+    @Indicator
+    @Column(name = "creatinine", nullable = true)
     @DisplayName("Креатинин")
     @IndicatorNorm(minCritical = 3.9, min = 4.9, max = 15.6, maxCritical = 19.6)
     @StatVariable
-    private double creatinine;
+    private Double creatinine;
 
-    @Column(name = "urea", nullable = false)
+    @Indicator
+    @Column(name = "urea", nullable = true)
     @DisplayName("Мочевина")
     @IndicatorNorm(minCritical = 303.0, min = 363.0, max = 522.8, maxCritical = 642.8)
     @StatVariable
-    private double urea;
+    private Double urea;
 
-    @Column(name = "ureaAcid", nullable = false)
+    @Indicator
+    @Column(name = "ureaAcid", nullable = true)
     @DisplayName("Мочевая кислота")
     @IndicatorNorm(minCritical = 1.42, min = 1.62, max = 3.30, maxCritical = 3.9)
     @StatVariable
-    private double ureaAcid;
+    private Double ureaAcid;
 
-    @Column(name = "calcium", nullable = false)
+    @Indicator
+    @Column(name = "calcium", nullable = true)
     @DisplayName("Кальций")
     @IndicatorNorm(minCritical = 2.3, min = 2.7, max = 6.8, maxCritical = 8.2)
     @StatVariable
-    private double calcium;
+    private Double calcium;
 
-    @Column(name = "potassium", nullable = false)
+    @Indicator
+    @Column(name = "potassium", nullable = true)
     @DisplayName("Калий")
     @IndicatorNorm(minCritical = 27.0, min = 33.0, max = 90.0, maxCritical = 110.0)
     @StatVariable
-    private double potassium;
+    private Double potassium;
 
-    @Column(name = "magnesium", nullable = false)
+    @Indicator
+    @Column(name = "magnesium", nullable = true)
     @DisplayName("Магний")
     @IndicatorNorm(minCritical = 0.45, min = 0.55, max = 3.7, maxCritical = 4.7)
     @StatVariable
-    private double magnesium;
+    private Double magnesium;
 
-    @Column(name = "sodium", nullable = false)
+    @Indicator
+    @Column(name = "sodium", nullable = true)
     @DisplayName("Натрий")
     @IndicatorNorm(minCritical = 120.0, min = 140.0, max = 230.0, maxCritical = 290.0)
     @StatVariable
-    private double sodium;
+    private Double sodium;
 
-    @Column(name = "phosphorOxide", nullable = false)
+    @Indicator
+    @Column(name = "phosphorOxide", nullable = true)
     @DisplayName("Оксид Фосфора")
     @IndicatorNorm(minCritical = 11.4, min = 14.4, max = 35.0, maxCritical = 45.0)
     @StatVariable
-    private double phosphorOxide;
+    private Double phosphorOxide;
 
-    @Column(name = "chlorine", nullable = false)
+    @Indicator
+    @Column(name = "chlorine", nullable = true)
     @DisplayName("Хлор")
     @IndicatorNorm(minCritical = 99.0, min = 121.0, max = 225.0, maxCritical = 275.0)
     @StatVariable
-    private double chlorine;
+    private Double chlorine;
 
+    @Indicator
     @DisplayName("Креатинин")
     @StatVariable
-    public double getCreatinine() {
+    public Double getCreatinine() {
         return creatinine;
     }
 
-    public void setCreatinine(double creatinine) {
+    @Indicator
+    public void setCreatinine(Double creatinine) {
         this.creatinine = creatinine;
     }
 
+    @Indicator
     @DisplayName("Мочевина")
     @StatVariable
-    public double getUrea() {
+    public Double getUrea() {
         return urea;
     }
 
-    public void setUrea(double urea) {
+    @Indicator
+    public void setUrea(Double urea) {
         this.urea = urea;
     }
 
+    @Indicator
     @DisplayName("Мочевая кислота")
     @StatVariable
-    public double getUreaAcid() {
+    public Double getUreaAcid() {
         return ureaAcid;
     }
 
-    public void setUreaAcid(double ureaAcid) {
+    @Indicator
+    public void setUreaAcid(Double ureaAcid) {
         this.ureaAcid = ureaAcid;
     }
 
+    @Indicator
     @DisplayName("Кальций")
     @StatVariable
-    public double getCalcium() {
+    public Double getCalcium() {
         return calcium;
     }
 
-    public void setCalcium(double calcium) {
+    @Indicator
+    public void setCalcium(Double calcium) {
         this.calcium = calcium;
     }
 
+    @Indicator
     @DisplayName("Калий")
     @StatVariable
-    public double getPotassium() {
+    public Double getPotassium() {
         return potassium;
     }
 
-    public void setPotassium(double potassium) {
+    @Indicator
+    public void setPotassium(Double potassium) {
         this.potassium = potassium;
     }
 
+    @Indicator
     @DisplayName("Магний")
     @StatVariable
-    public double getMagnesium() {
+    public Double getMagnesium() {
         return magnesium;
     }
 
-    public void setMagnesium(double magnesium) {
+    @Indicator
+    public void setMagnesium(Double magnesium) {
         this.magnesium = magnesium;
     }
 
+    @Indicator
     @DisplayName("Натрий")
     @StatVariable
-    public double getSodium() {
+    public Double getSodium() {
         return sodium;
     }
 
-    public void setSodium(double sodium) {
+    @Indicator
+    public void setSodium(Double sodium) {
         this.sodium = sodium;
     }
 
+    @Indicator
     @DisplayName("Оксид Фосфора")
     @StatVariable
-    public double getPhosphorOxide() {
+    public Double getPhosphorOxide() {
         return phosphorOxide;
     }
 
-    public void setPhosphorOxide(double phosphorOxide) {
+    @Indicator
+    public void setPhosphorOxide(Double phosphorOxide) {
         this.phosphorOxide = phosphorOxide;
     }
 
+    @Indicator
     @DisplayName("Хлор")
     @StatVariable
-    public double getChlorine() {
+    public Double getChlorine() {
         return chlorine;
     }
 
-    public void setChlorine(double chlorine) {
+    @Indicator
+    public void setChlorine(Double chlorine) {
         this.chlorine = chlorine;
     }
 

@@ -1,11 +1,9 @@
 package org.egdeveloper.data.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.egdeveloper.attributes.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table
@@ -18,159 +16,175 @@ public class UreaColorTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "DUV", nullable = false)
+    @Indicator
+    @Column(name = "DUV", nullable = true)
     @DisplayName("Диурез")
     @IndicatorNorm(minCritical = 720, min = 880, max = 1350, maxCritical = 1650)
     @StatVariable
-    private double duv;
+    private Double duv;
 
-    @Column(name = "ClSalt", nullable = false)
+    @Indicator
+    @Column(name = "ClSalt", nullable = true)
     @DisplayName("Хлорид")
     @IndicatorNorm(minCritical = 160, min = 200, max = 252, maxCritical = 312)
     @StatVariable
-    private double clSalt;
+    private Double clSalt;
 
-    @Column(name = "NO2Salt", nullable = false)
+    @Indicator
+    @Column(name = "NO2Salt", nullable = true)
     @DisplayName("Нитрит")
     @IndicatorNorm(minCritical = 0, min = 0, max = 0, maxCritical = 0.05)
     @StatVariable
-    private double no2Salt;
+    private Double no2Salt;
 
-    @Column(name = "NO3Salt", nullable = false)
+    @Indicator
+    @Column(name = "NO3Salt", nullable = true)
     @DisplayName("Нитрат")
     @IndicatorNorm(minCritical = 0.7, min = 0.9, max = 2.06, maxCritical = 2.46)
     @StatVariable
-    private double no3Salt;
+    private Double no3Salt;
 
-    @Column(name = "SO3Salt", nullable = false)
+    @Indicator
+    @Column(name = "SO3Salt", nullable = true)
     @DisplayName("Сульфат")
     @IndicatorNorm(minCritical = 23.6, min = 29.6, max = 38.0, maxCritical = 46.0)
     @StatVariable
-    private double so3Salt;
+    private Double so3Salt;
 
-    @Column(name = "PO3Salt", nullable = false)
+    @Indicator
+    @Column(name = "PO3Salt", nullable = true)
     @DisplayName("Фосфат")
     @IndicatorNorm(minCritical = 9.5, min = 11.5, max = 62.0, maxCritical = 74.0)
     @StatVariable
-    private double po3Salt;
+    private Double po3Salt;
 
-    @Column(name = "citrate", nullable = false)
+    @Indicator
+    @Column(name = "citrate", nullable = true)
     @DisplayName("Цитрат")
     @IndicatorNorm(minCritical = 2.2, min = 2.6, max = 4.8, maxCritical = 5.8)
     @StatVariable
-    private double citrate;
+    private Double citrate;
 
-    @Column(name = "isoCitrate", nullable = false)
+    @Indicator
+    @Column(name = "isoCitrate", nullable = true)
     @DisplayName("Изоцитрат")
     @IndicatorNorm(minCritical = 0.63, min = 0.77, max = 1.8, maxCritical = 2.2)
     @StatVariable
-    private double isoCitrate;
+    private Double isoCitrate;
 
-    @Column(name = "ureaAcid", nullable = false)
+    @Indicator
+    @Column(name = "ureaAcid", nullable = true)
     @DisplayName("Мочевая кислота")
     @IndicatorNorm(minCritical = 5.9, min = 7.1, max = 11.7, maxCritical = 14.3)
     @StatVariable
-    private double ureaAcid;
+    private Double ureaAcid;
 
+    @Indicator
     @DisplayName("Диурез")
     @IndicatorNorm(minCritical = 720, min = 880, max = 1350, maxCritical = 1650)
     @StatVariable
-    public double getDuv() {
+    public Double getDuv() {
         return duv;
     }
 
-    //@JsonProperty("duv")
-    public void setDuv(double duv) {
+    @Indicator
+    public void setDuv(Double duv) {
         this.duv = duv;
     }
 
+    @Indicator
     @DisplayName("Хлорид")
     @StatVariable
-    //@JsonProperty("clSalt")
-    public double getClSalt() {
+    public Double getClSalt() {
         return clSalt;
     }
 
-    //@JsonProperty("clSalt")
-    public void setClSalt(double clSalt) {
+    @Indicator
+    public void setClSalt(Double clSalt) {
         this.clSalt = clSalt;
     }
 
+    @Indicator
     @DisplayName("Нитрит")
     @StatVariable
-    //@JsonProperty("no2Salt")
-    public double getNo2Salt() {
+    public Double getNo2Salt() {
         return no2Salt;
     }
 
-    //@JsonProperty("no2Salt")
-    public void setNo2Salt(double no2Salt) {
+    @Indicator
+    public void setNo2Salt(Double no2Salt) {
         this.no2Salt = no2Salt;
     }
 
+    @Indicator
     @DisplayName("Нитрат")
     @StatVariable
-    //@JsonProperty("no3Salt")
-    public double getNo3Salt() {
+    public Double getNo3Salt() {
         return no3Salt;
     }
 
-    //@JsonProperty("no3Salt")
-    public void setNo3Salt(double no3Salt) {
+    @Indicator
+    public void setNo3Salt(Double no3Salt) {
         this.no3Salt = no3Salt;
     }
 
+    @Indicator
     @DisplayName("Сульфат")
     @StatVariable
-    //@JsonProperty("so3Salt")
-    public double getSo3Salt() {
+    public Double getSo3Salt() {
         return so3Salt;
     }
 
-    //@JsonProperty("so3Salt")
-    public void setSo3Salt(double so3Salt) {
+    @Indicator
+    public void setSo3Salt(Double so3Salt) {
         this.so3Salt = so3Salt;
     }
 
+    @Indicator
     @DisplayName("Фосфат")
     @StatVariable
-    //@JsonProperty("po3Salt")
-    public double getPo3Salt() {
+    public Double getPo3Salt() {
         return po3Salt;
     }
 
-    //@JsonProperty("po3Salt")
-    public void setPo3Salt(double po3Salt) {
+    @Indicator
+    public void setPo3Salt(Double po3Salt) {
         this.po3Salt = po3Salt;
     }
 
+    @Indicator
     @DisplayName("Цитрат")
     @StatVariable
-    public double getCitrate() {
+    public Double getCitrate() {
         return citrate;
     }
 
-    public void setCitrate(double citrate) {
+    @Indicator
+    public void setCitrate(Double citrate) {
         this.citrate = citrate;
     }
 
+    @Indicator
     @DisplayName("Изоцитрат")
     @StatVariable
-    public double getIsoCitrate() {
+    public Double getIsoCitrate() {
         return isoCitrate;
     }
 
-    public void setIsoCitrate(double isoCitrate) {
+    @Indicator
+    public void setIsoCitrate(Double isoCitrate) {
         this.isoCitrate = isoCitrate;
     }
 
+    @Indicator
     @DisplayName("Мочевая кислота")
     @StatVariable
-    public double getUreaAcid() {
+    public Double getUreaAcid() {
         return ureaAcid;
     }
 
-    public void setUreaAcid(double ureaAcid) {
+    @Indicator
+    public void setUreaAcid(Double ureaAcid) {
         this.ureaAcid = ureaAcid;
     }
 

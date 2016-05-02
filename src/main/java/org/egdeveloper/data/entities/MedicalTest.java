@@ -1,14 +1,15 @@
 package org.egdeveloper.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.egdeveloper.attributes.DisplayName;
 import org.egdeveloper.attributes.EntityID;
 import org.egdeveloper.attributes.MedTest;
 import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
+import org.egdeveloper.converters.deserializers.MedicalTestDeserializer;
 import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
+import org.egdeveloper.converters.serializers.MedicalTestSerializer;
 import org.egdeveloper.data.entities.custom_types.Attachment;
 import org.egdeveloper.data.entities.custom_types.PatientState;
 import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
@@ -17,16 +18,15 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonSerialize(using = MedicalTestSerializer.class)
+@JsonDeserialize(using = MedicalTestDeserializer.class)
 @MedTest
 @MappedSuperclass
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public abstract class MedicalTest extends AbstractEntity implements Serializable, Comparable<MedicalTest>{
 
     public MedicalTest(){

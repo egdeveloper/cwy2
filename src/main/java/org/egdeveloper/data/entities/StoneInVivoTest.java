@@ -1,9 +1,9 @@
 package org.egdeveloper.data.entities;
-import org.egdeveloper.attributes.DisplayName;
-import org.egdeveloper.attributes.EntityID;
-import org.egdeveloper.attributes.MedTest;
-import org.egdeveloper.attributes.StatVariable;
-import javax.persistence.*;
+
+import org.egdeveloper.attributes.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table
@@ -16,57 +16,69 @@ public class StoneInVivoTest extends MedicalTest {
         super();
     }
 
-    @Column(name = "size", nullable = false)
+    @Indicator
+    @Column(name = "size", nullable = true)
     @DisplayName("Размер")
     @StatVariable
-    private double size;
+    private Double size;
 
-    @Column(name = "density", nullable = false)
+    @Indicator
+    @Column(name = "density", nullable = true)
     @DisplayName("Плотность")
     @StatVariable
-    private double density;
+    private Double density;
 
+    @Indicator
     @Column(name = "location", nullable = false)
     @DisplayName("Локализация")
     private String location;
 
+    @Indicator
     @Column(name = "addInfo", nullable = false)
     @DisplayName("Дополнительная информация о камне")
     private String addInfo;
 
+    @Indicator
     @DisplayName("Размер")
     @StatVariable
-    public double getSize() {
+    public Double getSize() {
         return size;
     }
 
-    public void setSize(double size) {
+    @Indicator
+    public void setSize(Double size) {
         this.size = size;
     }
 
+    @Indicator
     @DisplayName("Плотность")
     @StatVariable
-    public double getDensity() {
+    public Double getDensity() {
         return density;
     }
 
-    public void setDensity(double density) {
+    @Indicator
+    public void setDensity(Double density) {
         this.density = density;
     }
 
+    @Indicator
     @DisplayName("Локализация")
     public String getLocation() {
         return location;
     }
 
+    @Indicator
     public void setLocation(String location) {
         this.location = location;
     }
 
+    @Indicator
     public String getAddInfo() {
         return addInfo;
     }
 
+    @Indicator
     public void setAddInfo(String addInfo) {
         this.addInfo = addInfo;
     }

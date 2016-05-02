@@ -1,9 +1,10 @@
-package org.egdeveloper.service;
+package org.egdeveloper.service.data;
 
 import org.egdeveloper.data.dao.IPatientDAO;
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.data.entities.Patient;
+import org.egdeveloper.service.data.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,28 +15,28 @@ import java.util.List;
 
 @Service("patientService")
 @Transactional
-public class PatientService implements IPatientService{
+public class PatientService implements IPatientService {
 
     @Autowired
     @Qualifier("patientDAO")
     private IPatientDAO patientDAO;
 
-    @Transactional
+    @Override
     public void addPatient(Doctor doctor, Patient patient){
         patientDAO.addPatient(doctor, patient);
     }
 
-    @Transactional
-    public void editPatientInfo(Patient patient){
-        patientDAO.editPatientInfo(patient);
+    @Override
+    public void updatePatient(Patient patient){
+        patientDAO.updatePatient(patient);
     }
 
-    @Transactional
+    @Override
     public List<Patient> getPatients(){
         return patientDAO.getPatients();
     }
 
-    @Transactional
+    @Override
     public Patient getPatientById(Integer id){
         return patientDAO.getPatientById(id);
     }
@@ -45,7 +46,7 @@ public class PatientService implements IPatientService{
         return patientDAO.checkPatientExist(patient);
     }
 
-    @Transactional
+    @Override
     public void removePatient(Integer id){
         patientDAO.removePatient(id);
     }
@@ -61,7 +62,17 @@ public class PatientService implements IPatientService{
     }
 
     @Override
-    public <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass) {
+    public void addMedicalTest(Patient patient, MedicalTest medicalTest) {
+        patientDAO.addMedicalTest(patient, medicalTest);
+    }
+
+    @Override
+    public <T extends MedicalTest> T getMedicalTestByID(Class<T> medicalTestClazz, int testID) {
+        return patientDAO.getMedicalTestByID(medicalTestClazz, testID);
+    }
+
+    @Override
+    public <T extends MedicalTest> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass) {
         return patientDAO.retrieveMedicalTestsByType(medicalTestClass);
     }
 

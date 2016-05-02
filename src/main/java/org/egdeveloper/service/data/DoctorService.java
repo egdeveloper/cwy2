@@ -1,4 +1,4 @@
-package org.egdeveloper.service;
+package org.egdeveloper.service.data;
 
 import org.egdeveloper.data.dao.IDoctorDAO;
 import org.egdeveloper.data.entities.Doctor;
@@ -43,7 +43,7 @@ public class DoctorService implements IDoctorService{
     }
 
     @Transactional
-    public Doctor getDoctorByLoginAndPassword(String login, String password){
-        return doctorDAO.getDoctorByLoginAndPassword(login, password);
+    public Doctor getDoctorByLogin(String login){
+        return doctorDAO.getDoctorByLogin(login);
     }
 }

@@ -49,7 +49,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
-                        <li><a href="">По видам камня</a></li>
+                        <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+                        <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
                     </ul>
                 </li>
                 <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
