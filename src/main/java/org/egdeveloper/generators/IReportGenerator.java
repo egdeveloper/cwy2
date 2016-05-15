@@ -4,6 +4,7 @@ import org.egdeveloper.data.entities.MedicalTest;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
 
 /**
  * Developer: Roman Yarnykh (egdeveloper@mail.ru)
@@ -12,5 +13,7 @@ import java.io.OutputStream;
  * Package: org.egdeveloper.generators
  */
 public interface IReportGenerator {
-    void generateMedicalTestReport(MedicalTest test, OutputStream output) throws IOException, IllegalAccessException;
+    void generateMedicalTestReport(MedicalTest test, OutputStream output) throws Exception;
+    String buildName(String prefixName);
+    void setFonts(Map<String, String> fonts);
 }

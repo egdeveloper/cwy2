@@ -39,7 +39,9 @@ public class MainController {
     }
 
     @RequestMapping(value = "/patientList", method = RequestMethod.GET)
-    public String patientList(ModelMap modelMap){
+    public String patientList(ModelMap modelMap, HttpSession session){
+        Doctor doctorAccount = (Doctor) session.getAttribute("doctor");
+        modelMap.addAttribute("patients", patientService.getPatientsForDoctor(doctorAccount.getId()));
         return "DoctorPages/PatientListPage";
     }
 

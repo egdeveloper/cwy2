@@ -29,6 +29,7 @@
                         <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
                         <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
                         <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+                        <li><a href="<c:url value="/stoneComponentsStatPage"/>">Компоненты мочевых камней</a></li>
                     </ul>
                 </li>
                 <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
@@ -66,7 +67,7 @@
         <div id="anions"></div>
     </div>
     <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-        <div id="cations">
+        <div id="cations"></div>
     </div>
     <div class="row" id="anionsTable"></div>
     <div class="row" id="cationsTable"></div>
@@ -234,6 +235,8 @@
     };
     $("#anions").empty();
     $("#cations").empty();
+    $("#anionsTable").empty();
+    $("#cationsTable").empty();
     $("#updateStat").click(function(){
        if($("#treatmentNumberSelection").val() != null){
            $.ajax({
@@ -302,6 +305,8 @@
                ]
            };
            */
+           $("#anions").empty();
+           $("#cations").empty();
            $("#anions").append("<div class='panel panel-default'>" +
                    "<div class='panel-heading'>Анионы</div>" +
                    "<div class='panel-body'>" +
@@ -414,6 +419,7 @@
                        barmode: "group"
                    }
            );
+           $("#anionsTable").empty();
            $("#anionsTable").append("<table id='innerAnionsTable' class='table table-striped table-bordered' style='margin-top: 20px;' cellpadding='0' width='100%'></table>");
            $("#innerAnionsTable").append("<thead>" +
                    "<tr>" +

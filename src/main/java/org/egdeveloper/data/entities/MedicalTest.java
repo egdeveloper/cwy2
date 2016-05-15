@@ -10,9 +10,9 @@ import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
 import org.egdeveloper.converters.deserializers.MedicalTestDeserializer;
 import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
 import org.egdeveloper.converters.serializers.MedicalTestSerializer;
-import org.egdeveloper.data.entities.custom_types.Attachment;
-import org.egdeveloper.data.entities.custom_types.PatientState;
-import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
+import org.egdeveloper.data.entities.customTypes.Attachment;
+import org.egdeveloper.data.entities.customTypes.PatientState;
+import org.egdeveloper.data.entities.customTypes.TreatmentNumber;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
@@ -45,6 +45,7 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     @DisplayName("Лечение")
     private String treatment;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "treatmentNumber", nullable = false)
     @DisplayName("Стадия лечения")
     private TreatmentNumber treatmentNumber;
@@ -65,6 +66,7 @@ public abstract class MedicalTest extends AbstractEntity implements Serializable
     private Set<Attachment> attachment;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     /**

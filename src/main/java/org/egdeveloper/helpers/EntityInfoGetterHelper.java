@@ -20,6 +20,7 @@ import java.util.*;
 public class EntityInfoGetterHelper {
 
     private Map<Class<? extends MedicalTest>, List<Field>> indicatorsMap = new HashMap<>();
+    private List<Class<? extends MedicalTest>> testTypes = new ArrayList<>();
 
     private Reflections reflections = new Reflections("org.egdeveloper.data.entities");
 
@@ -35,9 +36,15 @@ public class EntityInfoGetterHelper {
             }
             indicatorsMap.put(testClazz, indicators);
         }
+        testTypes.addAll(testClazzes);
     }
 
     public List<Field> getAllIndicators(Class<? extends MedicalTest> medicalTestClazz){
         return indicatorsMap.get(medicalTestClazz);
+    }
+
+    public List<Class<? extends MedicalTest>> getTestTypes()
+    {
+        return testTypes;
     }
 }

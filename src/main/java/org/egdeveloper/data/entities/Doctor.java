@@ -34,8 +34,7 @@ public class Doctor extends Person implements Serializable{
     @XmlElement
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @XmlElement(name = "patients")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "doctor")
     private List<Patient> patients = new ArrayList<>();
 
     public String getLogin() {

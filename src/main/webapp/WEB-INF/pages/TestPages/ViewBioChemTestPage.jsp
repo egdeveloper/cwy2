@@ -24,7 +24,15 @@
             <li><a href="<c:url value="/help"/>">Помощь</a></li>
           </ul>
         </li>
-        <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+            <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+            <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+            <li><a href="<c:url value="/stoneComponentsStatPage"/>">Компоненты мочевых камней</a></li>
+          </ul>
+        </li>
         <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -42,13 +50,19 @@
             <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
             <ul class = "dropdown-menu" role = "menu">
               <li>
-                <a class="dropdown-item" href="">PDF</a>
+                <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/pdf" download>PDF</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/generateTestReport/${medicalTest.retrieveTestID()}/${medicalTest.id}" type="application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
+                <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
               </li>
               <li>
-                <a class="dropdown-item" href="">Excel</a>
+                <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" download>Excel</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=text/xml" download>XML</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/json" download>JSON</a>
               </li>
             </ul>
           </div>

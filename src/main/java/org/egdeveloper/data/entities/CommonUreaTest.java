@@ -46,7 +46,7 @@ public class CommonUreaTest extends MedicalTest {
     private Double rbCells;
 
     @Indicator
-    @Column(name = "color", nullable = true)
+    @Column(name = "color", nullable = false)
     @DisplayName("Цвет")
     private String color;
 

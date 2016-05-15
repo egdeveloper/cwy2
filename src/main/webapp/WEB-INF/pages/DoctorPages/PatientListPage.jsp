@@ -51,6 +51,7 @@
                         <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
                         <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
                         <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+                        <li><a href="<c:url value="/stoneComponentsStatPage"/>">Компоненты мочевых камней</a></li>
                     </ul>
                 </li>
                 <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
@@ -76,7 +77,6 @@
                         <td>№</td>
                         <td>ФИО</td>
                         <td>Пол</td>
-                        <td>Дата рождения</td>
                         <td>Номер карты</td>
                         <td>Адрес проживания</td>
                         <td></td>
@@ -84,12 +84,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="patient" items="${doctor.patients}" varStatus="counter">
+                    <c:forEach var="patient" items="${patients}" varStatus="counter">
                         <tr>
                             <td>${counter.count}</td>
                             <td><a href="<c:url value="/patients/${patient.id}"/>">${patient.fullName}</a></td>
                             <td>${patient.gender.gender2String()}</td>
-                            <td>${patient.birthdate}</td>
                             <td>${patient.cardNumber}</td>
                             <td>${patient.postIndex}, ${patient.region}, ${patient.city}, ${patient.address}</td>
                             <td>

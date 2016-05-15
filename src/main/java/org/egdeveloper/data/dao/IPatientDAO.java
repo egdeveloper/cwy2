@@ -3,6 +3,8 @@ package org.egdeveloper.data.dao;
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.data.entities.Patient;
+import org.egdeveloper.data.entities.tempEntities.PatientDTO;
+
 import java.util.List;
 
 /**
@@ -27,6 +29,7 @@ public interface IPatientDAO {
      */
     List<Patient> getPatients();
 
+    List<PatientDTO> getPatientsForDoctor(Integer doctorID);
     /**
      * Get unique patient record
      * @param id unique patient id

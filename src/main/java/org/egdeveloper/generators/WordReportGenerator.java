@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Developer: Roman Yarnykh (egdeveloper@mail.ru)
@@ -24,6 +26,8 @@ import java.util.List;
  */
 public class WordReportGenerator implements IReportGenerator {
 
+    private Map<String, String> fonts_ = new HashMap<>();
+
     @Autowired
     @Qualifier("entityInfoGetterHelper")
     private EntityInfoGetterHelper entityInfoGetterHelper;
@@ -31,7 +35,7 @@ public class WordReportGenerator implements IReportGenerator {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy");
 
     @Override
-    public void generateMedicalTestReport(MedicalTest test, OutputStream output) throws IllegalAccessException, IOException {
+    public void generateMedicalTestReport(MedicalTest test, OutputStream output) throws Exception {
 
         List<Field> indicators = entityInfoGetterHelper.getAllIndicators(test.getClass());
 
@@ -41,6 +45,7 @@ public class WordReportGenerator implements IReportGenerator {
         //header
         XWPFParagraph header_paragraph = document.createParagraph();
         header_paragraph.setSpacingAfter(2);
+        header_paragraph.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun header_content = header_paragraph.createRun();
         header_content.setBold(true);
         header_content.setFontFamily("Times New Roman");
@@ -84,5 +89,15 @@ public class WordReportGenerator implements IReportGenerator {
         //indicators: end
         document.write(output);
         output.flush();
+    }
+
+    @Override
+    public String buildName(String prefixName) {
+        return prefixName + ".docx";
+    }
+
+    @Override
+    public void setFonts(Map<String, String> fonts) {
+        this.fonts_ = fonts;
     }
 }

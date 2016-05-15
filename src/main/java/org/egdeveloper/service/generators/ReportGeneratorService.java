@@ -4,7 +4,6 @@ import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.generators.IReportGenerator;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,18 +18,29 @@ import java.util.Map;
 @Service("reportGeneratorService")
 public class ReportGeneratorService implements IReportGeneratorService {
 
-    private Map<String, IReportGenerator> reportGenerators = new HashMap<>();
+    private Map<String, IReportGenerator> reportGenerators_ = new HashMap<>();
+    private Map<String, String> fonts_ = new HashMap<>();
 
     @Override
-    public void generateMedicalTestReport(String mimeType, MedicalTest test, OutputStream output) throws IOException, IllegalAccessException {
-        reportGenerators.get(mimeType).generateMedicalTestReport(test, output);
+    public void generateMedicalTestReport(String mimeType, MedicalTest test, OutputStream output) throws Exception {
+        reportGenerators_.get(mimeType).generateMedicalTestReport(test, output);
+    }
+
+    @Override
+    public IReportGenerator getReportGenerator(String mimeType) {
+        return reportGenerators_.get(mimeType);
+    }
+
+    @Override
+    public void setFonts(Map<String, String> fonts) {
+        this.fonts_ = fonts;
     }
 
     public Map<String, IReportGenerator> getReportGenerators() {
-        return reportGenerators;
+        return reportGenerators_;
     }
 
     public void setReportGenerators(Map<String, IReportGenerator> reportGenerators) {
-        this.reportGenerators = reportGenerators;
+        this.reportGenerators_ = reportGenerators;
     }
 }

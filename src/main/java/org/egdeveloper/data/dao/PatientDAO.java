@@ -1,15 +1,24 @@
 package org.egdeveloper.data.dao;
 
+import com.sun.org.apache.bcel.internal.generic.Type;
 import org.egdeveloper.data.entities.*;
+import org.egdeveloper.data.entities.tempEntities.MedicalTestDTO;
+import org.egdeveloper.data.entities.tempEntities.PatientDTO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.internal.TypeLocatorImpl;
+import org.hibernate.transform.ResultTransformer;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.*;
+import org.joda.time.contrib.hibernate.PersistentLocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 
 @Repository("patientDAO")
@@ -75,15 +84,89 @@ public class PatientDAO implements IPatientDAO{
     }
 
     @Override
+    public List<PatientDTO> getPatientsForDoctor(Integer doctorID)
+    {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Properties properties = new Properties();
+            properties.put("enumClass", "org.egdeveloper.data.entities.customTypes.Gender");
+            properties.put("type", "12");
+            org.hibernate.type.Type genderType = new TypeLocatorImpl(new TypeResolver()).custom(EnumType.class, properties);
+            Query query = session.createSQLQuery("SELECT id, fullName, gender, cardNumber, country, postIndex, region, city, address from Patient where doctor_id = :doctor_id")
+                    .addScalar("id", IntegerType.INSTANCE)
+                    .addScalar("fullName", StringType.INSTANCE)
+                    .addScalar("gender", genderType)
+                    .addScalar("cardNumber", StringType.INSTANCE)
+                    .addScalar("country", StringType.INSTANCE)
+                    .addScalar("postIndex", StringType.INSTANCE)
+                    .addScalar("region", StringType.INSTANCE)
+                    .addScalar("city", StringType.INSTANCE)
+                    .addScalar("address", StringType.INSTANCE)
+                    .setParameter("doctor_id", doctorID)
+                    .setResultTransformer(Transformers.aliasToBean(PatientDTO.class));
+            List<PatientDTO> patients = query.list();
+            tx.commit();
+            return patients;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Override
     public Patient getPatientById(Integer id){
+        /*
         Query query = sessionFactory.getCurrentSession().createQuery("from Patient where id = :id");
         query.setParameter("id", id);
         return (Patient)query.uniqueResult();
+         */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Query query = sessionFactory.getCurrentSession().createQuery("from Patient where id = :id");
+            query.setParameter("id", id);
+            Patient patient = (Patient)query.uniqueResult();
+            tx.commit();
+            return patient;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public void updatePatient(Patient patient) {
+        /*
         sessionFactory.getCurrentSession().update(patient);
+         */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            session.update(patient);
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
@@ -93,24 +176,73 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void removePatient(Integer patientId){
+        /*
         Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, patientId);
         if(patient != null){
             Doctor doctor = patient.getDoctor();
             doctor.getPatients().remove(patient);
             sessionFactory.getCurrentSession().update(doctor);
-            //patient.setDoctor(null);
+            patient.setDoctor(null);
             sessionFactory.getCurrentSession().delete(patient);
+        }
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Patient patient = (Patient) session.load(Patient.class, patientId);
+            if(patient != null){
+                Doctor doctor = patient.getDoctor();
+                doctor.getPatients().remove(patient);
+                session.update(doctor);
+                //patient.setDoctor(null);
+                //session.delete(patient);
+            }
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
         }
     }
 
     @Override
     public void removePatientAndUpdateDoctor(Doctor doctor, Integer patientId) {
+        /*
         Patient patient = (Patient)sessionFactory.getCurrentSession().load(Patient.class, patientId);
         if(patient != null){
             doctor.getPatients().remove(patient);
             sessionFactory.getCurrentSession().merge(doctor);
             patient.setDoctor(null);
             sessionFactory.getCurrentSession().delete(patient);
+        }
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Patient patient = (Patient)session.get(Patient.class, patientId);
+            if(patient != null){
+                doctor.getPatients().remove(patient);
+                patient.setDoctor(null);
+                //session.update(patient);
+                //session.merge(doctor);
+                //patient.setDoctor(null);
+                session.delete(patient);
+            }
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
         }
     }
 
@@ -122,15 +254,53 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void addMedicalTest(Patient patient, MedicalTest test) {
+        /*
         patient.addMedicalTest(test);
         test.setPatient(patient);
         sessionFactory.getCurrentSession().update(patient);
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            patient.addMedicalTest(test);
+            test.setPatient(patient);
+            session.update(patient);
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException();
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public <T> List<T> retrieveMedicalTestsByType(Class<T> medicalTestClass){
+        /*
         Query query = sessionFactory.getCurrentSession().createQuery("from " + medicalTestClass.getSimpleName());
         return (List<T>)query.list();
+         */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from " + medicalTestClass.getSimpleName());
+            List<T> testList = (List<T>)query.list();
+            tx.commit();
+            return testList;
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
+        }
     }
 
     @Override
@@ -152,7 +322,6 @@ public class PatientDAO implements IPatientDAO{
             session.close();
         }
     }
-
 
     @Override
     public List<MedicalTest> retrieveAllMedicalTests() {

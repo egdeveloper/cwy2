@@ -1,12 +1,13 @@
 package org.egdeveloper.data.dao;
 
 import org.egdeveloper.data.entities.Doctor;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.egdeveloper.data.entities.Patient;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class DoctorDAO implements IDoctorDAO{
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void addDoctor(Doctor doctor){
@@ -84,6 +85,7 @@ public class DoctorDAO implements IDoctorDAO{
         }
     }
 
+    //TODO: patient collection lazy loading
     @Override
     public Doctor getDoctorByLogin(String login){
         /*
@@ -104,9 +106,11 @@ public class DoctorDAO implements IDoctorDAO{
             Query query = session.createQuery("from Doctor where login = :login");
             query.setParameter("login", login);
             List doctorList = query.list();
+            if(doctorList != null && doctorList.size() > 0) {
+                doctor = (Doctor) doctorList.get(0);
+                Hibernate.initialize(doctor.getPatients());
+            }
             tx.commit();
-            if(doctorList != null && doctorList.size() > 0)
-                doctor = (Doctor)doctorList.get(0);
             return doctor;
         }
         catch (Exception exception) {
@@ -134,6 +138,9 @@ public class DoctorDAO implements IDoctorDAO{
             Query query = sessionFactory.getCurrentSession().createQuery("from Doctor where id = :id");
             query.setParameter("id", id);
             doctor = (Doctor)query.uniqueResult();
+            if(doctor != null){
+                Hibernate.initialize(doctor.getPatients());
+            }
             tx.commit();
             return doctor;
         }

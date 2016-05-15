@@ -1,4 +1,4 @@
-package org.egdeveloper.data.entities.custom_types;
+package org.egdeveloper.data.entities.customTypes;
 
 
 public enum TestMethod {

@@ -1,7 +1,7 @@
 package org.egdeveloper.data.entities;
 
 import org.egdeveloper.attributes.*;
-import org.egdeveloper.data.entities.custom_types.StoneXRay;
+import org.egdeveloper.data.entities.customTypes.StoneXRay;
 import javax.persistence.*;
 
 @Entity

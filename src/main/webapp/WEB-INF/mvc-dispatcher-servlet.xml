@@ -21,6 +21,28 @@
                             <entry key="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                    <bean class="org.egdeveloper.generators.WordReportGenerator"/>
                             </entry>
+                            <entry key="application/pdf">
+                                   <bean class="org.egdeveloper.generators.PDFReportGenerator">
+                                          <property name="fonts">
+                                                 <map>
+                                                        <entry key="Times_New_Roman" value="/WEB-INF/resources/fonts/Times New Roman.ttf"/>
+                                                        <entry key="Times_New_Roman_Bold" value="/WEB-INF/resources/fonts/Times New Roman Bold.ttf"/>
+                                                 </map>
+                                          </property>
+                                   </bean>
+                            </entry>
+                            <entry key="text/xml">
+                                   <bean class="org.egdeveloper.generators.XMLReportGenerator"/>
+                            </entry>
+                            <entry key="application/json">
+                                   <bean class="org.egdeveloper.generators.JSONReportGenerator"/>
+                            </entry>
+                     </map>
+              </property>
+              <property name="fonts">
+                     <map>
+                            <entry key="Times_New_Roman" value="/WEB-INF/resources/fonts/Times New Roman.ttf"/>
+                            <entry key="Times_New_Roman_Bold" value="/WEB-INF/resources/fonts/Times New Roman Bold.ttf"/>
                      </map>
               </property>
        </bean>

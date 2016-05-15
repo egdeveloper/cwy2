@@ -24,7 +24,15 @@
           <li><a href="<c:url value="/help"/>">Помощь</a></li>
         </ul>
       </li>
-      <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">Статистика</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
+          <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
+          <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+          <li><a href="<c:url value="/stoneComponentsStatPage"/>">Компоненты мочевых камней</a></li>
+        </ul>
+      </li>
       <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -35,128 +43,136 @@
 </nav>
 <div class="container">
   <fieldset>
-    <div class="page-header">
+    <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
+      <div class="page-header">
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
           <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
           <ul class = "dropdown-menu" role = "menu">
             <li>
-              <a class="dropdown-item" href="">PDF</a>
+              <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/pdf" download>PDF</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">Word</a>
+              <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">Excel</a>
+              <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" download>Excel</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=text/xml" download>XML</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/json" download>JSON</a>
             </li>
           </ul>
         </div>
       </div>
       <h2>Суточная экскреция</h2>
     </div>
-    <form:form cssClass="form-horizontal" modelAttribute="medicalTest">
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Дата</label>
-          <form:input cssClass="form-control dateField" path="testDate"/>
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Дата</label>
+            <form:input cssClass="form-control dateField" path="testDate"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Описание</label>
-          <form:input cssClass="form-control" path="description"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Описание</label>
+            <form:input cssClass="form-control" path="description"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Лечение до проведения анализа</label>
-          <form:input cssClass="form-control" path="treatment"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Лечение до проведения анализа</label>
+            <form:input cssClass="form-control" path="treatment"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Номер стадии лечения</label>
-          <form:select cssClass="form-control" path="treatmentNumber">
-            <form:option value="NONE">не было</form:option>
-            <form:option value="I">лечение 1</form:option>
-            <form:option value="II">лечение 2</form:option>
-            <form:option value="III">лечение 3</form:option>
-            <form:option value="IV">лечение 4</form:option>
-            <form:option value="V">лечение 5</form:option>
-            <form:option value="VI">лечение 6</form:option>
-            <form:option value="VII">лечение 7</form:option>
-            <form:option value="VIII">лечение 8</form:option>
-            <form:option value="IX">лечение 9</form:option>
-            <form:option value="X">лечение 10</form:option>
-            <form:option value="XI">лечение 11</form:option>
-            <form:option value="XII">лечение 12</form:option>
-          </form:select>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Номер стадии лечения</label>
+            <form:select cssClass="form-control" path="treatmentNumber">
+              <form:option value="NONE">не было</form:option>
+              <form:option value="I">лечение 1</form:option>
+              <form:option value="II">лечение 2</form:option>
+              <form:option value="III">лечение 3</form:option>
+              <form:option value="IV">лечение 4</form:option>
+              <form:option value="V">лечение 5</form:option>
+              <form:option value="VI">лечение 6</form:option>
+              <form:option value="VII">лечение 7</form:option>
+              <form:option value="VIII">лечение 8</form:option>
+              <form:option value="IX">лечение 9</form:option>
+              <form:option value="X">лечение 10</form:option>
+              <form:option value="XI">лечение 11</form:option>
+              <form:option value="XII">лечение 12</form:option>
+            </form:select>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Состояние пациента на момент обследования</label>
-          <form:select cssClass="form-control" path="patientState">
-            <form:option value="HEALTHY">здоров</form:option>
-            <form:option value="FAIR">стабилен</form:option>
-            <form:option value="SERIOUS">болен</form:option>
-            <form:option value="CRITICAL">серьезно болен</form:option>
-            <form:option value="UNDERTERMINED">неопределенное</form:option>
-          </form:select>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Состояние пациента на момент обследования</label>
+            <form:select cssClass="form-control" path="patientState">
+              <form:option value="HEALTHY">здоров</form:option>
+              <form:option value="FAIR">стабилен</form:option>
+              <form:option value="SERIOUS">болен</form:option>
+              <form:option value="CRITICAL">серьезно болен</form:option>
+              <form:option value="UNDERTERMINED">неопределенное</form:option>
+            </form:select>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Креатинин</label>
-          <form:input cssClass="form-control" path="creatinine"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Креатинин</label>
+            <form:input cssClass="form-control" path="creatinine"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Мочевина</label>
-          <form:input cssClass="form-control" path="urea"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Мочевина</label>
+            <form:input cssClass="form-control" path="urea"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Мочевая кислота</label>
-          <form:input cssClass="form-control" path="ureaAcid"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Мочевая кислота</label>
+            <form:input cssClass="form-control" path="ureaAcid"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Кальций</label>
-          <form:input cssClass="form-control" path="calcium"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Кальций</label>
+            <form:input cssClass="form-control" path="calcium"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Калий</label>
-          <form:input cssClass="form-control" path="potassium"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Калий</label>
+            <form:input cssClass="form-control" path="potassium"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Магний</label>
-          <form:input cssClass="form-control" path="magnesium"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Магний</label>
+            <form:input cssClass="form-control" path="magnesium"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Натрий</label>
-          <form:input cssClass="form-control" path="sodium"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Натрий</label>
+            <form:input cssClass="form-control" path="sodium"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Оксид Фосфора</label>
-          <form:input cssClass="form-control" path="phosphorOxide"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Оксид Фосфора</label>
+            <form:input cssClass="form-control" path="phosphorOxide"/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="control-label">Хлор</label>
-          <form:input cssClass="form-control" path="chlorine"/>
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Хлор</label>
+            <form:input cssClass="form-control" path="chlorine"/>
+          </div>
         </div>
       </div>
     </form:form>

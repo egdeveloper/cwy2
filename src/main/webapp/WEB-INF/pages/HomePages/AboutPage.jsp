@@ -29,6 +29,7 @@
                             <li><a href="<c:url value="/beforeTreatmentStatVisualization"/>">До лечения</a></li>
                             <li><a href="<c:url value="/indicatorDeviationsStatPage"/>">Отклонения от нормы</a></li>
                             <li><a href="<c:url value="/indicatorDeviationsForStoneTypeStatPage"/>">По типу камня</a></li>
+                            <li><a href="<c:url value="/stoneComponentsStatPage"/>">Компоненты мочевых камней</a></li>
                         </ul>
                     </li>
                     <li><a href="<c:url value="/patientList"/>">Пациенты</a></li>

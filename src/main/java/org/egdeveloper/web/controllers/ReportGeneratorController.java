@@ -52,9 +52,11 @@ public class ReportGeneratorController {
         {
             Class testClazz = Class.forName("org.egdeveloper.data.entities." + testName.substring(0, 1).toUpperCase() + testName.substring(1));
             MedicalTest test = patientService.getMedicalTestByID(testClazz, testID);
+            String reportName = reportGeneratorService.getReportGenerator(mimeType)
+                    .buildName(String.format("%s - %s (%s)", test.getPatient().getFullName(),
+                            ((DisplayName)testClazz.getAnnotation(DisplayName.class)).value(), test.getTestDate().toString(formatter)));
             response.setContentType(mimeType + "; charset=utf-8");
-            response.setHeader("Content-Disposition", String.format("attachment; filename*=UTF-8''%s.docx", URLEncoder.encode(String.format("%s - %s (%s)", test.getPatient().getFullName(),
-                    ((DisplayName)testClazz.getAnnotation(DisplayName.class)).value(), test.getTestDate().toString(formatter)), "UTF-8").replace("+", "%20"))
+            response.setHeader("Content-Disposition", String.format("attachment; filename*=UTF-8''%s", URLEncoder.encode(reportName, "UTF-8").replace("+", "%20"))
             );
             reportGeneratorService.generateMedicalTestReport(mimeType, test, output);
         }

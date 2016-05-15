@@ -4,6 +4,7 @@ import org.egdeveloper.data.dao.IPatientDAO;
 import org.egdeveloper.data.entities.Doctor;
 import org.egdeveloper.data.entities.MedicalTest;
 import org.egdeveloper.data.entities.Patient;
+import org.egdeveloper.data.entities.tempEntities.PatientDTO;
 import org.egdeveloper.service.data.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +35,11 @@ public class PatientService implements IPatientService {
     @Override
     public List<Patient> getPatients(){
         return patientDAO.getPatients();
+    }
+
+    @Override
+    public List<PatientDTO> getPatientsForDoctor(Integer doctorID) {
+        return patientDAO.getPatientsForDoctor(doctorID);
     }
 
     @Override

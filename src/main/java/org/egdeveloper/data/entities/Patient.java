@@ -1,5 +1,4 @@
 package org.egdeveloper.data.entities;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -8,7 +7,7 @@ import org.egdeveloper.converters.deserializers.CustomDateTimeDeserializer;
 import org.egdeveloper.converters.deserializers.PatientDeserializer;
 import org.egdeveloper.converters.serializers.CustomDateTimeSerializer;
 import org.egdeveloper.converters.serializers.PatientSerializer;
-import org.egdeveloper.data.entities.custom_types.*;
+import org.egdeveloper.data.entities.customTypes.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -139,39 +138,39 @@ public class Patient extends Person implements Serializable{
     private String diseaseDuration;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<BioChemTest> bioChemTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<CommonBloodTest> commonBloodTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<CommonUreaTest> commonUreaTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<DailyExcreationTest> dailyExcreationTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<TitrationTest> titrationTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<UreaColorTest> ureaColorTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<StoneInVivoTest> stoneInVivoTests = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "patient")
     @MedTest
     private Set<StoneInVitroTest> stoneInVitroTests = new TreeSet<>();
 

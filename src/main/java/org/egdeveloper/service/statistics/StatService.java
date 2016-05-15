@@ -1,13 +1,13 @@
 package org.egdeveloper.service.statistics;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.math3.stat.Frequency;
 import org.egdeveloper.attributes.*;
 import org.egdeveloper.data.entities.*;
-import org.egdeveloper.data.entities.custom_types.StoneXRay;
-import org.egdeveloper.data.entities.custom_types.TreatmentNumber;
+import org.egdeveloper.data.entities.customTypes.StoneXRay;
+import org.egdeveloper.data.entities.customTypes.TreatmentNumber;
 import org.egdeveloper.service.data.IDoctorService;
 import org.egdeveloper.service.data.IPatientService;
-import org.egdeveloper.service.statistics.IStatService;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,6 +171,12 @@ public class StatService implements IStatService {
     public <T extends MedicalTest> Map<String, Map<String, Integer>> indicatorDeviations(Class<T> testClazz, TreatmentNumber treatmentNumber) throws IllegalAccessException{
         List<T> tests = patientService.retrieveMedicalTestsByType(testClazz);
         return retrieveTestDeviations(testClazz, tests, treatmentNumber);
+    }
+
+    // TODO: not implemented stoneComponentsStat()
+    @Override
+    public Map stoneComponentsStat(TreatmentNumber treatmentNumber) {
+        throw new NotImplementedException("Not implemented method!");
     }
 
     //Utility functions

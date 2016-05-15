@@ -1,4 +1,4 @@
-package org.egdeveloper.data.entities.custom_types;
+package org.egdeveloper.data.entities.customTypes;
 
 /**
  * Created by egdeveloper on 17.11.15.

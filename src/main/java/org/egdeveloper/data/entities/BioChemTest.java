@@ -32,6 +32,7 @@ public class BioChemTest extends MedicalTest {
     @StatVariable
     private Double urea;
 
+    @Indicator
     @Column(name = "creatinine", nullable = true)
     @DisplayName("Креатинин")
     @IndicatorNorm(minCritical = 43.0, min = 63.0, max = 105.0, maxCritical = 125.0)
@@ -59,6 +60,7 @@ public class BioChemTest extends MedicalTest {
     @StatVariable
     private Double cholesterol;
 
+    @Indicator
     @Column(name = "TAG", nullable = true)
     @DisplayName("Триглицериды")
     @IndicatorNorm(minCritical = 0.0, min = 0.0, max = 1.6, maxCritical = 1.8)
