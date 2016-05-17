@@ -152,7 +152,7 @@
             Plotly.newPlot('badHabitsStatBar', badHabitsData, {title: 'Вредные привычки'});
         }
         $(document).ready(function(){
-            requestForBeforeTreatmentStat(retrievePath("/beforeTreatmentStat"), visualizeBeforeTreatmentStatData);
+            requestForBeforeTreatmentStat(retrievePath("/statService/beforeTreatmentStat"), visualizeBeforeTreatmentStatData);
         });
     </script>
 </body>

@@ -48,9 +48,6 @@
                     <button class="btn btn-secondary btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">Экспортировать анализ</button>
                     <ul class = "dropdown-menu" role = "menu">
                         <li>
-                            <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/pdf" download>PDF</a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="<c:url value="/generateTestReport/${medicalTest.retrieveEntityID()}/${medicalTest.id}"/>?type=application/vnd.openxmlformats-officedocument.wordprocessingml.document" download>Word</a>
                         </li>
                         <li>

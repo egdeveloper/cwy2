@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
+@RequestMapping("/statService")
 public class StatisticsController {
 
     private DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy");
@@ -32,6 +33,10 @@ public class StatisticsController {
     @Autowired
     @Qualifier("statService")
     IStatService statService;
+
+    @Autowired
+    @Qualifier("optimizedStatService")
+    IStatService optStatService;
 
     @Autowired
     @Qualifier("doctorService")
@@ -66,6 +71,12 @@ public class StatisticsController {
     {
         Class testClazz = Class.forName("org.egdeveloper.data.entities." + testType.substring(0, 1).toUpperCase() + testType.substring(1));
         return statService.indicatorDeviationsForStoneTypesStat(testClazz, TreatmentNumber.valueOf(treatmentNumber));
+    }
+
+    @RequestMapping(value = "/stoneComponentsDevsStat/{treatmentNumber}", method = RequestMethod.GET)
+    public @ResponseBody Map stoneComponentsDevsStat(@PathVariable("treatmentNumber") String treatmentNumber)
+    {
+        return optStatService.stoneComponentsStat(TreatmentNumber.valueOf(treatmentNumber));
     }
 
     @RequestMapping(value = "/generateStatistics", method = RequestMethod.GET)

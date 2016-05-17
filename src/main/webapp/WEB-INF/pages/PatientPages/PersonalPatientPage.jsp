@@ -409,7 +409,7 @@
     });
 
     function retrieveTestDynamics(patientId, callback){
-        $.getJSON(retrievePath("/indicatorsDynamics") + "/" + patientId.toString(), callback);
+        $.getJSON(retrievePath("/statService/indicatorsDynamics") + "/" + patientId.toString(), callback);
     }
 
     function visualizeTestDynamics(testType, testData){

@@ -234,7 +234,7 @@
     $("#updateStatButton").click(function(){
         if($("#testSelection").val() != null && $("#treatmentNumberSelection").val() != null){
             testSelected = $("#testSelection").val();
-            $.getJSON(retrievePath("/indicatorDeviationsForStoneType/" + $("#testSelection").val() + "/" + $("#treatmentNumberSelection").val()), visualizeDeviationsStat);
+            $.getJSON(retrievePath("/statService/indicatorDeviationsForStoneType/" + $("#testSelection").val() + "/" + $("#treatmentNumberSelection").val()), visualizeDeviationsStat);
         }
         else{
             bootbox.alert("Выберите тип обследования или стадию лечения!");

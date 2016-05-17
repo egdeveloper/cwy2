@@ -66,10 +66,10 @@
     <div class="row" style="margin-top: 20px;">
         <div id="anions"></div>
     </div>
+    <div class="row" id="anionsTable"></div>
     <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
         <div id="cations"></div>
     </div>
-    <div class="row" id="anionsTable"></div>
     <div class="row" id="cationsTable"></div>
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.js"/>"></script>
@@ -78,9 +78,10 @@
 <script type="text/javascript" src="<c:url value="/resources/bootbox/bootbox.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pathFactory.js"/>"></script>
 <script>
-    var ttStat = {};
-    var detStat = {};
-    var uctStat = {};
+    String.prototype.capitalizeFirstLetter = function(){
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    };
+    var devsStat = {};
     var anionsTable = {};
     var cationsTable = {};
     function getAnionsData(){
@@ -99,76 +100,70 @@
             anionsTable["Цитрат"][key] = "-";
             anionsTable["Фосфат"][key] = "-";
             anionsTable["Сульфат"][key] = "-";
-            anionsTable["Мочевоя кислота"] = "-";
-            var testStat = ttStat[key]["titrationTest"]["indicators"];
+            anionsTable["Мочевая кислота"][key] = "-";
 
             //Оксалат
-            if(ttStat[key]["titrationTest"]["volume"] > 0){
-                if(testStat["Оксалат"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Оксалат",
-                                y: testStat["Оксалат"]["deviations"] / testStat["Оксалат"]["volume"] * 100
-                            }
-                    );
-                    anionsTable["Оксалат"][key] = {
-                        deviations: testStat["Оксалат"]["deviations"] / testStat["Оксалат"]["volume"] * 100,
-                        volume: testStat["Оксалат"]["volume"]
-                    };
-                }
+            if(devsStat[key]["oxalate"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Оксалат",
+                            y: devsStat[key]["oxalate"]["deviations"] / devsStat[key]["oxalate"]["volume"] * 100
+                        }
+                );
+                anionsTable["Оксалат"][key] = {
+                    deviations: devsStat[key]["oxalate"]["deviations"] / devsStat[key]["oxalate"]["volume"] * 100,
+                    volume: devsStat[key]["oxalate"]["volume"]
+                };
             }
             //
 
-            testStat = uctStat[key]["ureaColorTest"]["indicators"];
-            if(uctStat[key]["ureaColorTest"]["volume"] > 0){
-                if(testStat["Цитрат"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Цитрат",
-                                y: testStat["Цитрат"]["deviations"] / testStat["Цитрат"]["volume"] * 100
-                            }
-                    );
-                    anionsTable["Цитрат"][key] = {
-                        deviations: testStat["Цитрат"]["deviations"] / testStat["Цитрат"]["volume"] * 100,
-                        volume: testStat["Цитрат"]["volume"]
-                    };
-                }
-                if(testStat["Фосфат"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Фосфат",
-                                y: testStat["Фосфат"]["deviations"] / testStat["Фосфат"]["volume"] * 100
-                            }
-                    );
-                    anionsTable["Фосфат"][key] = {
-                        volume: testStat["Фосфат"]["volume"],
-                        deviations: testStat["Фосфат"]["deviations"] / testStat["Фосфат"]["volume"] * 100
-                    };
-                }
-                if(testStat["Сульфат"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Сульфат",
-                                y: testStat["Сульфат"]["deviations"] / testStat["Сульфат"]["volume"] * 100
-                            }
-                    );
-                    anionsTable["Сульфат"][key] = {
-                        volume: testStat["Сульфат"]["volume"],
-                        deviations: testStat["Сульфат"]["deviations"] / testStat["Сульфат"]["volume"] * 100
-                    };
-                }
-                if(testStat["Мочевая кислота"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Мочевая кислота",
-                                y: testStat["Мочевая кислота"]["deviations"] / testStat["Мочевая кислота"]["volume"] * 100
-                            }
-                    );
-                    anionsTable["Мочевая кислота"][key] = {
-                        volume: testStat["Мочевая кислота"]["volume"],
-                        deviations: testStat["Мочевая кислота"]["deviations"] / testStat["Мочевая кислота"]["volume"] * 100
-                    };
-                }
+            if(devsStat[key]["citrate"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Цитрат",
+                            y: devsStat[key]["citrate"]["deviations"] / devsStat[key]["citrate"]["volume"] * 100
+                        }
+                );
+                anionsTable["Цитрат"][key] = {
+                    deviations: devsStat[key]["citrate"]["deviations"] / devsStat[key]["citrate"]["volume"] * 100,
+                    volume: devsStat[key]["citrate"]["volume"]
+                };
+            }
+            if(devsStat[key]["phosphate"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Фосфат",
+                            y: devsStat[key]["phosphate"]["deviations"] / devsStat[key]["phosphate"]["volume"] * 100
+                        }
+                );
+                anionsTable["Фосфат"][key] = {
+                    volume: devsStat[key]["phosphate"]["volume"],
+                    deviations: devsStat[key]["phosphate"]["deviations"] / devsStat[key]["phosphate"]["volume"] * 100
+                };
+            }
+            if(devsStat[key]["sulfate"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Сульфат",
+                            y: devsStat[key]["sulfate"]["deviations"] / devsStat[key]["sulfate"]["volume"] * 100
+                        }
+                );
+                anionsTable["Сульфат"][key] = {
+                    volume: devsStat[key]["sulfate"]["volume"],
+                    deviations: devsStat[key]["sulfate"]["deviations"] / devsStat[key]["sulfate"]["volume"] * 100
+                };
+            }
+            if(devsStat[key]["ureaAcid"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Мочевая кислота",
+                            y: devsStat[key]["ureaAcid"]["deviations"] / devsStat[key]["ureaAcid"]["volume"] * 100
+                        }
+                );
+                anionsTable["Мочевая кислота"][key] = {
+                    volume: devsStat[key]["ureaAcid"]["volume"],
+                    deviations: devsStat[key]["ureaAcid"]["deviations"] / devsStat[key]["ureaAcid"]["volume"] * 100
+                };
             }
         });
         return data;
@@ -183,56 +178,62 @@
         cationsTable["Калий"] = {};
         cationsTable["Кальций"] = {};
         Object.keys(data).forEach(function(key){
-            var testStat = detStat[key]["dailyExcreationTest"]["indicators"];
             data[key] = [];
-            cationsTable["Натрий"] = "-";
-            cationsTable["Магний"] = "-";
-            cationsTable["Калий"] = "-";
-            cationsTable["Кальций"] = "-";
-            if(detStat[key]["dailyExcreationTest"]["volume"] > 0){
-                if(testStat["Натрий"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Натрий",
-                                y: testStat["Натрий"]["deviations"] / testStat["Натрий"]["volume"] * 100
-                            }
-                    );
-                    cationsTable["Натрий"][key] = testStat["Натрий"]["deviations"] / testStat["Натрий"]["volume"] * 100;
-                }
-                if(testStat["Магний"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Магний",
-                                y: testStat["Магний"]["deviations"] / testStat["Магний"]["volume"] * 100
-                            }
-                    );
-                    cationsTable["Магний"][key] = testStat["Магний"]["deviations"] / testStat["Магний"]["volume"] * 100;
-                }
-                if(testStat["Калий"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Калий",
-                                y: testStat["Калий"]["deviations"] / testStat["Калий"]["volume"] * 100
-                            }
-                    );
-                    cationsTable["Калий"][key] = testStat["Калий"]["deviations"] / testStat["Калий"]["volume"] * 100;
-                }
-                if(testStat["Кальций"]["volume"] > 0){
-                    data[key].push(
-                            {
-                                label: "Кальций",
-                                y: testStat["Кальций"]["deviations"] / testStat["Кальций"]["volume"] * 100
-                            }
-                    );
-                    cationsTable["Кальций"][key] = testStat["Кальций"]["deviations"] / testStat["Кальций"]["volume"] * 100;
-                }
+            cationsTable["Натрий"][key] = "-";
+            cationsTable["Магний"][key] = "-";
+            cationsTable["Калий"][key] = "-";
+            cationsTable["Кальций"][key] = "-";
+            if(devsStat[key]["sodium"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Натрий",
+                            y: devsStat[key]["sodium"]["deviations"] / devsStat[key]["sodium"]["volume"] * 100
+                        }
+                );
+                cationsTable["Натрий"][key] = {
+                    volume: devsStat[key]["sodium"]["volume"],
+                    deviations: devsStat[key]["sodium"]["deviations"] / devsStat[key]["sodium"]["volume"] * 100
+                };
+            }
+            if(devsStat[key]["magnesium"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Магний",
+                            y: devsStat[key]["magnesium"]["deviations"] / devsStat[key]["magnesium"]["volume"] * 100
+                        }
+                );
+                cationsTable["Магний"][key] = {
+                    volume: devsStat[key]["magnesium"]["volume"],
+                    deviations: devsStat[key]["magnesium"]["deviations"] / devsStat[key]["magnesium"]["volume"] * 100
+                };
+            }
+            if(devsStat[key]["potassium"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Калий",
+                            y: devsStat[key]["potassium"]["deviations"] / devsStat[key]["potassium"]["volume"] * 100
+                        }
+                );
+                cationsTable["Калий"][key] = {
+                    volume: devsStat[key]["potassium"]["volume"],
+                    deviations: devsStat[key]["potassium"]["deviations"] / devsStat[key]["potassium"]["volume"] * 100
+                };
+            }
+            if(devsStat[key]["calcium"]["volume"] > 0){
+                data[key].push(
+                        {
+                            label: "Кальций",
+                            y: devsStat[key]["calcium"]["deviations"] / devsStat[key]["calcium"]["volume"] * 100
+                        }
+                );
+                cationsTable["Кальций"][key] = {
+                    volume: devsStat[key]["calcium"]["volume"],
+                    deviations: devsStat[key]["calcium"]["deviations"] / devsStat[key]["calcium"]["volume"] * 100
+                };
             }
         });
         return data;
     }
-    String.prototype.capitalizeFirstLetter = function(){
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    };
     $("#anions").empty();
     $("#cations").empty();
     $("#anionsTable").empty();
@@ -242,69 +243,13 @@
            $.ajax({
                 dataType: "json",
                 async: false,
-                url: retrievePath("/indicatorDeviationsForStoneType/titrationTest/" + $("#treatmentNumberSelection").val()),
+                url: retrievePath("/statService/stoneComponentsDevsStat/" + $("#treatmentNumberSelection").val()),
                 success: function(data){
-                    ttStat = data;
+                    devsStat = data;
                 }
-           });
-           $.ajax({
-               dataType: "json",
-               async: false,
-               url: retrievePath("/indicatorDeviationsForStoneType/dailyExcreationTest/" + $("#treatmentNumberSelection").val()),
-               success: function(data){
-                   detStat = data;
-               }
-           });
-           $.ajax({
-               dataType: "json",
-               async: false,
-               url: retrievePath("/indicatorDeviationsForStoneType/ureaColorTest/" + $("#treatmentNumberSelection").val()),
-               success: function(data){
-                   uctStat = data;
-               }
            });
            var anionsStat = getAnionsData();
            var cationsStat = getCationsData();
-           /*
-           var anionsData = {
-               theme: "theme3",
-               title: {
-                   text: "Анионы",
-                   fontSize: 20,
-                   margin: 10
-               },
-               toolTip: {
-                   shared: true
-               },
-               axisY: {
-                   title: "%"
-               },
-               data: [
-                   anionsStat["OXALATES"],
-                   anionsStat["URATES"],
-                   anionsStat["PHOSPHATES"]
-               ]
-           };
-           var cationsData = {
-               theme: "theme3",
-               title: {
-                   text: "Катионы",
-                   fontSize: 20,
-                   margin: 10
-               },
-               toolTip: {
-                   shared: true
-               },
-               axisY: {
-                   title: "%"
-               },
-               data: [
-                   cationsStat["OXALATES"],
-                   cationsStat["URATES"],
-                   cationsStat["PHOSPHATES"]
-               ]
-           };
-           */
            $("#anions").empty();
            $("#cations").empty();
            $("#anions").append("<div class='panel panel-default'>" +
@@ -424,17 +369,35 @@
            $("#innerAnionsTable").append("<thead>" +
                    "<tr>" +
                    "<td>Показатель</td>" +
-                   "<td>Оксалаты (%/Объем выборки)</td>" +
-                   "<td>Ураты (%/Объем выборки)</td>" +
-                   "<td>Фосфаты (%/Объем выборки)</td>" +
+                   "<td>Оксалаты (% | Объем выборки)</td>" +
+                   "<td>Ураты (% | Объем выборки)</td>" +
+                   "<td>Фосфаты (% | Объем выборки)</td>" +
                    "</tr>" +
                    "</thead><tbody id='innerAnionsTable_Body'></tbody>");
            for(var ind in anionsTable){
                $("#innerAnionsTable_Body").append("<tr>" +
                        "<td>" + ind + "</td>" +
-                       "<td>" + (anionsTable[ind]["OXALATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["OXALATES"].deviations.toFixed(3)).toString() + "/" + anionsTable[ind]["OXALATES"].volume) + "</td>" +
-                       "<td>" + (anionsTable[ind]["URATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["URATES"].deviations.toFixed(3)).toString() + "/" + anionsTable[ind]["URATES"].volume) + "</td>" +
-                       "<td>" + (anionsTable[ind]["PHOSPHATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["PHOSPHATES"].deviations.toFixed(3)).toString() + "/" + anionsTable[ind]["PHOSPHATES"].volume) + "</td>" +
+                       "<td>" + (anionsTable[ind]["OXALATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["OXALATES"].deviations.toFixed(3)).toString() + "% из " + anionsTable[ind]["OXALATES"].volume) + "</td>" +
+                       "<td>" + (anionsTable[ind]["URATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["URATES"].deviations.toFixed(3)).toString() + "% из " + anionsTable[ind]["URATES"].volume) + "</td>" +
+                       "<td>" + (anionsTable[ind]["PHOSPHATES"] instanceof String ? "-" : parseFloat(anionsTable[ind]["PHOSPHATES"].deviations.toFixed(3)).toString() + "% из " + anionsTable[ind]["PHOSPHATES"].volume) + "</td>" +
+                       "</tr>");
+           }
+           $("#cationsTable").empty();
+           $("#cationsTable").append("<table id='innerCationsTable' class='table table-striped table-bordered' style='margin-top: 20px;' cellpadding='0' width='100%'></table>");
+           $("#innerCationsTable").append("<thead>" +
+                   "<tr>" +
+                   "<td>Показатель</td>" +
+                   "<td>Оксалаты (% | Объем выборки)</td>" +
+                   "<td>Ураты (% | Объем выборки)</td>" +
+                   "<td>Фосфаты (% | Объем выборки)</td>" +
+                   "</tr>" +
+                   "</thead><tbody id='innerCationsTable_Body'></tbody>");
+           for(var ind in cationsTable){
+               $("#innerCationsTable_Body").append("<tr>" +
+                       "<td>" + ind + "</td>" +
+                       "<td>" + (cationsTable[ind]["OXALATES"] instanceof String ? "-" : parseFloat(cationsTable[ind]["OXALATES"].deviations.toFixed(3)).toString() + "% из " + cationsTable[ind]["OXALATES"].volume) + "</td>" +
+                       "<td>" + (cationsTable[ind]["URATES"] instanceof String ? "-" : parseFloat(cationsTable[ind]["URATES"].deviations.toFixed(3)).toString() + "% из " + cationsTable[ind]["URATES"].volume) + "</td>" +
+                       "<td>" + (cationsTable[ind]["PHOSPHATES"] instanceof String ? "-" : parseFloat(cationsTable[ind]["PHOSPHATES"].deviations.toFixed(3)).toString() + "% из " + cationsTable[ind]["PHOSPHATES"].volume) + "</td>" +
                        "</tr>");
            }
        }

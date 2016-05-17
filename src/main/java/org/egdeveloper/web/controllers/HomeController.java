@@ -1,8 +1,8 @@
 package org.egdeveloper.web.controllers;
 
 import org.egdeveloper.data.entities.Doctor;
-import org.egdeveloper.service.data.IDoctorService;
 import org.egdeveloper.service.security.IUserAuthService;
+import org.egdeveloper.web.form.Login;
 import org.egdeveloper.web.form.Signup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,18 +13,13 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import org.egdeveloper.web.form.Login;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
 public class HomeController {
-
-    @Autowired
-    @Qualifier("doctorService")
-    private IDoctorService doctorService;
 
     @Autowired
     @Qualifier("userAuthService")

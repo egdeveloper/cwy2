@@ -1,0 +1,17 @@
+<ehcache updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+    <cache name="stCsDevsStatCache"
+           maxElementsInMemory="500"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false">
+    </cache>
+    <cache name="beforeTreatmentStatCache"
+           maxElementsInMemory="500"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false">
+    </cache>
+</ehcache>

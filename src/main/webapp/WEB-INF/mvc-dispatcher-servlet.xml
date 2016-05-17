@@ -1,7 +1,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,7 +12,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
        <context:component-scan base-package="org.egdeveloper"/>
        <bean class="org.egdeveloper.service.generators.ReportGeneratorService" name="reportGeneratorService">
               <property name="reportGenerators">
@@ -112,4 +116,12 @@
        <bean id="customJSONMapper" class="org.egdeveloper.converters.CustomJSONMapper"/>
        <bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
        <mvc:resources mapping="/resources/**" location="/resources/" />
+       <cache:annotation-driven/>
+       <bean id="cacheManager"
+             class="org.springframework.cache.ehcache.EhCacheCacheManager">
+              <property name="cacheManager" ref="ehcache"/>
+       </bean>
+       <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+              <property name="configLocation" value="classpath:ehcache.xml"/>
+       </bean>
 </beans>

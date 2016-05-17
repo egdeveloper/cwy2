@@ -12,6 +12,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,7 +59,7 @@ public class StatService implements IStatService {
     }
 
     @Override
-    @Transactional
+    @Cacheable(cacheNames = "beforeTreatmentStatCache")
     public Map<Object, Object> beforeTreatmentStat() {
         List<Patient> patients = patientService.getPatients();
         Map<Object, Object> statData = new HashMap<>();
@@ -89,7 +90,6 @@ public class StatService implements IStatService {
     }
 
     @Override
-    @Transactional
     public Map<Object, Object> indicatorsDynamics(Integer patientId) throws IllegalAccessException, InvocationTargetException {
         Map<Object, Object> indicatorsStat = new HashMap<>();
 

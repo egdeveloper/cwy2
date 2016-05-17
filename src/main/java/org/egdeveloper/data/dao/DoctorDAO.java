@@ -1,13 +1,9 @@
 package org.egdeveloper.data.dao;
 
 import org.egdeveloper.data.entities.Doctor;
-import org.egdeveloper.data.entities.Patient;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +81,6 @@ public class DoctorDAO implements IDoctorDAO{
         }
     }
 
-    //TODO: patient collection lazy loading
     @Override
     public Doctor getDoctorByLogin(String login){
         /*
@@ -170,9 +165,29 @@ public class DoctorDAO implements IDoctorDAO{
 
     @Override
     public void removeDoctor(Integer id){
+        /*
         Doctor doctor = (Doctor)sessionFactory.getCurrentSession().load(Doctor.class, id);
         if(doctor != null){
             sessionFactory.getCurrentSession().delete(doctor);
+        }
+        */
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            Doctor doctor = (Doctor)session.get(Doctor.class, id);
+            if(doctor != null) {
+                session.delete(doctor);
+            }
+            tx.commit();
+        }
+        catch (Exception exception){
+            if(tx != null)
+                tx.rollback();
+            throw new RuntimeException(exception);
+        }
+        finally {
+            session.close();
         }
     }
 }

@@ -1,18 +1,17 @@
 package org.egdeveloper.data.dao;
 
-import com.sun.org.apache.bcel.internal.generic.Type;
 import org.egdeveloper.data.entities.*;
-import org.egdeveloper.data.entities.tempEntities.MedicalTestDTO;
 import org.egdeveloper.data.entities.tempEntities.PatientDTO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.internal.TypeLocatorImpl;
-import org.hibernate.transform.ResultTransformer;
 import org.hibernate.transform.Transformers;
-import org.hibernate.type.*;
-import org.joda.time.contrib.hibernate.PersistentLocalDate;
+import org.hibernate.type.EnumType;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.StringType;
+import org.hibernate.type.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
